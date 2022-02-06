@@ -11,11 +11,11 @@ Item {
         case 0: 
             return systemsListView
         case 1:
-            return favoriteView
+            return collectionListView
         case 2: 
+            return favoriteView
+        case 3:
             return recentsView
-//        case 3:
-//            return appsView
         default: 
             return ""
         }
@@ -26,11 +26,11 @@ Item {
         case 0: 
             return systemsListView
         case 1:
-            return favoritesLoader.item
+            return collectionListView
         case 2: 
+            return favoritesLoader.item
+        case 3:
             return recentsLoader.item
-//        case 3:
-//            return appsLoader.item
         default: 
             return null
         }
@@ -55,7 +55,7 @@ Item {
 //        if (api.keys.isPageDown(event)) {
         if (api.keys.isNextPage(event)) {
             event.accepted = true;
-            setHomeIndex(Math.min(currentHomeIndex + 1,2))
+            setHomeIndex(Math.min(currentHomeIndex + 1,3))
             navSound.play();
             return;
         }  
@@ -65,13 +65,13 @@ Item {
     Rectangle {
         id: rect
         anchors.fill: parent
-        color: currentHomeIndex == 0 ? "#FEFEFE" : "transparent"
+        color: currentHomeIndex <= 1 ? "#FEFEFE" : "transparent"
     }
 
     HeaderHome {
         id: header
         z: 1
-        light: (currentHomeIndex == 0 && currentPage === "HomePage")
+        light: (currentHomeIndex <= 1 && currentPage === "HomePage")
     }
 
     Footer {
@@ -80,7 +80,7 @@ Item {
         light: (currentHomeIndex == 0 && currentPage === "HomePage")
         anchors.bottom: homepage.bottom
         visible: true
-        z: (currentHomeIndex == 0) ? 1 : 0
+        z: (currentHomeIndex <= 1) ? 1 : 0
     }
 
 
@@ -135,6 +135,19 @@ Item {
                     headerFocused: header.anyFocused
                     id: systemsListView
                 }
+
+                // Collections
+                CollectionListLarge {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    //anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: parent.width
+                    visible: currentHomeIndex == 1
+                    focus: currentHomeIndex == 1
+                    headerFocused: header.anyFocused
+                    id: collectionListView
+                }
                 
                 // Favourites
                 Component {
@@ -153,7 +166,7 @@ Item {
 
                 Loader  {
                     id: favoritesLoader
-                    focus: currentHomeIndex == 1
+                    focus: currentHomeIndex == 2
                     active: opacity !== 0
                     opacity: focus ? 1 : 0
                     anchors.fill: parent
@@ -177,7 +190,7 @@ Item {
 
                 Loader  {
                     id: recentsLoader
-                    focus: currentHomeIndex == 2
+                    focus: currentHomeIndex == 3
                     active: opacity !== 0
                     opacity: focus ? 1 : 0
                     anchors.fill: parent

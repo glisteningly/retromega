@@ -10,7 +10,9 @@ import 'components' as Components
 FocusScope {
     id: root
 
-    FontLoader { id: systemformFont; source: "assets/fonts/BebasNeue.otf" }
+    FontLoader { id: systemTitleFont; source: "assets/fonts/BebasNeue.otf" }
+    FontLoader { id: systemSubitleFont; source: "assets/fonts/Acre.otf" }
+
     
     Timer {
         id: timer
@@ -27,6 +29,7 @@ FocusScope {
 //        console.log('aaaaaaaaaaaa')
 //        console.log(Pinyin.getFirstPY('三国'))
         currentHomeIndex = api.memory.get('homeIndex') ?? 0
+        currentSystemIndex = api.memory.get('currentSystemIndex') ?? 0
         currentCollectionIndex = api.memory.get('currentCollectionIndex') ?? 0
         currentPage = api.memory.get('currentPage') ?? 'HomePage'
         collectionListIndex = api.memory.get('collectionListIndex') ?? 0
@@ -38,13 +41,27 @@ FocusScope {
     }
 
     // Collection index
+    property var currentSystemIndex : 0
     property var currentCollectionIndex : 0
     property var currentCollection: {
-        return allSystems.get(currentCollectionIndex)
+//        return  allSystems.get(currentSystemIndex)
+//        return allCollections.get(currentSystemIndex)
+        if (currentHomeIndex == 0) {
+            return allSystems.get(currentSystemIndex)
+        } else if (currentHomeIndex == 1) {
+            return allCollections.get(currentCollectionIndex)
+        } else {
+            return allSystems.get(currentSystemIndex)
+        }
     }
   
+    function setSystemIndex(index) {
+//        setCollectionListIndex(0)
+        api.memory.set('currentSystemIndex', index)
+        currentSystemIndex = index
+    }
+
     function setCollectionIndex(index) {
-        //setCollectionListIndex(0)
         api.memory.set('currentCollectionIndex', index)
         currentCollectionIndex = index
     }
@@ -176,45 +193,45 @@ FocusScope {
     } 
     
     property var systemColors : {
-        "gg"       : "#1886DC",
-        "gamegear" : "#1886DC",
-        "snes"     : "#AA6AFF",
-        "sfc"      : "#920E00",
-        "mastersystem"  : "#1886DC",
-        "genesis"  : "#1886DC",
-        "megadrive"  : "#1886DC",
-        "saturn"   : "#1886DC",
-        "neogeo"   : "#1499DE",
-        "ngp"     : "#FFC205",
-        "ngpc"     : "#FFC205",
-        "neogeocd"  : "#FFC205",
-        "android"  : "#5BFF92",
-        "famicom"   : "#920E00",
-        "gb"        : "#920E00",
-        "gba"      : "#920E00",
-        "gbc1"      : "#920E00",
-        "gbc"      : "#920E00",
-        "pcengine" : "#FF955B",
-        "tg16"     : "#FF955B",
         "nes"      : "#920E00",
         "n64"      : "#920E00",
         "nds"      : "#920E00",
-        "psp"      : "#00439C",
-        "psx"      : "#00439C",
-        "ps2"      : "#00439C",
-        "sega32x"      : "#1886DC",
-        "segacd"      : "#1886DC",
-        "dreamcast"   : "#1886DC",
+        "famicom"  : "#920E00",
+        "gb"       : "#920E00",
+        "gba"      : "#920E00",
+        "gbc1"     : "#920E00",
+        "gbc"      : "#920E00",
+        "snes"     : "#AA6AFF",
+        "sfc"      : "#920E00",
+        "gg"       : "#2196F3",
+        "gamegear" : "#2196F3",
+        "mastersystem"  : "#2196F3",
+        "genesis"  : "#2196F3",
+        "megadrive"  : "#2196F3",
+        "saturn"   : "#2196F3",
+        "sega32x"      : "#2196F3",
+        "segacd"      : "#2196F3",
+        "dreamcast"   : "#2196F3",
+        "psp"      : "#616161",
+        "psx"      : "#616161",
+        "ps2"      : "#616161",
+        "neogeo"   : "#0277BD",
+        "ngp"     : "#689F38",
+        "ngpc"     : "#689F38",
+        "neogeocd"  : "#689F38",
+        "android"  : "#5BFF92",
+        "pcengine" : "#FF7043",
+        "tg16"     : "#FF7043",
         "cps"         : "#ECAF00",
         "cps1"         : "#ECAF00",
         "cps2"         : "#ECAF00",
         "cps3"         : "#ECAF00",
-        "mame"         : "#1673A4",
-        "naomi"  : "#FF6701",
+        "mame"         : "#546E7A",
+        "naomi"  : "#BF360C",
         "pgm"  : "#0494CA",
-        "wonderswan"  : "#283A86",
-        "wonderswancolor"  : "#283A86",
-        "pgm"  : "#008FAB",
+        "wonderswan"  : "#6A1B9A",
+        "wonderswancolor"  : "#6A1B9A",
+        "pgm"  : "#00838F",
 
         "kof"  : "#720D08",
         "mslug"  : "#777",
@@ -349,7 +366,15 @@ FocusScope {
     SortFilterProxyModel {
         id: allSystems
         sourceModel: api.collections
-        filters: ValueFilter { roleName: "name"; value: "Android"; inverted: true; }
+//        filters: ValueFilter { roleName: "name"; value: "Android"; inverted: true; }
+        filters: ValueFilter { roleName: "summary"; value: "collection"; inverted: true; }
+    }
+
+    SortFilterProxyModel {
+        id: allCollections
+        sourceModel: api.collections
+//        filters: ValueFilter { roleName: "name"; value: "Android"; inverted: true; }
+        filters: ValueFilter { roleName: "summary"; value: "collection"; }
     }
 
     SortFilterProxyModel {

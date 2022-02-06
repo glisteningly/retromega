@@ -3,14 +3,14 @@ import QtGraphicalEffects 1.12
 //import QtQuick.Controls 2.15
 
 ListView {
-    id: systemsListView
+    id: collectionListView
 
     property var footerTitle: {
-        return (currentIndex + 1) + " / " + allSystems.count
+        return (currentIndex + 1) + " / " + allCollections.count
     }
 
     property var headerFocused: false
-    
+
     function letterSpacing(str) {
         return str == 'NES' ? 1.0 : 0.0
     }
@@ -21,16 +21,16 @@ ListView {
 
     property var bgIndex: 0
     property var itemTextColor: {
-        systemsListView.activeFocus ? "#ffffff"  : "#60ffffff"
+        collectionListView.activeFocus ? "#ffffff"  : "#60ffffff"
     }
     width: parent.width
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: parent.bottom
-    model: allSystems
+    model: allCollections
     cacheBuffer: 10
-    delegate: systemsDelegate  
+    delegate: systemsDelegate
     orientation: ListView.Horizontal
     highlightRangeMode: ListView.StrictlyEnforceRange
     preferredHighlightBegin: 0
@@ -40,18 +40,18 @@ ListView {
     highlightMoveVelocity: -1
     keyNavigationWraps: false
     spacing: 50
-    currentIndex: currentSystemIndex
+    currentIndex: currentCollectionIndex
     move: Transition {
         NumberAnimation { properties: "x,y"; duration: 3000 }
     }
     displaced: Transition {
         NumberAnimation { properties: "x,y"; duration: 3000 }
     }
-    Keys.onLeftPressed: {  
+    Keys.onLeftPressed: {
         decrementCurrentIndex(); navSound.play(); systemsBackground.bgIndex = currentIndex
-    } 
+    }
 
-    Keys.onRightPressed: {  
+    Keys.onRightPressed: {
         incrementCurrentIndex(); navSound.play();  systemsBackground.bgIndex = currentIndex
     }
 
@@ -60,7 +60,7 @@ ListView {
           if (api.keys.isPageDown(event)) {
              event.accepted = true
              navSound.play()
-             systemsListView.currentIndex = Math.min(systemsListView.currentIndex + 10, allSystems.count - 1)
+             collectionListView.currentIndex = Math.min(collectionListView.currentIndex + 10, allCollections.count - 1)
              systemsBackground.bgIndex = currentIndex
              return
           }
@@ -68,7 +68,7 @@ ListView {
           //Prev collection
           if (api.keys.isPageUp(event)) {
               event.accepted = true;
-              systemsListView.currentIndex = Math.max(systemsListView.currentIndex - 10, 0);
+              collectionListView.currentIndex = Math.max(collectionListView.currentIndex - 10, 0);
               systemsBackground.bgIndex = currentIndex
               navSound.play();
               return;
@@ -90,8 +90,8 @@ ListView {
 
 
     PageIndicator {
-        currentIndex: systemsListView.currentIndex
-        pageCount: allSystems.count
+        currentIndex: collectionListView.currentIndex
+        pageCount: allCollections.count
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 25
@@ -109,7 +109,7 @@ ListView {
         z: -1
         Behavior on bgIndex {
             ColorAnimation {
-                target: systemsBackground; property: "color"; to: systemColors[allSystems.get(currentIndex).shortName] ?? systemColors["default"]; duration: 335
+                target: systemsBackground; property: "color"; to: systemColors[allCollections.get(currentIndex).shortName] ?? systemColors["default"]; duration: 335
             }
         }
         transitions: Transition {
@@ -118,54 +118,54 @@ ListView {
     }
 
     Component.onDestruction: {
-        setSystemIndex(systemsListView.currentIndex)
+        setCollectionIndex(collectionListView.currentIndex)
     }
 
-    Component.onCompleted: { 
-        positionViewAtIndex(currentSystemIndex, ListView.Center)
+    Component.onCompleted: {
+        positionViewAtIndex(currentCollectionIndex, ListView.Center)
         delay(50, function() {
-            systemsListView.positionViewAtIndex(currentSystemIndex, ListView.Center)
+            collectionListView.positionViewAtIndex(currentCollectionIndex, ListView.Center)
         })
         systemsBackground.bgIndex = currentIndex
     }
     Component {
         id: systemsDelegate
-    
-    
+
+
         Item {
             id: home_item_container
             width: layoutScreen.width
             height: layoutScreen.height - 55 - 55 - 35
             scale: 1.0
-            
+
             z: 100 - index
             Keys.onPressed: {
                 if (api.keys.isAccept(event)) {
                     event.accepted = true;
-                    
+
                     //We update the collection we want to browse
                     setCollectionListIndex(0)
-                    setSystemIndex(home_item_container.ListView.view.currentIndex)
+                    setCollectionIndex(home_item_container.ListView.view.currentIndex)
 
                     //We change Pages
                     navigate('GamesPage');
-                    
+
                     return;
-                }      
+                }
                 if (api.keys.isFilters(event)) {
                     event.accepted = true;
                     toggleZoom();
                     return;
-                }                      
-            }                          
+                }
+            }
 
 
             Rectangle {
-                id: systemsListView_item
+                id: collectionListView_item
                 width: parent.width
-                height: parent.height       
-                color:  "transparent" //systemColors[modelData.shortName]  
-                
+                height: parent.height
+                color:  "transparent" //systemColors[modelData.shortName]
+
                 states: [
 
                     State{
@@ -182,7 +182,7 @@ ListView {
                 transitions: Transition {
                     NumberAnimation { properties: "scale, opacity"; easing.type: Easing.InOutCubic; duration: 225  }
                 }
-                
+
                 Image {
                     id: menu_mask
                     //width: 136
@@ -200,8 +200,8 @@ ListView {
                 Rectangle {
 
                     id: tile_content
-                    anchors.top: systemsListView_item.top
-                    anchors.left: systemsListView_item.left
+                    anchors.top: collectionListView_item.top
+                    anchors.left: collectionListView_item.left
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
                     width: parent.width
@@ -209,9 +209,9 @@ ListView {
                     color: systemColors[modelData.shortName] ?? "#000000"
                     clip: false
                     visible: false
-                                                                                       
-                }                
-                    
+
+                }
+
                 DropShadow {
                     anchors.fill: mask
                     horizontalOffset: 0
@@ -221,8 +221,8 @@ ListView {
                     opacity: 0.4
                     color: systemColors[modelData.shortName]
                     source: mask
-                }   
-                
+                }
+
                 Image {
                     id: device
 //                    source: "../assets/images/devices/"+modelData.shortName+".png"
@@ -257,25 +257,25 @@ ListView {
                         State {
                             name: "inactive"; when: home_item_container.ListView.isCurrentItem  && headerFocused
                             PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 0.85}
-                        }   
+                        }
                     ]
 
                     transitions: Transition {
                         NumberAnimation { properties: "scale, opacity, anchors.rightMargin"; easing.type: Easing.InOutCubic; duration: 225  }
                     }
-                    
-                }                
+
+                }
 
 //              主标题
                 Text {
                     id: title
                     text: modelData.name
-                    font.family: systemTitleFont.name
-                    font.pixelSize: titleFontSize(modelData.name)
-                    font.letterSpacing: letterSpacing(modelData.name)
-//                    font.bold: true
+//                    font.family: systemTitleFont.name
+                    font.pixelSize: 60
+                    font.letterSpacing: 3
+                    font.bold: true
                     color: itemTextColor
-                    width: 280
+                    width: 480
                     wrapMode: Text.WordWrap
                     anchors.rightMargin: 30
                     visible: true
@@ -283,8 +283,8 @@ ListView {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: 30
-                    anchors.verticalCenterOffset: -25
-                }                                         
+                    anchors.verticalCenterOffset: -30
+                }
 
                 DropShadow {
                     anchors.fill: title
@@ -295,63 +295,64 @@ ListView {
                     radius: 10
                     samples: 20
                 }
-                
+
                 Text {
                     text: modelData.games.count + " 游戏"
                     font.pixelSize: 18
                     font.letterSpacing: -0.3
 //                    font.bold: true
                     color: itemTextColor
-                    opacity: 0.7    
-                    anchors.bottomMargin: -27
+                    opacity: 0.7
+                    anchors.bottomMargin: -33
                     anchors.left: parent.left
                     anchors.leftMargin: 30
                     anchors.bottom: title.bottom
                     visible: true
-                }    
+                }
 
                 Text {
-                    text: systemCompanies[modelData.shortName].toUpperCase()
+//                    text: systemCompanies[modelData.shortName].toUpperCase()
+                    text: modelData.description
                     font.family: systemSubitleFont.name
-                    font.pixelSize: 14
+                    font.pixelSize: 16
                     font.letterSpacing: 0.5
 //                    font.bold: true
                     color: itemTextColor
-                    opacity: 0.7    
-                    anchors.bottomMargin: -1
+                    opacity: 0.7
+                    anchors.bottomMargin: -10
                     anchors.left: parent.left
                     anchors.leftMargin: 30
                     anchors.bottom: title.top
-                }    
+                }
 
                 Rectangle {
                     id: selectButton
                     visible: false
                     width: 64
                     height: 28
-                    color: systemsListView.activeFocus ? "#000000"  : "#20ffffff"
+                    color: collectionListView.activeFocus ? "#000000"  : "#20ffffff"
                     anchors.topMargin: 12
                     radius: 8
                     anchors.top: title.bottom
                     anchors.left: title.left
 
-                    Text { 
+                    Text {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: "View"
                         font.pixelSize: 12
                         font.letterSpacing: 0
-                        font.bold: true       
-                        color: systemsListView.activeFocus ? "#ffffff"  : "#ffffff"                        
+                        font.bold: true
+                        color: collectionListView.activeFocus ? "#ffffff"  : "#ffffff"
                     }
                 }
-            
+
                 // Image {
                 //     id: tile_logo
                 //     source: "../assets/images/logos/"+modelData.shortName+".png"
                 //     anchors.verticalCenter: parent.verticalCenter
                 //     anchors.horizontalCenter: parent.horizontalCenter
-                // }  
+                // }
             }
 
             Text {
@@ -361,10 +362,10 @@ ListView {
                 //anchors.bottomMargin: -30
                 font.pixelSize: 14
                 font.letterSpacing: -0.3
-                font.bold: true       
-                color: "#4F4F4F"    
-                visible: false   
-            }    
+                font.bold: true
+                color: "#4F4F4F"
+                visible: false
+            }
 
             Text {
                 text: modelData.games.count + " games"
@@ -372,16 +373,16 @@ ListView {
                 //anchors.bottomMargin: 20
                 font.pixelSize: 14
                 font.letterSpacing: -0.3
-                font.bold: true       
-                color: "#ffffff"   
-                opacity: 0.7    
+                font.bold: true
+                color: "#ffffff"
+                opacity: 0.7
                 visible: false
                 //anchors.horizontalCenter: parent.horizontalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.bottomMargin: -30
-            }    
-            
+            }
+
             // DropShadow {
             //     anchors.fill: systems__item
             //     horizontalOffset: 3
@@ -390,10 +391,10 @@ ListView {
             //     samples: 17
             //     color: "#80000000"
             //     source: systems__item
-            // }                        
+            // }
 
         }
-    }      
-    
+    }
+
 
 }

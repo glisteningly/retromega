@@ -34,7 +34,7 @@ Item {
 	        	 id: legend_title
 	             text: title
 	             color: lightText ? "#70ffffff" : theme.text                      
-	             font.pixelSize: 14
+                 font.pixelSize: 16
                  font.letterSpacing: 1
 	             font.bold: true              
 	             anchors.verticalCenter: parent.verticalCenter

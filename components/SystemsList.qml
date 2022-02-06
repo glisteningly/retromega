@@ -28,7 +28,7 @@ ListView {
     highlightMoveVelocity: -1
     keyNavigationWraps: false
     spacing: 30
-    currentIndex: currentCollectionIndex     
+    currentIndex: currentSystemIndex     
 
 
     Keys.onLeftPressed: {  
@@ -52,15 +52,15 @@ ListView {
 
     
     Component.onDestruction: {
-        setCollectionIndex(systemsListView.currentIndex)
+        setSystemIndex(systemsListView.currentIndex)
     }
 
     Component.onCompleted: { 
-        positionViewAtIndex(currentCollectionIndex, ListView.Center)
+        positionViewAtIndex(currentSystemIndex, ListView.Center)
         delay(50, function() {
-            systemsListView.positionViewAtIndex(currentCollectionIndex, ListView.Center)
+            systemsListView.positionViewAtIndex(currentSystemIndex, ListView.Center)
         })
-        //currentIndex = currentCollectionIndex
+        //currentIndex = currentSystemIndex
     }
     Component {
         id: systemsDelegate
@@ -77,7 +77,7 @@ ListView {
                     
                     //We update the collection we want to browse
                     setCollectionListIndex(0)
-                    setCollectionIndex(systemsListView.currentIndex)
+                    setSystemIndex(systemsListView.currentIndex)
 
                     //We change Pages
                     navigate('GamesPage');

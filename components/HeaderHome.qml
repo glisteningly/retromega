@@ -5,14 +5,16 @@ Rectangle {
         if (currentHomeIndex == 0) {
             return title_systems
         } else if (currentHomeIndex == 1) {
-            return title_favorites
+            return title_collection
         } else if (currentHomeIndex == 2) {
+            return title_favorites
+        } else if (currentHomeIndex == 3) {
             return title_recent
         }
     } 
 
     property var anyFocused: {
-        return title_systems.activeFocus || title_favorites.activeFocus || title_recent.activeFocus
+        return title_systems.activeFocus || title_collection.activeFocus ||title_favorites.activeFocus || title_recent.activeFocus
     }
 
     property var light: false
@@ -75,14 +77,27 @@ Rectangle {
         anchors.leftMargin: 16
         lightText: light
         KeyNavigation.down: mainFocus
-        KeyNavigation.right: title_favorites    
+        KeyNavigation.right: title_collection
+    }
+
+    HeaderLink {
+        id: title_collection
+        title: "系列"
+        index: 1
+        anchors.left: title_systems.right
+        anchors.top: parent.top
+        anchors.topMargin: 6
+        anchors.leftMargin: 24
+        lightText: light
+        KeyNavigation.down: mainFocus
+        KeyNavigation.right: title_favorites
     }
 
     HeaderLink {
         id: title_favorites
         title: "收藏"
-        index: 1
-        anchors.left: title_systems.right
+        index: 2
+        anchors.left: title_collection.right
         anchors.top: parent.top
         anchors.topMargin: 6
         anchors.leftMargin: 24
@@ -94,7 +109,7 @@ Rectangle {
     HeaderLink {
         id: title_recent
         title: "最近"
-        index: 2
+        index: 3
         anchors.left: title_favorites.right
         anchors.top: parent.top
         anchors.topMargin: 6

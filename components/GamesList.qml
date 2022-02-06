@@ -243,7 +243,7 @@ Item {
                 delay(50, function() {
                     gameView.positionViewAtIndex(defaultIndex, ListView.Center)
                 })
-                //currentIndex = currentCollectionIndex
+                //currentIndex = currentSystemIndex
             }
             
             Component {
