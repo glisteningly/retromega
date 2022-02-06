@@ -20,7 +20,7 @@ Item {
         }
     }
 
-    property var gamesColor : "#0060A8"
+    property var gamesColor : theme.primaryColor
     property var selectedGame: {
         return gameView.currentIndex >= 0 ? items.get(gameView.currentIndex) : items.get(0)
     } 

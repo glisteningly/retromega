@@ -33,6 +33,7 @@ FocusScope {
 //        console.log(Pinyin.getFirstPY('三国'))
         currentHomeIndex = api.memory.get('homeIndex') ?? 0
         currentSystemIndex = api.memory.get('currentSystemIndex') ?? 0
+        currentSystemViewMode = api.memory.get('currentSystemViewMode') ?? 'list'
         currentCollectionIndex = api.memory.get('currentCollectionIndex') ?? 0
         currentPage = api.memory.get('currentPage') ?? 'HomePage'
         collectionListIndex = api.memory.get('collectionListIndex') ?? 0
@@ -54,6 +55,14 @@ FocusScope {
         } else {
             return allSystems.get(currentSystemIndex)
         }
+    }
+
+//    property string currentSystemViewMode : "grid"
+    property string currentSystemViewMode : "list"
+    function toggleSystemViewMode() {
+        var _flag = (currentSystemViewMode === 'list')?'grid':'list'
+        api.memory.set('currentSystemViewMode', _flag)
+        currentSystemViewMode = _flag
     }
   
     function setSystemIndex(index) {
@@ -171,9 +180,9 @@ FocusScope {
     
     property var systemColor: {
         if (currentPage === 'GamesPage') {
-            return systemColors[currentCollection.shortName] || "#0060A8"
+            return systemColors[currentCollection.shortName] || theme.primaryColor
         } else {
-            return "#0060A8"
+            return theme.primaryColor
         }
     }
 

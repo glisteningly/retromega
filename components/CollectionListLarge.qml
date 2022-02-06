@@ -30,7 +30,7 @@ ListView {
     anchors.bottom: parent.bottom
     model: allCollections
     cacheBuffer: 10
-    delegate: systemsDelegate
+    delegate: collectionsDelegate
     orientation: ListView.Horizontal
     highlightRangeMode: ListView.StrictlyEnforceRange
     preferredHighlightBegin: 0
@@ -129,7 +129,7 @@ ListView {
         systemsBackground.bgIndex = currentIndex
     }
     Component {
-        id: systemsDelegate
+        id: collectionsDelegate
 
 
         Item {

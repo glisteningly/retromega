@@ -9,7 +9,8 @@ Item {
     property var currentView: {
         switch (currentHomeIndex) {
         case 0: 
-            return systemsListView
+//            return systemsListView
+            return currentSystemViewMode === 'grid' ? systemsGridView : systemsListView
         case 1:
             return collectionListView
         case 2: 
@@ -24,7 +25,8 @@ Item {
     property var currentContentView: {
         switch (currentHomeIndex) {
         case 0: 
-            return systemsListView
+//            return systemsListView
+            return currentSystemViewMode === 'grid' ? systemsGridView : systemsListView
         case 1:
             return collectionListView
         case 2: 
@@ -40,7 +42,17 @@ Item {
         return currentContentView.footerTitle
     }
 
-    Keys.onPressed: {                                            
+    property var backgroundColor: {
+        if (currentSystemViewMode === 'grid' && currentHomeIndex <= 0) {
+            return theme.background_grid
+        } else {
+            return currentHomeIndex <= 1 ? "#FEFEFE" : "transparent"
+        }
+    }
+
+    Keys.onPressed: {
+        console.log('------')
+        console.log(event.key)
 
         // Prev
 //        if (api.keys.isPageUp(event)) {
@@ -60,12 +72,16 @@ Item {
             return;
         }  
 
+        if (api.keys.isFilters(event) || event.key === 32) {
+            toggleSystemViewMode()
+        }
+
     }  
 
     Rectangle {
         id: rect
         anchors.fill: parent
-        color: currentHomeIndex <= 1 ? "#FEFEFE" : "transparent"
+        color: backgroundColor
     }
 
     HeaderHome {
@@ -130,10 +146,22 @@ Item {
                     //anchors.verticalCenter: parent.verticalCenter
                     height: parent.height
                     width: parent.width
-                    visible: currentHomeIndex == 0
-                    focus: currentHomeIndex == 0
+                    visible: currentHomeIndex == 0 && currentSystemViewMode === 'list'
+                    focus: currentHomeIndex == 0 && currentSystemViewMode === 'list'
                     headerFocused: header.anyFocused
                     id: systemsListView
+                }
+
+                SystemsGrid {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    //anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: parent.width
+                    visible: currentHomeIndex == 0 && currentSystemViewMode === 'grid'
+                    focus: currentHomeIndex == 0 && currentSystemViewMode === 'grid'
+                    headerFocused: header.anyFocused
+                    id: systemsGridView
                 }
 
                 // Collections
@@ -197,32 +225,6 @@ Item {
                     sourceComponent: recentsView
                     asynchronous: false
                 }  
-
-                // Apps
-//                Component {
-//                    id: appsView
-//                    GamesList {
-//                        id: appsContentView
-//                        width: parent.width
-//                        height: parent.height
-//                        items: androidCollection.games
-//                        indexItems: androidCollection.games
-//                        sortMode: "title"
-//                        visible: currentHomeIndex == 3
-//                        focus: currentHomeIndex == 3 && !isShowingGameDetail
-//                    }
-//                }
-
-//                Loader  {
-//                    id: appsLoader
-//                    focus: currentHomeIndex == 3
-//                    active: opacity !== 0
-//                    opacity: focus ? 1 : 0
-//                    anchors.fill: parent
-//                    sourceComponent: appsView
-//                    asynchronous: false
-//                }
-
             } 
         }  
     }

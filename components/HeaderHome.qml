@@ -17,37 +17,37 @@ Rectangle {
         return title_systems.activeFocus || title_collection.activeFocus ||title_favorites.activeFocus || title_recent.activeFocus
     }
 
-    property var light: false
+    property bool light: false
 
     property var showStatusInfo : {
         return layoutScreen.height >= 480
     }
 
     property var showBattery : {
-        return showStatusInfo && (api.device != null && api.device.batteryPercent)
+        return showStatusInfo && (api.device !== null && api.device.batteryPercent)
     }
 
     id: home_header
-    color: "transparent"
+    color: currentSystemViewMode === 'grid' && currentHomeIndex <= 0 ? theme.background_grid : "transparent"
     width: parent.width
     height: layoutHeader.height
     anchors.top: parent.top      
 
-    Rectangle {
-        anchors.leftMargin: 22
-        anchors.rightMargin: 22
-        anchors.left: parent.left
-        anchors.right: parent.right
-        color: light ? "#00ffffff" : "#20000000"
-        anchors.bottom: parent.bottom
-        height: 1
-    }
+//    Rectangle {
+//        anchors.leftMargin: 22
+//        anchors.rightMargin: 22
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        color: light ? "#00ffffff" : "#20000000"
+//        anchors.bottom: parent.bottom
+//        height: 1
+//    }
 
     Rectangle{
         id: tabLeft
         height:18
         width:32
-        color:"#80444444"
+        color:"#444444"
         radius:2
         anchors.top: parent.top
         anchors.topMargin: 11
@@ -123,7 +123,7 @@ Rectangle {
         id: tabRight
         height:18
         width:32
-        color:"#80444444"
+        color:"#444444"
         radius:2
         anchors.top: parent.top
         anchors.topMargin: 11

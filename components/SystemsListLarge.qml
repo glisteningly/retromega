@@ -9,16 +9,18 @@ ListView {
         return (currentIndex + 1) + " / " + allSystems.count
     }
 
-    property var headerFocused: false
+    property bool headerFocused: false
 
     function titleFontSize(str) {
         return str.length <= 10 ? 70 : 50
     }
 
-    property var bgIndex: 0
+    property int bgIndex: 0
     property var itemTextColor: {
         systemsListView.activeFocus ? "#ffffff"  : "#60ffffff"
     }
+
+    currentIndex: currentSystemIndex
     width: parent.width
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
@@ -36,7 +38,6 @@ ListView {
     highlightMoveVelocity: -1
     keyNavigationWraps: false
     spacing: 50
-    currentIndex: currentSystemIndex
     move: Transition {
         NumberAnimation { properties: "x,y"; duration: 3000 }
     }
@@ -148,11 +149,11 @@ ListView {
                     
                     return;
                 }      
-                if (api.keys.isFilters(event)) {
-                    event.accepted = true;
-                    toggleZoom();
-                    return;
-                }                      
+//                if (api.keys.isFilters(event)) {
+//                    event.accepted = true;
+//                    toggleZoom();
+//                    return;
+//                }
             }                          
 
 

@@ -4,7 +4,11 @@ const theme = {
   "title": "#444",
   "background_dark": "#333333",
   "text_dark": "#DDD",
-  "title_dark": "#DDD"
+  "title_dark": "#DDD",
+//  "background_grid": "#283593",
+  "background_grid": "#333",
+  "gridColumnCount": 4,
+  "primaryColor": "#1565C0"
 }
 
 const systemColors = {

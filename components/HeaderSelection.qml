@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtGraphicalEffects 1.12
 
 Item {
-    property var tintColor : "#66333333"
+    property var tintColor : theme.primaryColor
 
 	// DropShadow {
 	// 	anchors.fill: list_selection
@@ -18,10 +18,10 @@ Item {
 	/** Selection Rect */
 	Rectangle{
 		id: list_selection
-        width:parent.width + 12
-        height:parent.height - 10
+        width: parent.width + 12
+        height: parent.height - 10
 		color: tintColor
-		opacity:1
+        opacity: 1
         x: -10
         y: 6
         radius: 6
