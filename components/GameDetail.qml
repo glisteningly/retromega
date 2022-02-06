@@ -46,7 +46,7 @@ Item {
     }
 
     property var textColor: {
-        return "#333333"
+        return theme.text_dark
     }
 
     property var margin: {
@@ -95,7 +95,7 @@ Item {
     * Background
     */
     Rectangle {
-        color: theme.background
+        color: theme.background_dark
         anchors.fill: parent
         opacity: 1.0
     }
@@ -133,8 +133,8 @@ Item {
                 text: game ? game.title : "No Game"
                 lineHeight: 1.1
                 color: textColor
-                font.pixelSize: 24
-                font.letterSpacing: -0.35
+                font.pixelSize: 28
+                font.letterSpacing: 1
                 font.bold: true
             }
 
@@ -159,7 +159,7 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     wrapMode: Text.WordWrap
-                    maximumLineCount: 4                    
+                    maximumLineCount: 4
                 }
 
                 Text {
@@ -167,7 +167,7 @@ Item {
                     color: textColor
                     opacity: 0.5
                     font.pixelSize: 18
-                    font.letterSpacing: -0.35
+//                    font.letterSpacing: -0.35
                     font.bold: true 
                 }   
 
@@ -191,7 +191,7 @@ Item {
                 spacing: 10
                 ActionButton {
                     id: actionPlay
-                    title: "Play"
+                    title: "游玩"
                     icon: "play"
                     focus: true
                     height: 40
@@ -212,7 +212,7 @@ Item {
                     textColor: gameDetail.textColor
                     KeyNavigation.left: actionPlay  
                     KeyNavigation.down: gameDetailText   
-                    title: gameIsFavorite ? "Unfavorite" : "Favorite"
+                    title: gameIsFavorite ? "取消收藏" : "收藏"
                     icon: gameIsFavorite ? "favorite-on" : "favorite-off"
                     focus: false
                     height: 40
@@ -308,10 +308,10 @@ Item {
                 wrapMode: Text.WordWrap
                 //color: parent.activeFocus ? "#50000000" : textColor
                 color: textColor
-                font.pixelSize: 18
-                font.letterSpacing: -0.1
-                font.bold: true  
-                lineHeight: 1.2 
+                font.pixelSize: 16
+                font.letterSpacing: 0.4
+//                font.bold: true
+                lineHeight: 1.2
                 elide: Text.ElideRight
                 width: parent.width
                 maximumLineCount: 4
@@ -326,28 +326,28 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 2
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: 5
+                anchors.bottomMargin: -6
                 radius: 4
 
                 Text {
                     font.pixelSize: 13
-                    font.letterSpacing: -0.1
-                    font.bold: true  
-                    text: "MORE"
+//                    font.letterSpacing: -0.1
+//                    font.bold: true
+                    text: "更多"
                     color: parent.parent.activeFocus ? "white" : systemColor
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
             }
-            DropShadow {
-                anchors.fill: moreButton
-                horizontalOffset: -6
-                verticalOffset: 3
-                radius: 10.0
-                samples: 10
-                color: theme.background
-                source: moreButton
-            }
+//            DropShadow {
+//                anchors.fill: moreButton
+//                horizontalOffset: -6
+//                verticalOffset: 3
+//                radius: 10.0
+//                samples: 10
+//                color: theme.background
+//                source: moreButton
+//            }
         }
 
         // Item {
@@ -413,7 +413,7 @@ Item {
 
 
         Rectangle {
-            color: theme.background
+            color: theme.background_dark
             anchors.fill: parent
             opacity: 1.0
         }
@@ -452,8 +452,9 @@ Item {
             anchors.rightMargin: 50
             anchors.topMargin: 50 - textScroll
             font.pixelSize: 18
-            font.letterSpacing: -0.35
-            font.bold: true
+            font.letterSpacing: 0.4
+//            font.bold: true
+            color: textColor
             wrapMode: Text.WordWrap
             maximumLineCount: 2000
             lineHeight: 1.2

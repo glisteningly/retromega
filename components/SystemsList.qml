@@ -3,7 +3,7 @@ import QtGraphicalEffects 1.12
 
 ListView {
     property var footerTitle: {
-        return (currentIndex + 1) + " of " + allSystems.count
+        return (currentIndex + 1) + " / " + allSystems.count
     }
 
     property var headerFocused: false

@@ -25,7 +25,7 @@ Item {
 	             text: key
 	             color:"white"         
 	             font.pixelSize: 14
-	             font.letterSpacing: -0.3
+//	             font.letterSpacing: -0.3
 	             font.bold: true              
 	             anchors.verticalCenter: parent.verticalCenter
 	             anchors.horizontalCenter: parent.horizontalCenter
@@ -35,7 +35,7 @@ Item {
 	             text: title
 	             color: lightText ? "#70ffffff" : theme.text                      
 	             font.pixelSize: 14
-	             font.letterSpacing: -0.3
+                 font.letterSpacing: 1
 	             font.bold: true              
 	             anchors.verticalCenter: parent.verticalCenter
 	             anchors.left: parent.right

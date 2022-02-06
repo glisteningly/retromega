@@ -21,44 +21,44 @@ Item {
     
     property var showIndex: false
     property var collectionSortTitle: {
-        var title = "Title"
+        var title = "标题"
         switch (collectionSortMode) {
             case "title": {
-                title = "By Title"
+                title = "按标题"
                 break
             }
             case "lastPlayed": {
-                title = "By Last Played"
+                title = "按最后游玩"
                 break
             }
             case "rating": {
-                title = "By Rating"
+                title = "按评分"
                 break
             }   
             case "favorites": {
-                title = "By Favorites"
+                title = "按收藏"
                 break
             }               
             case "release": {
-                title = "By Release Date"
+                title = "按发售时间"
                 break
             }                        
             case "playCount": {
-                title = "By Play Count"
+                title = "按游戏次数"
                 break
             }                        
             case "playTime": {
-                title = "By Play Time"
+                title = "按游戏时间"
                 break
             }                        
             default: {
-                title = "By"
+                title = "按"
                 break
             }
         }
 
         if (collectionFilterMode == "favorites" && !collectionShowAllItems) {
-            return "Favorites, " + title 
+            return "收藏, " + title
         }  else {
             return title
         }
@@ -87,7 +87,7 @@ Item {
     Keys.onPressed: {           
 
         // Show / Hide Sort
-        if (api.keys.isPageDown(event)) {
+        if (api.keys.isFilters(event)) {
             event.accepted = true;
             showIndex = false
             showSort = !showSort
@@ -169,7 +169,7 @@ Item {
             id: footer
             color: "transparent"
             width: parent.width
-            height: 55
+            height: 40
             anchors.left: parent.left
             anchors.leftMargin: 0
             anchors.rightMargin: 0 
@@ -191,8 +191,8 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 32
                 color: "#9B9B9B"//theme.title
-                font.pixelSize: 18
-                font.letterSpacing: -0.3
+                font.pixelSize: 16
+//                font.letterSpacing: -0.3
                 font.bold: true              
                 anchors.verticalCenter: parent.verticalCenter
                 elide: Text.ElideRight   
@@ -201,7 +201,7 @@ Item {
 
             ButtonLegend {
                 id: button_legend_start
-                title: "Start"
+                title: "开始"
                 key: "A"
                 width: 55
                 anchors.left: parent.left
@@ -211,7 +211,7 @@ Item {
 
             ButtonLegend {
                 id: button_legend_back
-                title: "Back"
+                title: "返回"
                 key: "B"
                 width: 55
                 anchors.left: button_legend_start.right
@@ -221,7 +221,7 @@ Item {
 
             ButtonLegend {
                 id: button_legend_details
-                title: "Details"
+                title: "详细信息"
                 key: "X"
                 width: 75
                 visible: true//collectionFilterMode == "all" || collectionShowAllItems
@@ -250,7 +250,7 @@ Item {
             id: header
             color: "transparent"
             width: parent.width
-            height: 55
+            height: 40
             anchors.left: parent.left
             anchors.leftMargin: 0
             anchors.rightMargin: 0
@@ -273,7 +273,7 @@ Item {
                 anchors.leftMargin: 32
                 color: systemColor//theme.title
                 font.pixelSize: 18
-                font.letterSpacing: -0.3
+//                font.letterSpacing: -0.3
                 font.bold: true              
                 anchors.verticalCenter: parent.verticalCenter
                 width:300       
@@ -286,11 +286,11 @@ Item {
                 text: collectionSortTitle
                 anchors.right: legend.left
                 anchors.top: parent.top
-                anchors.topMargin: 16
+                anchors.topMargin: 9
                 anchors.rightMargin: 8
                 color: "#9B9B9B"
-                font.pixelSize: 18
-                font.letterSpacing: -0.3
+                font.pixelSize: 16
+//                font.letterSpacing: -0.3
                 font.bold: true              
             }   
 
@@ -309,22 +309,22 @@ Item {
             // }   
             Rectangle{
                 id: legend
-                height:24
-                width:32
+                height:20
+                width:20
                 color:"#444"
-                radius:8
+                radius:10
                 anchors.top: parent.top
-                anchors.topMargin: 15
+                anchors.topMargin: 10
                 //anchors.right: header_time.left  
                 anchors.right: parent.right
                 anchors.leftMargin: 0
                 //anchors.rightMargin: 5
                 anchors.rightMargin: 32
                 Text{
-                    text: "ZR"
+                    text: "Y"
                     color:"white"         
                     font.pixelSize: 14
-                    font.letterSpacing: -0.3
+//                    font.letterSpacing: -0.3
                     font.bold: true              
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter

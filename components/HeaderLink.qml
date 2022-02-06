@@ -36,15 +36,15 @@ Item {
         }
     }    
 
-	ListSelection {
+    HeaderSelection {
 		anchors.left: parent.left
 		anchors.top: parent.top 
         anchors.topMargin: -8
         anchors.bottomMargin: -8
-        anchors.rightMargin: -13
+        anchors.rightMargin: -8
 		anchors.fill: parent
 		width:parent.width
-		height:parent.height
+        height:parent.height
 		visible: parent.activeFocus ? true : false
 	}
 
@@ -55,8 +55,8 @@ Item {
         anchors.top: parent.top
         color: textColor
         font.pixelSize: 18
-        font.letterSpacing: -0.3
-        font.bold: true              
+        font.letterSpacing: 3
+//        font.bold: true
     }
 
 }

@@ -25,7 +25,7 @@ Item {
 
     Text { 
         text: title
-        font.bold: true
+        font.bold: false
         font.pixelSize: 14
         visible: parent.activeFocus
         opacity: 0.5

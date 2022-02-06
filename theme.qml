@@ -4,9 +4,13 @@ import QtMultimedia 5.9
 import SortFilterProxyModel 0.2
 
 import 'components' as Components
+//import './assets/js/cnchar.min.js' as Cnchar
+//import './assets/js/pinyin.js' as Pinyin
 
 FocusScope {
-    id: root  
+    id: root
+
+    FontLoader { id: systemformFont; source: "assets/fonts/BebasNeue.otf" }
     
     Timer {
         id: timer
@@ -20,6 +24,8 @@ FocusScope {
     }
 
     Component.onCompleted: { 
+//        console.log('aaaaaaaaaaaa')
+//        console.log(Pinyin.getFirstPY('三国'))
         currentHomeIndex = api.memory.get('homeIndex') ?? 0
         currentCollectionIndex = api.memory.get('currentCollectionIndex') ?? 0
         currentPage = api.memory.get('currentPage') ?? 'HomePage'
@@ -28,7 +34,7 @@ FocusScope {
         collectionSortDirection =  api.memory.get('collectionSortDirection') ?? 0
         collectionFilterMode =  api.memory.get('collectionFilterMode') ?? "all"
         collectionShowAllItems =  api.memory.get('collectionShowAllItems') ?? false
-        startSound.play()
+        startSound.play()                                                                           
     }
 
     // Collection index
@@ -151,42 +157,68 @@ FocusScope {
     
     property var systemColor: {
         if (currentPage === 'GamesPage') {
-            return systemColors[currentCollection.shortName] || "#000000" 
+            return systemColors[currentCollection.shortName] || "#0060A8"
         } else {
-            return "#000000"
+            return "#0060A8"
         }
     }
 
     property var theme : {
         "background": "#F3F3F3",
         "text":"#70000000",
-        "title":"#444"
+        "title":"#444",
+        "background_dark" : "#333333",
+        "text_dark":"#DDD",
+        "title_dark":"#DDD"
+//        "background": "#333333",
+//        "text":"#70000000",
+//        "title":"#444"
     } 
     
     property var systemColors : {
-        "gg"       : "#011DA9",
-        "gamegear" : "#FFAA22",
+        "gg"       : "#1886DC",
+        "gamegear" : "#1886DC",
         "snes"     : "#AA6AFF",
-        "ngp"     : "#AA6AFF",
-        "genesis"  : "#DF535B",
+        "sfc"      : "#920E00",
+        "mastersystem"  : "#1886DC",
+        "genesis"  : "#1886DC",
+        "megadrive"  : "#1886DC",
+        "saturn"   : "#1886DC",
         "neogeo"   : "#1499DE",
+        "ngp"     : "#FFC205",
+        "ngpc"     : "#FFC205",
+        "neogeocd"  : "#FFC205",
         "android"  : "#5BFF92",
-        "mastersystem"  : "#2F34C2",
-        "neogeocd"  : "#EFC323",
-        "gb"        : "#1DA1DC",
-        "gba"      : "#342692",
-        "gbc1"      : "#EE60A5",
-        "gbc"      : "#7B4CCC",
+        "famicom"   : "#920E00",
+        "gb"        : "#920E00",
+        "gba"      : "#920E00",
+        "gbc1"      : "#920E00",
+        "gbc"      : "#920E00",
         "pcengine" : "#FF955B",
         "tg16"     : "#FF955B",
-        "nes"      : "#C85173",
-        "n64"      : "#FF5B5B",
-        "nds"      : "#EFC323",
-        "psx"      : "#F0CC40",
-        "sega32x"      : "#6935E9",
-        "segacd"      : "#C85173",
-        "dreamcast"   : "#2387FF",
-        "psp"         : "#4E0B9C",
+        "nes"      : "#920E00",
+        "n64"      : "#920E00",
+        "nds"      : "#920E00",
+        "psp"      : "#00439C",
+        "psx"      : "#00439C",
+        "ps2"      : "#00439C",
+        "sega32x"      : "#1886DC",
+        "segacd"      : "#1886DC",
+        "dreamcast"   : "#1886DC",
+        "cps"         : "#ECAF00",
+        "cps1"         : "#ECAF00",
+        "cps2"         : "#ECAF00",
+        "cps3"         : "#ECAF00",
+        "mame"         : "#1673A4",
+        "naomi"  : "#FF6701",
+        "pgm"  : "#0494CA",
+        "wonderswan"  : "#283A86",
+        "wonderswancolor"  : "#283A86",
+        "pgm"  : "#008FAB",
+
+        "kof"  : "#720D08",
+        "mslug"  : "#777",
+
         "default"     : "#2387FF"
     }
     
@@ -196,24 +228,42 @@ FocusScope {
         "gamegear"   : "Sega",
         "genesis"    : "Sega",
         "megadrive"  : "Sega",
-        "segacd"  : "Sega",
-        "megacd"  : "Sega",
+        "saturn"     : "Sega",
+        "segacd"     : "Sega",
+        "megacd"     : "Sega",
         "mastersystem"  : "Sega",
+        "naomi"  : "Sega",
         "sega32x"  : "Sega",
         "neogeo"   : "SNK",
         "neogeocd" : "SNK",
         "ngp"      : "SNK",
+        "famicom"       : "Nintendo",
         "gb"       : "Nintendo",
         "gba"      : "Nintendo",
         "gbc"      : "Nintendo",
         "snes"     : "Nintendo",
         "nes"      : "Nintendo",
+        "sfc"      : "Nintendo",
         "n64"      : "Nintendo",
         "nds"      : "Nintendo",
         "pcengine" : "NEC",
         "tg16"     : "NEC",
         "psx"      : "Sony",
-        "psp"      : "Sony"
+        "psp"      : "Sony",
+        "ps2"      : "Sony",
+        "wonderswan"  : "Bandai",
+        "wonderswancolor"  : "Bandai",
+        "cps"      : "capcom",
+        "cps1"      : "capcom",
+        "cps2"      : "capcom",
+        "cps3"      : "capcom",
+        "ngp"     : "snk",
+        "ngpc"     : "snk",
+        "pgm"  : "igs",
+        "mame"  : "arcade",
+
+        "kof" : "snk",
+        "mslug" : "snk",
     }
 
     property var layoutScreen : {
@@ -225,14 +275,14 @@ FocusScope {
 
     property var layoutHeader : {
         "width": layoutScreen.width,
-        "height": 55,
+        "height": 40,
         "background": "transparent",
     }
 
 
     property var layoutFooter : {
         "width": layoutScreen.width,
-        "height": 55,
+        "height": 40,
         "background": "transparent",
         
     }    

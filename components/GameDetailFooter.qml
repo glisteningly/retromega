@@ -13,7 +13,7 @@ Item {
         id: footer
         color: theme.background
         width: parent.width
-        height: 55
+        height: 40
         anchors.left: parent.left
         anchors.leftMargin: 0
         anchors.rightMargin: 0 
@@ -33,7 +33,7 @@ Item {
             
         ButtonLegend {
             id: button_legend_start
-            title: "Select"
+            title: "选择"
             key: "A"
             width: 55
             anchors.left: parent.left
@@ -43,7 +43,7 @@ Item {
 
         ButtonLegend {
             id: button_legend_back
-            title: "Back"
+            title: "返回"
             key: "B"
             width: 55
             anchors.left: button_legend_start.right

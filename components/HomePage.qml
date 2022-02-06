@@ -14,8 +14,8 @@ Item {
             return favoriteView
         case 2: 
             return recentsView
-        case 3:
-            return appsView
+//        case 3:
+//            return appsView
         default: 
             return ""
         }
@@ -29,8 +29,8 @@ Item {
             return favoritesLoader.item
         case 2: 
             return recentsLoader.item
-        case 3:
-            return appsLoader.item
+//        case 3:
+//            return appsLoader.item
         default: 
             return null
         }
@@ -43,7 +43,8 @@ Item {
     Keys.onPressed: {                                            
 
         // Prev
-        if (api.keys.isPageUp(event)) {
+//        if (api.keys.isPageUp(event)) {
+        if (api.keys.isPrevPage(event)) {
             event.accepted = true
             setHomeIndex(Math.max(currentHomeIndex - 1,0))
             navSound.play()
@@ -51,9 +52,10 @@ Item {
         }  
         
         // Next
-        if (api.keys.isPageDown(event)) {
+//        if (api.keys.isPageDown(event)) {
+        if (api.keys.isNextPage(event)) {
             event.accepted = true;
-            setHomeIndex(Math.min(currentHomeIndex + 1,3))
+            setHomeIndex(Math.min(currentHomeIndex + 1,2))
             navSound.play();
             return;
         }  
@@ -184,29 +186,29 @@ Item {
                 }  
 
                 // Apps
-                Component {
-                    id: appsView                    
-                    GamesList {
-                        id: appsContentView
-                        width: parent.width
-                        height: parent.height
-                        items: androidCollection.games      
-                        indexItems: androidCollection.games
-                        sortMode: "title"
-                        visible: currentHomeIndex == 3
-                        focus: currentHomeIndex == 3 && !isShowingGameDetail
-                    }          
-                }
+//                Component {
+//                    id: appsView
+//                    GamesList {
+//                        id: appsContentView
+//                        width: parent.width
+//                        height: parent.height
+//                        items: androidCollection.games
+//                        indexItems: androidCollection.games
+//                        sortMode: "title"
+//                        visible: currentHomeIndex == 3
+//                        focus: currentHomeIndex == 3 && !isShowingGameDetail
+//                    }
+//                }
 
-                Loader  {
-                    id: appsLoader
-                    focus: currentHomeIndex == 3
-                    active: opacity !== 0
-                    opacity: focus ? 1 : 0
-                    anchors.fill: parent
-                    sourceComponent: appsView
-                    asynchronous: false
-                }  
+//                Loader  {
+//                    id: appsLoader
+//                    focus: currentHomeIndex == 3
+//                    active: opacity !== 0
+//                    opacity: focus ? 1 : 0
+//                    anchors.fill: parent
+//                    sourceComponent: appsView
+//                    asynchronous: false
+//                }
 
             } 
         }  

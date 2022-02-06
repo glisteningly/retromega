@@ -8,7 +8,7 @@ Item {
     left: parent.left
     right: parent.right
   }
-  height: 55  
+  height: 40
   Rectangle {
     id: footer
     //color: light ? "#60000000" : "transparent"
@@ -52,20 +52,20 @@ Item {
       anchors.right: parent.right
       anchors.rightMargin: 32
       color: "#9B9B9B"
-      font.pixelSize: 18
-      font.letterSpacing: -0.3
+      font.pixelSize: 16
+//      font.letterSpacing: -0.3
       font.bold: true              
       anchors.verticalCenter: parent.verticalCenter
       elide: Text.ElideRight   
-      height: 20    
+      height: 20
     }
 
  
     ButtonLegend {
       id: button_legend_a
-      title: "Select"
+      title: "选择"
       key: "A"
-      width: 40
+      width: 55
       lightText: lightActive
       anchors.left: parent.left
       //anchors.left: button_legend_x.right
@@ -75,12 +75,12 @@ Item {
 
    ButtonLegend {
       id: button_legend_x
-      title: "Menu"
+      title: "菜单"
       key: "B"
       width: 55
       lightText: lightActive
       anchors.left: button_legend_a.right
-      anchors.leftMargin: 36
+      anchors.leftMargin: 24
       anchors.verticalCenter: parent.verticalCenter
     }
 

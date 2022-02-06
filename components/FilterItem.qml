@@ -44,9 +44,9 @@ Item {
         anchors.right: parent.right
         anchors.left: parent.left
         text: title
-        color: parent.activeFocus ? "#ffffff" : "#000000"
-        font.pixelSize: 16
-        font.bold: true
+        color: parent.activeFocus ? "#ffffff" : "#333"
+        font.pixelSize: 18
+//        font.bold: true
         anchors.verticalCenter: parent.verticalCenter
     }
 

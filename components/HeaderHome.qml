@@ -7,14 +7,12 @@ Rectangle {
         } else if (currentHomeIndex == 1) {
             return title_favorites
         } else if (currentHomeIndex == 2) {
-            return title_apps
-        } else {
             return title_recent
         }
     } 
 
     property var anyFocused: {
-        return title_systems.activeFocus || title_favorites.activeFocus || title_recent.activeFocus || title_apps.activeFocus
+        return title_systems.activeFocus || title_favorites.activeFocus || title_recent.activeFocus
     }
 
     property var light: false
@@ -43,14 +41,38 @@ Rectangle {
         height: 1
     }
 
+    Rectangle{
+        id: tabLeft
+        height:18
+        width:32
+        color:"#80444444"
+        radius:2
+        anchors.top: parent.top
+        anchors.topMargin: 11
+        //anchors.right: header_time.left
+        anchors.left: parent.left
+        anchors.leftMargin: 24
+        //anchors.rightMargin: 5
+//        anchors.rightMargin: 32
+        Text{
+            text: "L"
+            color:"white"
+            font.pixelSize: 12
+//            font.letterSpacing: -0.3
+            font.bold: true
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+
     HeaderLink {
         id: title_systems
-        title: "Systems"
+        title: "机种"
         index: 0
-        anchors.left: parent.left
+        anchors.left: tabLeft.right
         anchors.top: parent.top
-        anchors.topMargin: 16
-        anchors.leftMargin: 32
+        anchors.topMargin: 6
+        anchors.leftMargin: 16
         lightText: light
         KeyNavigation.down: mainFocus
         KeyNavigation.right: title_favorites    
@@ -58,11 +80,11 @@ Rectangle {
 
     HeaderLink {
         id: title_favorites
-        title: "Favorites"
+        title: "收藏"
         index: 1
         anchors.left: title_systems.right
         anchors.top: parent.top
-        anchors.topMargin: 16
+        anchors.topMargin: 6
         anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus    
@@ -71,36 +93,60 @@ Rectangle {
 
     HeaderLink {
         id: title_recent
-        title: "Recent"
+        title: "最近"
         index: 2
         anchors.left: title_favorites.right
         anchors.top: parent.top
-        anchors.topMargin: 16
+        anchors.topMargin: 6
         anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus     
-        KeyNavigation.right: title_apps                                
-    }           
-     
-    HeaderLink {
-        id: title_apps
-        title: "Apps"
-        index: 3
-        anchors.left: title_recent.right
+//        KeyNavigation.right: title_apps
+    }
+
+    Rectangle{
+        id: tabRight
+        height:18
+        width:32
+        color:"#80444444"
+        radius:2
         anchors.top: parent.top
-        anchors.topMargin: 16
-        anchors.leftMargin: 24
-        lightText: light
-        KeyNavigation.down: mainFocus                  
-    }       
+        anchors.topMargin: 11
+        //anchors.right: header_time.left
+        anchors.left: title_recent.right
+        anchors.leftMargin: 16
+        //anchors.rightMargin: 5
+//        anchors.rightMargin: 32
+        Text{
+            text: "R"
+            color:"white"
+            font.pixelSize: 12
+//            font.letterSpacing: -0.3
+            font.bold: true
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+     
+//    HeaderLink {
+//        id: title_apps
+//        title: "应用"
+//        index: 3
+//        anchors.left: title_recent.right
+//        anchors.top: parent.top
+//        anchors.topMargin: 6
+//        anchors.leftMargin: 24
+//        lightText: light
+//        KeyNavigation.down: mainFocus
+//    }
 
     
     BatteryIndicator {
         id: battery_indicator
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 20
-        anchors.rightMargin: 32
+        anchors.topMargin: 12
+        anchors.rightMargin: 16
         opacity: 0.5
         lightStyle: light
         visible: showBattery 
@@ -111,8 +157,8 @@ Rectangle {
         text: Qt.formatTime(new Date(), "hh:mm")          
         anchors.right:  parent.right
         anchors.top: parent.top
-        anchors.topMargin: 16
-        anchors.rightMargin: showBattery ? 70 : 32
+        anchors.topMargin: 8
+        anchors.rightMargin: showBattery ? 54 : 16
         color: light ? "#60ffffff" : "#60000000"
         font.pixelSize: 18
         font.letterSpacing: -0.3

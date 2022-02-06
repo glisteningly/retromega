@@ -20,12 +20,12 @@ Item {
 
 	Text {
 		text:title
-		color: selected ? "#ffffff" : "#333333"
+        color: selected ? "#ffffff" : "#DDDDDD"
 		opacity: emptyStyle ? 0.3 : 1.0
-		font.family: globalFonts.sans
+//		font.family: normalFont.name
 		font.pixelSize: 18
-		font.letterSpacing: -0.3
-		font.bold: true
+        font.letterSpacing: 0.5
+        font.bold: false
 		// the size of the whole text box,
 		// a bit taller than the text size for a nice padding
 		width: parent.width - (favorite ? 24 : 12)

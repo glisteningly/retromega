@@ -79,7 +79,7 @@ Item {
                 anchors.rightMargin: 20
                 anchors.bottomMargin: 20
                 SortItem {
-                    title: "By Title"
+                    title: "按标题"
                     width: parent.width
                     mode: "title"
                     itemColor: sortColor
@@ -88,7 +88,7 @@ Item {
 
                 SortItem {
                     id: by_last_played
-                    title: "By Last Played"
+                    title: "按最后游玩"
                     width: parent.width
                     mode: "lastPlayed"
                     itemColor: sortColor
@@ -97,7 +97,7 @@ Item {
 
                 SortItem {
                     id: by_rating
-                    title: "By Highest Rated"
+                    title: "按评分"
                     width: parent.width
                     mode: "rating"
                     itemColor: sortColor
@@ -106,7 +106,7 @@ Item {
 
                 SortItem {
                     id: by_release_year
-                    title: "By Release Date"
+                    title: "按发售时间"
                     width: parent.width
                     mode: "release"
                     itemColor: sortColor
@@ -146,7 +146,7 @@ Item {
 
                 FilterItem {
                     id: show_all
-                    title: "Show All"
+                    title: "显示全部"
                     KeyNavigation.down: show_favorites_only
                     width: parent.width
                     filter: "all"
@@ -155,7 +155,7 @@ Item {
 
                 FilterItem {
                     id: show_favorites_only
-                    title: "Favorites Only"
+                    title: "只显示收藏"
                     width: parent.width
                     filter: "favorites"
                     itemColor: sortColor

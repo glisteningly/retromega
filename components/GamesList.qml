@@ -12,7 +12,7 @@ Item {
 
     property var footerTitle: {
         if (items.count > 0) {
-            return (gameView.currentIndex + 1) + " of " + items.count
+            return (gameView.currentIndex + 1) + " / " + items.count
         } else if (items.count > 0) {
             return items.count
         } else {
@@ -20,7 +20,7 @@ Item {
         }
     }
 
-    property var gamesColor : "#000000"
+    property var gamesColor : "#0060A8"
     property var selectedGame: {
         return gameView.currentIndex >= 0 ? items.get(gameView.currentIndex) : items.get(0)
     } 
@@ -106,9 +106,9 @@ Item {
 
     function rowHeight(index) {
         if (isLastRow(index) && showSeeAll) {
-            return 42 + 46
+            return 36 + 36
         } else {
-            return 42
+            return 36
         }
     }
 
@@ -118,7 +118,8 @@ Item {
 
     Rectangle {
         id: mainListContent
-        color: "transparent"
+        color: theme.background_dark
+//        color: "transparent"
         width: parent.width                
         height: parent.height               
         anchors.top: parent.top
@@ -196,9 +197,9 @@ Item {
               width: parent.height
               anchors.left: parent.left
               anchors.bottom: parent.bottom
-              anchors.margins: 32    
-              anchors.bottomMargin: 12
-              anchors.topMargin: 12
+              anchors.margins: 32
+              anchors.bottomMargin: 6
+              anchors.topMargin: 2
               anchors.top: parent.top
               currentIndex: defaultIndex
               snapMode: ListView.SnapOneItem
@@ -283,7 +284,7 @@ Item {
                         // }
 
                         //Next page
-                        if (api.keys.isNextPage(event)) {
+                        if (api.keys.isPageDown(event)) {
                            event.accepted = true
                            navSound.play()
                            gameView.currentIndex = Math.min(gameView.currentIndex + 10, items.count - 1)
@@ -291,7 +292,7 @@ Item {
                         }  
                         
                         //Prev collection
-                        if (api.keys.isPrevPage(event)) {
+                        if (api.keys.isPageUp(event)) {
                             event.accepted = true;
                             gameView.currentIndex = Math.max(gameView.currentIndex - 10, 0);
                             navSound.play();
@@ -307,7 +308,7 @@ Item {
                     selected: parent.ListView.isCurrentItem && gameView.activeFocus && !selectSeeAll && modelData ? true : false
                     width: parent.width
                     emptyStyle: modelData ? false : true
-                    height: 42
+                    height: 38
                     rowColor: gamesColor
                     favorite: modelData.favorite && !hideFavoriteIcon
                   }
@@ -315,7 +316,7 @@ Item {
                   Item {
                       id: see_all
                       width: parent.width
-                      height: 42
+                      height: 38
                       visible: isLastRow(index) && showSeeAll
                       anchors.top: parent.top
                       anchors.topMargin: 48 
@@ -323,15 +324,15 @@ Item {
                           width: parent.width
                           anchors.top: parent.top
                           height: 1
-                          color: "black"
+                          color: "white"
                           opacity: 0.1
                       }
                       ListRow {
-                          title: "See All"
+                          title: "显示全部"
                           selected: selectSeeAll
                           width: parent.width
                           anchors.bottom: parent.bottom
-                          height: 42
+                          height: 38
                           rowColor: gamesColor
                           favorite: false
                       }

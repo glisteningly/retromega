@@ -3,22 +3,27 @@ import QtGraphicalEffects 1.12
 //import QtQuick.Controls 2.15
 
 ListView {
+    id: systemsListView
+
     property var footerTitle: {
-        return (currentIndex + 1) + " of " + allSystems.count
+        return (currentIndex + 1) + " / " + allSystems.count
     }
 
     property var headerFocused: false
     
     function letterSpacing(str) {
-        return str == 'NES' ? 1.0 : -1.0
-
+        return str == 'NES' ? 1.0 : 0.0
     }
+
+    function titleFontSize(str) {
+        return str.length <= 10 ? 70 : 50
+    }
+
     property var bgIndex: 0
     property var itemTextColor: {
         systemsListView.activeFocus ? "#ffffff"  : "#60ffffff"
     }
     width: parent.width
-    id: systemsListView
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
     anchors.right: parent.right
@@ -48,6 +53,28 @@ ListView {
 
     Keys.onRightPressed: {  
         incrementCurrentIndex(); navSound.play();  systemsBackground.bgIndex = currentIndex
+    }
+
+    Keys.onPressed: {
+          //Next page
+          if (api.keys.isPageDown(event)) {
+             event.accepted = true
+             navSound.play()
+             systemsListView.currentIndex = Math.min(systemsListView.currentIndex + 10, allSystems.count - 1)
+             systemsBackground.bgIndex = currentIndex
+             return
+          }
+
+          //Prev collection
+          if (api.keys.isPageUp(event)) {
+              event.accepted = true;
+              systemsListView.currentIndex = Math.max(systemsListView.currentIndex - 10, 0);
+              systemsBackground.bgIndex = currentIndex
+              navSound.play();
+              return;
+          }
+
+          event.accepted = false
     }
 
     Timer {
@@ -198,13 +225,17 @@ ListView {
                 
                 Image {
                     id: device
-                    source: "../assets/images/devices/"+modelData.shortName+".png"
+//                    source: "../assets/images/devices/"+modelData.shortName+".png"
+                    source: "../assets/images/controllers/"+modelData.shortName+".png"
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 0
-                    anchors.verticalCenterOffset: 10
+                    anchors.verticalCenterOffset: 20
                     cache: true
                     asynchronous: true
+                    width: 420
+                    height: 342
+                    fillMode: Image.PreserveAspectFill
                     scale: 1.0
                     states: [
 
@@ -220,12 +251,12 @@ ListView {
 
                         State {
                             name: "active"; when: home_item_container.ListView.isCurrentItem && !headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: -60.0; opacity: 1.0; scale: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 1.0}
                         },
 
                         State {
                             name: "inactive"; when: home_item_container.ListView.isCurrentItem  && headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: -60.0; opacity: 1.0; scale: 0.9}
+                            PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 0.85}
                         }   
                     ]
 
@@ -235,12 +266,14 @@ ListView {
                     
                 }                
 
+//              主标题
                 Text {
                     id: title
                     text: modelData.name
-                    font.pixelSize: 36
+                    font.family: systemformFont.name
+                    font.pixelSize: titleFontSize(modelData.name)
                     font.letterSpacing: letterSpacing(modelData.name)
-                    font.bold: true       
+//                    font.bold: true
                     color: itemTextColor
                     width: 280
                     wrapMode: Text.WordWrap
@@ -263,10 +296,10 @@ ListView {
                 }
                 
                 Text {
-                    text: modelData.games.count + " games"
-                    font.pixelSize: 14
+                    text: modelData.games.count + " 游戏"
+                    font.pixelSize: 18
                     font.letterSpacing: -0.3
-                    font.bold: true       
+//                    font.bold: true
                     color: itemTextColor
                     opacity: 0.7    
                     anchors.bottomMargin: -27
@@ -278,9 +311,9 @@ ListView {
 
                 Text {
                     text: systemCompanies[modelData.shortName].toUpperCase()
-                    font.pixelSize: 12
-                    font.letterSpacing: 1.3
-                    font.bold: true       
+                    font.pixelSize: 14
+                    font.letterSpacing: 0.5
+//                    font.bold: true
                     color: itemTextColor
                     opacity: 0.7    
                     anchors.bottomMargin: -1
