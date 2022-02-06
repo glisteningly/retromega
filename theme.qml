@@ -4,8 +4,8 @@ import QtMultimedia 5.9
 import SortFilterProxyModel 0.2
 
 import 'components' as Components
-//import './assets/js/cnchar.min.js' as Cnchar
 //import './assets/js/pinyin.js' as Pinyin
+import './const.js' as Const
 
 FocusScope {
     id: root
@@ -13,7 +13,10 @@ FocusScope {
     FontLoader { id: systemTitleFont; source: "assets/fonts/BebasNeue.otf" }
     FontLoader { id: systemSubitleFont; source: "assets/fonts/Acre.otf" }
 
-    
+    property var theme : Const.theme
+    property var systemColors: Const.systemColors
+    property var systemCompanies: Const.systemCompanies
+
     Timer {
         id: timer
     }
@@ -41,11 +44,9 @@ FocusScope {
     }
 
     // Collection index
-    property var currentSystemIndex : 0
-    property var currentCollectionIndex : 0
+    property int currentSystemIndex : 0
+    property int currentCollectionIndex : 0
     property var currentCollection: {
-//        return  allSystems.get(currentSystemIndex)
-//        return allCollections.get(currentSystemIndex)
         if (currentHomeIndex == 0) {
             return allSystems.get(currentSystemIndex)
         } else if (currentHomeIndex == 1) {
@@ -67,55 +68,51 @@ FocusScope {
     }
 
     // Collection list index
-    property var collectionListIndex : 0
+    property int collectionListIndex : 0
     function setCollectionListIndex(index) {
         api.memory.set('collectionListIndex', index)
         collectionListIndex = index
     }
 
     // Collection list index
-    property var collectionShowAllItems : false
+    property bool collectionShowAllItems : false
     function setCollectionShowAllItems(show) {
         api.memory.set('collectionShowAllItems', show)
         collectionShowAllItems = show
     }
 
     // Games index
-    property var currentGameIndex: 0
+    property int currentGameIndex: 0
     property var currentGame: {return currentCollection.games.get(currentGameIndex)}
   
     // Main homepage index
-    property var currentHomeIndex: 0
+    property int currentHomeIndex: 0
 
     // Collection sort mode
     // Collection list index
-    property var collectionSortMode : "title"
-    property var collectionSortDirection : 0
-    property var collectionFilterMode : "all"
+    property string collectionSortMode : "title"
+    property int collectionSortDirection : 0
+    property string collectionFilterMode : "all"
 
     function setCollectionSortMode(sortMode) {
         api.memory.set('collectionSortMode', sortMode)
         
         var direction = collectionSortDirection == 0 ? 1 : 0
-        if (collectionSortMode != sortMode || sortMode == "lastPlayed" || sortMode == "rating")  { 
+        if (collectionSortMode !== sortMode || sortMode === "lastPlayed" || sortMode === "rating")  {
         
             switch (sortMode) {
-                case "title": {
+                case "title":
                     direction = 0
-                    break
-                }
-                case "lastPlayed": {
+                    break               
+                case "lastPlayed":
                     direction = 1
-                    break
-                }
-                case "rating": {
+                    break               
+                case "rating":
                     direction = 1
-                    break
-                }
-                case "release": {
+                    break                
+                case "release":
                     direction = 0
-                    break
-                }
+                    break              
             }
         }
 
@@ -139,15 +136,15 @@ FocusScope {
         return api.collections.get(0)
     }
   
-    property var currentPage : 'HomePage';
+    property string currentPage : 'HomePage';
     function setCurrentPage(page) {
         api.memory.set('currentPage', page)
         currentPage = page
     }
 
     property var currentGameDetail : null
-    property var currentGameDetailIndex : 0
-    property var isShowingGameDetail : false
+    property int currentGameDetailIndex : 0
+    property bool isShowingGameDetail : false
     function showGameDetail(game, index) {                
         if (game) {
             forwardSound.play()
@@ -161,7 +158,7 @@ FocusScope {
     }
 
     // When the game is launching
-    property var launchingGame : false
+    property bool launchingGame : false
     function startGame(game, index) {
         currentGameIndex = index
         setCollectionListIndex(index)       
@@ -180,108 +177,7 @@ FocusScope {
         }
     }
 
-    property var theme : {
-        "background": "#F3F3F3",
-        "text":"#70000000",
-        "title":"#444",
-        "background_dark" : "#333333",
-        "text_dark":"#DDD",
-        "title_dark":"#DDD"
-//        "background": "#333333",
-//        "text":"#70000000",
-//        "title":"#444"
-    } 
-    
-    property var systemColors : {
-        "nes"      : "#920E00",
-        "n64"      : "#920E00",
-        "nds"      : "#920E00",
-        "famicom"  : "#920E00",
-        "gb"       : "#920E00",
-        "gba"      : "#920E00",
-        "gbc1"     : "#920E00",
-        "gbc"      : "#920E00",
-        "snes"     : "#AA6AFF",
-        "sfc"      : "#920E00",
-        "gg"       : "#2196F3",
-        "gamegear" : "#2196F3",
-        "mastersystem"  : "#2196F3",
-        "genesis"  : "#2196F3",
-        "megadrive"  : "#2196F3",
-        "saturn"   : "#2196F3",
-        "sega32x"      : "#2196F3",
-        "segacd"      : "#2196F3",
-        "dreamcast"   : "#2196F3",
-        "psp"      : "#616161",
-        "psx"      : "#616161",
-        "ps2"      : "#616161",
-        "neogeo"   : "#0277BD",
-        "ngp"     : "#689F38",
-        "ngpc"     : "#689F38",
-        "neogeocd"  : "#689F38",
-        "android"  : "#5BFF92",
-        "pcengine" : "#FF7043",
-        "tg16"     : "#FF7043",
-        "cps"         : "#ECAF00",
-        "cps1"         : "#ECAF00",
-        "cps2"         : "#ECAF00",
-        "cps3"         : "#ECAF00",
-        "mame"         : "#546E7A",
-        "naomi"  : "#BF360C",
-        "pgm"  : "#0494CA",
-        "wonderswan"  : "#6A1B9A",
-        "wonderswancolor"  : "#6A1B9A",
-        "pgm"  : "#00838F",
 
-        "kof"  : "#1A237E",
-        "mslug"  : "#777",
-
-        "default"     : "#2387FF"
-    }
-    
-    property var systemCompanies: {
-        "dreamcast"  : "Sega",
-        "gg"         : "Sega",
-        "gamegear"   : "Sega",
-        "genesis"    : "Sega",
-        "megadrive"  : "Sega",
-        "saturn"     : "Sega",
-        "segacd"     : "Sega",
-        "megacd"     : "Sega",
-        "mastersystem"  : "Sega",
-        "naomi"  : "Sega",
-        "sega32x"  : "Sega",
-        "neogeo"   : "SNK",
-        "neogeocd" : "SNK",
-        "ngp"      : "SNK",
-        "famicom"       : "Nintendo",
-        "gb"       : "Nintendo",
-        "gba"      : "Nintendo",
-        "gbc"      : "Nintendo",
-        "snes"     : "Nintendo",
-        "nes"      : "Nintendo",
-        "sfc"      : "Nintendo",
-        "n64"      : "Nintendo",
-        "nds"      : "Nintendo",
-        "pcengine" : "NEC",
-        "tg16"     : "NEC",
-        "psx"      : "Sony",
-        "psp"      : "Sony",
-        "ps2"      : "Sony",
-        "wonderswan"  : "Bandai",
-        "wonderswancolor"  : "Bandai",
-        "cps"      : "capcom",
-        "cps1"      : "capcom",
-        "cps2"      : "capcom",
-        "cps3"      : "capcom",
-        "ngp"     : "snk",
-        "ngpc"     : "snk",
-        "pgm"  : "igs",
-        "mame"  : "arcade",
-
-        "kof" : "snk",
-        "mslug" : "snk",
-    }
 
     property var layoutScreen : {
         "width": parent.width,
@@ -313,12 +209,12 @@ FocusScope {
  
     function navigate(page){
         setCurrentPage(page)
-        if (page == 'HomePage') {
+        if (page === 'HomePage') {
             backSound.play()
         } else {
             forwardSound.play()
         }
-        if (page == 'GamesPage') {
+        if (page === 'GamesPage') {
            gamesPage.onShow()
         }
     }
