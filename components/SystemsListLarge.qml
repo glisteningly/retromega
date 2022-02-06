@@ -10,10 +10,6 @@ ListView {
     }
 
     property var headerFocused: false
-    
-    function letterSpacing(str) {
-        return str == 'NES' ? 1.0 : 0.0
-    }
 
     function titleFontSize(str) {
         return str.length <= 10 ? 70 : 50
@@ -272,7 +268,7 @@ ListView {
                     text: modelData.name
                     font.family: systemTitleFont.name
                     font.pixelSize: titleFontSize(modelData.name)
-                    font.letterSpacing: letterSpacing(modelData.name)
+                    font.letterSpacing: 0
 //                    font.bold: true
                     color: itemTextColor
                     width: 280

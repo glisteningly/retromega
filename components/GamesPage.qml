@@ -188,12 +188,13 @@ Item {
 
             Text {
                 text: footerTitle
+                font.family: systemSubitleFont.name
                 anchors.right: parent.right
                 anchors.rightMargin: 32
                 color: "#9B9B9B"//theme.title
-                font.pixelSize: 16
-//                font.letterSpacing: -0.3
-                font.bold: true              
+                font.pixelSize: 18
+                font.letterSpacing: 0.3
+//                font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
                 elide: Text.ElideRight   
                 height: 20    
@@ -285,13 +286,14 @@ Item {
                 id: header_time
                 text: collectionSortTitle
                 anchors.right: legend.left
-                anchors.top: parent.top
-                anchors.topMargin: 9
+                anchors.verticalCenter: parent.verticalCenter
+//                anchors.top: parent.top
+//                anchors.topMargin: 6
                 anchors.rightMargin: 8
                 color: "#9B9B9B"
-                font.pixelSize: 16
-//                font.letterSpacing: -0.3
-                font.bold: true              
+                font.pixelSize: 18
+                font.letterSpacing: 0.3
+//                font.bold: true
             }   
 
 

@@ -23,15 +23,15 @@ Item {
     clip:true
 
 
-    Rectangle {
-        anchors.leftMargin: 22
-        anchors.rightMargin: 22
-        anchors.left: parent.left
-        anchors.right: parent.right
-        color: lightActive ? "#20ffffff" : "#20000000"
-        anchors.top: parent.top
-        height: 1
-    }
+//    Rectangle {
+//        anchors.leftMargin: 22
+//        anchors.rightMargin: 22
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        color: lightActive ? "#20ffffff" : "#20000000"
+//        anchors.top: parent.top
+//        height: 1
+//    }
 
 
     // CustomBorder {
@@ -49,12 +49,13 @@ Item {
 
     Text{
       text: title
+      font.family: systemSubitleFont.name
       anchors.right: parent.right
       anchors.rightMargin: 32
       color: "#9B9B9B"
-      font.pixelSize: 16
-//      font.letterSpacing: -0.3
-      font.bold: true              
+      font.pixelSize: 18
+      font.letterSpacing: 0.3
+//      font.bold: true
       anchors.verticalCenter: parent.verticalCenter
       elide: Text.ElideRight   
       height: 20

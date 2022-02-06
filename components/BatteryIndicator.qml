@@ -6,7 +6,7 @@ Item {
     width: 26
     height: 14
 
-    property var lightStyle : false
+    property bool lightStyle : false
 
     property var percent: {
         api.device ? api.device.batteryPercent : 0

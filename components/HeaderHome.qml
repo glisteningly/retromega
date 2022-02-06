@@ -154,7 +154,6 @@ Rectangle {
 //        lightText: light
 //        KeyNavigation.down: mainFocus
 //    }
-
     
     BatteryIndicator {
         id: battery_indicator
@@ -162,22 +161,23 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 12
         anchors.rightMargin: 16
-        opacity: 0.5
+        opacity: 0.6
         lightStyle: light
         visible: showBattery 
     }
 
     Text {
         id: header_time
+        font.family: systemSubitleFont.name
         text: Qt.formatTime(new Date(), "hh:mm")          
         anchors.right:  parent.right
         anchors.top: parent.top
         anchors.topMargin: 8
         anchors.rightMargin: showBattery ? 54 : 16
-        color: light ? "#60ffffff" : "#60000000"
+        color: light ? "#ccffffff" : "#80000000"
         font.pixelSize: 18
         font.letterSpacing: -0.3
-        font.bold: true     
+//        font.bold: true
         visible: showStatusInfo         
     }      
 

@@ -27,16 +27,16 @@ Item {
 	             font.pixelSize: 14
 //	             font.letterSpacing: -0.3
 	             font.bold: true              
-	             anchors.verticalCenter: parent.verticalCenter
+                 anchors.verticalCenter: parent.verticalCenter
 	             anchors.horizontalCenter: parent.horizontalCenter
 	        }
 	        Text{
 	        	 id: legend_title
 	             text: title
 	             color: lightText ? "#70ffffff" : theme.text                      
-                 font.pixelSize: 16
+                 font.pixelSize: 18
                  font.letterSpacing: 1
-	             font.bold: true              
+//	             font.bold: true
 	             anchors.verticalCenter: parent.verticalCenter
 	             anchors.left: parent.right
 	             anchors.leftMargin: 4

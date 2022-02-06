@@ -233,7 +233,7 @@ FocusScope {
         "wonderswancolor"  : "#6A1B9A",
         "pgm"  : "#00838F",
 
-        "kof"  : "#720D08",
+        "kof"  : "#1A237E",
         "mslug"  : "#777",
 
         "default"     : "#2387FF"
