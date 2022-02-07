@@ -223,15 +223,15 @@ ListView {
                 Image {
                     id: device
 //                    source: "../assets/images/devices/"+modelData.shortName+".png"
-                    source: "../assets/images/logos/"+modelData.shortName+".png"
+                    source: "../assets/images/logos-l/"+modelData.shortName+".png"
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 0
-                    anchors.verticalCenterOffset: 20
+                    anchors.verticalCenterOffset: 25
                     cache: true
                     asynchronous: true
-                    width: 420
-                    height: 342
+//                    width: 420
+//                    height: 342
                     fillMode: Image.PreserveAspectFill
                     scale: 1.0
                     states: [
@@ -248,12 +248,12 @@ ListView {
 
                         State {
                             name: "active"; when: home_item_container.ListView.isCurrentItem && !headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 1.0}
                         },
 
                         State {
                             name: "inactive"; when: home_item_container.ListView.isCurrentItem  && headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 0.85}
+                            PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 0.85}
                         }   
                     ]
 

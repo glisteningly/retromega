@@ -7,7 +7,7 @@ const theme = {
   "title_dark": "#DDD",
 //  "background_grid": "#283593",
   "background_grid": "#333",
-  "gridColumnCount": 4,
+  "gridColumnCount": 5,
   "primaryColor": "#1565C0"
 }
 

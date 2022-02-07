@@ -8,12 +8,17 @@ GridView {
     property var footerTitle: {
         return (currentIndex + 1) + " / " + allSystems.count
     }
-
     property bool headerFocused: false
+    property int columnCount: {
+        return theme.gridColumnCount;
+    }
+    readonly property int maxRecalcs: 5
+    property int currentRecalcs: 0
+    property real cellHeightRatio: 0.8
 
 
     model: allSystems
-
+    currentIndex: currentSystemIndex
     width: parent.width
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
@@ -26,7 +31,21 @@ GridView {
     anchors.bottomMargin: 12
     cacheBuffer: 10
 //    delegate: systemsDelegate
-    currentIndex: currentSystemIndex
+
+    highlightRangeMode: GridView.ApplyRange
+    highlightMoveDuration: 0
+    preferredHighlightBegin: height * 0.5 - vpx(120)
+    preferredHighlightEnd: height * 0.5 + vpx(120)
+
+//        function update_cell_height_ratio(img_w, img_h) {
+//            cellHeightRatio = Math.min(Math.max(cellHeightRatio, img_h / img_w), 1.5);
+//        }
+
+
+    cellWidth: width / columnCount
+    cellHeight: cellWidth * cellHeightRatio;
+
+    displayMarginBeginning: anchors.topMargin
 
     Keys.onPressed: {
         if (event.isAutoRepeat)
@@ -44,37 +63,20 @@ GridView {
         }
     }
 
-    property int columnCount: {
-        return theme.gridColumnCount;
-    }
+//    highlight: Rectangle {
+//        color:  theme.primaryColor
+//        opacity: headerFocused ? 0.1 : 0.3
+//        width: grid.cellWidth
+//        height: grid.cellHeight
+//        scale: 1.1
+//        radius: vpx(12)
+//        z: 2
+//    }
 
-    readonly property int maxRecalcs: 5
-    property int currentRecalcs: 0
-    property real cellHeightRatio: 0.8
-
-//        function update_cell_height_ratio(img_w, img_h) {
-//            cellHeightRatio = Math.min(Math.max(cellHeightRatio, img_h / img_w), 1.5);
-//        }
-
-
-    cellWidth: width / columnCount
-    cellHeight: cellWidth * cellHeightRatio;
-
-    displayMarginBeginning: anchors.topMargin
-
-    highlight: Rectangle {
-        color:  theme.primaryColor
-        opacity: headerFocused ? 0.1 : 0.3
-        width: grid.cellWidth
-        height: grid.cellHeight
-        scale: 1.1
-        radius: vpx(12)
-        z: 2
-    }
-
-    highlightMoveDuration: 0
+//    highlightMoveDuration: 0
 
     delegate: SystemsGridItem {
+        id: home_griditem_container
         width: GridView.view.cellWidth
         height: GridView.view.cellHeight
         selected: GridView.isCurrentItem
@@ -85,7 +87,14 @@ GridView {
 
         Keys.onPressed: {
             if (api.keys.isAccept(event) && !event.isAutoRepeat) {
-                root.launchRequested();
+//                //We update the collection we want to browse
+                setCollectionListIndex(0)
+                setSystemIndex(home_griditem_container.GridView.view.currentIndex)
+
+                //We change Pages
+                navigate('GamesPage');
+
+                return;
             }
         }
     }

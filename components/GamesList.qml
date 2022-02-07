@@ -203,12 +203,17 @@ Item {
               anchors.top: parent.top
               currentIndex: defaultIndex
               snapMode: ListView.SnapOneItem
-              preferredHighlightBegin: 0; preferredHighlightEnd: 0
-              highlightRangeMode: maintainFocusTop ? ListView.ApplyRange : ListView.NoHighlightRange
-
+//              preferredHighlightBegin: 0;
+//              preferredHighlightEnd: 0;
+//              highlightRangeMode: maintainFocusTop ? ListView.StrictlyEnforceRange : ListView.NoHighlightRange
+//              highlightMoveDuration: 0
+              highlightRangeMode: ListView.ApplyRange
               highlightMoveDuration: 0
+              preferredHighlightBegin: height * 0.5 - vpx(20)
+              preferredHighlightEnd: height * 0.5 + vpx(20)
+
               focus: listContent.activeFocus
-                Keys.onUpPressed: { 
+                Keys.onUpPressed: {
                     if (focusSeeAll) {
                         focusSeeAll = false
                     } else if (gameView.currentIndex == 0) {
@@ -217,17 +222,17 @@ Item {
                         decrementCurrentIndex();
                         event.accepted = true
                     }
-                    navSound.play(); 
-                }      
+                    navSound.play();
+                }
 
-                Keys.onDownPressed:     { 
+                Keys.onDownPressed:     {
                     if (gameView.currentIndex == items.count - 1 && showSeeAll) {
                         focusSeeAll = true
                     } else {
-                        incrementCurrentIndex(); 
+                        incrementCurrentIndex();
                         event.accepted = true
                     }
-                    navSound.play(); 
+                    navSound.play();
                 }
 
               move: Transition {

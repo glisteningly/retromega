@@ -16,6 +16,7 @@
 
 
 import QtQuick 2.2
+import QtGraphicalEffects 1.12
 
 
 Item {
@@ -30,18 +31,41 @@ Item {
     signal clicked()
     signal doubleClicked()
 
-    scale: selected ? 1.05 : 0.88
+    scale: selected ? 1.1 : 1
     z: selected ? 3 : 1
 
 
     Behavior on scale { PropertyAnimation { duration: 150 } }
+
+    Rectangle {
+        id: gridItemBg
+        color:  systemColors[modelData.shortName] ?? "#000000"
+//        opacity: headerFocused ? 0.1 : 0.3
+        opacity: 0.5
+        anchors.fill: parent
+        anchors.margins: 2
+//            scale: 1.1
+        radius: vpx(12)
+//            z: 2
+    }
+
+    DropShadow {
+        visible: selected
+        anchors.fill: gridItemBg
+        source: gridItemBg
+        verticalOffset: 3
+        horizontalOffset: 3
+        color: "#90000000"
+        radius: 10
+        samples: 20
+    }
 
     Image {
         id: imgController
         anchors { fill: parent; margins: vpx(5) }
         asynchronous: true
         visible: source != ""
-        source:  "../assets/images/logos/"+modelData.shortName+".png" || ""
+        source:  "../assets/images/logos-s/"+modelData.shortName+".png" || ""
 //        sourceSize { width: 256; height: 256 }
         fillMode: Image.PreserveAspectFit
         smooth: true
