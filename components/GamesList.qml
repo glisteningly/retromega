@@ -209,8 +209,8 @@ Item {
 //              highlightMoveDuration: 0
               highlightRangeMode: ListView.ApplyRange
               highlightMoveDuration: 0
-              preferredHighlightBegin: height * 0.5 - vpx(20)
-              preferredHighlightEnd: height * 0.5 + vpx(20)
+              preferredHighlightBegin: height * 0.5 - 15
+              preferredHighlightEnd: height * 0.5 + 15
 
               focus: listContent.activeFocus
                 Keys.onUpPressed: {
@@ -247,8 +247,11 @@ Item {
                 gameView.positionViewAtIndex(defaultIndex, ListView.Center)
                 delay(50, function() {
                     gameView.positionViewAtIndex(defaultIndex, ListView.Center)
+                    if (currentHomeIndex <= 1) {
+                        currentIndex = -1
+                    }
                 })
-                //currentIndex = currentSystemIndex
+                currentIndex = defaultIndex
             }
             
             Component {

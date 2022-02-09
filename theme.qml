@@ -75,6 +75,7 @@ FocusScope {
     }
 
     function setCurSystemIndex(index) {
+//        setCollectionListIndex(0)
         currentSystemIndex = index
     }
 
@@ -329,11 +330,17 @@ FocusScope {
     // Primary UI
     Rectangle {
         id: app
-        color: theme.background
+        color: '#000'
         width: layoutScreen.width
         height: layoutScreen.height
         anchors.top: parent.top
 
+//        Rectangle {
+//            id: backRect
+//            color: theme.background
+//            anchors.fill: parent
+//            radius: vpx(12)
+//        }
 
 
         // Home Page

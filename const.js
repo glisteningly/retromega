@@ -53,6 +53,7 @@ const systemColors = {
 
   "kof": "#1A237E",
   "mslug": "#777",
+  "megaman": "#2154D1",
 
   "default": "#2387FF"
 }
@@ -98,4 +99,5 @@ const systemCompanies = {
 
   "kof": "snk",
   "mslug": "snk",
+  "megaman": "capcom"
 }

@@ -51,8 +51,8 @@ Item {
     }
 
     Keys.onPressed: {
-        console.log('------')
-        console.log(event.key)
+//        console.log('------')
+//        console.log(event.key)
 
         // Prev
 //        if (api.keys.isPageUp(event)) {
@@ -74,7 +74,9 @@ Item {
 
 //        if (api.keys.isFilters(event) || event.key === 32) {
         if (event.key === 1048586 || event.key === 32) {
-            toggleSystemViewMode()
+            if (currentHomeIndex == 0){
+                toggleSystemViewMode()
+            }
         }
     }  
 
@@ -113,16 +115,16 @@ Item {
 
         Keys.onPressed: {                                            
             // Back to Home            
-            if (api.keys.isCancel(event)) {
-                if (currentContentView && currentContentView.showIndex) {
-                    currentContentView.showIndex = false
-                } else {
-                    header.focused_link.forceActiveFocus()
-                }
-                event.accepted = true;                    
-            } else {
-                event.accepted = false;                
-            }
+//            if (api.keys.isCancel(event)) {
+//                if (currentContentView && currentContentView.showIndex) {
+//                    currentContentView.showIndex = false
+//                } else {
+//                    header.focused_link.forceActiveFocus()
+//                }
+//                event.accepted = true;
+//            } else {
+//                event.accepted = false;
+//            }
         }
 
         Rectangle {

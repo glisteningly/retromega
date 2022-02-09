@@ -32,7 +32,7 @@ Rectangle {
          if (currentSystemViewMode === 'grid') {
              return theme.background
          } else {
-             return  "transparent"
+             return currentHomeIndex <= 1 ?  "transparent" : theme.background
          }
     }
     width: parent.width
@@ -79,7 +79,7 @@ Rectangle {
         index: 0
         anchors.left: tabLeft.right
         anchors.top: parent.top
-        anchors.topMargin: 6
+//        anchors.topMargin: 6
         anchors.leftMargin: 16
         lightText: light
         KeyNavigation.down: mainFocus
@@ -92,7 +92,7 @@ Rectangle {
         index: 1
         anchors.left: title_systems.right
         anchors.top: parent.top
-        anchors.topMargin: 6
+//        anchors.topMargin: 6
         anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus
@@ -105,7 +105,7 @@ Rectangle {
         index: 2
         anchors.left: title_collection.right
         anchors.top: parent.top
-        anchors.topMargin: 6
+//        anchors.topMargin: 6
         anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus    
@@ -118,7 +118,7 @@ Rectangle {
         index: 3
         anchors.left: title_favorites.right
         anchors.top: parent.top
-        anchors.topMargin: 6
+//        anchors.topMargin: 6
         anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus     

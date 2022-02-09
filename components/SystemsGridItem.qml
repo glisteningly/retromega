@@ -62,7 +62,13 @@ Item {
 
     Image {
         id: imgController
-        anchors { fill: parent; margins: vpx(5) }
+        anchors {
+            fill: parent
+//            margins: vpx(5)
+            leftMargin: 5
+            rightMargin: 5
+            bottomMargin: 10
+        }
         asynchronous: true
         visible: source != ""
         source:  "../assets/images/logos-s/"+modelData.shortName+".png" || ""
@@ -92,7 +98,7 @@ Item {
 //        anchors.centerIn: parent.bottom
 //        anchors.leftMargin: 8
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 1.5
+        anchors.bottomMargin: 5
         font.letterSpacing: 0.2
 
 

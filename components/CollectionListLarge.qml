@@ -226,16 +226,16 @@ ListView {
                 Image {
                     id: device
 //                    source: "../assets/images/devices/"+modelData.shortName+".png"
-                    source: "../assets/images/logos/"+modelData.shortName+".png"
+                    source: "../assets/images/collections/"+modelData.shortName+".png"
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 0
                     anchors.verticalCenterOffset: 20
                     cache: true
                     asynchronous: true
-                    width: 420
-                    height: 342
-                    fillMode: Image.PreserveAspectFill
+                    width: 400
+                    height: 400
+                    fillMode: Image.PreserveAspectFit
                     scale: 1.0
                     states: [
 
@@ -251,12 +251,12 @@ ListView {
 
                         State {
                             name: "active"; when: home_listitem_container.ListView.isCurrentItem && !headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: 0.0; opacity: 1.0; scale: 1.0}
                         },
 
                         State {
                             name: "inactive"; when: home_listitem_container.ListView.isCurrentItem  && headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 0.85}
+                            PropertyChanges { target: device; anchors.rightMargin: 0.0; opacity: 1.0; scale: 0.85}
                         }
                     ]
 
@@ -283,7 +283,7 @@ ListView {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: 30
-                    anchors.verticalCenterOffset: -30
+                    anchors.verticalCenterOffset: -20
                 }
 
                 DropShadow {

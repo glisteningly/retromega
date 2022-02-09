@@ -55,6 +55,7 @@ GridView {
     }
 
     onCurrentIndexChanged: {
+        navSound.play()
         setCurSystemIndex(currentIndex)
     }
 
