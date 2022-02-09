@@ -31,7 +31,7 @@ Item {
     signal clicked()
     signal doubleClicked()
 
-    scale: selected ? 1.1 : 1
+    scale: selected && !headerFocused ? 1.1 : 1
     z: selected ? 3 : 1
 
 
@@ -50,7 +50,7 @@ Item {
     }
 
     DropShadow {
-        visible: selected
+        visible: selected && !headerFocused
         anchors.fill: gridItemBg
         source: gridItemBg
         verticalOffset: 3
@@ -86,19 +86,35 @@ Item {
 //    }
 
     Text {
-        width: parent.width - vpx(64)
-        anchors.centerIn: parent
+        id: shortTitle
+        visible: selected && !headerFocused
+        width: parent.width
+//        anchors.centerIn: parent.bottom
+//        anchors.leftMargin: 8
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 1.5
+        font.letterSpacing: 0.2
 
-        visible: !imgController.visible
 
-        text: collection.shortName
-        wrapMode: Text.Wrap
+        text: collection.name.length >= 18 ? collection.shortName : collection.name
+        wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
         color: "#eee"
-//        font {
-//            pixelSize: vpx(16)
-//            family: subtitleFont.name
-//        }
+        font {
+            pixelSize: vpx(32)
+            family: systemTitleFont.name
+        }
+    }
+
+    DropShadow {
+        visible: selected && !headerFocused
+        anchors.fill: shortTitle
+        source: shortTitle
+        verticalOffset: 0
+        horizontalOffset: 0
+        color: "#90000000"
+        radius: 20
+        samples: 30
     }
 
     MouseArea {

@@ -14,18 +14,18 @@ Item {
 	    //anchors.leftMargin: 70
 	    Rectangle{
 	    	id: legend
-	        height:22
-	        width:30
+            height:18
+            width:30
 	        color:"#444"
-	        radius:8
+            radius:3
 	        anchors.verticalCenter: parent.verticalCenter
 	        anchors.left: parent.left  
 	        anchors.leftMargin: 0
 	        Text{
 	             text: key
 	             color:"white"         
-	             font.pixelSize: 14
-	             font.letterSpacing: -0.3
+                 font.pixelSize: 12
+                 font.letterSpacing: 0
 	             font.bold: true              
 	             anchors.verticalCenter: parent.verticalCenter
 	             anchors.horizontalCenter: parent.horizontalCenter
@@ -34,9 +34,9 @@ Item {
 	        	 id: legend_title
 	             text: title
 	             color: lightText ? "#70ffffff" : theme.text                      
-	             font.pixelSize: 14
-	             font.letterSpacing: -0.3
-	             font.bold: true              
+                 font.pixelSize: 18
+                 font.letterSpacing: 1
+//	             font.bold: true
 	             anchors.verticalCenter: parent.verticalCenter
 	             anchors.left: parent.right
 	             anchors.leftMargin: 4

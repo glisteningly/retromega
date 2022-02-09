@@ -28,7 +28,13 @@ Rectangle {
     }
 
     id: home_header
-    color: currentSystemViewMode === 'grid' && currentHomeIndex <= 0 ? theme.background_grid : "transparent"
+    color: {
+         if (currentSystemViewMode === 'grid') {
+             return theme.background
+         } else {
+             return  "transparent"
+         }
+    }
     width: parent.width
     height: layoutHeader.height
     anchors.top: parent.top      

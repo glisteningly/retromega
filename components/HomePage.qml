@@ -72,10 +72,10 @@ Item {
             return;
         }  
 
-        if (api.keys.isFilters(event) || event.key === 32) {
+//        if (api.keys.isFilters(event) || event.key === 32) {
+        if (event.key === 1048586 || event.key === 32) {
             toggleSystemViewMode()
         }
-
     }  
 
     Rectangle {
@@ -87,7 +87,7 @@ Item {
     HeaderHome {
         id: header
         z: 1
-        light: (currentHomeIndex <= 1 && currentPage === "HomePage")
+        light: (currentHomeIndex <= 1 && currentPage === "HomePage" && currentSystemViewMode === 'list')
     }
 
     Footer {
@@ -148,6 +148,7 @@ Item {
                     width: parent.width
                     visible: currentHomeIndex == 0 && currentSystemViewMode === 'list'
                     focus: currentHomeIndex == 0 && currentSystemViewMode === 'list'
+                    enabled: currentHomeIndex == 0 && currentSystemViewMode === 'list'
                     headerFocused: header.anyFocused
                     id: systemsListView
                 }

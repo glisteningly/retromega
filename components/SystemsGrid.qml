@@ -19,16 +19,14 @@ GridView {
 
     model: allSystems
     currentIndex: currentSystemIndex
-    width: parent.width
-    anchors.verticalCenter: parent.verticalCenter
+//    width: parent.width - 8
+//    anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
     anchors.leftMargin: 12
     anchors.right: parent.right
     anchors.rightMargin: 12
-    anchors.top: parent.top
-    anchors.topMargin: 6
-    anchors.bottom: parent.bottom
-    anchors.bottomMargin: 12
+
+    anchors.margins: 12
     cacheBuffer: 10
 //    delegate: systemsDelegate
 
@@ -46,6 +44,19 @@ GridView {
     cellHeight: cellWidth * cellHeightRatio;
 
     displayMarginBeginning: anchors.topMargin
+
+    onVisibleChanged: {
+        if (visible) {
+            positionViewAtIndex(currentSystemIndex, GridView.Center)
+            delay(0, function() {
+                systemsGridView.positionViewAtIndex(currentSystemIndex, GridView.Center)
+            })
+        }
+    }
+
+    onCurrentIndexChanged: {
+        setCurSystemIndex(currentIndex)
+    }
 
     Keys.onPressed: {
         if (event.isAutoRepeat)

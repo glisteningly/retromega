@@ -44,8 +44,11 @@ FocusScope {
         startSound.play()                                                                           
     }
 
+    // Main homepage index
+    property int currentHomeIndex: 0
+
     // Collection index
-    property int currentSystemIndex : 0
+    property var currentSystemIndex : 0
     property int currentCollectionIndex : 0
     property var currentCollection: {
         if (currentHomeIndex == 0) {
@@ -68,6 +71,10 @@ FocusScope {
     function setSystemIndex(index) {
 //        setCollectionListIndex(0)
         api.memory.set('currentSystemIndex', index)
+        currentSystemIndex = index
+    }
+
+    function setCurSystemIndex(index) {
         currentSystemIndex = index
     }
 
@@ -94,8 +101,7 @@ FocusScope {
     property int currentGameIndex: 0
     property var currentGame: {return currentCollection.games.get(currentGameIndex)}
   
-    // Main homepage index
-    property int currentHomeIndex: 0
+
 
     // Collection sort mode
     // Collection list index
@@ -260,7 +266,7 @@ FocusScope {
         volume: 0.35
     }           
     
-    property int lastPlayedMaximum: {
+    property var lastPlayedMaximum: {
         if (allLastPlayed.count >= 50) {
             return 50
         } else {

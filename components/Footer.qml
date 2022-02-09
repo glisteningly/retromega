@@ -74,13 +74,25 @@ Item {
       anchors.verticalCenter: parent.verticalCenter
     }      
 
-   ButtonLegend {
-      id: button_legend_x
+    ButtonLegend {
+      id: button_legend_b
       title: "菜单"
       key: "B"
       width: 55
       lightText: lightActive
       anchors.left: button_legend_a.right
+      anchors.leftMargin: 24
+      anchors.verticalCenter: parent.verticalCenter
+    }
+
+    ButtonLegendSquare {
+      visible: currentHomeIndex == 0
+      id: button_legend_sel
+      title: "视图"
+      key: "SEL"
+      width: 55
+      lightText: lightActive
+      anchors.left: button_legend_b.right
       anchors.leftMargin: 24
       anchors.verticalCenter: parent.verticalCenter
     }

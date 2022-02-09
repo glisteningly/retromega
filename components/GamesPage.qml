@@ -19,42 +19,34 @@ Item {
         return (collectionShowAllItems) ? "All " + currentCollection.name : currentCollection.name
     }
     
-    property var showIndex: false
+    property bool showIndex: false
     property var collectionSortTitle: {
         var title = "标题"
         switch (collectionSortMode) {
-            case "title": {
+            case "title":
                 title = "按标题"
                 break
-            }
-            case "lastPlayed": {
+            case "lastPlayed":
                 title = "按最后游玩"
                 break
-            }
-            case "rating": {
+            case "rating":
                 title = "按评分"
                 break
-            }   
-            case "favorites": {
+            case "favorites":
                 title = "按收藏"
-                break
-            }               
-            case "release": {
+                break           
+            case "release":
                 title = "按发售时间"
                 break
-            }                        
-            case "playCount": {
+            case "playCount":
                 title = "按游戏次数"
-                break
-            }                        
-            case "playTime": {
+                break                      
+            case "playTime":
                 title = "按游戏时间"
-                break
-            }                        
-            default: {
+                break                       
+            default:
                 title = "按"
                 break
-            }
         }
 
         if (collectionFilterMode == "favorites" && !collectionShowAllItems) {
@@ -142,7 +134,7 @@ Item {
     property var gamesItems: {
         if (collectionShowAllItems) {
             return currentCollectionGamesSorted
-        } else if (collectionFilterMode == "favorites" && currentCollectionGamesSortedFiltered.count == 0) {
+        } else if (collectionFilterMode == "favorites" && currentCollectionGamesSortedFiltered.count === 0) {
             return emptyListModel
         } else {
             return currentCollectionGamesSortedFiltered
@@ -311,8 +303,8 @@ Item {
             // }   
             Rectangle{
                 id: legend
-                height:20
-                width:20
+                height:22
+                width:22
                 color:"#444"
                 radius:10
                 anchors.top: parent.top

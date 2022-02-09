@@ -133,7 +133,7 @@ ListView {
 
 
         Item {
-            id: home_item_container
+            id: home_listitem_container
             width: layoutScreen.width
             height: layoutScreen.height - 55 - 55 - 35
             scale: 1.0
@@ -145,7 +145,7 @@ ListView {
 
                     //We update the collection we want to browse
                     setCollectionListIndex(0)
-                    setCollectionIndex(home_item_container.ListView.view.currentIndex)
+                    setCollectionIndex(home_listitem_container.ListView.view.currentIndex)
 
                     //We change Pages
                     navigate('GamesPage');
@@ -169,13 +169,13 @@ ListView {
                 states: [
 
                     State{
-                        name: "inactive"; when: !(home_item_container.ListView.isCurrentItem && !headerFocused)
-                        PropertyChanges { target: home_item_container; scale: 1.0; opacity: 1.0}
+                        name: "inactive"; when: !(home_listitem_container.ListView.isCurrentItem && !headerFocused)
+                        PropertyChanges { target: home_listitem_container; scale: 1.0; opacity: 1.0}
                     },
 
                     State {
-                        name: "active"; when: home_item_container.ListView.isCurrentItem && !headerFocused
-                        PropertyChanges { target: home_item_container; scale: 1.0; opacity: 1.0}
+                        name: "active"; when: home_listitem_container.ListView.isCurrentItem && !headerFocused
+                        PropertyChanges { target: home_listitem_container; scale: 1.0; opacity: 1.0}
                     }
                 ]
 
@@ -240,22 +240,22 @@ ListView {
                     states: [
 
                         State{
-                            name: "inactiveRight"; when: !(home_item_container.ListView.isCurrentItem) && currentIndex < index
+                            name: "inactiveRight"; when: !(home_listitem_container.ListView.isCurrentItem) && currentIndex < index
                             PropertyChanges { target: device; anchors.rightMargin: -160.0; opacity: 1.0}
                         },
 
                         State{
-                            name: "inactiveLeft"; when: !(home_item_container.ListView.isCurrentItem) && currentIndex > index
+                            name: "inactiveLeft"; when: !(home_listitem_container.ListView.isCurrentItem) && currentIndex > index
                             PropertyChanges { target: device; anchors.rightMargin: 40.0; opacity: 1.0}
                         },
 
                         State {
-                            name: "active"; when: home_item_container.ListView.isCurrentItem && !headerFocused
+                            name: "active"; when: home_listitem_container.ListView.isCurrentItem && !headerFocused
                             PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 1.0}
                         },
 
                         State {
-                            name: "inactive"; when: home_item_container.ListView.isCurrentItem  && headerFocused
+                            name: "inactive"; when: home_listitem_container.ListView.isCurrentItem  && headerFocused
                             PropertyChanges { target: device; anchors.rightMargin: -20.0; opacity: 1.0; scale: 0.85}
                         }
                     ]

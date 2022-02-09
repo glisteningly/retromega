@@ -14,8 +14,8 @@ Item {
 	    //anchors.leftMargin: 70
 	    Rectangle{
 	    	id: legend
-	        height:20
-	        width:20
+            height:22
+            width:22
 	        color:"#444"
 	        radius:20
 	        anchors.verticalCenter: parent.verticalCenter

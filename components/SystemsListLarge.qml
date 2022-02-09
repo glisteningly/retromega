@@ -125,6 +125,25 @@ ListView {
         })
         systemsBackground.bgIndex = currentIndex
     }
+
+    onVisibleChanged: {
+        if (visible) {
+            positionViewAtIndex(currentSystemIndex, ListView.Center)
+            delay(0, function() {
+                systemsListView.positionViewAtIndex(currentSystemIndex, ListView.Center)
+            })
+            systemsBackground.bgIndex = currentIndex
+        }
+    }
+
+    onCurrentIndexChanged: {
+        setCurSystemIndex(currentIndex)
+    }
+
+//    onEnabledChanged: {
+//        console.log("ENABLED: " + enabled);
+//    }
+
     Component {
         id: systemsDelegate
     
