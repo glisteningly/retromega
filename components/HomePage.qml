@@ -163,6 +163,7 @@ Item {
                     width: parent.width
                     visible: currentHomeIndex == 0 && currentSystemViewMode === 'grid'
                     focus: currentHomeIndex == 0 && currentSystemViewMode === 'grid'
+                    enabled: currentHomeIndex == 0 && currentSystemViewMode === 'grid'
                     headerFocused: header.anyFocused
                     id: systemsGridView
                 }

@@ -45,18 +45,17 @@ ListView {
         NumberAnimation { properties: "x,y"; duration: 3000 }
     }
     Keys.onLeftPressed: {  
-        decrementCurrentIndex(); navSound.play(); systemsBackground.bgIndex = currentIndex
+        decrementCurrentIndex(); systemsBackground.bgIndex = currentIndex
     } 
 
     Keys.onRightPressed: {  
-        incrementCurrentIndex(); navSound.play();  systemsBackground.bgIndex = currentIndex
+        incrementCurrentIndex(); systemsBackground.bgIndex = currentIndex
     }
 
     Keys.onPressed: {
           //Next page
           if (api.keys.isPageDown(event)) {
              event.accepted = true
-             navSound.play()
              systemsListView.currentIndex = Math.min(systemsListView.currentIndex + 10, allSystems.count - 1)
              systemsBackground.bgIndex = currentIndex
              return
@@ -67,7 +66,6 @@ ListView {
               event.accepted = true;
               systemsListView.currentIndex = Math.max(systemsListView.currentIndex - 10, 0);
               systemsBackground.bgIndex = currentIndex
-              navSound.play();
               return;
           }
 
@@ -137,7 +135,10 @@ ListView {
     }
 
     onCurrentIndexChanged: {
-        setCurSystemIndex(currentIndex)
+        if (visible) {
+            navSound.play()
+            setCurSystemIndex(currentIndex)
+        }
     }
 
 //    onEnabledChanged: {

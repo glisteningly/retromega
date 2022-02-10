@@ -48,18 +48,17 @@ ListView {
         NumberAnimation { properties: "x,y"; duration: 3000 }
     }
     Keys.onLeftPressed: {
-        decrementCurrentIndex(); navSound.play(); systemsBackground.bgIndex = currentIndex
+        decrementCurrentIndex(); systemsBackground.bgIndex = currentIndex
     }
 
     Keys.onRightPressed: {
-        incrementCurrentIndex(); navSound.play();  systemsBackground.bgIndex = currentIndex
+        incrementCurrentIndex(); systemsBackground.bgIndex = currentIndex
     }
 
     Keys.onPressed: {
           //Next page
           if (api.keys.isPageDown(event)) {
              event.accepted = true
-             navSound.play()
              collectionListView.currentIndex = Math.min(collectionListView.currentIndex + 10, allCollections.count - 1)
              systemsBackground.bgIndex = currentIndex
              return
@@ -70,7 +69,6 @@ ListView {
               event.accepted = true;
               collectionListView.currentIndex = Math.max(collectionListView.currentIndex - 10, 0);
               systemsBackground.bgIndex = currentIndex
-              navSound.play();
               return;
           }
 
@@ -128,6 +126,14 @@ ListView {
         })
         systemsBackground.bgIndex = currentIndex
     }
+
+    onCurrentIndexChanged: {
+        if (visible) {
+            navSound.play()
+            setCurCollectionIndex(currentIndex)
+        }
+    }
+
     Component {
         id: collectionsDelegate
 
@@ -283,7 +289,7 @@ ListView {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: 30
-                    anchors.verticalCenterOffset: -10
+                    anchors.verticalCenterOffset: 0
                 }
 
                 DropShadow {

@@ -84,6 +84,10 @@ FocusScope {
         currentCollectionIndex = index
     }
 
+    function setCurCollectionIndex(index) {
+        currentCollectionIndex = index
+    }
+
     // Collection list index
     property int collectionListIndex : 0
     function setCollectionListIndex(index) {

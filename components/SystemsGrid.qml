@@ -55,8 +55,10 @@ GridView {
     }
 
     onCurrentIndexChanged: {
-        navSound.play()
-        setCurSystemIndex(currentIndex)
+        if (visible) {
+          navSound.play()
+          setCurSystemIndex(currentIndex)
+        }
     }
 
     Keys.onPressed: {
@@ -65,7 +67,7 @@ GridView {
 
         if (api.keys.isPageUp(event) || api.keys.isPageDown(event)) {
             event.accepted = true;
-            navSound.play()
+//            navSound.play()
             var rows_to_skip = Math.max(1, Math.round(systemsGridView.height / cellHeight));
             var games_to_skip = rows_to_skip * columnCount;
             if (api.keys.isPageUp(event))
