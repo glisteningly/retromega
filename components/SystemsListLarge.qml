@@ -16,9 +16,10 @@ ListView {
     }
 
     property int bgIndex: 0
-    property var itemTextColor: {
-        systemsListView.activeFocus ? "#ffffff"  : "#60ffffff"
-    }
+//    property var itemTextColor: {
+//        systemsListView.activeFocus ? "#ffffff"  : "#30ffffff"
+//    }
+    property string itemTextColor: "#ffffff"
 
     currentIndex: currentSystemIndex
     width: parent.width
@@ -90,7 +91,7 @@ ListView {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 25
-        opacity: headerFocused ? 0.5 : 1.0
+        opacity: 1.0
     }
 
     Rectangle {
@@ -183,22 +184,22 @@ ListView {
                 height: parent.height       
                 color:  "transparent" //systemColors[modelData.shortName]  
                 
-                states: [
+//                states: [
 
-                    State{
-                        name: "inactive"; when: !(home_item_container.ListView.isCurrentItem && !headerFocused)
-                        PropertyChanges { target: home_item_container; scale: 1.0; opacity: 1.0}
-                    },
+//                    State{
+//                        name: "inactive"; when: !(home_item_container.ListView.isCurrentItem && !headerFocused)
+//                        PropertyChanges { target: home_item_container; scale: 1.0; opacity: 1.0}
+//                    },
 
-                    State {
-                        name: "active"; when: home_item_container.ListView.isCurrentItem && !headerFocused
-                        PropertyChanges { target: home_item_container; scale: 1.0; opacity: 1.0}
-                    }
-                ]
+//                    State {
+//                        name: "active"; when: home_item_container.ListView.isCurrentItem && !headerFocused
+//                        PropertyChanges { target: home_item_container; scale: 1.0; opacity: 1.0}
+//                    }
+//                ]
 
-                transitions: Transition {
-                    NumberAnimation { properties: "scale, opacity"; easing.type: Easing.InOutCubic; duration: 225  }
-                }
+//                transitions: Transition {
+//                    NumberAnimation { properties: "scale, opacity"; easing.type: Easing.InOutCubic; duration: 225  }
+//                }
                 
                 Image {
                     id: menu_mask

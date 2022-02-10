@@ -59,7 +59,6 @@ Item {
         if (api.keys.isPrevPage(event)) {
             event.accepted = true
             setHomeIndex(Math.max(currentHomeIndex - 1,0))
-            navSound.play()
             return
         }  
         
@@ -68,7 +67,6 @@ Item {
         if (api.keys.isNextPage(event)) {
             event.accepted = true;
             setHomeIndex(Math.min(currentHomeIndex + 1,3))
-            navSound.play();
             return;
         }  
 

@@ -222,7 +222,6 @@ Item {
                         decrementCurrentIndex();
                         event.accepted = true
                     }
-                    navSound.play();
                 }
 
                 Keys.onDownPressed:     {
@@ -232,7 +231,12 @@ Item {
                         incrementCurrentIndex();
                         event.accepted = true
                     }
-                    navSound.play();
+                }
+
+                onCurrentIndexChanged: {
+                    if (visible) {
+                        navSound.play()
+                    }
                 }
 
               move: Transition {
@@ -294,7 +298,6 @@ Item {
                         //Next page
                         if (api.keys.isPageDown(event)) {
                            event.accepted = true
-                           navSound.play()
                            gameView.currentIndex = Math.min(gameView.currentIndex + 10, items.count - 1)
                            return
                         }  
@@ -303,7 +306,6 @@ Item {
                         if (api.keys.isPageUp(event)) {
                             event.accepted = true;
                             gameView.currentIndex = Math.max(gameView.currentIndex - 10, 0);
-                            navSound.play();
                             return;
                         }  
 
