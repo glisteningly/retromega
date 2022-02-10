@@ -37,17 +37,17 @@ Item {
         }
     }
 
-    HeaderSelection {
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.topMargin: -8
-        anchors.bottomMargin: -8
-        anchors.rightMargin: -8
-        anchors.fill: parent
-        width:parent.width
-        height:parent.height
-        visible: parent.activeFocus ? true : false
-    }
+//    HeaderSelection {
+//        anchors.left: parent.left
+//        anchors.top: parent.top
+//        anchors.topMargin: -8
+//        anchors.bottomMargin: -8
+//        anchors.rightMargin: -8
+//        anchors.fill: parent
+//        width:parent.width
+//        height:parent.height
+//        visible: parent.activeFocus ? true : false
+//    }
 
     Text {
         id: item_text

@@ -299,7 +299,7 @@ ListView {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: 30
-                    anchors.verticalCenterOffset: -25
+                    anchors.verticalCenterOffset: -10
                 }                                         
 
                 DropShadow {
@@ -307,9 +307,9 @@ ListView {
                     source: title
                     verticalOffset: 2
                     horizontalOffset: 2
-                    color: "#80000000"
-                    radius: 10
-                    samples: 20
+                    color: "#60000000"
+                    radius: 5
+//                    samples: 10
                 }
                 
                 Text {
@@ -319,10 +319,10 @@ ListView {
 //                    font.bold: true
                     color: itemTextColor
                     opacity: 0.7    
-                    anchors.bottomMargin: -27
+                    anchors.topMargin: 8
                     anchors.left: parent.left
                     anchors.leftMargin: 30
-                    anchors.bottom: title.bottom
+                    anchors.top: title.bottom
                     visible: true
                 }    
 

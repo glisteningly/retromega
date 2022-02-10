@@ -4,16 +4,16 @@ import QtGraphicalEffects 1.12
 Item {
     property var tintColor : "#66333333"
 
-	// DropShadow {
-	// 	anchors.fill: list_selection
-	// 	horizontalOffset: 0
-	// 	verticalOffset: 4
-	// 	radius: 12.0
-	// 	samples: 18
-	// 	opacity: 0.4
-	// 	color: "#30000000"
-	// 	source: list_selection
-	// }
+//     DropShadow {
+//        anchors.fill: list_selection
+//        horizontalOffset: 0
+//        verticalOffset: 4
+//        radius: 12.0
+//        samples: 18
+//        opacity: 0.8
+//        color: "#30000000"
+//        source: list_selection
+//     }
 
 	/** Selection Rect */
 	Rectangle{

@@ -272,18 +272,18 @@ ListView {
                     text: modelData.name
 //                    font.family: systemTitleFont.name
                     font.pixelSize: 60
-                    font.letterSpacing: 3
+                    font.letterSpacing: 2
                     font.bold: true
                     color: itemTextColor
                     width: 480
                     wrapMode: Text.WordWrap
                     anchors.rightMargin: 30
                     visible: true
-                    lineHeight: 0.8
+//                    lineHeight: 0.8
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: 30
-                    anchors.verticalCenterOffset: -20
+                    anchors.verticalCenterOffset: -10
                 }
 
                 DropShadow {
@@ -291,9 +291,9 @@ ListView {
                     source: title
                     verticalOffset: 2
                     horizontalOffset: 2
-                    color: "#80000000"
-                    radius: 10
-                    samples: 20
+                    color: "#60000000"
+                    radius: 5
+//                    samples: 20
                 }
 
                 Text {
@@ -303,10 +303,10 @@ ListView {
 //                    font.bold: true
                     color: itemTextColor
                     opacity: 0.7
-                    anchors.bottomMargin: -33
+                    anchors.topMargin: -6
                     anchors.left: parent.left
                     anchors.leftMargin: 30
-                    anchors.bottom: title.bottom
+                    anchors.top: title.bottom
                     visible: true
                 }
 
