@@ -73,11 +73,17 @@ Item {
     }
 
     Keys.onRightPressed: {
-        showIndex = false
+        event.accepted = true
+        gameView.currentIndex = Math.min(gameView.currentIndex + 10, items.count - 1)
+        return
+//        showIndex = false
     }
 
     Keys.onLeftPressed: {
-        showIndex = true
+        event.accepted = true;
+        gameView.currentIndex = Math.max(gameView.currentIndex - 10, 0);
+        return;
+//        showIndex = true
     }
 
     Keys.onPressed: {

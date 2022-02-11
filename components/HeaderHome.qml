@@ -24,7 +24,8 @@ Rectangle {
     }
 
     property var showBattery : {
-        return showStatusInfo && (api.device !== null && api.device.batteryPercent)
+        return true
+//        return showStatusInfo && (api.device !== null && api.device.batteryPercent)
     }
 
     id: home_header

@@ -7,11 +7,11 @@ Item {
 //     DropShadow {
 //        anchors.fill: list_selection
 //        horizontalOffset: 0
-//        verticalOffset: 4
-//        radius: 12.0
-//        samples: 18
+//        verticalOffset: 2
+//        radius: 5.0
+//        samples: 7
 //        opacity: 0.8
-//        color: "#30000000"
+//        color: "#60000000"
 //        source: list_selection
 //     }
 

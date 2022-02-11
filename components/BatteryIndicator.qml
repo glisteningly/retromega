@@ -9,7 +9,7 @@ Item {
     property bool lightStyle : false
 
     property var percent: {
-        api.device ? api.device.batteryPercent : 0
+        api.device && api.device.batteryPercent ? api.device.batteryPercent : 1
     }
 
     Image {
