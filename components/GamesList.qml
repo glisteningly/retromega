@@ -209,10 +209,6 @@ Item {
               anchors.top: parent.top
               currentIndex: defaultIndex
               snapMode: ListView.SnapOneItem
-//              preferredHighlightBegin: 0;
-//              preferredHighlightEnd: 0;
-//              highlightRangeMode: maintainFocusTop ? ListView.StrictlyEnforceRange : ListView.NoHighlightRange
-//              highlightMoveDuration: 0
               highlightRangeMode: ListView.ApplyRange
               highlightMoveDuration: 0
               preferredHighlightBegin: height * 0.5 - 15
