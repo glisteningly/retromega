@@ -77,6 +77,7 @@ FocusScope {
     function setCurSystemIndex(index) {
 //        setCollectionListIndex(0)
         currentSystemIndex = index
+        gamesPage.cells_need_recalc()
     }
 
     function setCollectionIndex(index) {
@@ -150,6 +151,7 @@ FocusScope {
         setCollectionListIndex(0)
         api.memory.set('homeIndex', index)
         currentHomeIndex = index
+        gamesPage.cells_need_recalc()
     }
   
     property var androidCollection: {

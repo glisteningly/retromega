@@ -58,7 +58,7 @@ Item {
         width: (371 / 200) * parent.width
         height: (371 / 200) * parent.height
         fillMode: Image.PreserveAspectFill
-                            anchors.horizontalCenter: parent.horizontalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
     }
 

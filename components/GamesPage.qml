@@ -9,7 +9,7 @@ Item {
     //property var showGameDetail : false
 
     property alias currentIndex: gameList.currentIndex
-    property alias showIndex: gameList.showIndex
+//    property alias showIndex: gameList.showIndex
 
     property var footerTitle: {
         return gameList.footerTitle
@@ -19,7 +19,7 @@ Item {
         return (collectionShowAllItems) ? "All " + currentCollection.name : currentCollection.name
     }
     
-    property bool showIndex: false
+//    property bool showIndex: false
     property var collectionSortTitle: {
         var title = "标题"
         switch (collectionSortMode) {
@@ -69,6 +69,10 @@ Item {
         setCollectionShowAllItems(true)    
     }
 
+    function cells_need_recalc() {
+        gameList.cells_need_recalc()
+    }
+
     Component.onCompleted: {
         onShow()
     }
@@ -81,7 +85,6 @@ Item {
         // Show / Hide Sort
         if (api.keys.isFilters(event)) {
             event.accepted = true;
-            showIndex = false
             showSort = !showSort
             return;
         }  
@@ -93,19 +96,15 @@ Item {
                 //showGameDetail(null)
                 //showGameDetail = false
                 //listFocus.focus = true   
-            if (showIndex == true) {
-                showIndex = false
-            } else if (showSort) {
+            if (showSort) {
                 showSort = false
                 backSound.play()
             } else if (collectionShowAllItems) {
-                showIndex = false                
                 gameList.currentIndex = -1
                 gameList.box_art.initialLoad = true
                 setCollectionShowAllItems(false)
                 backSound.play()
             } else {
-                showIndex = false
                 gameList.currentIndex = -1
                 gameList.box_art.initialLoad = true
                 navigate('HomePage');
