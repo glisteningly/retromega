@@ -16,7 +16,6 @@ GridView {
     property int currentRecalcs: 0
     property real cellHeightRatio: 0.8
 
-
     model: allSystems
     currentIndex: currentSystemIndex
 //    width: parent.width - 8
@@ -94,21 +93,28 @@ GridView {
         width: GridView.view.cellWidth
         height: GridView.view.cellHeight
         selected: GridView.isCurrentItem
-
         collection: modelData
 
-        onClicked: GridView.view.currentIndex = index
+        function enterGamePage() {
+            //We update the collection we want to browse
+            setCollectionListIndex(0)
+            setSystemIndex(home_griditem_container.GridView.view.currentIndex)
+
+            //We change Pages
+            navigate('GamesPage');
+        }
+
+        onClicked: {
+            if (GridView.view.currentIndex === index) {
+                enterGamePage()
+            } else {
+                GridView.view.currentIndex = index
+            }
+        }
 
         Keys.onPressed: {
             if (api.keys.isAccept(event) && !event.isAutoRepeat) {
-//                //We update the collection we want to browse
-                setCollectionListIndex(0)
-                setSystemIndex(home_griditem_container.GridView.view.currentIndex)
-
-                //We change Pages
-                navigate('GamesPage');
-
-                return;
+                enterGamePage()
             }
         }
     }

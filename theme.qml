@@ -34,6 +34,7 @@ FocusScope {
         currentHomeIndex = api.memory.get('homeIndex') ?? 0
         currentSystemIndex = api.memory.get('currentSystemIndex') ?? 0
         currentSystemViewMode = api.memory.get('currentSystemViewMode') ?? 'list'
+        currentGameListViewMode = api.memory.get('currentGameListViewMode') ?? 'list'
         currentCollectionIndex = api.memory.get('currentCollectionIndex') ?? 0
         currentPage = api.memory.get('currentPage') ?? 'HomePage'
         collectionListIndex = api.memory.get('collectionListIndex') ?? 0
@@ -66,6 +67,13 @@ FocusScope {
         var _flag = (currentSystemViewMode === 'list')?'grid':'list'
         api.memory.set('currentSystemViewMode', _flag)
         currentSystemViewMode = _flag
+    }
+
+    property string currentGameListViewMode : "list"
+    function toggleGameListViewMode() {
+        var _flag = (currentGameListViewMode === 'list')?'grid':'list'
+        api.memory.set('currentGameListViewMode', _flag)
+        currentGameListViewMode = _flag
     }
   
     function setSystemIndex(index) {

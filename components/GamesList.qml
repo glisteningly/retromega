@@ -4,11 +4,17 @@ import QtGraphicalEffects 1.12
 Item { 
     id: listContent
 
-    property var context : "default"
+    property string context : "default"
+
+    property string gameListViewMode : currentGameListViewMode
     
     property var listIdentifier: {
         return gameView
     }
+
+//    property var currentGameView: {
+//        return currentGameListViewMode === 'list' ? gameView : gameView
+//    }
 
     property var footerTitle: {
         if (items.count > 0) {
@@ -24,29 +30,29 @@ Item {
     property var selectedGame: {
         return gameView.currentIndex >= 0 ? items.get(gameView.currentIndex) : items.get(0)
     } 
-    property var viewType : 'list'
+    property string viewType : 'list'
     property alias currentIndex : gameView.currentIndex
 //    property alias box_art : game_box_art
-    property var hideFavoriteIcon : false
-    property var defaultIndex: 0
+    property bool hideFavoriteIcon : false
+    property int defaultIndex: 0
     property var items : []
     property var indexItems : []
 //    property var showIndex : false
-    property var focusSeeAll : false
+    property bool focusSeeAll : false
 //    property var maintainFocusTop : false
 
     // Sort mode that the items have applied to them.
     // Is used to determine how to show the quick index.
     // Doesn't actually apply the sort to the collection.
-    property var sortMode: "title"
-    property var sortDirection: 0
+    property string sortMode: "title"
+    property int sortDirection: 0
 
     property var selectSeeAll : {
         if (showSeeAll) {
             if (focusSeeAll && !showIndex) {
                 return true
             } else {
-                if (items.count == 1 && !items.get(0).modelData) {
+                if (items.count === 1 && !items.get(0).modelData) {
                     return true
                 } else {
                     return false
@@ -57,8 +63,8 @@ Item {
         }
     }
 
-    property var showSeeAll : false
-    property var onSeeAll : { }
+    property bool showSeeAll : false
+    property var onSeeAll : ({})
     property var onIndexChanged : function(title, index) {
         
     }
@@ -92,10 +98,14 @@ Item {
             showGameDetail(selectedGame, gameView.currentIndex)
             return
         }
+
+        if (event.key === 1048586 || event.key === 32) {
+            toggleGameListViewMode()
+        }
     }
     
     function isLastRow(currentIndex) {
-        if (currentIndex == items.count - 1) {
+        if (currentIndex === items.count - 1) {
             return true
         } else {
             return false
@@ -237,6 +247,12 @@ Item {
 //                            if (showSeeAll) {
 //                                focusSeeAll = false
 //                            }
+
+//                            if (currentHomeIndex <= 1) {
+//                             event.accepted = true;
+//                             gameList.currentIndex = -1
+//                             navigate('HomePage');
+//                         }
 //                        }
 //                        if (api.keys.isAccept(event)) {
 //                            event.accepted = true;
@@ -357,170 +373,155 @@ Item {
 //        }
 //    }
 
-        Rectangle {
-            id: mainGridContent
-            color: theme.background_dark
-    //        color: "transparent"
-            width: parent.width
-            height: parent.height
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            clip: true
 
-    GridView {
-            id: gameView
-            visible: false
-            enabled: false
-//            focus: listContent.activeFocus
-            focus: false
+    Rectangle {
+        id: mainGridContent
+        color: theme.background_dark
+        width: parent.width
+        height: parent.height
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        clip: true
 
-//            property int columnCount: {
-//    //            return theme.gridColumnCount;
-//                return 5
-//            }
+        GridView {
+                id: gameView
+    //            visible: false
+    //            enabled: false
+                focus: listContent.activeFocus
+                readonly property int maxRecalcs: 5
+                property int currentRecalcs: 0
+                property real cellHeightRatio: 1
 
-            readonly property int maxRecalcs: 5
-            property int currentRecalcs: 0
-            property real cellHeightRatio: 1
-
-            property real columnCount: {
-                if (cellHeightRatio > 1.2) return 6;
-                if (cellHeightRatio < 0.8) return 4;
-                return 5;
-            }
-
-            model: items
-            anchors.fill: parent
-            currentIndex: defaultIndex
-            anchors.left: parent.left
-            anchors.leftMargin: 12
-            anchors.right: parent.right
-            anchors.rightMargin: 12
-            anchors.margins: 12
-            cacheBuffer: 10
-
-            highlightRangeMode: GridView.ApplyRange
-            highlightMoveDuration: 0
-            preferredHighlightBegin: height * 0.5 - vpx(120)
-            preferredHighlightEnd: height * 0.5 + vpx(120)
-
-            function cells_need_recalc() {
-                currentRecalcs = 0;
-                cellHeightRatio = 1;
-            }
-
-            function update_cell_height_ratio(img_w, img_h) {
-                if (currentHomeIndex === 0) {
-                    cellHeightRatio = Math.min(Math.max(0.67, img_h / img_w), 1.5);
-                } else {
-                    return 1.0
+                property real columnCount: {
+                    if (cellHeightRatio > 1.2) return 6;
+                    if (cellHeightRatio < 0.8) return 4;
+                    return 5;
                 }
-//                cellHeightRatio =  img_h / img_w
-            }
 
+                model: parent.visible ? items : []
+                anchors.fill: parent
+                currentIndex: defaultIndex
+                anchors.left: parent.left
+                anchors.leftMargin: 12
+                anchors.right: parent.right
+                anchors.rightMargin: 12
+                anchors.margins: 12
+                cacheBuffer: 10
 
-            cellWidth: width / columnCount
-            cellHeight: cellWidth * cellHeightRatio;
+                highlightRangeMode: GridView.ApplyRange
+                highlightMoveDuration: 0
+                preferredHighlightBegin: height * 0.5 - vpx(120)
+                preferredHighlightEnd: height * 0.5 + vpx(120)
 
-            displayMarginBeginning: anchors.topMargin
-
-            Component.onCompleted: {
-//                cells_need_recalc()
-//                gameView.positionViewAtIndex(defaultIndex, GridView.Center)
-//                delay(50, function() {
-//                    gameView.positionViewAtIndex(defaultIndex, GridView.Center)
-//                    if (currentHomeIndex <= 1 && !collectionListIndex) {
-//                        currentIndex = -1
-//                    }
-//                })
-//                    currentIndex = defaultIndex
-            }
-
-            onVisibleChanged: {
-                if (visible) {
-//                    cells_need_recalc()
-                    positionViewAtIndex(currentGameIndex, GridView.Center)
-                    delay(0, function() {
-                        gameView.positionViewAtIndex(currentGameIndex, GridView.Center)
-                    })
+                function cells_need_recalc() {
+                    currentRecalcs = 0;
+                    cellHeightRatio = 1;
                 }
-            }
 
-            onCurrentIndexChanged: {
-                if (visible) {
-                  navSound.play()
-    //              setCurSystemIndex(currentIndex)
+                function update_cell_height_ratio(img_w, img_h) {
+                    if (currentHomeIndex === 0) {
+                        // 限制图片的最大宽高比
+                        cellHeightRatio = Math.min(Math.max(0.67, img_h / img_w), 1.5);
+    //                    cellHeightRatio =  img_h / img_w
+                    } else {
+                        return 1.0
+                    }
                 }
-            }
 
-            Keys.onPressed: {
-                if (event.isAutoRepeat)
-                    return;
 
-                if (api.keys.isPageUp(event) || api.keys.isPageDown(event)) {
-                    event.accepted = true;
-        //            navSound.play()
-                    var rows_to_skip = Math.max(1, Math.round(gameView.height / cellHeight));
-                    var games_to_skip = rows_to_skip * columnCount;
-                    if (api.keys.isPageUp(event))
-                        currentIndex = Math.max(currentIndex - games_to_skip, 0);
-                    else
-                        currentIndex = Math.min(currentIndex + games_to_skip, items.count - 1);
+                cellWidth: width / columnCount
+                cellHeight: cellWidth * cellHeightRatio;
+
+                displayMarginBeginning: anchors.topMargin
+
+                Component.onCompleted: {
+    //                gameView.positionViewAtIndex(defaultIndex, GridView.Center)
+    //                delay(50, function() {
+    //                    gameView.positionViewAtIndex(defaultIndex, GridView.Center)
+    //                    if (currentHomeIndex <= 1 && !collectionListIndex) {
+    //                        currentIndex = -1
+    //                    }
+    //                })
+    //                currentIndex = defaultIndex
                 }
-            }
 
-//            highlight: Rectangle {
-//                color:  theme.primaryColor
-//                opacity: headerFocused ? 0.1 : 0.3
-//                width: grid.cellWidth
-//                height: grid.cellHeight
-//                scale: 1.1
-//                radius: vpx(12)
-//                z: 2
-//            }
+                onVisibleChanged: {
+                    if (visible) {
+                        positionViewAtIndex(currentGameIndex, GridView.Center)
+                        delay(0, function() {
+                            gameView.positionViewAtIndex(currentGameIndex, GridView.Center)
+                        })
+                    }
+                }
 
-    //        highlightMoveDuration: 0
-
-            delegate: GameGridItem {
-                id: game_griditem_container
-                width: GridView.view.cellWidth
-                height: GridView.view.cellHeight
-//                anchors {
-//                    centerIn: GridView.view
-////                            margins: 4
-//                    leftMargin: 5
-//            //        rightMargin: 5
-//            //        bottomMargin: 5
-//                    topMargin: 5
-//                }
-
-                selected: GridView.isCurrentItem
-                focus: true
-
-                gameData: modelData
-
-                onClicked: GridView.view.currentIndex = index
+                onCurrentIndexChanged: {
+                    if (visible) {
+                      navSound.play()
+                    }
+                }
 
                 Keys.onPressed: {
-                    if (api.keys.isAccept(event) && !event.isAutoRepeat) {
-                      startGame(modelData, index)
-                      return;
-                    }
-                    if (api.keys.isCancel(event)) {
+                    if (event.isAutoRepeat)
+                        return;
+
+                    if (api.keys.isPageUp(event) || api.keys.isPageDown(event)) {
                         event.accepted = true;
-                        gameList.currentIndex = -1
-                        navigate('HomePage');
+                        var rows_to_skip = Math.max(1, Math.round(gameView.height / cellHeight));
+                        var games_to_skip = rows_to_skip * columnCount;
+                        if (api.keys.isPageUp(event))
+                            currentIndex = Math.max(currentIndex - games_to_skip, 0);
+                        else
+                            currentIndex = Math.min(currentIndex + games_to_skip, items.count - 1);
                     }
                 }
 
-                onImageLoaded: {
-//                    gameView.update_cell_height_ratio(imageWidth, imageHeight);
-                    if (gameView.currentRecalcs < gameView.maxRecalcs) {
-                        gameView.currentRecalcs++;
-                        gameView.update_cell_height_ratio(imageWidth, imageHeight);
+    //            highlight: Rectangle {
+    //                color:  theme.primaryColor
+    //                opacity: headerFocused ? 0.1 : 0.3
+    //                width: grid.cellWidth
+    //                height: grid.cellHeight
+    //                scale: 1.1
+    //                radius: vpx(12)
+    //                z: 2
+    //            }
+
+                delegate: GameGridItem {
+                    id: game_griditem_container
+                    gameData: modelData
+                    width: GridView.view.cellWidth
+                    height: GridView.view.cellHeight
+                    selected: GridView.isCurrentItem
+
+                    onClicked: {
+                        if (GridView.view.currentIndex === index) {
+                            startGame(modelData, index)
+                        } else {
+                            GridView.view.currentIndex = index
+                        }
+                    }
+
+                    Keys.onPressed: {
+                        if (api.keys.isAccept(event) && !event.isAutoRepeat) {
+                          startGame(modelData, index)
+                        }
+
+                        if (api.keys.isCancel(event)) {
+                            if (currentHomeIndex <= 1) {
+                                event.accepted = true;
+                                gameList.currentIndex = -1
+                                navigate('HomePage');
+                            }
+                        }
+                        event.accepted = false
+                    }
+
+                    onImageLoaded: {
+                        if (gameView.currentRecalcs < gameView.maxRecalcs) {
+                            gameView.currentRecalcs++;
+                            gameView.update_cell_height_ratio(imageWidth, imageHeight);
+                        }
                     }
                 }
             }
-        }
-    }
+       }
 }

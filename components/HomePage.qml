@@ -51,8 +51,8 @@ Item {
     }
 
     Keys.onPressed: {
-        console.log('------')
-        console.log(event.key)
+//        console.log('------')
+//        console.log(event.key)
 
         // Prev
 //        if (api.keys.isPageUp(event)) {

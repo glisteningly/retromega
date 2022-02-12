@@ -305,7 +305,7 @@ Item {
                 height:22
                 width:22
                 color:"#444"
-                radius:10
+                radius:12
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 //anchors.right: header_time.left  

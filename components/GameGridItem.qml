@@ -27,6 +27,14 @@ Item {
     property bool selected: false
     property var gameData
 
+    property var highlightColor: {
+        if (currentHomeIndex > 1) {
+            return theme.primaryColor
+        } else {
+            return systemColors[currentCollection.shortName] ?? theme.primaryColor
+        }
+    }
+
     property alias imageWidth: imgGridItem.paintedWidth
     property alias imageHeight: imgGridItem.paintedHeight
 
@@ -41,7 +49,7 @@ Item {
 
     Rectangle {
         id: gridItemBg
-        color: systemColors[currentCollection.shortName] ?? theme.primaryColor
+        color: highlightColor
         visible: selected
 //        color:  systemColors[modelData.shortName] ?? "#000000"
 //        opacity: headerFocused ? 0.1 : 0.3
@@ -74,7 +82,7 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  modelData.assets.boxFront || ""
-        sourceSize { width: 128; height: 128 }
+        sourceSize { width: 160; height: 160 }
         fillMode: Image.PreserveAspectFit
         smooth: true
 //        property bool adapt: true
@@ -102,8 +110,8 @@ Item {
 //    Image {
 //        anchors.centerIn: parent
 
-//        visible: boxFront.status === Image.Loading
-//        source: "../assets/loading-spinner.png"
+//        visible: imgGridItem.status === Image.Loading
+//        source: '../assets/images/loading-spinner.png'
 
 //        RotationAnimator on rotation {
 //            loops: Animator.Infinite;
