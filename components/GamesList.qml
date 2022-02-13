@@ -393,7 +393,7 @@ Item {
                 property real cellHeightRatio: 1
 
                 property real columnCount: {
-                    if (cellHeightRatio > 1.2) return 6;
+//                    if (cellHeightRatio > 1.2) return 6;
                     if (cellHeightRatio < 0.8) return 4;
                     return 5;
                 }
@@ -421,7 +421,7 @@ Item {
                 function update_cell_height_ratio(img_w, img_h) {
                     if (currentHomeIndex === 0) {
                         // 限制图片的最大宽高比
-                        cellHeightRatio = Math.min(Math.max(0.67, img_h / img_w), 1.5);
+                        cellHeightRatio = Math.min(Math.max(0.67, img_h / img_w), 1.67);
     //                    cellHeightRatio =  img_h / img_w
                     } else {
                         return 1.0
@@ -430,7 +430,7 @@ Item {
 
 
                 cellWidth: width / columnCount
-                cellHeight: cellWidth * cellHeightRatio;
+                cellHeight: cellWidth * cellHeightRatio + 20;
 
                 displayMarginBeginning: anchors.topMargin
 

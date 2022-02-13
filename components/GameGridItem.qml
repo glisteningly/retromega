@@ -57,8 +57,8 @@ Item {
         anchors.fill: parent
         anchors.margins: 2
 //            scale: 1.1
-        radius: 8
-        clip: true
+        radius: 4
+//        clip: true
 //            z: 2
     }
 
@@ -76,8 +76,14 @@ Item {
     Image {
         id: imgGridItem
         anchors {
-            fill: parent
-            margins: 6
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+            leftMargin: 6
+            rightMargin: 6
+            topMargin: 6
+            bottomMargin: 24
         }
         asynchronous: true
         visible: source != ""
@@ -87,18 +93,19 @@ Item {
         smooth: true
 //        property bool adapt: true
 
-        layer.enabled: rounded
-        layer.effect: OpacityMask {
-            maskSource: Item {
-                width: gameGridItem.width
-                height: gameGridItem.height
+        // 圆角
+//        layer.enabled: rounded
+//        layer.effect: OpacityMask {
+//            maskSource: Item {
+//                width: gameGridItem.width
+//                height: gameGridItem.height
 
-                Rectangle {
-                    anchors.fill: parent
-                    radius: 6
-                }
-            }
-        }
+//                Rectangle {
+//                    anchors.fill: parent
+//                    radius: 6
+//                }
+//            }
+//        }
 
         onStatusChanged: {
             if (status === Image.Ready) {
@@ -120,19 +127,42 @@ Item {
 //            duration: 500
 //        }
 //    }
+    Rectangle {
+        id: noImage
+        visible: !imgGridItem.visible
+        color:  "#20FFFFFF"
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+            leftMargin: 6
+            rightMargin: 6
+            topMargin: 6
+            bottomMargin: 24
+        }
+        radius: 4
+    }
 
     Text {
-        width: parent.width - 24
-        anchors.centerIn: parent
-
-        visible: !imgGridItem.visible
-
+        height: 20
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            leftMargin: 6
+            rightMargin: 6
+            bottomMargin: 5
+        }
         text: modelData.title
-        wrapMode: Text.Wrap
+        wrapMode: Text.NoWrap
         horizontalAlignment: Text.AlignHCenter
-        color: "#eee"
+        color: selected ? "white" : '#90FFFFFF'
+        elide: Text.ElideMiddle
+        maximumLineCount:1
         font {
             pixelSize: 14
+            letterSpacing: 0.5
         }
     }
 
