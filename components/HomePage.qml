@@ -72,8 +72,10 @@ Item {
 
 //        if (api.keys.isFilters(event) || event.key === 32) {
         if (event.key === 1048586 || event.key === 32) {
-            if (currentHomeIndex == 0){
+            if (currentHomeIndex === 0){
                 toggleSystemViewMode()
+            } else if (currentHomeIndex > 1) {
+                toggleGameListViewMode()
             }
         }
     }  
@@ -109,20 +111,6 @@ Item {
             right: parent.right
             top: header.bottom
             bottom: footer.top
-        }
-
-        Keys.onPressed: {                                            
-            // Back to Home            
-//            if (api.keys.isCancel(event)) {
-//                if (currentContentView && currentContentView.showIndex) {
-//                    currentContentView.showIndex = false
-//                } else {
-//                    header.focused_link.forceActiveFocus()
-//                }
-//                event.accepted = true;
-//            } else {
-//                event.accepted = false;
-//            }
         }
 
         Rectangle {
@@ -181,13 +169,27 @@ Item {
                 
                 // Favourites
                 Component {
-                    id: favoriteView                    
-                    GamesList {
+                    id: favoriteListView
+                    GameListView {
                         id: favoritesContentView
                         width: parent.width
                         height: parent.height
                         items: allFavorites   
                         indexItems: allFavorites   
+                        sortMode: "title"
+                        focus: true && !isShowingGameDetail
+                        hideFavoriteIcon: true
+                    }
+                }
+
+                Component {
+                    id: favoriteGridView
+                    GameGridView {
+                        id: favoritesContentView
+                        width: parent.width
+                        height: parent.height
+                        items: allFavorites
+                        indexItems: allFavorites
                         sortMode: "title"
                         focus: true && !isShowingGameDetail
                         hideFavoriteIcon: true
@@ -200,18 +202,31 @@ Item {
                     active: opacity !== 0
                     opacity: focus ? 1 : 0
                     anchors.fill: parent
-                    sourceComponent: favoriteView
+                    sourceComponent: currentGameListViewMode === 'list' ? favoriteListView : favoriteGridView
                     asynchronous: false
                 }                
 
                 // Recents
                 Component {
-                    id: recentsView                    
-                    GamesList {
+                    id: recentsListView
+                    GameListView {
                         id: recentsContentView
                         width: parent.width
                         height: parent.height
                         items: allRecentlyPlayed      
+                        indexItems: allRecentlyPlayed
+                        sortMode: "recent"
+                        focus: true  && !isShowingGameDetail
+                    }
+                }
+
+                Component {
+                    id: recentsGridView
+                    GameGridView {
+                        id: recentsContentView
+                        width: parent.width
+                        height: parent.height
+                        items: allRecentlyPlayed
                         indexItems: allRecentlyPlayed
                         sortMode: "recent"
                         focus: true  && !isShowingGameDetail
@@ -224,7 +239,7 @@ Item {
                     active: opacity !== 0
                     opacity: focus ? 1 : 0
                     anchors.fill: parent
-                    sourceComponent: recentsView
+                    sourceComponent: currentGameListViewMode === 'list' ? recentsListView : recentsGridView
                     asynchronous: false
                 }  
             } 

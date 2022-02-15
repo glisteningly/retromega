@@ -166,6 +166,21 @@ Item {
         }
     }
 
+    Image {
+        width: 28
+        height: 28
+        visible: modelData.favorite && !hideFavoriteIcon
+//        fillMode: Image.PreserveAspectFit
+        source: "../assets/icons/favorite_red.png"
+        asynchronous: true
+        anchors {
+            right: parent.right
+            top: parent.top
+            rightMargin: 4
+            topMargin: 4
+        }
+    }
+
     MouseArea {
         anchors.fill: parent
         onClicked: gameGridItem.clicked()

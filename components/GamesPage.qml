@@ -4,15 +4,28 @@ import QtGraphicalEffects 1.12
 Item {
     id: gamesPage
     anchors.leftMargin: 200 
+
+    state: currentGameListViewMode
     
     property var showSort       : false
     //property var showGameDetail : false
 
-    property alias currentIndex: gameList.currentIndex
+//    property alias currentIndex: gameList.currentIndex
 //    property alias showIndex: gameList.showIndex
+    property int currentIndex: 0
+    function setCurrentIndex(index) {
+        currentIndex = index
+    }
+
 
     property var footerTitle: {
-        return gameList.footerTitle
+//        return gameList.footerTitle
+//        return currentIndex
+        if (gamesItems.count > 0) {
+            return (currentIndex + 1) + " / " + gamesItems.count
+        } else {
+            return "No Games"
+        }
     }
 
     property var headerTitle: {
@@ -57,7 +70,7 @@ Item {
     }
 
     property var onShow: function() {
-        currentIndex = collectionListIndex
+//        gameList.currentIndex = collectionListIndex
     }
 
     property var isFavoritesList: {
@@ -67,10 +80,6 @@ Item {
     function onSeeAllEvent() {        
         setCollectionListIndex(0)
         setCollectionShowAllItems(true)    
-    }
-
-    function cells_need_recalc() {
-        gameList.cells_need_recalc()
     }
 
     Component.onCompleted: {
@@ -111,6 +120,10 @@ Item {
             }
             return
         }  
+
+        if (event.key === 1048586 || event.key === 32) {
+            toggleGameListViewMode(currentIndex)
+        }
 
         event.accepted = false
     }
@@ -213,13 +226,25 @@ Item {
 
             ButtonLegend {
                 id: button_legend_details
-                title: "详细信息"
+                title: '详情'
                 key: "X"
                 width: 75
                 visible: true//collectionFilterMode == "all" || collectionShowAllItems
                 anchors.left: button_legend_back.right
                 anchors.leftMargin: 24
                 anchors.verticalCenter: parent.verticalCenter
+            }
+
+            ButtonLegendSquare {
+//              visible: currentHomeIndex == 0
+              id: button_legend_sel
+              title: '视图'
+              key: "SEL"
+              width: 55
+              lightText: lightActive
+              anchors.left: button_legend_details.right
+              anchors.leftMargin: 6
+              anchors.verticalCenter: parent.verticalCenter
             }
 
             // ButtonLegend {
@@ -336,24 +361,56 @@ Item {
             height: parent.height
             anchors.top: header.bottom
             anchors.bottom: footer.top
+
+            Loader {
+                id: gameListContainer
+                sourceComponent: currentGameListViewMode === 'list' ? gameListView : gameGridView
+                anchors.fill: parent
+                focus: true
+            }
             
-            GamesList {
-                id: gameList
-                defaultIndex: collectionListIndex
-                width: parent.width
-                height: parent.height 
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                gamesColor: systemColor            
-                items:  gamesItems
-                indexItems: gamesPage.isFavoritesList ? currentFavorites : currentCollection.games
-                context: collectionShowAllItems ? "all" : "default"
-                showSeeAll: gamesPage.isFavoritesList
-                hideFavoriteIcon: gamesPage.isFavoritesList
-                onSeeAll: onSeeAllEvent
-                sortMode: collectionSortMode
-                sortDirection: collectionSortDirection
-                focus: true  && !isShowingGameDetail
+            Component {
+                id: gameGridView
+                GameGridView {
+                    id: gameList
+                    defaultIndex: collectionListIndex
+                    width: parent.width
+                    height: parent.height
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    gamesColor: systemColor
+                    items:  gamesItems
+                    indexItems: gamesPage.isFavoritesList ? currentFavorites : currentCollection.games
+                    context: collectionShowAllItems ? "all" : "default"
+                    showSeeAll: gamesPage.isFavoritesList
+                    hideFavoriteIcon: gamesPage.isFavoritesList
+                    onSeeAll: onSeeAllEvent
+                    sortMode: collectionSortMode
+                    sortDirection: collectionSortDirection
+                    focus: true  && !isShowingGameDetail
+                }
+            }
+
+            Component {
+                id: gameListView
+                GameListView {
+                    id: gameList
+                    defaultIndex: collectionListIndex
+                    width: parent.width
+                    height: parent.height
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    gamesColor: systemColor
+                    items:  gamesItems
+                    indexItems: gamesPage.isFavoritesList ? currentFavorites : currentCollection.games
+                    context: collectionShowAllItems ? "all" : "default"
+                    showSeeAll: gamesPage.isFavoritesList
+                    hideFavoriteIcon: gamesPage.isFavoritesList
+                    onSeeAll: onSeeAllEvent
+                    sortMode: collectionSortMode
+                    sortDirection: collectionSortDirection
+                    focus: true  && !isShowingGameDetail
+                }
             }
         }
     }

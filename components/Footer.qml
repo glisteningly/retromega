@@ -86,7 +86,7 @@ Item {
     }
 
     ButtonLegendSquare {
-      visible: currentHomeIndex == 0
+//      visible: currentHomeIndex !== 1
       id: button_legend_sel
       title: "视图"
       key: "SEL"

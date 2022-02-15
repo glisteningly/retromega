@@ -85,7 +85,6 @@ FocusScope {
     function setCurSystemIndex(index) {
 //        setCollectionListIndex(0)
         currentSystemIndex = index
-        gamesPage.cells_need_recalc()
     }
 
     function setCollectionIndex(index) {
