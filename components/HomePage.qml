@@ -6,29 +6,16 @@ Item {
     width: parent.width
     height: parent.height
 
-    property var currentView: {
-        switch (currentHomeIndex) {
-        case 0: 
-//            return systemsListView
-            return currentSystemViewMode === 'grid' ? systemsGridView : systemsListView
-        case 1:
-            return collectionListView
-        case 2: 
-            return favoriteView
-        case 3:
-            return recentsView
-        default: 
-            return ""
-        }
-    }
+    property alias systemloaderItem: systemLoader.item
+    property alias collectionloaderItem: collectionLoader.item
+
 
     property var currentContentView: {
         switch (currentHomeIndex) {
         case 0: 
-//            return systemsListView
-            return currentSystemViewMode === 'grid' ? systemsGridView : systemsListView
+            return systemloaderItem
         case 1:
-            return collectionListView
+            return collectionloaderItem
         case 2: 
             return favoritesLoader.item
         case 3:
@@ -43,7 +30,7 @@ Item {
     }
 
     property var backgroundColor: {
-        if (currentSystemViewMode === 'grid' && currentHomeIndex <= 0) {
+        if (currentSystemViewMode === 'grid' && currentHomeIndex <= 1) {
             return theme.background_grid
         } else {
             return currentHomeIndex <= 1 ? "#FEFEFE" : "transparent"
@@ -72,9 +59,9 @@ Item {
 
 //        if (api.keys.isFilters(event) || event.key === 32) {
         if (event.key === 1048586 || event.key === 32) {
-            if (currentHomeIndex === 0){
+            if (currentHomeIndex <= 1){
                 toggleSystemViewMode()
-            } else if (currentHomeIndex > 1) {
+            } else {
                 toggleGameListViewMode()
             }
         }
@@ -127,44 +114,61 @@ Item {
                     fill: parent
                 }
 
-                // Systems        
-                SystemsListLarge {
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    //anchors.verticalCenter: parent.verticalCenter
-                    height: parent.height
-                    width: parent.width
-                    visible: currentHomeIndex == 0 && currentSystemViewMode === 'list'
-                    focus: currentHomeIndex == 0 && currentSystemViewMode === 'list'
-                    enabled: currentHomeIndex == 0 && currentSystemViewMode === 'list'
-                    headerFocused: header.anyFocused
-                    id: systemsListView
+                // Systems
+
+                Loader {
+                    id: systemLoader
+                    sourceComponent: currentSystemViewMode === 'list' ? systemList : systemGrid
+                    visible: currentHomeIndex == 0
+                    focus: currentHomeIndex == 0
+                    anchors.fill: parent
+                    asynchronous: false
                 }
 
-                SystemsGrid {
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    //anchors.verticalCenter: parent.verticalCenter
-                    height: parent.height
-                    width: parent.width
-                    visible: currentHomeIndex == 0 && currentSystemViewMode === 'grid'
-                    focus: currentHomeIndex == 0 && currentSystemViewMode === 'grid'
-                    enabled: currentHomeIndex == 0 && currentSystemViewMode === 'grid'
-                    headerFocused: header.anyFocused
-                    id: systemsGridView
+                Component {
+                    id: systemList
+                    SystemsListLarge {
+                        id: systemsListView
+                        anchors.fill: parent
+                        focus: currentHomeIndex == 0
+                    }
+                }
+
+                Component {
+                    id: systemGrid
+                    SystemsGrid {
+                        id: systemsGridView
+                        anchors.fill: parent
+                        focus: currentHomeIndex == 0
+                    }
+                }
+
+                Loader {
+                    id: collectionLoader
+                    sourceComponent: currentSystemViewMode === 'list' ? collectionList : collectionGrid
+                    visible: currentHomeIndex == 1
+                    focus: currentHomeIndex == 1
+                    anchors.fill: parent
+                    asynchronous: false
                 }
 
                 // Collections
-                CollectionListLarge {
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    //anchors.verticalCenter: parent.verticalCenter
-                    height: parent.height
-                    width: parent.width
-                    visible: currentHomeIndex == 1
-                    focus: currentHomeIndex == 1
-                    headerFocused: header.anyFocused
-                    id: collectionListView
+                Component {
+                    id: collectionList
+                    CollectionsListLarge {
+                        id: collectionsListView
+                        anchors.fill: parent
+                        focus: currentHomeIndex == 1
+                    }
+                }
+
+                Component {
+                    id: collectionGrid
+                    CollectionsGrid {
+                        id: collectionsListView
+                        anchors.fill: parent
+                        focus: currentHomeIndex == 1
+                    }
                 }
                 
                 // Favourites

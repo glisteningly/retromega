@@ -34,7 +34,7 @@ Item {
         color: "black"
         opacity: 0.5
         transitions: Transition {
-                            NumberAnimation { properties: "opacity"; easing.type: Easing.Out; duration: 250  }
+                            NumberAnimation { properties: "opacity"; easing.type: Easing.OutCurve; duration: 250  }
                     }   
 
         states: [ 

@@ -7,7 +7,8 @@ const theme = {
   "title_dark": "#DDD",
 //  "background_grid": "#283593",
   "background_grid": "#333",
-  "gridColumnCount": 5,
+  "gridColumnCount": 4,
+  "gridLargeColumnCount": 3,
   "primaryColor": "#1565C0"
 }
 
@@ -54,6 +55,8 @@ const systemColors = {
   "kof": "#1A237E",
   "mslug": "#777",
   "megaman": "#2154D1",
+  "sf": "#CB1321",
+  "samsho": "#204A2C",
 
   "default": "#2387FF"
 }

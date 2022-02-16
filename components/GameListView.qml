@@ -213,15 +213,6 @@ Item {
             }
 
             Component.onCompleted: {
-//                gameView.positionViewAtIndex(defaultIndex, ListView.Center)
-//                delay(50, function() {
-//                    gameView.positionViewAtIndex(defaultIndex, ListView.Center)
-//                    if (currentHomeIndex <= 1 && !collectionListIndex) {
-//                        currentIndex = -1
-////                        setCurrentIndex(currentIndex)
-//                    }
-//                })
-//                console.log(defaultIndex)
                 currentIndex = defaultIndex
             }
 

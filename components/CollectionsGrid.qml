@@ -3,18 +3,21 @@ import QtGraphicalEffects 1.12
 //import QtQuick.Controls 2.15
 
 GridView {
-    id: systemsGridView
+    id: collectionsGridView
 
     property var footerTitle: {
-        return (currentIndex + 1) + " / " + allSystems.count
+        return (currentIndex + 1) + " / " + allCollections.count
     }
     property int columnCount: {
-        return theme.gridColumnCount;
+        return 3
+//        return theme.gridColumnCount;
     }
-    property real cellHeightRatio: 0.8
+    readonly property int maxRecalcs: 5
+    property int currentRecalcs: 0
+    property real cellHeightRatio: 0.6
 
-    model: allSystems
-    currentIndex: currentSystemIndex
+    model: allCollections
+    currentIndex: currentCollectionIndex
 //    width: parent.width - 8
 //    anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
@@ -43,9 +46,9 @@ GridView {
 
     onVisibleChanged: {
         if (visible) {
-            positionViewAtIndex(currentSystemIndex, GridView.Center)
+            positionViewAtIndex(currentCollectionIndex, GridView.Center)
             delay(0, function() {
-                positionViewAtIndex(currentSystemIndex, GridView.Center)
+                positionViewAtIndex(currentCollectionIndex, GridView.Center)
             })
         }
     }
@@ -53,7 +56,7 @@ GridView {
     onCurrentIndexChanged: {
         if (visible) {
           navSound.play()
-          setCurSystemIndex(currentIndex)
+          setCurCollectionIndex(currentIndex)
         }
     }
 
@@ -64,7 +67,7 @@ GridView {
         if (api.keys.isPageUp(event) || api.keys.isPageDown(event)) {
             event.accepted = true;
 //            navSound.play()
-            var rows_to_skip = Math.max(1, Math.round(systemsGridView.height / cellHeight));
+            var rows_to_skip = Math.max(1, Math.round(collectionsGridView.height / cellHeight));
             var games_to_skip = rows_to_skip * columnCount;
             if (api.keys.isPageUp(event))
                 currentIndex = Math.max(currentIndex - games_to_skip, 0);
@@ -75,7 +78,6 @@ GridView {
 
 //    highlight: Rectangle {
 //        color:  theme.primaryColor
-//        opacity: headerFocused ? 0.1 : 0.3
 //        width: grid.cellWidth
 //        height: grid.cellHeight
 //        scale: 1.1
@@ -85,7 +87,7 @@ GridView {
 
 //    highlightMoveDuration: 0
 
-    delegate: SystemsGridItem {
+    delegate: CollectionsGridItem {
         id: home_griditem_container
         width: GridView.view.cellWidth
         height: GridView.view.cellHeight
@@ -95,7 +97,7 @@ GridView {
         function enterGamePage() {
             //We update the collection we want to browse
             setCollectionListIndex(0)
-            setSystemIndex(home_griditem_container.GridView.view.currentIndex)
+            setCollectionIndex(home_griditem_container.GridView.view.currentIndex)
 
             //We change Pages
             navigate('GamesPage');

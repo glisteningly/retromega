@@ -184,23 +184,6 @@ ListView {
                 height: parent.height       
                 color:  "transparent" //systemColors[modelData.shortName]  
                 
-//                states: [
-
-//                    State{
-//                        name: "inactive"; when: !(home_item_container.ListView.isCurrentItem && !headerFocused)
-//                        PropertyChanges { target: home_item_container; scale: 1.0; opacity: 1.0}
-//                    },
-
-//                    State {
-//                        name: "active"; when: home_item_container.ListView.isCurrentItem && !headerFocused
-//                        PropertyChanges { target: home_item_container; scale: 1.0; opacity: 1.0}
-//                    }
-//                ]
-
-//                transitions: Transition {
-//                    NumberAnimation { properties: "scale, opacity"; easing.type: Easing.InOutCubic; duration: 225  }
-//                }
-                
                 Image {
                     id: menu_mask
                     //width: 136
@@ -230,16 +213,16 @@ ListView {
                                                                                        
                 }                
                     
-                DropShadow {
-                    anchors.fill: mask
-                    horizontalOffset: 0
-                    verticalOffset: 4
-                    radius: 12.0
-                    samples: 16
-                    opacity: 0.4
-                    color: systemColors[modelData.shortName]
-                    source: mask
-                }   
+//                DropShadow {
+//                    anchors.fill: mask
+//                    horizontalOffset: 0
+//                    verticalOffset: 4
+//                    radius: 12.0
+//                    samples: 16
+//                    opacity: 0.4
+//                    color: systemColors[modelData.shortName]
+//                    source: mask
+//                }
                 
                 Image {
                     id: device
@@ -253,7 +236,7 @@ ListView {
                     asynchronous: true
 //                    width: 420
 //                    height: 342
-                    fillMode: Image.PreserveAspectFill
+                    fillMode: Image.PreserveAspectFit
                     scale: 1.0
                     states: [
 

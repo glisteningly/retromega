@@ -241,7 +241,6 @@ Item {
               title: '视图'
               key: "SEL"
               width: 55
-              lightText: lightActive
               anchors.left: button_legend_details.right
               anchors.leftMargin: 6
               anchors.verticalCenter: parent.verticalCenter

@@ -64,14 +64,14 @@ Item {
         anchors {
             fill: parent
 //            margins: vpx(5)
-            leftMargin: 5
-            rightMargin: 5
+            leftMargin: 20
+            rightMargin: 20
             bottomMargin: 10
         }
         asynchronous: true
         visible: source != ""
-        source:  "../assets/images/logos-s/"+modelData.shortName+".png" || ""
-//        sourceSize { width: 256; height: 256 }
+        source:  "../assets/images/collections/"+modelData.shortName+".png" || ""
+        sourceSize { width: 200; height: 200 }
         fillMode: Image.PreserveAspectFit
         smooth: true
     }
@@ -93,7 +93,7 @@ Item {
     Text {
         id: shortTitle
 //        visible: selected
-        opacity: selected ? 1.0 : 0.6
+        opacity: selected ? 1.0 : 0.85
         width: parent.width
 //        anchors.centerIn: parent.bottom
 //        anchors.leftMargin: 8
@@ -107,8 +107,8 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         color: "#eee"
         font {
-            pixelSize: vpx(32)
-            family: systemTitleFont.name
+            pixelSize: vpx(28)
+//            family: systemTitleFont.name
         }
     }
 

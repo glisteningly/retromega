@@ -89,7 +89,7 @@ Rectangle {
 
     HeaderLink {
         id: title_collection
-        title: "系列"
+        title: "合集"
         index: 1
         anchors.left: title_systems.right
         anchors.top: parent.top

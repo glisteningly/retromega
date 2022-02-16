@@ -158,7 +158,6 @@ FocusScope {
         setCollectionListIndex(0)
         api.memory.set('homeIndex', index)
         currentHomeIndex = index
-        gamesPage.cells_need_recalc()
     }
   
     property var androidCollection: {
@@ -432,7 +431,7 @@ FocusScope {
         ]
 
         transitions: Transition {
-            NumberAnimation { properties: "opacity"; easing.type: Easing.Out; duration: 350  }
+            NumberAnimation { properties: "opacity"; easing.type: Easing.OutInElastic; duration: 350  }
         }            
         z: 2002
     }          

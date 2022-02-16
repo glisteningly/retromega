@@ -11,26 +11,20 @@ ListView {
 
     property var headerFocused: false
 
-    function letterSpacing(str) {
-        return str == 'NES' ? 1.0 : 0.0
-    }
-
-    function titleFontSize(str) {
-        return str.length <= 10 ? 70 : 50
-    }
-
     property var bgIndex: 0
     property var itemTextColor: {
         collectionListView.activeFocus ? "#ffffff"  : "#60ffffff"
     }
+    model: allCollections
+    currentIndex: currentCollectionIndex
+    delegate: collectionsDelegate
+
     width: parent.width
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: parent.bottom
-    model: allCollections
     cacheBuffer: 10
-    delegate: collectionsDelegate
     orientation: ListView.Horizontal
     highlightRangeMode: ListView.StrictlyEnforceRange
     preferredHighlightBegin: 0
@@ -40,7 +34,7 @@ ListView {
     highlightMoveVelocity: -1
     keyNavigationWraps: false
     spacing: 50
-    currentIndex: currentCollectionIndex
+
     move: Transition {
         NumberAnimation { properties: "x,y"; duration: 3000 }
     }
@@ -218,16 +212,16 @@ ListView {
 
                 }
 
-                DropShadow {
-                    anchors.fill: mask
-                    horizontalOffset: 0
-                    verticalOffset: 4
-                    radius: 12.0
-                    samples: 16
-                    opacity: 0.4
-                    color: systemColors[modelData.shortName]
-                    source: mask
-                }
+//                DropShadow {
+//                    anchors.fill: mask
+//                    horizontalOffset: 0
+//                    verticalOffset: 4
+//                    radius: 12.0
+//                    samples: 16
+//                    opacity: 0.4
+//                    color: systemColors[modelData.shortName]
+//                    source: mask
+//                }
 
                 Image {
                     id: device
@@ -279,7 +273,7 @@ ListView {
 //                    font.family: systemTitleFont.name
                     font.pixelSize: 60
                     font.letterSpacing: 2
-                    font.bold: true
+//                    font.bold: true
                     color: itemTextColor
                     width: 480
                     wrapMode: Text.WordWrap
