@@ -79,13 +79,11 @@ FocusScope {
     }
   
     function setSystemIndex(index) {
-//        setCollectionListIndex(0)
         api.memory.set('currentSystemIndex', index)
         currentSystemIndex = index
     }
 
     function setCurSystemIndex(index) {
-//        setCollectionListIndex(0)
         currentSystemIndex = index
     }
 

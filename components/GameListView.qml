@@ -340,7 +340,7 @@ Item {
             height: parent.height
             anchors.rightMargin: 0
             anchors.right: parent.right
-            anchors.top: header.top
+            anchors.top: parent.top
             anchors.bottom: parent.bottom
             z: 2001
 

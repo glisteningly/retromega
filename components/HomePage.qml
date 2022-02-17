@@ -165,7 +165,7 @@ Item {
                 Component {
                     id: collectionGrid
                     CollectionsGrid {
-                        id: collectionsListView
+                        id: collectionsGridView
                         anchors.fill: parent
                         focus: currentHomeIndex == 1
                     }
@@ -183,6 +183,7 @@ Item {
                         sortMode: "title"
                         focus: true && !isShowingGameDetail
                         hideFavoriteIcon: true
+                        defaultIndex: collectionListIndex
                     }
                 }
 
@@ -197,6 +198,7 @@ Item {
                         sortMode: "title"
                         focus: true && !isShowingGameDetail
                         hideFavoriteIcon: true
+                        defaultIndex: collectionListIndex
                     }
                 }
 

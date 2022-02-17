@@ -47,7 +47,7 @@ GridView {
     onVisibleChanged: {
         if (visible) {
             positionViewAtIndex(currentCollectionIndex, GridView.Center)
-            delay(0, function() {
+            delay(10, function() {
                 positionViewAtIndex(currentCollectionIndex, GridView.Center)
             })
         }
@@ -56,9 +56,13 @@ GridView {
     onCurrentIndexChanged: {
         if (visible) {
           navSound.play()
-          setCurCollectionIndex(currentIndex)
+          setCurCollectionIndex(collectionsGridView.currentIndex)
         }
     }
+
+//    Component.onDestruction: {
+//        setCollectionIndex(collectionsGridView.currentIndex)
+//    }
 
     Keys.onPressed: {
         if (event.isAutoRepeat)
@@ -88,7 +92,7 @@ GridView {
 //    highlightMoveDuration: 0
 
     delegate: CollectionsGridItem {
-        id: home_griditem_container
+        id: collection_griditem_container
         width: GridView.view.cellWidth
         height: GridView.view.cellHeight
         selected: GridView.isCurrentItem
@@ -97,7 +101,7 @@ GridView {
         function enterGamePage() {
             //We update the collection we want to browse
             setCollectionListIndex(0)
-            setCollectionIndex(home_griditem_container.GridView.view.currentIndex)
+            setCollectionIndex(collection_griditem_container.GridView.view.currentIndex)
 
             //We change Pages
             navigate('GamesPage');

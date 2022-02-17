@@ -9,8 +9,6 @@ ListView {
         return (currentIndex + 1) + " / " + allSystems.count
     }
 
-    property bool headerFocused: false
-
     function titleFontSize(str) {
         return str.length <= 10 ? 70 : 50
     }
@@ -130,8 +128,8 @@ ListView {
             positionViewAtIndex(currentSystemIndex, ListView.Center)
             delay(0, function() {
                 systemsListView.positionViewAtIndex(currentSystemIndex, ListView.Center)
+                systemsBackground.bgIndex = currentIndex
             })
-            systemsBackground.bgIndex = currentIndex
         }
     }
 
@@ -251,12 +249,12 @@ ListView {
                         },
 
                         State {
-                            name: "active"; when: home_item_container.ListView.isCurrentItem && !headerFocused
+                            name: "active"; when: home_item_container.ListView.isCurrentItem
                             PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 1.0}
                         },
 
                         State {
-                            name: "inactive"; when: home_item_container.ListView.isCurrentItem  && headerFocused
+                            name: "inactive"; when: home_item_container.ListView.isCurrentItem
                             PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 0.85}
                         }   
                     ]

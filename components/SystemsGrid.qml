@@ -86,7 +86,7 @@ GridView {
 //    highlightMoveDuration: 0
 
     delegate: SystemsGridItem {
-        id: home_griditem_container
+        id: system_griditem_container
         width: GridView.view.cellWidth
         height: GridView.view.cellHeight
         selected: GridView.isCurrentItem
@@ -95,7 +95,7 @@ GridView {
         function enterGamePage() {
             //We update the collection we want to browse
             setCollectionListIndex(0)
-            setSystemIndex(home_griditem_container.GridView.view.currentIndex)
+            setSystemIndex(system_griditem_container.GridView.view.currentIndex)
 
             //We change Pages
             navigate('GamesPage');

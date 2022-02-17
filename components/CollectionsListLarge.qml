@@ -42,11 +42,11 @@ ListView {
         NumberAnimation { properties: "x,y"; duration: 3000 }
     }
     Keys.onLeftPressed: {
-        decrementCurrentIndex(); systemsBackground.bgIndex = currentIndex
+        decrementCurrentIndex(); collectionsBackground.bgIndex = currentIndex
     }
 
     Keys.onRightPressed: {
-        incrementCurrentIndex(); systemsBackground.bgIndex = currentIndex
+        incrementCurrentIndex(); collectionsBackground.bgIndex = currentIndex
     }
 
     Keys.onPressed: {
@@ -54,7 +54,7 @@ ListView {
           if (api.keys.isPageDown(event)) {
              event.accepted = true
              collectionListView.currentIndex = Math.min(collectionListView.currentIndex + 10, allCollections.count - 1)
-             systemsBackground.bgIndex = currentIndex
+             collectionsBackground.bgIndex = currentIndex
              return
           }
 
@@ -62,7 +62,7 @@ ListView {
           if (api.keys.isPageUp(event)) {
               event.accepted = true;
               collectionListView.currentIndex = Math.max(collectionListView.currentIndex - 10, 0);
-              systemsBackground.bgIndex = currentIndex
+              collectionsBackground.bgIndex = currentIndex
               return;
           }
 
@@ -87,12 +87,12 @@ ListView {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 25
-        opacity: headerFocused ? 0.5 : 1.0
+        opacity: 1.0
     }
 
     Rectangle {
         property int bgIndex: -1
-        id: systemsBackground
+        id: collectionsBackground
         width: layoutScreen.width
         height: layoutScreen.height
         anchors.top: parent.top
@@ -101,7 +101,7 @@ ListView {
         z: -1
         Behavior on bgIndex {
             ColorAnimation {
-                target: systemsBackground; property: "color"; to: systemColors[allCollections.get(currentIndex).shortName] ?? systemColors["default"]; duration: 335
+                target: collectionsBackground; property: "color"; to: systemColors[allCollections.get(currentIndex).shortName] ?? systemColors["default"]; duration: 335
             }
         }
         transitions: Transition {
@@ -118,7 +118,18 @@ ListView {
         delay(50, function() {
             collectionListView.positionViewAtIndex(currentCollectionIndex, ListView.Center)
         })
-        systemsBackground.bgIndex = currentIndex
+        collectionsBackground.bgIndex = currentIndex
+    }
+
+    onVisibleChanged: {
+        if (visible) {
+            positionViewAtIndex(currentCollectionIndex, ListView.Center)
+            delay(0, function() {
+                collectionListView.positionViewAtIndex(currentCollectionIndex, ListView.Center)
+                collectionsBackground.bgIndex = currentIndex
+            })
+//            collectionsBackground.bgIndex = currentIndex
+        }
     }
 
     onCurrentIndexChanged: {
@@ -133,7 +144,7 @@ ListView {
 
 
         Item {
-            id: home_listitem_container
+            id: grid_listitem_container
             width: layoutScreen.width
             height: layoutScreen.height - 55 - 55 - 35
             scale: 1.0
@@ -145,7 +156,7 @@ ListView {
 
                     //We update the collection we want to browse
                     setCollectionListIndex(0)
-                    setCollectionIndex(home_listitem_container.ListView.view.currentIndex)
+                    setCollectionIndex(grid_listitem_container.ListView.view.currentIndex)
 
                     //We change Pages
                     navigate('GamesPage');
@@ -165,23 +176,6 @@ ListView {
                 width: parent.width
                 height: parent.height
                 color:  "transparent" //systemColors[modelData.shortName]
-
-                states: [
-
-                    State{
-                        name: "inactive"; when: !(home_listitem_container.ListView.isCurrentItem && !headerFocused)
-                        PropertyChanges { target: home_listitem_container; scale: 1.0; opacity: 1.0}
-                    },
-
-                    State {
-                        name: "active"; when: home_listitem_container.ListView.isCurrentItem && !headerFocused
-                        PropertyChanges { target: home_listitem_container; scale: 1.0; opacity: 1.0}
-                    }
-                ]
-
-                transitions: Transition {
-                    NumberAnimation { properties: "scale, opacity"; easing.type: Easing.InOutCubic; duration: 225  }
-                }
 
                 Image {
                     id: menu_mask
@@ -240,22 +234,22 @@ ListView {
                     states: [
 
                         State{
-                            name: "inactiveRight"; when: !(home_listitem_container.ListView.isCurrentItem) && currentIndex < index
+                            name: "inactiveRight"; when: !(grid_listitem_container.ListView.isCurrentItem) && currentIndex < index
                             PropertyChanges { target: device; anchors.rightMargin: -160.0; opacity: 1.0}
                         },
 
                         State{
-                            name: "inactiveLeft"; when: !(home_listitem_container.ListView.isCurrentItem) && currentIndex > index
+                            name: "inactiveLeft"; when: !(grid_listitem_container.ListView.isCurrentItem) && currentIndex > index
                             PropertyChanges { target: device; anchors.rightMargin: 40.0; opacity: 1.0}
                         },
 
                         State {
-                            name: "active"; when: home_listitem_container.ListView.isCurrentItem && !headerFocused
+                            name: "active"; when: grid_listitem_container.ListView.isCurrentItem && !headerFocused
                             PropertyChanges { target: device; anchors.rightMargin: 0.0; opacity: 1.0; scale: 1.0}
                         },
 
                         State {
-                            name: "inactive"; when: home_listitem_container.ListView.isCurrentItem  && headerFocused
+                            name: "inactive"; when: grid_listitem_container.ListView.isCurrentItem  && headerFocused
                             PropertyChanges { target: device; anchors.rightMargin: 0.0; opacity: 1.0; scale: 0.85}
                         }
                     ]
@@ -270,7 +264,7 @@ ListView {
                 Text {
                     id: title
                     text: modelData.name
-//                    font.family: systemTitleFont.name
+                    font.family: collectionTitleFont.name
                     font.pixelSize: 60
                     font.letterSpacing: 2
 //                    font.bold: true
