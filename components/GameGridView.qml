@@ -20,9 +20,7 @@ Item {
 
     property var gamesColor: theme.primaryColor
     property var selectedGame: {
-        return gameView.currentIndex >= 0 ? items.get(
-                                                gameView.currentIndex) : items.get(
-                                                0)
+        return gameView.currentIndex >= 0 ? items.get(gameView.currentIndex) : items.get(0)
     }
 
     //    property alias box_art : game_box_art
@@ -131,7 +129,7 @@ Item {
             focus: listContent.activeFocus
             readonly property int maxRecalcs: 5
             property int currentRecalcs: 0
-            property real cellHeightRatio: 1
+            property real cellHeightRatio: 1.33
 
             property real columnCount: {
                 //                    if (cellHeightRatio > 1.2) return 6;
@@ -157,15 +155,13 @@ Item {
 
             function cells_need_recalc() {
                 currentRecalcs = 0
-                cellHeightRatio = 1
+                cellHeightRatio = 1.33
             }
 
             function update_cell_height_ratio(img_w, img_h) {
                 if (currentHomeIndex === 0) {
                     // 限制图片的最大宽高比
-                    cellHeightRatio = Math.min(Math.max(0.67,
-                                                        img_h / img_w), 1.67)
-                    //                    cellHeightRatio =  img_h / img_w
+                    cellHeightRatio = Math.min(Math.max(0.67,img_h / img_w), 1.67)
                 } else {
                     return 1.0
                 }

@@ -57,6 +57,7 @@ const systemColors = {
   "megaman": "#2154D1",
   "sf": "#CB1321",
   "samsho": "#204A2C",
+  "castlevania": "#6c3122",
 
   "default": "#2387FF"
 }

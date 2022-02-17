@@ -99,10 +99,8 @@ Item {
 //        anchors.leftMargin: 8
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 5
-        font.letterSpacing: 0.2
-
-
-        text: collection.name.length >= 18 ? collection.shortName : collection.name
+        font.letterSpacing: 1.5
+        text: collection.name
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
         color: "#eee"
