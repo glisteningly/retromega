@@ -58,6 +58,9 @@ const systemColors = {
   "sf": "#CB1321",
   "samsho": "#204A2C",
   "castlevania": "#6c3122",
+  "zelda": "#FBC02D",
+  "finalfantasy": "#eeeeee",
+  "metroid": "#0a7f9a",
 
   "default": "#2387FF"
 }

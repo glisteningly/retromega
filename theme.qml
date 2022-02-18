@@ -4,7 +4,6 @@ import QtMultimedia 5.9
 import SortFilterProxyModel 0.2
 
 import 'components' as Components
-//import './assets/js/pinyin.js' as Pinyin
 import './const.js' as Const
 
 FocusScope {
@@ -79,13 +78,11 @@ FocusScope {
     }
   
     function setSystemIndex(index) {
-//        setCollectionListIndex(0)
         api.memory.set('currentSystemIndex', index)
         currentSystemIndex = index
     }
 
     function setCurSystemIndex(index) {
-//        setCollectionListIndex(0)
         currentSystemIndex = index
     }
 

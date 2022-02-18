@@ -17,6 +17,7 @@
 
 import QtQuick 2.2
 import QtGraphicalEffects 1.12
+import '../assets/js/colorDetector.js' as ColorDetector
 
 
 Item {
@@ -40,7 +41,7 @@ Item {
     Rectangle {
         id: gridItemBg
         color:  systemColors[modelData.shortName] ?? "#000000"
-        opacity: 0.5
+        opacity: 0.6
         anchors.fill: parent
         anchors.margins: 2
 //            scale: 1.1
@@ -71,9 +72,9 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  "../assets/images/collections/"+modelData.shortName+".png" || ""
-        sourceSize { width: 200; height: 200 }
+        sourceSize { width: 128; height: 128 }
         fillMode: Image.PreserveAspectFit
-        smooth: true
+//        smooth: true
     }
 
 //    Image {
@@ -103,23 +104,31 @@ Item {
         text: collection.name
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
-        color: "#eee"
+        color: ColorDetector.isColorDarkOrLight(systemColors[modelData.shortName]) === 'dark'? "#eee":"#333"
         font {
             pixelSize: vpx(28)
 //            family: systemTitleFont.name
         }
     }
 
-    DropShadow {
-        visible: selected
-        anchors.fill: shortTitle
-        source: shortTitle
-        verticalOffset: 0
-        horizontalOffset: 0
-        color: "#90000000"
-        radius: 20
-        samples: 30
-    }
+//    DropShadow {
+//        visible: selected
+//        anchors.fill: shortTitle
+//        source: shortTitle
+//        verticalOffset: 0
+//        horizontalOffset: 0
+//        color: "#90000000"
+//        radius: 20
+//        samples: 20
+//    }
+//    Glow {
+//        anchors.fill: shortTitle
+//        visible: selected
+//        radius: 8
+//        samples: 17
+//        color: "#30000000"
+//        source: shortTitle
+//    }
 
     MouseArea {
         anchors.fill: parent
