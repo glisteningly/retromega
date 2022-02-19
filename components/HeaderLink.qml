@@ -61,21 +61,21 @@ Item {
 //        font.bold: true
     }
 
-    Rectangle{
-        visible: selected
-        id: item_underline
-        anchors {
-            left: parent.left
-            leftMargin: -6
-            right: parent.right
-            rightMargin: -6
-            bottom: parent.bottom
-            bottomMargin: 1
-        }
-        height: 4
-        color: theme.primaryColor
-//        opacity: 1
-//        radius: 6
-    }
+//    Rectangle{
+//        visible: selected
+//        id: item_underline
+//        anchors {
+//            left: parent.left
+//            leftMargin: -6
+//            right: parent.right
+//            rightMargin: -6
+//            bottom: parent.bottom
+//            bottomMargin: 1
+//        }
+//        height: 4
+//        color: theme.primaryColor
+////        opacity: 1
+////        radius: 6
+//    }
 
 }

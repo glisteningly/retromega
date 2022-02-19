@@ -143,7 +143,7 @@ Item {
              
             ListView {
               id: gameView
-              model: items
+              model: parent.visible ? items : []
               delegate: gameViewDelegate
               height: parent.width
               width: parent.height

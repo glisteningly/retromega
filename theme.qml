@@ -50,7 +50,7 @@ FocusScope {
     property var currentHomeIndex: 0
 
     // Collection index
-    property var currentSystemIndex : 0
+    property int currentSystemIndex : 0
     property var currentCollectionIndex : 0
     property var currentCollection: {
         if (currentHomeIndex === 0) {
@@ -210,7 +210,7 @@ FocusScope {
     property var layoutScreen : {
         "width": parent.width,
         "height": parent.height,
-        "background": theme.background,      
+        "background": theme.background,
     }
 
 

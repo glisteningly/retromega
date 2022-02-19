@@ -28,6 +28,10 @@ Item {
         }
     }
 
+    property var isSystemPage: {
+        return currentHomeIndex === 0
+    }
+
     property var headerTitle: {
         return (collectionShowAllItems) ? "All " + currentCollection.name : currentCollection.name
     }
@@ -288,10 +292,12 @@ Item {
                 anchors.left: parent.left
                 anchors.leftMargin: 32
                 color: systemColor//theme.title
-                font.pixelSize: 18
-//                font.letterSpacing: -0.3
-                font.bold: true              
+                font.pixelSize: 22
+                font.letterSpacing: 0.3
+//                font.bold: true
+                font.family: isSystemPage ? systemTitleFont.name : collectionTitleFont.name
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: isSystemPage ? 3 : 0
                 width:300       
                 elide: Text.ElideRight       
             }

@@ -15,7 +15,7 @@ ListView {
 
     property int bgIndex: 0
 //    property var itemTextColor: {
-//        systemsListView.activeFocus ? "#ffffff"  : "#30ffffff"
+//        systemsListView.activeFocus ? #ffffff"  : "#30ffffff"
 //    }
     property string itemTextColor: "#ffffff"
 
@@ -101,6 +101,7 @@ ListView {
         anchors.left: parent.left
         anchors.topMargin: -55
         z: -1
+        color: theme.background_dark
         Behavior on bgIndex {
             ColorAnimation {
                 target: systemsBackground; property: "color"; to: systemColors[allSystems.get(currentIndex).shortName] ?? systemColors["default"]; duration: 335
@@ -116,17 +117,17 @@ ListView {
     }
 
     Component.onCompleted: { 
-//        positionViewAtIndex(currentSystemIndex, ListView.Center)
-        delay(50, function() {
+        positionViewAtIndex(currentSystemIndex, ListView.Center)
+        delay(200, function() {
             systemsListView.positionViewAtIndex(currentSystemIndex, ListView.Center)
+            systemsBackground.bgIndex = currentIndex
         })
-        systemsBackground.bgIndex = currentIndex
     }
 
     onVisibleChanged: {
         if (visible) {
             positionViewAtIndex(currentSystemIndex, ListView.Center)
-            delay(0, function() {
+            delay(50, function() {
                 systemsListView.positionViewAtIndex(currentSystemIndex, ListView.Center)
                 systemsBackground.bgIndex = currentIndex
             })
@@ -149,7 +150,7 @@ ListView {
     
     
         Item {
-            id: home_item_container
+            id: system_listitem_container
             width: layoutScreen.width
             height: layoutScreen.height - 55 - 55 - 35
             scale: 1.0
@@ -161,7 +162,7 @@ ListView {
                     
                     //We update the collection we want to browse
                     setCollectionListIndex(0)
-                    setSystemIndex(home_item_container.ListView.view.currentIndex)
+                    setSystemIndex(system_listitem_container.ListView.view.currentIndex)
 
                     //We change Pages
                     navigate('GamesPage');
@@ -239,22 +240,22 @@ ListView {
                     states: [
 
                         State{
-                            name: "inactiveRight"; when: !(home_item_container.ListView.isCurrentItem) && currentIndex < index
+                            name: "inactiveRight"; when: !(system_listitem_container.ListView.isCurrentItem) && currentIndex < index
                             PropertyChanges { target: device; anchors.rightMargin: -160.0; opacity: 1.0}
                         },
 
                         State{
-                            name: "inactiveLeft"; when: !(home_item_container.ListView.isCurrentItem) && currentIndex > index
+                            name: "inactiveLeft"; when: !(system_listitem_container.ListView.isCurrentItem) && currentIndex > index
                             PropertyChanges { target: device; anchors.rightMargin: 40.0; opacity: 1.0}
                         },
 
                         State {
-                            name: "active"; when: home_item_container.ListView.isCurrentItem
+                            name: "active"; when: system_listitem_container.ListView.isCurrentItem
                             PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 1.0}
                         },
 
                         State {
-                            name: "inactive"; when: home_item_container.ListView.isCurrentItem
+                            name: "inactive"; when: system_listitem_container.ListView.isCurrentItem
                             PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 0.85}
                         }   
                     ]

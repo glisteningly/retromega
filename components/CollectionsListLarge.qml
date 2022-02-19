@@ -99,6 +99,7 @@ ListView {
         anchors.left: parent.left
         anchors.topMargin: -55
         z: -1
+        color: theme.background_dark
         Behavior on bgIndex {
             ColorAnimation {
                 target: collectionsBackground; property: "color"; to: systemColors[allCollections.get(currentIndex).shortName] ?? systemColors["default"]; duration: 335
@@ -117,8 +118,9 @@ ListView {
         positionViewAtIndex(currentCollectionIndex, ListView.Center)
         delay(50, function() {
             collectionListView.positionViewAtIndex(currentCollectionIndex, ListView.Center)
+            collectionsBackground.bgIndex = currentIndex
         })
-        collectionsBackground.bgIndex = currentIndex
+
     }
 
     onVisibleChanged: {

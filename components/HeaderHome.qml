@@ -13,6 +13,23 @@ Rectangle {
         }
     } 
 
+    property var focused_title: {
+        if (currentHomeIndex == 0) {
+            return 'systems'
+        } else if (currentHomeIndex == 1) {
+            return 'collection'
+        } else if (currentHomeIndex == 2) {
+            return 'favorites'
+        } else if (currentHomeIndex == 3) {
+            return 'recent'
+        }
+    }
+
+
+    onFocused_titleChanged: {
+        home_header.state = focused_title
+    }
+
     property var anyFocused: {
         return title_systems.activeFocus || title_collection.activeFocus ||title_favorites.activeFocus || title_recent.activeFocus
     }
@@ -40,16 +57,6 @@ Rectangle {
     height: layoutHeader.height
     anchors.top: parent.top      
 
-//    Rectangle {
-//        anchors.leftMargin: 22
-//        anchors.rightMargin: 22
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        color: light ? "#00ffffff" : "#20000000"
-//        anchors.bottom: parent.bottom
-//        height: 1
-//    }
-
     Rectangle{
         id: tabLeft
         height:18
@@ -72,6 +79,42 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
         }
+    }
+
+    Rectangle {
+        id: indicator
+        width: focused_link.width + 12
+        height: 4
+        color: theme.primaryColor
+        anchors {
+            leftMargin: -6
+            bottom: parent.bottom
+            bottomMargin: 1
+        }
+    }
+
+    states: [
+        State {
+            name: 'systems'
+            AnchorChanges { target: indicator; anchors.left: title_systems.left }
+        },
+        State {
+            name: 'collection'
+            AnchorChanges { target: indicator; anchors.left: title_collection.left }
+        },
+        State {
+            name: 'favorites'
+            AnchorChanges { target: indicator; anchors.left: title_favorites.left }
+        },
+        State {
+            name: 'recent'
+            AnchorChanges { target: indicator; anchors.left: title_recent.left }
+        }
+    ]
+
+    transitions: Transition {
+            // smoothly reanchor myRect and move into new position
+            AnchorAnimation { duration: 200 }
     }
 
     HeaderLink {
