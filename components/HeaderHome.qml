@@ -76,7 +76,7 @@ Rectangle {
 
     HeaderLink {
         id: title_systems
-        title: "机种"
+        title: "机型"
         index: 0
         anchors.left: tabLeft.right
         anchors.top: parent.top

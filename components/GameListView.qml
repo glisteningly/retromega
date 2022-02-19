@@ -213,7 +213,15 @@ Item {
             }
 
             Component.onCompleted: {
-                currentIndex = defaultIndex
+//                currentIndex = defaultIndex
+                delay(50, function() {
+                    gameView.positionViewAtIndex(currentIndex, ListView.Center)
+                    if (currentHomeIndex <= 1 && collectionListIndex) {
+                        currentIndex = defaultIndex
+//                        setCurrentIndex(currentIndex)
+                    }
+                })
+
             }
 
             onVisibleChanged: {

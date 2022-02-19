@@ -41,6 +41,13 @@ GridView {
 
     displayMarginBeginning: anchors.topMargin
 
+    Component.onCompleted: {
+        delay(50, function() {
+            positionViewAtIndex(currentSystemIndex, GridView.Center)
+        })
+        systemsBackground.bgIndex = currentIndex
+    }
+
     onVisibleChanged: {
         if (visible) {
             positionViewAtIndex(currentSystemIndex, GridView.Center)

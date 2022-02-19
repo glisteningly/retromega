@@ -53,6 +53,12 @@ GridView {
         }
     }
 
+    Component.onCompleted: {
+        delay(50, function() {
+            positionViewAtIndex(currentCollectionIndex, GridView.Center)
+        })
+    }
+
     onCurrentIndexChanged: {
         if (visible) {
           navSound.play()

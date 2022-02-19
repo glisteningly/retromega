@@ -1,48 +1,46 @@
-# Retro Mega v0.4
-[Pegasus](https://pegasus-frontend.org) theme for the Retroid Pocket 2.
+# Retro Fans v0.1
+[Pegasus](https://pegasus-frontend.org) theme for the Retroid Pocket 2/2+.
+forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to djfumberger
 
-[![Retromega Video](screenshots/screenshot-video.png)](https://www.youtube.com/watch?v=YuCvrY7uy6g)
+专为Retroid Pocket2/2+适配的Pegasus(天马前端)主题
+本主题来源于Retro Mega, 本人在原作者的基础上进行了修改，适配，更符合本土使用习惯。
+原本只是自己使用的，因有朋友有兴趣就放出来供使用和完善
+
+[![Retromega Video](screenshots/device-title.png)](https://www.youtube.com/watch?v=YuCvrY7uy6g)
 
 
-## Installation
+## 安装
 
-[Download](https://github.com/djfumberger/retromega/archive/main.zip) and extract to your [theme directory](http://pegasus-frontend.org/docs/user-guide/installing-themes) under the folder retromega. You can then select the theme in the settings menu of Pegasus.
+[下载](https://github.com/djfumberger/retromega/archive/main.zip) 解压到pegasus前端的主题(theme)文件夹中 [theme directory](http://pegasus-frontend.org/docs/user-guide/installing-themes). 在天马前端的设置界面中选择.
 
-To get Pegasus setup on your Retroid Pocket 2 there's a great written guide [available here](https://basvroegop.nl/pegasus) or a great video guide [available here](https://www.youtube.com/watch?v=fGWve7YYwGQ)
+推荐配合“挖坑者联盟”整合的游戏合集使用, 已经适配了绝大部分机型的图片
 
-## Features 
-* Optimised for the RP2.
-* Favorites and Recently Played.
-* Quick index seeking.
-* Sorting by title, date, rating, last played.
-* Filtering by favorites.
-* Make sure to remember where you left off.
-* Video previews.
-* Video, screenshot, and descriptions of games.
+## 特性 
+* 专门RP2/2+的屏幕分辨率适配和优化.
+* 首页分为：机型、合集、收藏、最近四个标签页.
+* 机型、合集可以切换网格视图/海报视图(原Retro Mega).
+* 游戏列表页面可以切换网格视图/列表视图(原Retro Mega).
+* 新增的合集展示功能，方便把一个系列的游戏放在一起，打造自己喜爱系列的专辑.
 
-## Planned Updates
-* Search.
-* Alternative game views.
-* Add more / missing system cover images.
+## 使用说明
+* 基本操作可参见主题下方的按键提示
+* 列表可以使用方向左右键翻页
 
-## Version History
+## 机型、合集的添加方法
+### 机型：
 
-### v0.4 - Apr 10th
+### 合集：
 
-* Added support for battery indicator
-* Improved layout when fullscreen is disabled.
+## 升级计划
+* 适配高分辨率屏幕.
+* 多语言支持.
+* 增加更多机型、合集的图片及颜色定义.
 
-### v0.3 - Mar 19th
-
-* Added detail screen for games. Detail screen will show screenshots, description, and videos.
-
-### v0.2 - Feb 21st
-
-* Added 'Quick Index'. Tap left when browsing lists to show an index to allow quick browsing of long lists.
+## 版本历史
 
 ### v0.1
 
-Initial Release
+初测发布
 
 ## License
 

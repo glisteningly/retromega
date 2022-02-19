@@ -116,7 +116,7 @@ ListView {
     }
 
     Component.onCompleted: { 
-        positionViewAtIndex(currentSystemIndex, ListView.Center)
+//        positionViewAtIndex(currentSystemIndex, ListView.Center)
         delay(50, function() {
             systemsListView.positionViewAtIndex(currentSystemIndex, ListView.Center)
         })
