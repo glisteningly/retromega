@@ -65,11 +65,13 @@ Rectangle {
         radius:2
         anchors.top: parent.top
         anchors.topMargin: 11
-        //anchors.right: header_time.left
         anchors.left: parent.left
         anchors.leftMargin: 24
-        //anchors.rightMargin: 5
-//        anchors.rightMargin: 32
+        border {
+            color: "#888"
+            width: 1
+        }
+
         Text{
             text: "L"
             color:"white"
@@ -177,11 +179,12 @@ Rectangle {
         radius:2
         anchors.top: parent.top
         anchors.topMargin: 11
-        //anchors.right: header_time.left
         anchors.left: title_recent.right
         anchors.leftMargin: 16
-        //anchors.rightMargin: 5
-//        anchors.rightMargin: 32
+        border {
+            color: "#888"
+            width: 1
+        }
         Text{
             text: "R"
             color:"white"
