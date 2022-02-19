@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtGraphicalEffects 1.12
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.15
+import "qrc:/qmlutils" as PegasusUtils
 
 Item { 
     id: gameDetail
@@ -125,73 +126,100 @@ Item {
 
             Text {
                 id: title
-                width: (parent.width / 2) - margin - 20
+                font.family: collectionTitleFont.name
+                width: parent.width - 20
                 wrapMode: Text.WordWrap
                 anchors.left: parent.left
                 anchors.top: parent.top
-                maximumLineCount: 2
+//                maximumLineCount: 2
                 text: game ? game.title : "No Game"
                 lineHeight: 1.1
                 color: textColor
-                font.pixelSize: 28
-                font.letterSpacing: 1
-                font.bold: true
+                font.pixelSize: 22
+                font.letterSpacing: 0
+                maximumLineCount: 1
+//                font.bold: true 
+                z:2
+            }
+
+            Image {
+                id: imgClearLogo
+                width: (parent.width / 2) - margin - 20
+
+                anchors {
+                    top: title.bottom
+                    topMargin: 12
+                    left: title.left
+        //            margins: vpx(5)
+//                    leftMargin: 20
+//                    rightMargin: 20
+//
+                    bottom: actionBtns.top
+                    bottomMargin: 20
+                }
+                asynchronous: true
+                visible: source != ""
+                source:  game ? game.assets.logo : ''
+                sourceSize { width: 200; height: 200 }
+                fillMode: Image.PreserveAspectFit
+        //        smooth: true
             }
 
             /** 
              * Title
              */
-            ColumnLayout {
-                anchors.left: parent.left
-                anchors.top: title.bottom 
-                spacing: 8
-                anchors.topMargin: 4
-                width: (parent.width / 2) - margin  
+//            ColumnLayout {
+//                anchors.left: parent.left
+//                anchors.top: title.bottom
+//                spacing: 8
+//                anchors.topMargin: 4
+//                width: (parent.width / 2) - margin
 
-                Text {
-                    text: playerGenre
-                    color: textColor
-                    opacity: 0.5
-                    font.pixelSize: 18
-                    font.letterSpacing: -0.35
-                    font.bold: true
-                    width: parent.width
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    wrapMode: Text.WordWrap
-                    maximumLineCount: 4
-                }
-
-                Text {
-                    text: releaseDate
-                    color: textColor
-                    opacity: 0.5
-                    font.pixelSize: 18
+//                Text {
+//                    text: playerGenre
+//                    color: textColor
+//                    opacity: 0.5
+//                    font.pixelSize: 18
 //                    font.letterSpacing: -0.35
-                    font.bold: true 
-                }   
+//                    font.bold: true
+//                    width: parent.width
+//                    anchors.left: parent.left
+//                    anchors.right: parent.right
+//                    wrapMode: Text.WordWrap
+//                    maximumLineCount: 4
+//                }
 
-                // Text {
-                //     text: developedBy
-                //     color: textColor
-                //     opacity: 0.5
-                //     font.pixelSize: 18
-                //     font.letterSpacing: -0.35
-                //     font.bold: true
-                // }   
+//                Text {
+//                    text: releaseDate
+//                    color: textColor
+//                    opacity: 0.5
+//                    font.pixelSize: 18
+////                    font.letterSpacing: -0.35
+//                    font.bold: true
+//                }
 
-            }
+//                // Text {
+//                //     text: developedBy
+//                //     color: textColor
+//                //     opacity: 0.5
+//                //     font.pixelSize: 18
+//                //     font.letterSpacing: -0.35
+//                //     font.bold: true
+//                // }
+
+//            }
 
             /** 
              * Buttons
              */
             RowLayout {
+                id: actionBtns
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: 16
+                anchors.bottomMargin: 12
                 spacing: 10
                 ActionButton {
                     id: actionPlay
-                    title: "游玩"
+                    title: "开始"
                     icon: "play"
                     focus: true
                     height: 40
@@ -237,7 +265,8 @@ Item {
                 height: 210
                 width: 280
                 anchors.right: parent.right
-                anchors.top: parent.top                 
+                anchors.top: parent.top
+                anchors.topMargin: 6
                 screenshot: gameScreenshot
                 video: gameVideo
                 active: gameDetail.active
@@ -260,7 +289,7 @@ Item {
             anchors.right: parent.right
             //height: 100
             visible: introDescription.length > 0 
-            height: 127
+            height: 150
 
             // Rectangle {
             //     anchors.fill: parent
@@ -281,6 +310,7 @@ Item {
             }
 
             Rectangle {
+                id: splitLine
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: 1
@@ -299,22 +329,50 @@ Item {
             //     opacity: 0.1
             // }
 
-            Text {
-                text: introDescription
-                anchors.top: parent.top
-                anchors.topMargin: 18
-                anchors.leftMargin: parent.left
-                anchors.rightMargin: parent.right
-                wrapMode: Text.WordWrap
-                //color: parent.activeFocus ? "#50000000" : textColor
-                color: textColor
-                font.pixelSize: 16
-                font.letterSpacing: 0.4
-//                font.bold: true
-                lineHeight: 1.2
-                elide: Text.ElideRight
+//            Text {
+//                text: introDescription
+//                anchors.top: parent.top
+//                anchors.topMargin: 18
+//                anchors.leftMargin: parent.left
+//                anchors.rightMargin: parent.right
+//                wrapMode: Text.WordWrap
+//                //color: parent.activeFocus ? "#50000000" : textColor
+//                color: textColor
+//                font.pixelSize: 16
+//                font.letterSpacing: 0.4
+////                font.bold: true
+//                lineHeight: 1.2
+//                elide: Text.ElideRight
+//                width: parent.width
+//                maximumLineCount: 4
+//            }
+
+            //Description
+            Item {
                 width: parent.width
-                maximumLineCount: 4
+                height: gameDetailText.height - 40
+                anchors {
+                    top: splitLine.bottom
+                    topMargin: 16
+                }
+
+                PegasusUtils.AutoScroll {
+                    anchors.fill: parent
+                    Text {
+                        id: txt_game_description
+                        width: parent.width
+                        text: introDescription
+                        font {
+                            weight: Font.Light
+                            pixelSize: 18
+                            letterSpacing: 0.4
+                        }
+                        wrapMode: Text.WordWrap
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignJustify
+                        color: textColor
+                    }
+                }
             }
 
             Rectangle {
@@ -326,14 +384,14 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 2
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: -6
+                anchors.bottomMargin: 0
                 radius: 4
 
                 Text {
                     font.pixelSize: 13
 //                    font.letterSpacing: -0.1
 //                    font.bold: true
-                    text: "更多"
+                    text: "全文"
                     color: parent.parent.activeFocus ? "white" : systemColor
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter

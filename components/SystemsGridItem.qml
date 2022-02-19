@@ -70,8 +70,8 @@ Item {
         }
         asynchronous: true
         visible: source != ""
-        source:  "../assets/images/logos-s/"+modelData.shortName+".png" || ""
-//        sourceSize { width: 256; height: 256 }
+        source:  "../assets/images/devices/"+modelData.shortName+".png" || ""
+        sourceSize { width: 128; height: 128 }
         fillMode: Image.PreserveAspectFit
         smooth: true
     }
