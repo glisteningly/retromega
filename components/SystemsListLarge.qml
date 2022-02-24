@@ -297,7 +297,7 @@ ListView {
                 }
                 
                 Text {
-                    text: modelData.games.count + " 游戏"
+                    text: modelData.games.count + " " + dataText[lang].global_games
                     font.pixelSize: 18
                     font.letterSpacing: -0.3
 //                    font.bold: true

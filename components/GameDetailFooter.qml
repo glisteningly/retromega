@@ -33,7 +33,7 @@ Item {
             
         ButtonLegend {
             id: button_legend_start
-            title: "选择"
+            title: curDataText.games_select
             key: "A"
             width: 55
             anchors.left: parent.left
@@ -43,11 +43,11 @@ Item {
 
         ButtonLegend {
             id: button_legend_back
-            title: "返回"
+            title: curDataText.global_back
             key: "B"
             width: 55
             anchors.left: button_legend_start.right
-            anchors.leftMargin: 24
+            anchors.leftMargin: 32
             anchors.verticalCenter: parent.verticalCenter
         }
 

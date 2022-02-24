@@ -34,8 +34,11 @@ Item {
 	        	 id: legend_title
 	             text: title
 	             color: lightText ? "#70ffffff" : theme.text                      
-                 font.pixelSize: 18
-                 font.letterSpacing: 1
+                 font {
+                     pixelSize: 18
+//                     letterSpacing: 1
+                     family: systemSubitleFont.name
+                 }
 //	             font.bold: true
 	             anchors.verticalCenter: parent.verticalCenter
 	             anchors.left: parent.right

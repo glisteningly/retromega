@@ -24,7 +24,7 @@ Item {
         if (gamesItems.count > 0) {
             return (currentIndex + 1) + " / " + gamesItems.count
         } else {
-            return "No Games"
+            return curDataText.global_no_games
         }
     }
 
@@ -33,41 +33,41 @@ Item {
     }
 
     property var headerTitle: {
-        return (collectionShowAllItems) ? "All " + currentCollection.name : currentCollection.name
+        return (collectionShowAllItems) ? curDataText.global_all + " " + currentCollection.name : currentCollection.name
     }
     
 //    property bool showIndex: false
     property var collectionSortTitle: {
-        var title = "标题"
+        var title = curDataText.global_title
         switch (collectionSortMode) {
             case "title":
-                title = "按标题"
+                title = curDataText.sort_title
                 break
             case "lastPlayed":
-                title = "按最后游玩"
+                title = curDataText.sort_last_played
                 break
             case "rating":
-                title = "按评分"
+                title = curDataText.sort_rating
                 break
             case "favorites":
-                title = "按收藏"
+                title = curDataText.sort_favorites_only
                 break           
             case "release":
-                title = "按发售时间"
+                title = curDataText.sort_release_year
                 break
             case "playCount":
-                title = "按游戏次数"
+                title = curDataText.sort_play_count
                 break                      
             case "playTime":
-                title = "按游戏时间"
+                title = curDataText.sort_play_time
                 break                       
             default:
-                title = "按"
+                title = curDataText.sort_by
                 break
         }
 
         if (collectionFilterMode == "favorites" && !collectionShowAllItems) {
-            return "收藏, " + title
+            return curDataText.global_favorite + ", " + title
         }  else {
             return title
         }
@@ -210,7 +210,7 @@ Item {
 
             ButtonLegend {
                 id: button_legend_start
-                title: "开始"
+                title: curDataText.games_play
                 key: "A"
                 width: 55
                 anchors.left: parent.left
@@ -220,33 +220,33 @@ Item {
 
             ButtonLegend {
                 id: button_legend_back
-                title: "返回"
+                title: curDataText.global_back
                 key: "B"
                 width: 55
                 anchors.left: button_legend_start.right
-                anchors.leftMargin: 24
+                anchors.leftMargin: 32
                 anchors.verticalCenter: parent.verticalCenter
             }
 
             ButtonLegend {
                 id: button_legend_details
-                title: '详情'
+                title: curDataText.games_info
                 key: "X"
-                width: 75
+                width: 55
                 visible: true//collectionFilterMode == "all" || collectionShowAllItems
                 anchors.left: button_legend_back.right
-                anchors.leftMargin: 24
+                anchors.leftMargin: 32
                 anchors.verticalCenter: parent.verticalCenter
             }
 
             ButtonLegendSquare {
 //              visible: currentHomeIndex == 0
               id: button_legend_sel
-              title: '视图'
+              title: curDataText.global_view
               key: "SEL"
               width: 55
               anchors.left: button_legend_details.right
-              anchors.leftMargin: 6
+              anchors.leftMargin: 32
               anchors.verticalCenter: parent.verticalCenter
             }
 

@@ -14,7 +14,7 @@ Item {
             if (lightText) {
                 return "#ffffff"
             } else {
-                return "#000000"
+                return "#333333"
             }
         }
         if (lightText) {
@@ -56,9 +56,12 @@ Item {
 //        anchors.top: parent.top
         anchors.centerIn: parent
         color: textColor
-        font.pixelSize: 18
-        font.letterSpacing: 3
-//        font.bold: true
+        font {
+            family: boldTitleFont
+            pixelSize: 20
+            letterSpacing: boldTitleLetterSpacing
+//        bold: true
+        }
     }
 
 //    Rectangle{

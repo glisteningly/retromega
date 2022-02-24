@@ -13,6 +13,12 @@ FocusScope {
     FontLoader { id: systemSubitleFont; source: "assets/fonts/Acre.otf" }
     FontLoader { id: collectionTitleFont; source: "assets/fonts/AlibabaPuHuiTi-2-105-Heavy.otf" }
 
+    property var boldTitleFont: { lang === 'cn'? collectionTitleFont.name : systemTitleFont.name }
+    property var boldTitleLetterSpacing: { lang === 'cn'? 3 : 0 }
+
+    property string lang: 'cn'
+    property var dataText : Const.dataText
+    property var curDataText: { dataText[lang] }
 
     property var theme : Const.theme
     property var systemColors: Const.systemColors
@@ -30,8 +36,7 @@ FocusScope {
     }
 
     Component.onCompleted: { 
-//        console.log('aaaaaaaaaaaa')
-//        console.log(Pinyin.getFirstPY('三国'))
+        lang = api.memory.get('lang') ?? 'cn'
         currentHomeIndex = api.memory.get('homeIndex') ?? 0
         currentSystemIndex = api.memory.get('currentSystemIndex') ?? 0
         currentCollectionIndex = api.memory.get('currentCollectionIndex') ?? 0

@@ -40,7 +40,7 @@ Item {
 
     property var selectSeeAll : {
         if (showSeeAll) {
-            if (focusSeeAll && !showIndex) {
+            if (focusSeeAll) {
                 return true
             } else {
                 if (items.count === 1 && !items.get(0).modelData) {
@@ -313,10 +313,10 @@ Item {
                   Item {
                       id: see_all
                       width: parent.width
-                      height: 38
+                      height: 42
                       visible: isLastRow(index) && showSeeAll
                       anchors.top: parent.top
-                      anchors.topMargin: 48
+                      anchors.topMargin: 42
                       Rectangle {
                           width: parent.width
                           anchors.top: parent.top

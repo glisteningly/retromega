@@ -64,7 +64,7 @@ Item {
  
     ButtonLegend {
       id: button_legend_a
-      title: "选择"
+      title: curDataText.global_select
       key: "A"
       width: 55
       lightText: lightActive
@@ -76,24 +76,24 @@ Item {
 
     ButtonLegend {
       id: button_legend_b
-      title: "菜单"
+      title: curDataText.global_menu
       key: "B"
       width: 55
       lightText: lightActive
       anchors.left: button_legend_a.right
-      anchors.leftMargin: 24
+      anchors.leftMargin: 32
       anchors.verticalCenter: parent.verticalCenter
     }
 
     ButtonLegendSquare {
 //      visible: currentHomeIndex !== 1
       id: button_legend_sel
-      title: "视图"
+      title: curDataText.global_view
       key: "SEL"
       width: 55
       lightText: lightActive
       anchors.left: button_legend_b.right
-      anchors.leftMargin: 24
+      anchors.leftMargin: 32
       anchors.verticalCenter: parent.verticalCenter
     }
 

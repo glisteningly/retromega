@@ -132,7 +132,7 @@ Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
 //                maximumLineCount: 2
-                text: game ? game.title : "No Game"
+                text: game ? game.title : curDataText.global_no_games
                 lineHeight: 1.1
                 color: textColor
                 font.pixelSize: 22
@@ -219,7 +219,7 @@ Item {
                 spacing: 10
                 ActionButton {
                     id: actionPlay
-                    title: "开始"
+                    title: curDataText.games_play
                     icon: "play"
                     focus: true
                     height: 40
@@ -240,7 +240,7 @@ Item {
                     textColor: gameDetail.textColor
                     KeyNavigation.left: actionPlay  
                     KeyNavigation.down: gameDetailText   
-                    title: gameIsFavorite ? "取消收藏" : "收藏"
+                    title: gameIsFavorite ? curDataText.games_favorite_cancel : curDataText.games_favorite
                     icon: gameIsFavorite ? "favorite-on" : "favorite-off"
                     focus: false
                     height: 40
@@ -391,7 +391,7 @@ Item {
                     font.pixelSize: 13
 //                    font.letterSpacing: -0.1
 //                    font.bold: true
-                    text: "全文"
+                    text: curDataText.games_more
                     color: parent.parent.activeFocus ? "white" : systemColor
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter

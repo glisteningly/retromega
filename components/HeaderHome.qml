@@ -116,17 +116,17 @@ Rectangle {
 
     transitions: Transition {
             // smoothly reanchor myRect and move into new position
-            AnchorAnimation { duration: 200 }
+            AnchorAnimation { duration: 200; easing.type: Easing.InOutCubic }
     }
 
     HeaderLink {
         id: title_systems
-        title: "机型"
+        title: curDataText.home_system
         index: 0
         anchors.left: tabLeft.right
         anchors.top: parent.top
 //        anchors.topMargin: 6
-        anchors.leftMargin: 16
+        anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus
         KeyNavigation.right: title_collection
@@ -134,7 +134,7 @@ Rectangle {
 
     HeaderLink {
         id: title_collection
-        title: "合集"
+        title: curDataText.home_collection
         index: 1
         anchors.left: title_systems.right
         anchors.top: parent.top
@@ -147,7 +147,7 @@ Rectangle {
 
     HeaderLink {
         id: title_favorites
-        title: "收藏"
+        title: curDataText.home_favorite
         index: 2
         anchors.left: title_collection.right
         anchors.top: parent.top
@@ -160,7 +160,7 @@ Rectangle {
 
     HeaderLink {
         id: title_recent
-        title: "最近"
+        title: curDataText.home_recent
         index: 3
         anchors.left: title_favorites.right
         anchors.top: parent.top
@@ -180,7 +180,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 11
         anchors.left: title_recent.right
-        anchors.leftMargin: 16
+        anchors.leftMargin: 24
         border {
             color: "#888"
             width: 1
