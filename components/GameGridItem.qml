@@ -17,6 +17,7 @@
 
 import QtQuick 2.2
 import QtGraphicalEffects 1.12
+import "qrc:/qmlutils" as PegasusUtils
 
 
 Item {
@@ -145,6 +146,7 @@ Item {
     }
 
     Text {
+        visible: !selected
         height: 20
         anchors {
             left: parent.left
@@ -163,6 +165,31 @@ Item {
         font {
             pixelSize: 14
             letterSpacing: 0.5
+        }
+    }
+
+    PegasusUtils.AutoScroll {
+        visible: selected
+        height: 20
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            leftMargin: 6
+            rightMargin: 6
+            bottomMargin: 5
+        }
+        Text {
+            width: parent.width
+            text: modelData.title
+            font {
+                pixelSize: 14
+                letterSpacing: 0.5
+            }
+            wrapMode: Text.WordWrap
+            elide: Text.ElideMiddle
+            horizontalAlignment: Text.AlignHCenter
+            color: "white"
         }
     }
 
