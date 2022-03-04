@@ -1,4 +1,4 @@
-# Retro Fans v0.1
+# Retro Fans v1.0
 [Pegasus](https://pegasus-frontend.org) theme for the Retroid Pocket 2/2+.
 forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to djfumberger
 
@@ -39,7 +39,7 @@ forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to dj
 
 ## 版本历史
 
-### v0.1
+### v1.0
 
 初测发布
 
