@@ -48,43 +48,43 @@ forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to dj
 [![CC-BY-NC-SA](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## 截图
-####机型网格视图  
+#### 机型网格视图
 <img src="screenshots/Screenshot_20220304-213422.png" width="640">  
 
-####合集网格视图  
+#### 合集网格视图
 <img src="screenshots/Screenshot_20220304-213447.png" width="640">  
 
-####收藏  
+#### 收藏
 <img src="screenshots/Screenshot_20220304-213513.png" width="640">  
 
-####最近游玩  
+#### 最近游玩
 <img src="screenshots/Screenshot_20220304-213621.png" width="640">  
 
-####机型卡片视图  
+#### 机型卡片视图
 <img src="screenshots/Screenshot_20220304-213655.png" width="640">  
 <img src="screenshots/Screenshot_20220304-213709.png" width="640">  
 <img src="screenshots/Screenshot_20220304-214205.png" width="640">  
 <img src="screenshots/Screenshot_20220304-213726.png" width="640">  
 
-####合集卡片视图  
+#### 合集卡片视图
 <img src="screenshots/Screenshot_20220304-213749.png" width="640">  
 
-####游戏网格视图  
+#### 游戏网格视图
 <img src="screenshots/Screenshot_20220304-213818.png" width="640">  
 
-####游戏列表视图  
+#### 游戏列表视图
 <img src="screenshots/Screenshot_20220304-213841.png" width="640">  
 
-####游戏详情页  
+#### 游戏详情页
 <img src="screenshots/Screenshot_20220304-213934.png" width="640">  
 
-####游戏列表排序  
+#### 游戏列表排序
 <img src="screenshots/Screenshot_20220304-213954.png" width="640">  
 
-####游戏详情页  
+#### 游戏详情页
 <img src="screenshots/Screenshot_20220304-214100.png" width="640">  
 
-#### 游戏介绍全文  
+#### 游戏介绍全文
 <img src="screenshots/Screenshot_20220304-214110.png" width="640">  
 
 
