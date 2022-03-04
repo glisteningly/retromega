@@ -28,9 +28,9 @@ forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to dj
 * 列表可以使用方向左右键翻页
 
 ## 机型、合集的添加方法
-### 机型：
-
-### 合集：
+### 机型：(目前请参考pegasus-frontend的官方文档)
+### 合集：(目前请参考pegasus-frontend的官方文档)
+pegasus-frontend 官方文档：[查看](https://pegasus-frontend.org/docs/user-guide/meta-files/)
 
 ## 升级计划
 * 适配高分辨率屏幕.
