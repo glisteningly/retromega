@@ -11,7 +11,7 @@ forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to dj
 
 ## 安装
 
-[下载](https://github.com/djfumberger/retromega/archive/main.zip) 解压到pegasus前端的主题(theme)文件夹中 [theme directory](http://pegasus-frontend.org/docs/user-guide/installing-themes). 在天马前端的设置界面中选择.
+[下载](https://github.com/glisteningly/retromega/releases/download/v1.0.0/RetroFans.zip) 解压到pegasus前端的主题(theme)文件夹中 [theme directory](http://pegasus-frontend.org/docs/user-guide/installing-themes). 在天马前端的设置界面中选择.
 
 推荐配合“挖坑者联盟”整合的游戏合集使用, 已经适配了绝大部分机型的图片
 
