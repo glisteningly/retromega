@@ -21,6 +21,7 @@ forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to dj
 * 机型、合集可以切换网格视图/海报视图(原Retro Mega).
 * 游戏列表页面可以切换网格视图/列表视图(原Retro Mega).
 * 新增的合集展示功能，方便把一个系列的游戏放在一起，打造自己喜爱系列的专辑.
+* 支持英文、中文(目前需要手动修改配置)
 
 ## 使用说明
 * 基本操作可参见主题下方的按键提示
@@ -33,7 +34,7 @@ forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to dj
 
 ## 升级计划
 * 适配高分辨率屏幕.
-* 多语言支持.
+* 多语言支持界面切换.
 * 增加更多机型、合集的图片及颜色定义.
 
 ## 版本历史
@@ -46,23 +47,44 @@ forked from [Retro Mega](https://github.com/djfumberger/retromega), thanks to dj
 
 [![CC-BY-NC-SA](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-## Screenshots
+## 截图
+####机型网格视图
+<img src="screenshots/Screenshot_20220304-213422.png" width="640">
 
-<img src="screenshots/device/homescreen-psx.png" >
-<img src="screenshots/device/games-list.png" >
-<img src="screenshots/device/games-detail.png" >
-<img src="screenshots/device/games-sort-options.png" >
+####合集网格视图
+<img src="screenshots/Screenshot_20220304-213447.png" width="640">
 
-## System Screenshots
+####收藏
+<img src="screenshots/Screenshot_20220304-213513.png" width="640">
 
-<img src="screenshots/system-dreamcast.png" width="640">
-<img src="screenshots/system-gameboy.png" width="640">
-<img src="screenshots/system-gbc.png" width="640">
-<img src="screenshots/system-mastersystem.png" width="640">
-<img src="screenshots/system-n64.png"  width="640">
-<img src="screenshots/system-neogeo.png"  width="640">
-<img src="screenshots/system-ngc.png" width="640">
-<img src="screenshots/system-ngp.png"  width="640">
-<img src="screenshots/system-psx.png"  width="640">
-<img src="screenshots/system-segacd.png"  width="640">
-<img src="screenshots/system-snes.png"  width="640">
+####最近游玩
+<img src="screenshots/Screenshot_20220304-213621.png" width="640">
+
+####机型卡片视图
+<img src="screenshots/Screenshot_20220304-213655.png" width="640">
+<img src="screenshots/Screenshot_20220304-213709.png" width="640">
+<img src="screenshots/Screenshot_20220304-214205.png" width="640">
+<img src="screenshots/Screenshot_20220304-213726.png" width="640">
+
+####合集卡片视图
+<img src="screenshots/Screenshot_20220304-213749.png" width="640">
+
+####游戏网格视图
+<img src="screenshots/Screenshot_20220304-213818.png" width="640">
+
+####游戏列表视图
+<img src="screenshots/Screenshot_20220304-213841.png" width="640">
+
+####游戏详情页
+<img src="screenshots/Screenshot_20220304-213934.png" width="640">
+
+####游戏列表排序
+<img src="screenshots/Screenshot_20220304-213954.png" width="640">
+
+####游戏详情页
+<img src="screenshots/Screenshot_20220304-214100.png" width="640">
+
+#### 游戏介绍全文
+<img src="screenshots/Screenshot_20220304-214110.png" width="640">
+
+
