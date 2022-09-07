@@ -11,7 +11,7 @@ GridView {
     property int columnCount: {
         return theme.gridColumnCount;
     }
-    property real cellHeightRatio: 0.8
+    property real cellHeightRatio: 0.67
 
     model: allSystems
     currentIndex: currentSystemIndex

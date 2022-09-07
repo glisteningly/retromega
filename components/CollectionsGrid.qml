@@ -9,7 +9,7 @@ GridView {
         return (currentIndex + 1) + " / " + allCollections.count
     }
     property int columnCount: {
-        return 3
+        return 5
 //        return theme.gridColumnCount;
     }
     readonly property int maxRecalcs: 5

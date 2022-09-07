@@ -39,6 +39,8 @@ Item {
     property alias imageWidth: imgGridItem.paintedWidth
     property alias imageHeight: imgGridItem.paintedHeight
 
+    property int titlefontSize: 20
+
     signal clicked()
     signal doubleClicked()
     signal imageLoaded(int imgWidth, int imgHeight)
@@ -84,7 +86,7 @@ Item {
             leftMargin: 6
             rightMargin: 6
             topMargin: 6
-            bottomMargin: 24
+            bottomMargin: vpx(30)
         }
         asynchronous: true
         visible: source != ""
@@ -147,14 +149,14 @@ Item {
 
     Text {
         visible: !selected
-        height: 20
+        height: titlefontSize + vpx(6)
         anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
             leftMargin: 6
             rightMargin: 6
-            bottomMargin: 5
+            bottomMargin: vpx(4)
         }
         text: modelData.title
         wrapMode: Text.NoWrap
@@ -163,27 +165,27 @@ Item {
         elide: Text.ElideMiddle
         maximumLineCount:1
         font {
-            pixelSize: 14
+            pixelSize: titlefontSize
             letterSpacing: 0.5
         }
     }
 
     PegasusUtils.AutoScroll {
         visible: selected
-        height: 20
+        height: titlefontSize + vpx(10)
         anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
             leftMargin: 6
             rightMargin: 6
-            bottomMargin: 5
+            bottomMargin: vpx(4)
         }
         Text {
             width: parent.width
             text: modelData.title
             font {
-                pixelSize: 14
+                pixelSize: titlefontSize
                 letterSpacing: 0.5
             }
             wrapMode: Text.WordWrap

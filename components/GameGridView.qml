@@ -134,8 +134,8 @@ Item {
             property real columnCount: {
                 //                    if (cellHeightRatio > 1.2) return 6;
                 if (cellHeightRatio < 0.8)
-                    return 4
-                return 5
+                    return 5
+                return 6
             }
 
             model: parent.visible ? items : []
@@ -168,7 +168,7 @@ Item {
             }
 
             cellWidth: width / columnCount
-            cellHeight: cellWidth * cellHeightRatio + 20
+            cellHeight: cellWidth * cellHeightRatio + vpx(30)
 
             displayMarginBeginning: anchors.topMargin
 

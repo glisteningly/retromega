@@ -42,9 +42,9 @@ Item {
         color:  systemColors[modelData.shortName] ?? "#000000"
         opacity: 0.5
         anchors.fill: parent
-        anchors.margins: 2
+        anchors.margins: 6
 //            scale: 1.1
-        radius: vpx(12)
+        radius: vpx(8)
 //            z: 2
     }
 
@@ -64,9 +64,9 @@ Item {
         anchors {
             fill: parent
 //            margins: vpx(5)
-            leftMargin: 5
-            rightMargin: 5
-            bottomMargin: 10
+            leftMargin: 12
+            rightMargin: 12
+            bottomMargin: 20
         }
         asynchronous: true
         visible: source != ""
@@ -98,7 +98,7 @@ Item {
 //        anchors.centerIn: parent.bottom
 //        anchors.leftMargin: 8
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 5
+        anchors.bottomMargin: 7
         font.letterSpacing: 0.2
 
 
@@ -107,7 +107,7 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         color: "#eee"
         font {
-            pixelSize: vpx(32)
+            pixelSize: vpx(24)
             family: systemTitleFont.name
         }
     }

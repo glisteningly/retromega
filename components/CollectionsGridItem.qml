@@ -43,9 +43,9 @@ Item {
         color:  systemColors[modelData.shortName] ?? "#000000"
         opacity: 0.6
         anchors.fill: parent
-        anchors.margins: 2
+        anchors.margins: 6
 //            scale: 1.1
-        radius: vpx(12)
+        radius: vpx(8)
 //            z: 2
     }
 
@@ -65,9 +65,9 @@ Item {
         anchors {
             fill: parent
 //            margins: vpx(5)
-            leftMargin: 20
-            rightMargin: 20
-            bottomMargin: 10
+            leftMargin: parent.width * 0.15
+            rightMargin: parent.width * 0.15
+            bottomMargin: parent.height * 0.1
         }
         asynchronous: true
         visible: source != ""
@@ -99,14 +99,14 @@ Item {
 //        anchors.centerIn: parent.bottom
 //        anchors.leftMargin: 8
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 5
+        anchors.bottomMargin: parent.height * 0.05
         font.letterSpacing: 1.5
         text: collection.name
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
         color: ColorDetector.isColorDarkOrLight(systemColors[modelData.shortName]) === 'dark'? "#eee":"#333"
         font {
-            pixelSize: vpx(28)
+            pixelSize: vpx(20)
 //            family: systemTitleFont.name
         }
     }
