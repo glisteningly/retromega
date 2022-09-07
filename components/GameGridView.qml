@@ -168,7 +168,7 @@ Item {
             }
 
             cellWidth: width / columnCount
-            cellHeight: cellWidth * cellHeightRatio + vpx(30)
+            cellHeight: cellWidth * cellHeightRatio
 
             displayMarginBeginning: anchors.topMargin
 

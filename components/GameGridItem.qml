@@ -52,17 +52,38 @@ Item {
 
     Rectangle {
         id: gridItemBg
-        color: highlightColor
+//        color: highlightColor
+        color: "white"
         visible: selected
 //        color:  systemColors[modelData.shortName] ?? "#000000"
 //        opacity: headerFocused ? 0.1 : 0.3
-//        opacity: 0.8
+        opacity: 1
         anchors.fill: parent
-        anchors.margins: 2
+        anchors.margins: -1
 //            scale: 1.1
-        radius: 4
+//        radius: 4
 //        clip: true
 //            z: 2
+//        SequentialAnimation on opacity {
+//                loops: Animation.Infinite
+//                OpacityAnimator  {from: 1; to: 0.2;duration: 1000 }
+//                OpacityAnimator  {from: 0.2; to: 1;duration: 1000 }
+//            }
+
+        SequentialAnimation on color {
+            loops: Animation.Infinite
+
+            ColorAnimation {
+                from: "white"
+                to: "#30000000"
+                duration: 400
+            }
+            ColorAnimation {
+                from: "#30000000"
+                to: "white"
+                duration: 400
+            }
+        }
     }
 
     DropShadow {
@@ -83,15 +104,12 @@ Item {
             right: parent.right
             top: parent.top
             bottom: parent.bottom
-            leftMargin: 6
-            rightMargin: 6
-            topMargin: 6
-            bottomMargin: vpx(30)
+            margins: 1
         }
         asynchronous: true
         visible: source != ""
         source:  modelData.assets.boxFront || ""
-        sourceSize { width: 160; height: 160 }
+        sourceSize { width: 240; height: 240 }
         fillMode: Image.PreserveAspectFit
         smooth: true
 //        property bool adapt: true
@@ -147,53 +165,53 @@ Item {
         radius: 4
     }
 
-    Text {
-        visible: !selected
-        height: titlefontSize + vpx(6)
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            leftMargin: 6
-            rightMargin: 6
-            bottomMargin: vpx(4)
-        }
-        text: modelData.title
-        wrapMode: Text.NoWrap
-        horizontalAlignment: Text.AlignHCenter
-        color: selected ? "white" : '#90FFFFFF'
-        elide: Text.ElideMiddle
-        maximumLineCount:1
-        font {
-            pixelSize: titlefontSize
-            letterSpacing: 0.5
-        }
-    }
+//    Text {
+//        visible: !selected
+//        height: titlefontSize + vpx(6)
+//        anchors {
+//            left: parent.left
+//            right: parent.right
+//            bottom: parent.bottom
+//            leftMargin: 6
+//            rightMargin: 6
+//            bottomMargin: vpx(4)
+//        }
+//        text: modelData.title
+//        wrapMode: Text.NoWrap
+//        horizontalAlignment: Text.AlignHCenter
+//        color: selected ? "white" : '#90FFFFFF'
+//        elide: Text.ElideMiddle
+//        maximumLineCount:1
+//        font {
+//            pixelSize: titlefontSize
+//            letterSpacing: 0.5
+//        }
+//    }
 
-    PegasusUtils.AutoScroll {
-        visible: selected
-        height: titlefontSize + vpx(10)
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            leftMargin: 6
-            rightMargin: 6
-            bottomMargin: vpx(4)
-        }
-        Text {
-            width: parent.width
-            text: modelData.title
-            font {
-                pixelSize: titlefontSize
-                letterSpacing: 0.5
-            }
-            wrapMode: Text.WordWrap
-            elide: Text.ElideMiddle
-            horizontalAlignment: Text.AlignHCenter
-            color: "white"
-        }
-    }
+//    PegasusUtils.AutoScroll {
+//        visible: selected
+//        height: titlefontSize + vpx(10)
+//        anchors {
+//            left: parent.left
+//            right: parent.right
+//            bottom: parent.bottom
+//            leftMargin: 6
+//            rightMargin: 6
+//            bottomMargin: vpx(4)
+//        }
+//        Text {
+//            width: parent.width
+//            text: modelData.title
+//            font {
+//                pixelSize: titlefontSize
+//                letterSpacing: 0.5
+//            }
+//            wrapMode: Text.WordWrap
+//            elide: Text.ElideMiddle
+//            horizontalAlignment: Text.AlignHCenter
+//            color: "white"
+//        }
+//    }
 
     Image {
         width: 28
