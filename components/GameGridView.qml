@@ -129,7 +129,7 @@ Item {
             focus: listContent.activeFocus
             readonly property int maxRecalcs: 5
             property int currentRecalcs: 0
-            property real cellHeightRatio: 1.33
+            property real cellHeightRatio: 1.39
 
             property real columnCount: {
                 //                    if (cellHeightRatio > 1.2) return 6;
@@ -155,13 +155,13 @@ Item {
 
             function cells_need_recalc() {
                 currentRecalcs = 0
-                cellHeightRatio = 1.33
+                cellHeightRatio = 1.39
             }
 
             function update_cell_height_ratio(img_w, img_h) {
                 if (currentHomeIndex === 0) {
                     // 限制图片的最大宽高比
-                    cellHeightRatio = Math.min(Math.max(0.67,img_h / img_w), 1.67)
+                    cellHeightRatio = Math.min(Math.max(0.67,img_h / img_w), 1.8)
                 } else {
                     return 1.0
                 }

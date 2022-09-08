@@ -71,7 +71,7 @@ const theme = {
   "text_dark": "#DDD",
   "title_dark": "#DDD",
 //  "background_grid": "#283593",
-  "background_grid": "#333",
+  "background_grid": "#222",
   "gridColumnCount": 5,
   "gridLargeColumnCount": 3,
   "primaryColor": "#1565C0"

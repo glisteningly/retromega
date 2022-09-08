@@ -53,12 +53,12 @@ Item {
     Rectangle {
         id: gridItemBg
 //        color: highlightColor
-        color: "transparent"
+        color: "#333"
         visible: selected
 //        color:  systemColors[modelData.shortName] ?? "#000000"
 //        opacity: headerFocused ? 0.1 : 0.3
         anchors.fill: parent
-        anchors.margins: -1.5
+//        anchors.margins: 0
 
 //        opacity: 1
 //        SequentialAnimation on color {
@@ -77,7 +77,7 @@ Item {
 //        }
 
         border.color: "white"
-        border.width: 1
+        border.width: 2
         SequentialAnimation on border.color {
             loops: Animation.Infinite
 
@@ -112,16 +112,17 @@ Item {
             right: parent.right
             top: parent.top
             bottom: parent.bottom
-            topMargin: 0
-            rightMargin: 10
-            bottomMargin: 0
-            leftMargin: 10
+            margins: 2
+//            topMargin: 0
+//            rightMargin: 10
+//            bottomMargin: 0
+//            leftMargin: 10
         }
         asynchronous: true
         visible: source != ""
         source:  modelData.assets.boxFront || ""
         sourceSize { width: 240; height: 240 }
-        fillMode: Image.PreserveAspectCrop
+        fillMode: Image.PreserveAspectFit
         smooth: true
 //        property bool adapt: true
 
@@ -164,16 +165,19 @@ Item {
         visible: !imgGridItem.visible
         color:  "#20FFFFFF"
         anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-            leftMargin: 6
-            rightMargin: 6
-            topMargin: 6
-            bottomMargin: 24
+            fill: parent
+            margins: 2
+//            left: parent.left
+//            right: parent.right
+//            top: parent.top
+//            bottom: parent.bottom
+
+//            leftMargin: 6
+//            rightMargin: 6
+//            topMargin: 6
+//            bottomMargin: 24
         }
-        radius: 4
+//        radius: 4
     }
 
 //    Text {
@@ -199,30 +203,39 @@ Item {
 //        }
 //    }
 
-//    PegasusUtils.AutoScroll {
-//        visible: selected
-//        height: titlefontSize + vpx(10)
-//        anchors {
-//            left: parent.left
-//            right: parent.right
-//            bottom: parent.bottom
-//            leftMargin: 6
-//            rightMargin: 6
-//            bottomMargin: vpx(4)
-//        }
-//        Text {
-//            width: parent.width
-//            text: modelData.title
-//            font {
-//                pixelSize: titlefontSize
-//                letterSpacing: 0.5
-//            }
-//            wrapMode: Text.WordWrap
-//            elide: Text.ElideMiddle
-//            horizontalAlignment: Text.AlignHCenter
-//            color: "white"
-//        }
-//    }
+    PegasusUtils.AutoScroll {
+        visible: selected
+        height: titlefontSize + vpx(14)
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+//            margins: 0
+            leftMargin: 2
+            rightMargin: 2
+            bottomMargin: -2.5
+        }
+        Rectangle {
+            color:  "#90000000"
+            anchors {
+                fill: parent
+
+            }
+        }
+
+        Text {
+            width: parent.width
+            text: modelData.title
+            font {
+                pixelSize: titlefontSize
+                letterSpacing: 0.5
+            }
+            wrapMode: Text.WordWrap
+            elide: Text.ElideMiddle
+            horizontalAlignment: Text.AlignHCenter
+            color: "white"
+        }
+    }
 
     Image {
         width: 28
