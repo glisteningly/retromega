@@ -90,8 +90,8 @@ Item {
         onShow()
     }
 
-    width: layoutScreen.width                
-    height: layoutScreen.height                
+    width: parent.width
+    height: parent.height
 
     Keys.onPressed: {           
 
@@ -270,7 +270,7 @@ Item {
             id: header
             color: "transparent"
             width: parent.width
-            height: 40
+            height: vpx(50)
             anchors.left: parent.left
             anchors.leftMargin: 0
             anchors.rightMargin: 0
@@ -278,11 +278,11 @@ Item {
             clip:true
 
             Rectangle {
-                anchors.leftMargin: 22
-                anchors.rightMargin: 22
+//                anchors.leftMargin: 22
+//                anchors.rightMargin: 22
                 anchors.left: parent.left
                 anchors.right: parent.right
-                color: "#e3e3e3"
+                color: "#222"
                 anchors.bottom: parent.bottom
                 height: 1
             }
@@ -290,9 +290,9 @@ Item {
             Text{
                 text: headerTitle
                 anchors.left: parent.left
-                anchors.leftMargin: 32
+                anchors.leftMargin: 18
                 color: systemColor//theme.title
-                font.pixelSize: 22
+                font.pixelSize: vpx(24)
                 font.letterSpacing: 0.3
 //                font.bold: true
                 font.family: isSystemPage ? systemTitleFont.name : collectionTitleFont.name
@@ -312,7 +312,7 @@ Item {
 //                anchors.topMargin: 6
                 anchors.rightMargin: 8
                 color: "#9B9B9B"
-                font.pixelSize: 18
+                font.pixelSize: vpx(22)
                 font.letterSpacing: 0.3
 //                font.bold: true
             }   
@@ -332,12 +332,12 @@ Item {
             // }   
             Rectangle{
                 id: legend
-                height:22
-                width:22
-                color:"#444"
-                radius:12
+                height:vpx(26)
+                width:vpx(26)
+                color:"#666"
+                radius:vpx(14)
                 anchors.top: parent.top
-                anchors.topMargin: 10
+                anchors.topMargin: vpx(12)
                 //anchors.right: header_time.left  
                 anchors.right: parent.right
                 anchors.leftMargin: 0
@@ -365,7 +365,9 @@ Item {
             width: parent.width
             height: parent.height
             anchors.top: header.bottom
-            anchors.bottom: footer.top
+//            anchors.bottom: footer.top
+            anchors.bottom: parent.bottom
+
 
             Loader {
                 id: gameListContainer

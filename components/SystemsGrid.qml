@@ -22,7 +22,7 @@ GridView {
     anchors.right: parent.right
     anchors.rightMargin: 12
 
-    anchors.margins: 12
+    anchors.topMargin: vpx(8)
     cacheBuffer: 10
 //    delegate: systemsDelegate
 

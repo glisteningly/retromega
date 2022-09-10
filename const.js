@@ -64,10 +64,10 @@ const dataText = {
 }
 
 const theme = {
-  "background": "#F3F3F3",
+  "background": "#333",
   "text": "#70000000",
   "title": "#444",
-  "background_dark": "#333333",
+  "background_dark": "#222",
   "text_dark": "#DDD",
   "title_dark": "#DDD",
 //  "background_grid": "#283593",

@@ -221,7 +221,7 @@ FocusScope {
 
     property var layoutHeader : {
         "width": layoutScreen.width,
-        "height": 40,
+        "height": vpx(50),
         "background": "transparent",
     }
 

@@ -84,7 +84,7 @@ Item {
         title: footerTitle
         light: (currentHomeIndex == 0 && currentPage === "HomePage")
         anchors.bottom: homepage.bottom
-        visible: true
+        visible: false
         z: (currentHomeIndex <= 1) ? 1 : 0
     }
 
@@ -97,7 +97,8 @@ Item {
             left: parent.left
             right: parent.right
             top: header.bottom
-            bottom: footer.top
+//            bottom: footer.top
+            bottom: parent.bottom
         }
 
         Rectangle {

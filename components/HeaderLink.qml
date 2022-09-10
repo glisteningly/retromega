@@ -11,18 +11,21 @@ Item {
             return "#ffffff"
         }
         if (selected) {
-            if (lightText) {
-                return "#ffffff"
-            } else {
-                return "#333333"
-            }
-        }
-        if (lightText) {
-            return "#60ffffff"            
+//            if (lightText) {
+//                return "#ffffff"
+//            } else {
+//                return "#333333"
+//            }
+            return "#ffffff"
         } else {
-            return "#60000000"
+            return "#60ffffff"
         }
-        return "#9B9B9B"
+
+//        if (lightText) {
+//            return "#60ffffff"
+//        } else {
+//            return "#60000000"
+//        }
     }
     enabled: false
     focus: true
@@ -58,7 +61,7 @@ Item {
         color: textColor
         font {
             family: boldTitleFont
-            pixelSize: 20
+            pixelSize: vpx(24)
             letterSpacing: boldTitleLetterSpacing
 //        bold: true
         }

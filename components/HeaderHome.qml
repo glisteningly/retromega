@@ -53,29 +53,36 @@ Rectangle {
              return currentHomeIndex <= 1 ?  "transparent" : theme.background
          }
     }
-    width: parent.width
+//    width: parent.width
+
     height: layoutHeader.height
-    anchors.top: parent.top      
+    anchors {
+        top: parent.top
+        left: parent.left
+        right: parent.right
+    }
 
     Rectangle{
         id: tabLeft
-        height:18
-        width:32
-        color:"#444444"
+//        height:parent.height
+        width:40
+        color:"#33000000"
         radius:2
         anchors.top: parent.top
-        anchors.topMargin: 11
+        anchors.topMargin: vpx(4)
         anchors.left: parent.left
-        anchors.leftMargin: 24
-        border {
-            color: "#888"
-            width: 1
-        }
+        anchors.leftMargin: vpx(4)
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: vpx(4)
+//        border {
+//            color: "#888"
+//            width: 1
+//        }
 
         Text{
             text: "L"
-            color:"white"
-            font.pixelSize: 12
+            color:"#55EEEEEE"
+            font.pixelSize: vpx(20)
 //            font.letterSpacing: -0.3
             font.bold: true
             anchors.verticalCenter: parent.verticalCenter
@@ -126,7 +133,7 @@ Rectangle {
         anchors.left: tabLeft.right
         anchors.top: parent.top
 //        anchors.topMargin: 6
-        anchors.leftMargin: 24
+        anchors.leftMargin: 18
         lightText: light
         KeyNavigation.down: mainFocus
         KeyNavigation.right: title_collection
@@ -173,22 +180,28 @@ Rectangle {
 
     Rectangle{
         id: tabRight
-        height:18
-        width:32
-        color:"#444444"
+        //        height:18
+        width:40
+        color:"#33000000"
         radius:2
-        anchors.top: parent.top
-        anchors.topMargin: 11
-        anchors.left: title_recent.right
-        anchors.leftMargin: 24
-        border {
-            color: "#888"
-            width: 1
+
+        anchors {
+            top: parent.top
+            topMargin: vpx(4)
+            left: title_recent.right
+            leftMargin: 18
+            bottom: parent.bottom
+            bottomMargin: vpx(4)
         }
+
+//        border {
+//            color: "#888"
+//            width: 1
+//        }
         Text{
             text: "R"
-            color:"white"
-            font.pixelSize: 12
+            color:"#55EEEEEE"
+            font.pixelSize: vpx(20)
 //            font.letterSpacing: -0.3
             font.bold: true
             anchors.verticalCenter: parent.verticalCenter
@@ -212,10 +225,10 @@ Rectangle {
         id: battery_indicator
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 12
+        anchors.topMargin: vpx(20)
         anchors.rightMargin: 16
         opacity: 0.6
-        lightStyle: light
+        lightStyle: true
         visible: showBattery 
     }
 
@@ -225,10 +238,10 @@ Rectangle {
         text: Qt.formatTime(new Date(), "hh:mm")          
         anchors.right:  parent.right
         anchors.top: parent.top
-        anchors.topMargin: 8
-        anchors.rightMargin: showBattery ? 54 : 16
-        color: light ? "#ccffffff" : "#80000000"
-        font.pixelSize: 18
+        anchors.topMargin: vpx(10)
+        anchors.rightMargin: showBattery ? vpx(54) : vpx(16)
+        color: "#ccffffff"
+        font.pixelSize: vpx(24)
         font.letterSpacing: -0.3
 //        font.bold: true
         visible: showStatusInfo         
