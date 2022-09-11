@@ -6,9 +6,8 @@ import "qrc:/qmlutils" as PegasusUtils
 
 Item { 
     id: gameDetail
-    property var active: false
+    property var active: true
     property var game: null
-    property var showFullDescription: false
     property var pauseScreenshotVideo: false
     //visible: active
 
@@ -51,11 +50,11 @@ Item {
     }
 
     property var margin: {
-        return 32
+        return vpx(32)
     }
 
     property var introDescription: {
-        if (!game) { return "" }    
+        if (!game) { return "" }
         return game.description.replace("\n"," ")
     }
 
@@ -80,10 +79,10 @@ Item {
             return null
         }
     }
-        property var textScroll: 10
+    property var textScroll: 10
 
-    Keys.onPressed: {      
-        if (event.key == '1048586') {
+    Keys.onPressed: {
+        if (event.key === '1048586') {
             pauseScreenshotVideo = !pauseScreenshotVideo
         }
         if (api.keys.isCancel(event) && active) {
@@ -92,435 +91,256 @@ Item {
         }
     }
 
-    /** 
+    MouseArea {
+        anchors {
+            fill: parent
+        }
+    }
+
+    /**
     * Background
     */
     Rectangle {
-        color: theme.background_dark
-        anchors.fill: parent
+        //        color: theme.background_dark
+        color: "#88000000"
+        anchors {
+            fill: parent
+        }
+    }
+
+    Rectangle {
+        id: mainPanel
+        color: "#333"
+        anchors {
+            fill: parent
+            //            margins: vpx(100)
+            leftMargin: vpx(100)
+            rightMargin: vpx(100)
+            topMargin: vpx(60)
+            bottomMargin: vpx(60)
+        }
         opacity: 1.0
+        radius: vpx(12)
+
+        Rectangle {
+            id: rightPanel
+            anchors {
+                top: parent.top
+                left: parent.left
+                leftMargin: parent.width * 0.33
+                right: parent.right
+                rightMargin: vpx(12)
+                bottom: parent.bottom
+            }
+            //            height: parent.height
+            color: "#3A3A3A"
+        }
+        Rectangle {
+            width: vpx(16)
+            anchors {
+                top: parent.top
+                right: parent.right
+                bottom: parent.bottom
+            }
+            //            height: parent.height
+            color: "#3A3A3A"
+            radius: vpx(12)
+        }
+
+
+    }
+
+    DropShadow {
+        anchors.fill: mainPanel
+        source: mainPanel
+        verticalOffset: vpx(5)
+        horizontalOffset: vpx(5)
+        color: "#BB000000"
+        radius: 20
+        samples: 20
     }
 
     // Content
     FocusScope {
         id: gameDetailContent
-        anchors.fill: parent
-        anchors.bottom: footer.top
+        anchors{
+            fill: parent
+            //            margins: vpx(100)
+            leftMargin: vpx(100)
+            rightMargin: vpx(100)
+            topMargin: vpx(60)
+            bottomMargin: vpx(60)
+            //            bottom: footer.top
+        }
         clip: true
-        focus: active && !showFullDescription
+        focus: active
         
-
-        /** 
-         * Header
-         */
         Item {
-            id: gameDetailHeader
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.leftMargin: margin
-            anchors.rightMargin: margin
-            anchors.topMargin: 35
-            height: 225
+            id: gameDetailInfo
+            anchors {
+                fill: parent
 
-
-            Text {
-                id: title
-                font.family: collectionTitleFont.name
-                width: parent.width - 20
-                wrapMode: Text.WordWrap
-                anchors.left: parent.left
-                anchors.top: parent.top
-//                maximumLineCount: 2
-                text: game ? game.title : curDataText.global_no_games
-                lineHeight: 1.1
-                color: textColor
-                font.pixelSize: 22
-                font.letterSpacing: 0
-                maximumLineCount: 1
-//                font.bold: true 
-                z:2
             }
 
-            Image {
-                id: imgClearLogo
-                width: (parent.width / 2) - margin - 20
-
-                anchors {
-                    top: title.bottom
-                    topMargin: 12
-                    left: title.left
-        //            margins: vpx(5)
-//                    leftMargin: 20
-//                    rightMargin: 20
-//
-                    bottom: actionBtns.top
-                    bottomMargin: 20
-                }
-                asynchronous: true
-                visible: source != ""
-                source:  game ? game.assets.logo : ''
-                sourceSize { width: 200; height: 200 }
-                fillMode: Image.PreserveAspectFit
-        //        smooth: true
-            }
-
-            /** 
-             * Title
-             */
-//            ColumnLayout {
-//                anchors.left: parent.left
-//                anchors.top: title.bottom
-//                spacing: 8
-//                anchors.topMargin: 4
-//                width: (parent.width / 2) - margin
-
-//                Text {
-//                    text: playerGenre
-//                    color: textColor
-//                    opacity: 0.5
-//                    font.pixelSize: 18
-//                    font.letterSpacing: -0.35
-//                    font.bold: true
-//                    width: parent.width
-//                    anchors.left: parent.left
-//                    anchors.right: parent.right
-//                    wrapMode: Text.WordWrap
-//                    maximumLineCount: 4
-//                }
-
-//                Text {
-//                    text: releaseDate
-//                    color: textColor
-//                    opacity: 0.5
-//                    font.pixelSize: 18
-////                    font.letterSpacing: -0.35
-//                    font.bold: true
-//                }
-
-//                // Text {
-//                //     text: developedBy
-//                //     color: textColor
-//                //     opacity: 0.5
-//                //     font.pixelSize: 18
-//                //     font.letterSpacing: -0.35
-//                //     font.bold: true
-//                // }
-
-//            }
-
-            /** 
-             * Buttons
-             */
-            RowLayout {
-                id: actionBtns
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 12
-                spacing: 10
-                ActionButton {
-                    id: actionPlay
-                    title: curDataText.games_play
-                    icon: "play"
-                    focus: true
-                    height: 40
-                    width: 120
-                    textColor: gameDetail.textColor
-                    KeyNavigation.right: actionFavorite   
-                    KeyNavigation.down: gameDetailText
-                    Keys.onPressed: {           
-                        // Start Game           
-                        if (api.keys.isAccept(event)) {
-                            startGame(game.modelData, currentGameDetailIndex)
-                        }
-                    }
-
-                }
-                ActionButton {
-                    id: actionFavorite
-                    textColor: gameDetail.textColor
-                    KeyNavigation.left: actionPlay  
-                    KeyNavigation.down: gameDetailText   
-                    title: gameIsFavorite ? curDataText.games_favorite_cancel : curDataText.games_favorite
-                    icon: gameIsFavorite ? "favorite-on" : "favorite-off"
-                    focus: false
-                    height: 40
-                    width: 120
-
-                    Keys.onPressed: {    
-                         
-                        // Favorite          
-                        if (api.keys.isAccept(event)) {                            
-                            game.modelData.favorite = !game.modelData.favorite
-                            event.accepted = true;
-                        }
-                    }
-
-                }
-            }
-
-            /**
-             * Screenshot
-             */
-            GameScreenshot {
-                height: 210
-                width: 280
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.topMargin: 6
-                screenshot: gameScreenshot
-                video: gameVideo
-                active: gameDetail.active
-                pauseVideo: showFullDescription || pauseScreenshotVideo
-            }
-
-        }        
-
-        /**
-         * Detail Text
-         */
-        Item {
-            id: gameDetailText
-            anchors.top: gameDetailHeader.bottom
-            //anchors.topMargin: 20
-            anchors.topMargin: 24
-            anchors.leftMargin: margin
-            anchors.rightMargin: margin
-            anchors.left: parent.left
-            anchors.right: parent.right
-            //height: 100
-            visible: introDescription.length > 0 
-            height: 150
-
-            // Rectangle {
-            //     anchors.fill: parent
-            //     anchors.leftMargin: -15
-            //     anchors.rightMargin: -15
-            //     anchors.bottomMargin: -15
-            //     radius: 8
-            //     color: "#000000"
-            //     opacity: parent.activeFocus ? 0.1 : 0.0
-            // }
-
-            Keys.onPressed: {           
-                // Back to Home            
-                if (api.keys.isAccept(event)) {
-                    showFullDescription = true
-                    event.accepted = true;
-                }
-            }
-
-            Rectangle {
-                id: splitLine
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: 1
-                anchors.top: parent.top
-                color: textColor
-                opacity: 0.1
-            }
-
-            // Rectangle {
-            //     anchors.left: parent.left
-            //     anchors.right: parent.right
-            //     height: 1
-            //     anchors.bottom: parent.bottom
-            //     anchors.bottomMargin: -12
-            //     color: textColor
-            //     opacity: 0.1
-            // }
-
-//            Text {
-//                text: introDescription
-//                anchors.top: parent.top
-//                anchors.topMargin: 18
-//                anchors.leftMargin: parent.left
-//                anchors.rightMargin: parent.right
-//                wrapMode: Text.WordWrap
-//                //color: parent.activeFocus ? "#50000000" : textColor
-//                color: textColor
-//                font.pixelSize: 16
-//                font.letterSpacing: 0.4
-////                font.bold: true
-//                lineHeight: 1.2
-//                elide: Text.ElideRight
-//                width: parent.width
-//                maximumLineCount: 4
-//            }
-
-            //Description
             Item {
-                width: parent.width
-                height: gameDetailText.height - 40
+                id: info_left
+                width: parent.width * 0.33 - 2 * margin
                 anchors {
-                    top: splitLine.bottom
-                    topMargin: 16
+                    //                    fill: parent
+                    top: parent.top
+                    left: parent.left
+                    bottom: parent.bottom
+                    margins: margin
+                    //                    rightMargin: parent.width * 0.33 - margin
                 }
 
-                PegasusUtils.AutoScroll {
-                    anchors.fill: parent
-                    Text {
-                        id: txt_game_description
-                        width: parent.width
-                        text: introDescription
-                        font {
-                            weight: Font.Light
-                            pixelSize: 18
-                            letterSpacing: 0.4
+                GameScreenshot {
+                    id: videoPreview
+                    height: info_left.width * 0.75
+                    anchors {
+                        top: info_left.top
+                        left: info_left.left
+                        right: info_left.right
+                        //                    bottom: actionBtns.top
+                        //                    bottomMargin: 20
+                    }
+                    screenshot: gameScreenshot
+                    video: gameVideo
+                    active: gameDetail.active
+                    pauseVideo: showFullDescription || pauseScreenshotVideo
+                }
+
+                Image {
+                    id: imgClearLogo
+
+
+                    anchors {
+                        top: videoPreview.bottom
+                        left: info_left.left
+                        right: info_left.right
+                        //                    bottom: actionBtns.top
+                        topMargin: vpx(30)
+                    }
+                    asynchronous: true
+                    visible: source != ""
+                    source:  game ? game.assets.logo : ''
+                    sourceSize { width: 200; height: 200 }
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                RowLayout {
+                    id: actionBtns
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: vpx(12)
+                    spacing: vpx(24)
+                    ActionButton {
+                        id: actionPlay
+                        title: curDataText.games_play
+                        icon: "play"
+                        focus: true
+                        height: vpx(45)
+                        width: vpx(135)
+                        textColor: gameDetail.textColor
+                        KeyNavigation.right: actionFavorite
+                        KeyNavigation.down: gameDetailText
+                        Keys.onPressed: {
+                            // Start Game
+                            if (api.keys.isAccept(event)) {
+                                startGame(game.modelData, currentGameDetailIndex)
+                            }
                         }
-                        wrapMode: Text.WordWrap
-                        elide: Text.ElideRight
-                        horizontalAlignment: Text.AlignJustify
-                        color: textColor
+
+                    }
+                    ActionButton {
+                        id: actionFavorite
+                        textColor: gameDetail.textColor
+                        KeyNavigation.left: actionPlay
+                        KeyNavigation.down: gameDetailText
+                        title: gameIsFavorite ? curDataText.games_favorite_cancel : curDataText.games_favorite
+                        icon: gameIsFavorite ? "favorite-on" : "favorite-off"
+                        focus: false
+                        height: vpx(45)
+                        width: vpx(135)
+
+                        Keys.onPressed: {
+
+                            // Favorite
+                            if (api.keys.isAccept(event)) {
+                                game.modelData.favorite = !game.modelData.favorite
+                                event.accepted = true;
+                            }
+                        }
+
                     }
                 }
             }
 
-            Rectangle {
-                id: moreButton
-                color: parent.activeFocus ? systemColor : theme.background
-                width: 54
-                height: 24
-                visible: true
-                anchors.right: parent.right
-                anchors.rightMargin: 2
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 0
-                radius: 4
+            Item {
+                id: info_right
+                anchors {
+                    fill: parent
+                    margins: margin
+                    leftMargin: parent.width * 0.33 + margin
+                }
 
                 Text {
-                    font.pixelSize: 13
-//                    font.letterSpacing: -0.1
-//                    font.bold: true
-                    text: curDataText.games_more
-                    color: parent.parent.activeFocus ? "white" : systemColor
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    id: title
+                    font.family: collectionTitleFont.name
+                    width: parent.width * 0.6 - 20
+                    wrapMode: Text.WordWrap
+                    anchors {
+                        left: info_right.left
+                        top: info_right.top
+                    }
+                    //                maximumLineCount: 2
+                    text: game ? game.title : curDataText.global_no_games
+                    lineHeight: 1.1
+                    color: textColor
+                    font.pixelSize: vpx(30)
+                    font.letterSpacing: 0
+                    maximumLineCount: 1
+                    //                font.bold: true
+                    z:2
+                }
+
+                //Description
+                Item {
+                    width: parent.width
+                    //                    height: gameDetailText.height - 40
+                    anchors {
+                        top: title.bottom
+                        topMargin: vpx(24)
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+
+                    PegasusUtils.AutoScroll {
+                        anchors.fill: parent
+                        Text {
+                            id: txt_game_description
+                            width: parent.width
+                            text: introDescription
+                            font {
+                                weight: Font.Light
+                                pixelSize: vpx(22)
+                                letterSpacing: 0.4
+                            }
+                            wrapMode: Text.WordWrap
+                            elide: Text.ElideRight
+                            horizontalAlignment: Text.AlignJustify
+                            color: textColor
+                        }
+                    }
                 }
             }
-//            DropShadow {
-//                anchors.fill: moreButton
-//                horizontalOffset: -6
-//                verticalOffset: 3
-//                radius: 10.0
-//                samples: 10
-//                color: theme.background
-//                source: moreButton
-//            }
-        }
 
-        // Item {
-        //     anchors.top: gameDetailText.bottom  
-        //     anchors.topMargin: 30
-        //     anchors.left: parent.left
-        //     anchors.right: parent.right
-        //     anchors.leftMargin: margin
-        //      Text {
-        //         text: "More by " + game.developer
-        //         wrapMode: Text.WordWrap
-        //         color: textColor
-        //         opacity: parent.activeFocus ? 1.0 : 1.0
-        //         font.pixelSize: 18
-        //         font.letterSpacing: -0.1
-        //         font.bold: true  
-        //         lineHeight: 1.0
-        //         width: parent.width
-        //         maximumLineCount: 1
-        //     }
-        // }
-    }
-
-    
-    GameDetailFooter {
-        id: footer
-        anchors.bottom: parent.bottom
-        visible: !showFullDescription
-    }
-
-
-    Item {  
-        id: background
-        anchors.left: parent.left
-        anchors.right: parent.right
-        visible: showFullDescription
-        //height: 280
-        //height: 392
-        height: 480
-        focus: showFullDescription
-
-        property var scrollMoveAmount : 100
-        Keys.onDownPressed: {
-            var maxHeight =  textElement.paintedHeight - (480 - 50 - 50)
-
-            textScroll = Math.max(Math.min(textScroll + scrollMoveAmount, maxHeight), 10)
-        }
-
-        Keys.onUpPressed: {
-            textScroll = Math.max(textScroll - scrollMoveAmount, 10)
-        }
-
-        Keys.onPressed: {           
-            // Back to Home            
-            if (api.keys.isCancel(event)) {
-                if (showFullDescription) {
-                    showFullDescription = false
-                    event.accepted = true
-                }
+            GameDetailFooter {
+                id: footer
+                visible: false
+                anchors.bottom: parent.bottom
+                //        visible: !showFullDescription
             }
         }
-
-
-
-        Rectangle {
-            color: theme.background_dark
-            anchors.fill: parent
-            opacity: 1.0
-        }
-
-        Image {
-            id: boxart
-            source: gameScreenshot 
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectCrop
-            visible: false
-        }
-
-        FastBlur {
-            id: blurOne
-            anchors.fill: parent
-            source: gameDetailContent
-            radius: 80
-            opacity: 0.5
-        }
-
-        // FastBlur {
-        //     id: blurTwo
-        //     anchors.fill: blurOne
-        //     source: blurOne
-        //     radius: 125
-        //     opacity: 0.5
-        // }
-
-        Text {
-            id: textElement
-            text: game.description
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top            
-            anchors.leftMargin: 50
-            anchors.rightMargin: 50
-            anchors.topMargin: 50 - textScroll
-            font.pixelSize: 18
-            font.letterSpacing: 0.4
-//            font.bold: true
-            color: textColor
-            wrapMode: Text.WordWrap
-            maximumLineCount: 2000
-            lineHeight: 1.2
-
-            Behavior on anchors.topMargin {
-                PropertyAnimation { easing.type: Easing.OutCubic; duration: 200  }
-            }                
-        }
-        
     }
 }

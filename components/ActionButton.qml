@@ -26,12 +26,12 @@ Item {
     Text { 
         text: title
         font.bold: false
-        font.pixelSize: 14
+        font.pixelSize: vpx(16)
         visible: parent.activeFocus
         opacity: 0.5
         color: textColor
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: -20
+        anchors.bottomMargin: vpx(-22)
         anchors.horizontalCenter: parent.horizontalCenter
     }
 

@@ -97,7 +97,7 @@ ListView {
         height: layoutScreen.height
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.topMargin: -55
+        anchors.topMargin: vpx(-50)
         z: -1
         color: theme.background_dark
         Behavior on bgIndex {

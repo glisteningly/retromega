@@ -50,7 +50,7 @@ Rectangle {
          if (currentSystemViewMode === 'grid') {
              return theme.background
          } else {
-             return currentHomeIndex <= 1 ?  "transparent" : theme.background
+             return currentHomeIndex <= 1 ?  "#11000000" : theme.background
          }
     }
 //    width: parent.width
@@ -93,8 +93,9 @@ Rectangle {
     Rectangle {
         id: indicator
         width: focused_link.width + 12
-        height: 4
-        color: theme.primaryColor
+        height: vpx(2)
+//        color: theme.primaryColor
+        color: "#CCC"
         anchors {
             leftMargin: -6
             bottom: parent.bottom

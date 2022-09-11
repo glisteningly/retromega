@@ -334,7 +334,10 @@ FocusScope {
     SortFilterProxyModel {
         id: currentCollectionGamesSortedFiltered
         sourceModel: currentCollection.games
-        sorters: RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
+        sorters: [
+            RoleSorter { roleName: "favorite"; sortOrder: Qt.DescendingOrder },
+            RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
+        ]
         filters: ValueFilter { roleName: "favorite"; value: true; inverted: false; enabled: collectionFilterMode == "favorites" }
     }
 
@@ -342,6 +345,11 @@ FocusScope {
         id: currentCollectionGamesSorted
         sourceModel: currentCollection.games
         sorters: RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
+//        sorters: [
+//            RoleSorter { roleName: "favorite"; sortOrder: Qt.DescendingOrder },
+//            RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
+//        ]
+
     }
 
     // Primary UI

@@ -45,7 +45,11 @@ Item {
     signal doubleClicked()
     signal imageLoaded(int imgWidth, int imgHeight)
 
+//    property var scale_normal: Scale { origin.x: 0; origin.y: 0; xScale: 1; yScale: 1}
+//    property var scale_zoomed: Scale { origin.x: 0; origin.y: 0; xScale: 1.1; yScale: 1.1}
+
     scale: selected ? 1.1 : 1
+//    transform: selected ? scale_zoomed : scale_normal
     z: selected ? 3 : 1
 
     Behavior on scale { PropertyAnimation { duration: 150 } }
@@ -238,8 +242,8 @@ Item {
     }
 
     Image {
-        width: 28
-        height: 28
+        width: vpx(40)
+        height: vpx(40)
         visible: modelData.favorite && !hideFavoriteIcon
 //        fillMode: Image.PreserveAspectFit
         source: "../assets/icons/favorite_red.png"
@@ -247,8 +251,8 @@ Item {
         anchors {
             right: parent.right
             top: parent.top
-            rightMargin: 4
-            topMargin: 4
+            rightMargin: 3
+            topMargin: 3
         }
     }
 

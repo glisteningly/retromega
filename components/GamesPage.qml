@@ -96,11 +96,11 @@ Item {
     Keys.onPressed: {           
 
         // Show / Hide Sort
-        if (api.keys.isFilters(event)) {
-            event.accepted = true;
-            showSort = !showSort
-            return;
-        }  
+//        if (api.keys.isFilters(event)) {
+//            event.accepted = true;
+//            showSort = !showSort
+//            return;
+//        }
 
         // Back to Home            
         if (api.keys.isCancel(event)) {
@@ -268,7 +268,7 @@ Item {
         */
         Rectangle {
             id: header
-            color: "transparent"
+            color: "#333"
             width: parent.width
             height: vpx(50)
             anchors.left: parent.left
@@ -291,7 +291,8 @@ Item {
                 text: headerTitle
                 anchors.left: parent.left
                 anchors.leftMargin: 18
-                color: systemColor//theme.title
+//                color: systemColor//theme.title
+                color: "#EEE"
                 font.pixelSize: vpx(24)
                 font.letterSpacing: 0.3
 //                font.bold: true
@@ -304,6 +305,7 @@ Item {
 
 
             Text {
+                visible: false
                 id: header_time
                 text: collectionSortTitle
                 anchors.right: legend.left
@@ -331,6 +333,7 @@ Item {
             //     font.bold: true              
             // }   
             Rectangle{
+                visible: false
                 id: legend
                 height:vpx(26)
                 width:vpx(26)
@@ -419,6 +422,16 @@ Item {
                     focus: true  && !isShowingGameDetail
                 }
             }
+        }
+
+        DropShadow {
+            anchors.fill: header
+            source: header
+            verticalOffset: vpx(5)
+            horizontalOffset: 0
+            color: "#88000000"
+            radius: 10
+            samples: 20
         }
     }
 

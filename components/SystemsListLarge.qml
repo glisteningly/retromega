@@ -14,20 +14,23 @@ ListView {
     }
 
     property int bgIndex: 0
-//    property var itemTextColor: {
-//        systemsListView.activeFocus ? #ffffff"  : "#30ffffff"
-//    }
+    //    property var itemTextColor: {
+    //        systemsListView.activeFocus ? #ffffff"  : "#30ffffff"
+    //    }
     property string itemTextColor: "#ffffff"
 
     currentIndex: currentSystemIndex
     width: parent.width
-    anchors.verticalCenter: parent.verticalCenter
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.bottom: parent.bottom
+    anchors {
+        verticalCenter: parent.verticalCenter
+        left: parent.left
+        right: parent.right
+        bottom: parent.bottom
+    }
+
     model: allSystems
     cacheBuffer: 10
-    delegate: systemsDelegate  
+    delegate: systemsDelegate
     orientation: ListView.Horizontal
     highlightRangeMode: ListView.StrictlyEnforceRange
     preferredHighlightBegin: 0
@@ -43,32 +46,32 @@ ListView {
     displaced: Transition {
         NumberAnimation { properties: "x,y"; duration: 3000 }
     }
-    Keys.onLeftPressed: {  
+    Keys.onLeftPressed: {
         decrementCurrentIndex(); systemsBackground.bgIndex = currentIndex
-    } 
+    }
 
-    Keys.onRightPressed: {  
+    Keys.onRightPressed: {
         incrementCurrentIndex(); systemsBackground.bgIndex = currentIndex
     }
 
     Keys.onPressed: {
-          //Next page
-          if (api.keys.isPageDown(event)) {
-             event.accepted = true
-             systemsListView.currentIndex = Math.min(systemsListView.currentIndex + 10, allSystems.count - 1)
-             systemsBackground.bgIndex = currentIndex
-             return
-          }
+        //Next page
+        if (api.keys.isPageDown(event)) {
+            event.accepted = true
+            systemsListView.currentIndex = Math.min(systemsListView.currentIndex + 10, allSystems.count - 1)
+            systemsBackground.bgIndex = currentIndex
+            return
+        }
 
-          //Prev collection
-          if (api.keys.isPageUp(event)) {
-              event.accepted = true;
-              systemsListView.currentIndex = Math.max(systemsListView.currentIndex - 10, 0);
-              systemsBackground.bgIndex = currentIndex
-              return;
-          }
+        //Prev collection
+        if (api.keys.isPageUp(event)) {
+            event.accepted = true;
+            systemsListView.currentIndex = Math.max(systemsListView.currentIndex - 10, 0);
+            systemsBackground.bgIndex = currentIndex
+            return;
+        }
 
-          event.accepted = false
+        event.accepted = false
     }
 
     Timer {
@@ -99,7 +102,7 @@ ListView {
         height: layoutScreen.height
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.topMargin: -55
+        anchors.topMargin: vpx(-50)
         z: -1
         color: theme.background_dark
         Behavior on bgIndex {
@@ -116,7 +119,7 @@ ListView {
         setSystemIndex(systemsListView.currentIndex)
     }
 
-    Component.onCompleted: { 
+    Component.onCompleted: {
         positionViewAtIndex(currentSystemIndex, ListView.Center)
         delay(200, function() {
             systemsListView.positionViewAtIndex(currentSystemIndex, ListView.Center)
@@ -141,14 +144,14 @@ ListView {
         }
     }
 
-//    onEnabledChanged: {
-//        console.log("ENABLED: " + enabled);
-//    }
+    //    onEnabledChanged: {
+    //        console.log("ENABLED: " + enabled);
+    //    }
 
     Component {
         id: systemsDelegate
-    
-    
+
+
         Item {
             id: system_listitem_container
             width: layoutScreen.width
@@ -168,20 +171,20 @@ ListView {
                     navigate('GamesPage');
                     
                     return;
-                }      
-//                if (api.keys.isFilters(event)) {
-//                    event.accepted = true;
-//                    toggleZoom();
-//                    return;
-//                }
-            }                          
+                }
+                //                if (api.keys.isFilters(event)) {
+                //                    event.accepted = true;
+                //                    toggleZoom();
+                //                    return;
+                //                }
+            }
 
 
             Rectangle {
                 id: systemsListView_item
                 width: parent.width
-                height: parent.height       
-                color:  "transparent" //systemColors[modelData.shortName]  
+                height: parent.height
+                color:  "transparent" //systemColors[modelData.shortName]
                 
                 Image {
                     id: menu_mask
@@ -207,25 +210,25 @@ ListView {
                     width: parent.width
                     height: parent.height
                     color: systemColors[modelData.shortName] ?? "#000000"
-                    clip: false
+                                                                clip: false
                     visible: false
-                                                                                       
-                }                
-                    
-//                DropShadow {
-//                    anchors.fill: mask
-//                    horizontalOffset: 0
-//                    verticalOffset: 4
-//                    radius: 12.0
-//                    samples: 16
-//                    opacity: 0.4
-//                    color: systemColors[modelData.shortName]
-//                    source: mask
-//                }
+
+                }
+
+                //                DropShadow {
+                //                    anchors.fill: mask
+                //                    horizontalOffset: 0
+                //                    verticalOffset: 4
+                //                    radius: 12.0
+                //                    samples: 16
+                //                    opacity: 0.4
+                //                    color: systemColors[modelData.shortName]
+                //                    source: mask
+                //                }
                 
                 Image {
                     id: device
-//                    source: "../assets/images/devices/"+modelData.shortName+".png"
+                    //                    source: "../assets/images/devices/"+modelData.shortName+".png"
                     source: "../assets/images/devices/"+modelData.shortName+".png"
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
@@ -233,8 +236,8 @@ ListView {
                     anchors.verticalCenterOffset: 25
                     cache: true
                     asynchronous: true
-//                    width: 420
-//                    height: 342
+                    //                    width: 420
+                    //                    height: 342
                     fillMode: Image.PreserveAspectFit
                     scale: 1.0
                     states: [
@@ -257,23 +260,23 @@ ListView {
                         State {
                             name: "inactive"; when: system_listitem_container.ListView.isCurrentItem
                             PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 0.85}
-                        }   
+                        }
                     ]
 
                     transitions: Transition {
                         NumberAnimation { properties: "scale, opacity, anchors.rightMargin"; easing.type: Easing.InOutCubic; duration: 225  }
                     }
                     
-                }                
+                }
 
-//              主标题
+                //              主标题
                 Text {
                     id: title
                     text: modelData.name
                     font.family: systemTitleFont.name
                     font.pixelSize: titleFontSize(modelData.name)
                     font.letterSpacing: 0
-//                    font.bold: true
+                    //                    font.bold: true
                     color: itemTextColor
                     width: 280
                     wrapMode: Text.WordWrap
@@ -284,7 +287,7 @@ ListView {
                     anchors.left: parent.left
                     anchors.leftMargin: 30
                     anchors.verticalCenterOffset: -10
-                }                                         
+                }
 
                 DropShadow {
                     anchors.fill: title
@@ -293,36 +296,36 @@ ListView {
                     horizontalOffset: 2
                     color: "#60000000"
                     radius: 5
-//                    samples: 10
+                    //                    samples: 10
                 }
                 
                 Text {
                     text: modelData.games.count + " " + dataText[lang].global_games
                     font.pixelSize: 18
                     font.letterSpacing: -0.3
-//                    font.bold: true
+                    //                    font.bold: true
                     color: itemTextColor
-                    opacity: 0.7    
+                    opacity: 0.7
                     anchors.topMargin: 8
                     anchors.left: parent.left
                     anchors.leftMargin: 30
                     anchors.top: title.bottom
                     visible: true
-                }    
+                }
 
                 Text {
                     text: systemCompanies[modelData.shortName].toUpperCase()
                     font.family: systemSubitleFont.name
                     font.pixelSize: 14
                     font.letterSpacing: 0.5
-//                    font.bold: true
+                    //                    font.bold: true
                     color: itemTextColor
-                    opacity: 0.7    
+                    opacity: 0.7
                     anchors.bottomMargin: -1
                     anchors.left: parent.left
                     anchors.leftMargin: 30
                     anchors.bottom: title.top
-                }    
+                }
 
                 Rectangle {
                     id: selectButton
@@ -335,23 +338,23 @@ ListView {
                     anchors.top: title.bottom
                     anchors.left: title.left
 
-                    Text { 
+                    Text {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: "View"
                         font.pixelSize: 12
                         font.letterSpacing: 0
-                        font.bold: true       
-                        color: systemsListView.activeFocus ? "#ffffff"  : "#ffffff"                        
+                        font.bold: true
+                        color: systemsListView.activeFocus ? "#ffffff"  : "#ffffff"
                     }
                 }
-            
+
                 // Image {
                 //     id: tile_logo
                 //     source: "../assets/images/logos/"+modelData.shortName+".png"
                 //     anchors.verticalCenter: parent.verticalCenter
                 //     anchors.horizontalCenter: parent.horizontalCenter
-                // }  
+                // }
             }
 
             Text {
@@ -361,10 +364,10 @@ ListView {
                 //anchors.bottomMargin: -30
                 font.pixelSize: 14
                 font.letterSpacing: -0.3
-                font.bold: true       
-                color: "#4F4F4F"    
-                visible: false   
-            }    
+                font.bold: true
+                color: "#4F4F4F"
+                visible: false
+            }
 
             Text {
                 text: modelData.games.count + " games"
@@ -372,15 +375,15 @@ ListView {
                 //anchors.bottomMargin: 20
                 font.pixelSize: 14
                 font.letterSpacing: -0.3
-                font.bold: true       
-                color: "#ffffff"   
-                opacity: 0.7    
+                font.bold: true
+                color: "#ffffff"
+                opacity: 0.7
                 visible: false
                 //anchors.horizontalCenter: parent.horizontalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.bottomMargin: -30
-            }    
+            }
             
             // DropShadow {
             //     anchors.fill: systems__item
@@ -390,10 +393,10 @@ ListView {
             //     samples: 17
             //     color: "#80000000"
             //     source: systems__item
-            // }                        
+            // }
 
         }
-    }      
+    }
     
 
 }

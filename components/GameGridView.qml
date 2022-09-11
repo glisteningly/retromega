@@ -139,14 +139,14 @@ Item {
             }
 
             model: parent.visible ? items : []
-            anchors.fill: parent
             currentIndex: defaultIndex
-            anchors.left: parent.left
-            anchors.leftMargin: 12
-            anchors.right: parent.right
-            anchors.rightMargin: 12
-            anchors.margins: 12
-            cacheBuffer: 10
+            anchors {
+                fill: parent
+                margins: vpx(12)
+                topMargin: vpx(14)
+                bottomMargin: vpx(14)
+            }
+            cacheBuffer: 30
 
             highlightRangeMode: GridView.ApplyRange
             highlightMoveDuration: 0

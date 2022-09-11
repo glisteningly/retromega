@@ -252,4 +252,14 @@ Item {
             } 
         }  
     }
+
+    DropShadow {
+        anchors.fill: header
+        source: header
+        verticalOffset: vpx(5)
+        horizontalOffset: 0
+        color: "#88000000"
+        radius: 10
+        samples: 20
+    }
 }
