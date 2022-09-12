@@ -39,13 +39,38 @@ Item {
     Behavior on scale { PropertyAnimation { duration: 150 } }
 
     Rectangle {
+        id: gridItemBgBorder
+        visible: selected
+        anchors {
+            fill: parent
+        }
+        color: "transparent"
+        border.color: "white"
+        border.width: 2
+        SequentialAnimation on border.color {
+            loops: Animation.Infinite
+
+            ColorAnimation {
+                from: "white"
+                to: "#30000000"
+                duration: 400
+            }
+            ColorAnimation {
+                from: "#30000000"
+                to: "white"
+                duration: 400
+            }
+        }
+    }
+
+    Rectangle {
         id: gridItemBg
         color:  systemColors[modelData.shortName] ?? "#000000"
         opacity: 0.6
         anchors.fill: parent
-        anchors.margins: 6
+        anchors.margins: 2
 //            scale: 1.1
-        radius: vpx(8)
+//        radius: vpx(8)
 //            z: 2
     }
 

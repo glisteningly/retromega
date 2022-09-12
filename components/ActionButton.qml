@@ -37,7 +37,7 @@ Item {
 
     Image {
         id: iconImage
-        source: "../assets/images/icon-" + icon + ".png"
+        source: "../assets/icons/ic-" + icon + ".svg"
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
     }

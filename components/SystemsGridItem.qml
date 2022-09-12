@@ -38,14 +38,38 @@ Item {
     Behavior on scale { PropertyAnimation { duration: 150 } }
 
     Rectangle {
+        id: gridItemBgBorder
+        visible: selected
+        anchors {
+            fill: parent
+        }
+        color: "transparent"
+        border.color: "white"
+        border.width: 2
+        SequentialAnimation on border.color {
+            loops: Animation.Infinite
+
+            ColorAnimation {
+                from: "white"
+                to: "#30000000"
+                duration: 400
+            }
+            ColorAnimation {
+                from: "#30000000"
+                to: "white"
+                duration: 400
+            }
+        }
+    }
+
+    Rectangle {
         id: gridItemBg
         color:  systemColors[modelData.shortName] ?? "#000000"
         opacity: 0.5
-        anchors.fill: parent
-        anchors.margins: 6
-//            scale: 1.1
-        radius: vpx(8)
-//            z: 2
+        anchors {
+            fill: parent
+            margins: 2
+        }
     }
 
     DropShadow {
@@ -63,7 +87,7 @@ Item {
         id: imgController
         anchors {
             fill: parent
-//            margins: vpx(5)
+            //            margins: vpx(5)
             leftMargin: 12
             rightMargin: 12
             bottomMargin: 20
@@ -71,32 +95,32 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  "../assets/images/devices/"+modelData.shortName+".png" || ""
-        sourceSize { width: 128; height: 128 }
+        sourceSize { width: 256; height: 256 }
         fillMode: Image.PreserveAspectFit
         smooth: true
     }
 
-//    Image {
-//        anchors.centerIn: parent
+    //    Image {
+    //        anchors.centerIn: parent
 
-//        visible: boxFront.status === Image.Loading
-//        source: "../assets/loading-spinner.png"
+    //        visible: boxFront.status === Image.Loading
+    //        source: "../assets/loading-spinner.png"
 
-//        RotationAnimator on rotation {
-//            loops: Animator.Infinite;
-//            from: 0;
-//            to: 360;
-//            duration: 500
-//        }
-//    }
+    //        RotationAnimator on rotation {
+    //            loops: Animator.Infinite;
+    //            from: 0;
+    //            to: 360;
+    //            duration: 500
+    //        }
+    //    }
 
     Text {
         id: shortTitle
-//        visible: selected
+        //        visible: selected
         opacity: selected ? 1.0 : 0.6
         width: parent.width
-//        anchors.centerIn: parent.bottom
-//        anchors.leftMargin: 8
+        //        anchors.centerIn: parent.bottom
+        //        anchors.leftMargin: 8
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 7
         font.letterSpacing: 0.2

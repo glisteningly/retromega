@@ -182,6 +182,27 @@ Item {
 //            bottomMargin: 24
         }
 //        radius: 4
+            Text {
+                visible: !selected
+                width: parent.width - vpx(12)
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: vpx(12)
+                    rightMargin: vpx(12)
+                    centerIn: parent
+                }
+                text: modelData.title
+                wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignHCenter
+                color: '#90FFFFFF'
+                elide: Text.ElideMiddle
+                maximumLineCount:3
+                font {
+                    pixelSize: vpx(20)
+                    letterSpacing: 0.5
+                }
+            }
     }
 
 //    Text {

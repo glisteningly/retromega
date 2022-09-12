@@ -18,14 +18,11 @@ GridView {
 
     model: allCollections
     currentIndex: currentCollectionIndex
-//    width: parent.width - 8
-//    anchors.verticalCenter: parent.verticalCenter
-    anchors.left: parent.left
-    anchors.leftMargin: 12
-    anchors.right: parent.right
-    anchors.rightMargin: 12
-
-    anchors.margins: 12
+    anchors {
+        fill: parent
+        margins: vpx(13)
+        topMargin: vpx(10)
+    }
     cacheBuffer: 10
 //    delegate: systemsDelegate
 
