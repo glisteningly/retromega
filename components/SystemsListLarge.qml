@@ -10,7 +10,7 @@ ListView {
     }
 
     function titleFontSize(str) {
-        return str.length <= 10 ? 70 : 50
+        return str.length <= 10 ? vpx(100) : vpx(80)
     }
 
     property int bgIndex: 0
@@ -155,7 +155,7 @@ ListView {
         Item {
             id: system_listitem_container
             width: layoutScreen.width
-            height: layoutScreen.height - 55 - 55 - 35
+            height: layoutScreen.height - vpx(50) - vpx(50) - 35
             scale: 1.0
             
             z: 100 - index
@@ -191,39 +191,32 @@ ListView {
                     //width: 136
                     width: layoutScreen.height * 0.283333
                     height: layoutScreen.height
-                    anchors.top: parent.top
-                    anchors.right: parent.right
-                    anchors.leftMargin: 0
-                    anchors.topMargin: -55
-                    anchors.rightMargin: 70
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        leftMargin: 0
+                        topMargin: -55
+                        //                        rightMargin: 70
+                        rightMargin: parent.width * 0.2
+                    }
                     z: 0
                     source: "../assets/images/menu-side-2.png"
                 }
 
-                Rectangle {
+                //                Rectangle {
 
-                    id: tile_content
-                    anchors.top: systemsListView_item.top
-                    anchors.left: systemsListView_item.left
-                    anchors.topMargin: 0
-                    anchors.leftMargin: 0
-                    width: parent.width
-                    height: parent.height
-                    color: systemColors[modelData.shortName] ?? "#000000"
-                                                                clip: false
-                    visible: false
-
-                }
-
-                //                DropShadow {
-                //                    anchors.fill: mask
-                //                    horizontalOffset: 0
-                //                    verticalOffset: 4
-                //                    radius: 12.0
-                //                    samples: 16
-                //                    opacity: 0.4
-                //                    color: systemColors[modelData.shortName]
-                //                    source: mask
+                //                    id: tile_content
+                //                    anchors {
+                //                        top: systemsListView_item.top
+                //                        left: systemsListView_item.left
+                //                        topMargin: 0
+                //                        leftMargin: 0
+                //                    }
+                //                    width: parent.width
+                //                    height: parent.height
+                //                    color: systemColors[modelData.shortName] ?? "#000000"
+                //                    clip: false
+                //                    visible: false
                 //                }
                 
                 Image {
@@ -232,12 +225,12 @@ ListView {
                     source: "../assets/images/devices/"+modelData.shortName+".png"
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.rightMargin: 0
+                    anchors.rightMargin: vpx(50)
                     anchors.verticalCenterOffset: 25
                     cache: true
                     asynchronous: true
-                    //                    width: 420
-                    //                    height: 342
+                    width: 550
+                    height: 550
                     fillMode: Image.PreserveAspectFit
                     scale: 1.0
                     states: [
@@ -254,12 +247,12 @@ ListView {
 
                         State {
                             name: "active"; when: system_listitem_container.ListView.isCurrentItem
-                            PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: vpx(50); opacity: 1.0; scale: 1.0}
                         },
 
                         State {
                             name: "inactive"; when: system_listitem_container.ListView.isCurrentItem
-                            PropertyChanges { target: device; anchors.rightMargin: -10.0; opacity: 1.0; scale: 0.85}
+                            PropertyChanges { target: device; anchors.rightMargin: vpx(50); opacity: 1.0; scale: 0.85}
                         }
                     ]
 
@@ -278,15 +271,15 @@ ListView {
                     font.letterSpacing: 0
                     //                    font.bold: true
                     color: itemTextColor
-                    width: 280
+                    //                    width: 280
                     wrapMode: Text.WordWrap
-                    anchors.rightMargin: 30
+                    //                    anchors.rightMargin: 30
                     visible: true
                     lineHeight: 0.8
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
-                    anchors.leftMargin: 30
-                    anchors.verticalCenterOffset: -10
+                    anchors.leftMargin: vpx(60)
+                    anchors.verticalCenterOffset: vpx(-10)
                 }
 
                 DropShadow {
@@ -301,14 +294,18 @@ ListView {
                 
                 Text {
                     text: modelData.games.count + " " + dataText[lang].global_games
-                    font.pixelSize: 18
-                    font.letterSpacing: -0.3
+                    font {
+                        family: boldTitleFont
+                        pixelSize: vpx(28)
+                        letterSpacing: -0.3
+                    }
+
                     //                    font.bold: true
                     color: itemTextColor
                     opacity: 0.7
-                    anchors.topMargin: 8
-                    anchors.left: parent.left
-                    anchors.leftMargin: 30
+                    anchors.topMargin: vpx(8)
+                    anchors.left: title.left
+                    anchors.leftMargin: vpx(2)
                     anchors.top: title.bottom
                     visible: true
                 }
@@ -316,14 +313,14 @@ ListView {
                 Text {
                     text: systemCompanies[modelData.shortName].toUpperCase()
                     font.family: systemSubitleFont.name
-                    font.pixelSize: 14
+                    font.pixelSize: vpx(20)
                     font.letterSpacing: 0.5
                     //                    font.bold: true
                     color: itemTextColor
                     opacity: 0.7
                     anchors.bottomMargin: -1
-                    anchors.left: parent.left
-                    anchors.leftMargin: 30
+                    anchors.left: title.left
+                    anchors.leftMargin: vpx(2)
                     anchors.bottom: title.top
                 }
 

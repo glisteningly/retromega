@@ -143,8 +143,8 @@ Item {
             anchors {
                 fill: parent
                 margins: vpx(12)
-                topMargin: vpx(14)
-                bottomMargin: vpx(14)
+                topMargin: vpx(16)
+                bottomMargin: vpx(16)
             }
             cacheBuffer: 30
 

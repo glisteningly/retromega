@@ -20,7 +20,7 @@ Item {
 
     enabled: false
     focus: true
-    width: selected? iconImage.width + item_text.width + vpx(4) : iconImage.width
+    width: selected? iconImage.width + item_text.width + vpx(4) : iconImage.width + vpx(12)
     height: parent.height
 
     Keys.onPressed: {
@@ -60,7 +60,7 @@ Item {
         source: "../assets/icons/ic-" + icon + ".svg"
         anchors {
             verticalCenter: parent.verticalCenter
-//            horizontalCenter: parent.horizontalCenter
+            //            horizontalCenter: parent.horizontalCenter
             left: parent.left
         }
         opacity: selected? 1 : 0.3
@@ -80,14 +80,14 @@ Item {
         anchors {
             //            centerIn: parent
             verticalCenter: parent.verticalCenter
-            verticalCenterOffset: -1
+//            verticalCenterOffset: -1
             left: iconImage.right
             leftMargin: vpx(-6)
         }
 
         color: textColor
         font {
-            //            family: boldTitleFont
+            family: boldTitleFont
             pixelSize: vpx(22)
             letterSpacing: boldTitleLetterSpacing
             //        bold: true

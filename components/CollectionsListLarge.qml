@@ -148,7 +148,7 @@ ListView {
         Item {
             id: grid_listitem_container
             width: layoutScreen.width
-            height: layoutScreen.height - 55 - 55 - 35
+            height: layoutScreen.height - vpx(50) - vpx(50) - 35
             scale: 1.0
 
             z: 100 - index
@@ -184,11 +184,14 @@ ListView {
                     //width: 136
                     width: layoutScreen.height * 0.283333
                     height: layoutScreen.height
-                    anchors.top: parent.top
-                    anchors.right: parent.right
-                    anchors.leftMargin: 0
-                    anchors.topMargin: -55
-                    anchors.rightMargin: 70
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        leftMargin: 0
+                        topMargin: -55
+                        //                        rightMargin: 70
+                        rightMargin: parent.width * 0.2
+                    }
                     z: 0
                     source: "../assets/images/menu-side-2.png"
                 }
@@ -229,8 +232,8 @@ ListView {
                     anchors.verticalCenterOffset: 20
                     cache: true
                     asynchronous: true
-                    width: 400
-                    height: 400
+                    width: 550
+                    height: 550
                     fillMode: Image.PreserveAspectFit
                     scale: 1.0
                     states: [
@@ -247,12 +250,12 @@ ListView {
 
                         State {
                             name: "active"; when: grid_listitem_container.ListView.isCurrentItem && !headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: 0.0; opacity: 1.0; scale: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: vpx(50); opacity: 1.0; scale: 1.0}
                         },
 
                         State {
                             name: "inactive"; when: grid_listitem_container.ListView.isCurrentItem  && headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: 0.0; opacity: 1.0; scale: 0.85}
+                            PropertyChanges { target: device; anchors.rightMargin: vpx(50); opacity: 1.0; scale: 0.85}
                         }
                     ]
 
@@ -266,10 +269,12 @@ ListView {
                 Text {
                     id: title
                     text: modelData.name
-                    font.family: collectionTitleFont.name
-                    font.pixelSize: 60
-                    font.letterSpacing: 2
-//                    font.bold: true
+                    font {
+                    family: collectionTitleFont.name
+                    pixelSize: vpx(80)
+                    letterSpacing: 2
+                    bold: true
+                    }
                     color: itemTextColor
                     width: 480
                     wrapMode: Text.WordWrap
@@ -278,7 +283,7 @@ ListView {
 //                    lineHeight: 0.8
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
-                    anchors.leftMargin: 30
+                    anchors.leftMargin: vpx(60)
                     anchors.verticalCenterOffset: 0
                 }
 
@@ -289,19 +294,22 @@ ListView {
                     horizontalOffset: 2
                     color: "#60000000"
                     radius: 5
-//                    samples: 20
+//                  samples: 20
                 }
 
                 Text {
                     text: modelData.games.count + " 游戏"
-                    font.pixelSize: 18
-                    font.letterSpacing: -0.3
-//                    font.bold: true
+                    font {
+                    family: boldTitleFont
+                    pixelSize: vpx(28)
+                    letterSpacing: -0.3
+//                    bold: true
+                    }
                     color: itemTextColor
                     opacity: 0.7
                     anchors.topMargin: -6
-                    anchors.left: parent.left
-                    anchors.leftMargin: 30
+                    anchors.left: title.left
+                    anchors.leftMargin: vpx(2)
                     anchors.top: title.bottom
                     visible: true
                 }
@@ -310,14 +318,14 @@ ListView {
 //                    text: systemCompanies[modelData.shortName].toUpperCase()
                     text: modelData.description
                     font.family: systemSubitleFont.name
-                    font.pixelSize: 16
+                    font.pixelSize: vpx(20)
                     font.letterSpacing: 0.5
 //                    font.bold: true
                     color: itemTextColor
                     opacity: 0.7
                     anchors.bottomMargin: -10
-                    anchors.left: parent.left
-                    anchors.leftMargin: 30
+                    anchors.left: title.left
+                    anchors.leftMargin: vpx(2)
                     anchors.bottom: title.top
                 }
 

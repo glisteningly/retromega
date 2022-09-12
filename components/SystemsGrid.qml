@@ -11,7 +11,7 @@ GridView {
     property int columnCount: {
         return theme.gridColumnCount;
     }
-    property real cellHeightRatio: 0.67
+    property real cellHeightRatio: 1
 
     model: allSystems
     currentIndex: currentSystemIndex
@@ -20,6 +20,7 @@ GridView {
     anchors {
         fill: parent
         margins: vpx(12)
+//        topMargin: vpx(12)
     }
     cacheBuffer: 10
 //    delegate: systemsDelegate

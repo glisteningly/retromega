@@ -20,7 +20,7 @@ GridView {
     currentIndex: currentCollectionIndex
     anchors {
         fill: parent
-        margins: vpx(13)
+        margins: vpx(14)
         topMargin: vpx(10)
     }
     cacheBuffer: 10

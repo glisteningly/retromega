@@ -54,6 +54,7 @@ Item {
             id: videoPlayer
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
+//            fillMode: Image.PreserveAspectFit
             source: video
             autoPlay: true
             loops: MediaPlayer.Infinite 
@@ -68,7 +69,7 @@ Item {
                     anchors.centerIn: parent
                     width: gameScreenshot.width
                     height: gameScreenshot.height
-                    radius: 12
+                    radius: vpx(6)
                 }
             }
         }

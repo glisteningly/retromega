@@ -88,9 +88,10 @@ Item {
         anchors {
             fill: parent
             //            margins: vpx(5)
-            leftMargin: 12
-            rightMargin: 12
-            bottomMargin: 20
+            topMargin: vpx(4)
+            leftMargin: vpx(20)
+            rightMargin: vpx(20)
+            bottomMargin: vpx(24)
         }
         asynchronous: true
         visible: source != ""

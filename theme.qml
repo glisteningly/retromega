@@ -408,16 +408,26 @@ FocusScope {
 
         }
 
-        Loader  {
-            id: gameDetailLoader
-            focus: isShowingGameDetail
-            active:  isShowingGameDetail
-            anchors.fill: parent
-            sourceComponent: gameDetail
-            asynchronous: false
-        }   
+
           
     }   
+
+//    FastBlur {
+//        visible: isShowingGameDetail
+//        id: blur
+//        anchors.fill: app
+//        source: app
+//        radius: 50
+//    }
+
+    Loader  {
+        id: gameDetailLoader
+        focus: isShowingGameDetail
+        active:  isShowingGameDetail
+        anchors.fill: parent
+        sourceComponent: gameDetail
+        asynchronous: false
+    }
 
     /**
         Loading Game Overlay

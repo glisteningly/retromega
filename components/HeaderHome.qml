@@ -45,6 +45,10 @@ Rectangle {
         //        return showStatusInfo && (api.device !== null && api.device.batteryPercent)
     }
 
+    property var percent: {
+        api.device && api.device.batteryPercent ? api.device.batteryPercent : 1
+    }
+
     id: home_header
     color: {
         if (currentSystemViewMode === 'grid') {
@@ -106,12 +110,13 @@ Rectangle {
 
         Rectangle {
             height: vpx(2)
-            color: "#CCC"
+            //            color: "#CCC"
+            color: theme.primaryColor
             anchors {
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
-                bottomMargin: 1
+                //                bottomMargin: 1
             }
         }
     }
@@ -238,15 +243,47 @@ Rectangle {
     //        lightText: light
     //        KeyNavigation.down: mainFocus
     //    }
+
+    Rectangle {
+        visible: false
+        anchors {
+            top: parent.top
+            topMargin: vpx(4)
+            right: parent.right
+            rightMargin: vpx(4)
+            bottom: parent.bottom
+            bottomMargin: vpx(4)
+            left: header_time.left
+            leftMargin: vpx(-12)
+        }
+        color: "#33000000"
+    }
     
     BatteryIndicator {
         id: battery_indicator
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.topMargin: vpx(20)
-        anchors.rightMargin: 16
+        anchors {
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+            verticalCenterOffset: vpx(2)
+            rightMargin: vpx(12)
+        }
         opacity: 0.6
         lightStyle: true
+        visible: showBattery
+    }
+
+    Text {
+        id: battery_percent
+        font.family: systemSubitleFont.name
+        text: Math.round(percent * 100) + "%"
+        anchors {
+            right:  battery_indicator.left
+            verticalCenter: parent.verticalCenter
+        }
+        color: "#66ffffff"
+        font.pixelSize: vpx(24)
+        //        font.letterSpacing: -0.3
+        //        font.bold: true
         visible: showBattery
     }
 
@@ -254,14 +291,14 @@ Rectangle {
         id: header_time
         font.family: systemSubitleFont.name
         text: Qt.formatTime(new Date(), "hh:mm")
-        anchors.right:  parent.right
-        anchors.top: parent.top
-        anchors.topMargin: vpx(10)
-        anchors.rightMargin: showBattery ? vpx(54) : vpx(16)
+        anchors {
+            right: showBattery ? battery_percent.left : parent.right
+            verticalCenter: parent.verticalCenter
+            rightMargin: vpx(24)
+        }
         color: "#ccffffff"
         font.pixelSize: vpx(24)
         font.letterSpacing: -0.3
-        //        font.bold: true
         visible: showStatusInfo
     }
 

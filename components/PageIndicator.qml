@@ -8,14 +8,14 @@ Item {
         Repeater {
             model: pageIndicator.pageCount
             Rectangle {
-                width: 4
-                height: 4
-                radius: 2
+                width: vpx(6)
+                height: vpx(6)
+                radius: vpx(3)
                 color: pageIndicator.currentIndex == index ? "white" : "#20ffffff"
             }
         }
     }
-    width:  pageIndicator.pageCount * (4 + 10)
+    width:  pageIndicator.pageCount * vpx(6 + 10)
     property var currentIndex: 0
     property int pageCount: 10
 

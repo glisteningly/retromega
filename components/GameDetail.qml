@@ -219,7 +219,7 @@ Item {
                         left: info_left.left
                         right: info_left.right
                         //                    bottom: actionBtns.top
-                        topMargin: vpx(30)
+                        topMargin: vpx(40)
                     }
                     asynchronous: true
                     visible: source != ""

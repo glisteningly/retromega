@@ -41,7 +41,7 @@ const dataText = {
     global_menu: "菜单",
     global_view: "视图",
     global_favorite: "收藏",
-    home_system: "机型",
+    home_system: "平台",
     home_collection: "合集",
     home_favorite: "收藏",
     home_recent: "最近",
@@ -72,7 +72,7 @@ const theme = {
   "title_dark": "#DDD",
 //  "background_grid": "#283593",
   "background_grid": "#222",
-  "gridColumnCount": 5,
+  "gridColumnCount": 6,
   "gridLargeColumnCount": 3,
   "primaryColor": "#1565C0"
 }
@@ -124,7 +124,7 @@ const systemColors = {
   "samsho": "#204A2C",
   "castlevania": "#6c3122",
   "zelda": "#FBC02D",
-  "finalfantasy": "#5001D5",
+  "finalfantasy": "#380096",
   "metroid": "#0a7f9a",
 
   "default": "#2387FF"
