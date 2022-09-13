@@ -90,7 +90,7 @@ Item {
             fillMode: Image.PreserveAspectCrop
             source: asset
             asynchronous: initialLoad ? false : true
-            sourceSize: { width: 320; height: 320 }
+            sourceSize: { width: 512; height: 512 }
             onStatusChanged: {
                 
                 if (status == Image.Null || status == Image.Error) {
@@ -106,7 +106,7 @@ Item {
                 }
                 
                 if (status == Image.Ready) {
-                    update_image_size(game_box_art.implicitWidth, game_box_art.implicitHeight, 320);
+                    update_image_size(game_box_art.implicitWidth, game_box_art.implicitHeight, vpx(400));
                     game_box_art_previous.source = source 
                     game_box_shadow.opacity = 1.0
                     opacity = 1.0

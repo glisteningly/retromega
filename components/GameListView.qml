@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtGraphicalEffects 1.12
+import "qrc:/qmlutils" as PegasusUtils
 
 Item { 
     id: listContent
@@ -23,20 +24,21 @@ Item {
         return gameView.currentIndex >= 0 ? items.get(gameView.currentIndex) : items.get(0)
     }
 
-//    property alias box_art : game_box_art
+    //    property alias box_art : game_box_art
     property bool hideFavoriteIcon : false
     property int defaultIndex: 0
     property var items : []
     property var indexItems : []
-//    property var showIndex : false
+    //    property var showIndex : false
     property bool focusSeeAll : false
-//    property var maintainFocusTop : false
+    //    property var maintainFocusTop : false
 
     // Sort mode that the items have applied to them.
     // Is used to determine how to show the quick index.
     // Doesn't actually apply the sort to the collection.
     property string sortMode: "title"
     property int sortDirection: 0
+    property var listRowHeight: vpx(50)
 
     property var selectSeeAll : {
         if (showSeeAll) {
@@ -60,26 +62,26 @@ Item {
         
     }
 
-//    onShowIndexChanged: {
-//        if (showIndex) {
-//            maintainFocusTop = true
-//        } else {
-//            maintainFocusTop = false
-//            listContent.focus = true
-//        }
-//    }
+    //    onShowIndexChanged: {
+    //        if (showIndex) {
+    //            maintainFocusTop = true
+    //        } else {
+    //            maintainFocusTop = false
+    //            listContent.focus = true
+    //        }
+    //    }
 
-//                Keys.onRightPressed: {
-//                    event.accepted = true
-//                    gameView.currentIndex = Math.min(gameView.currentIndex + 1, items.count - 1)
-//                    return
-//                }
+    //                Keys.onRightPressed: {
+    //                    event.accepted = true
+    //                    gameView.currentIndex = Math.min(gameView.currentIndex + 1, items.count - 1)
+    //                    return
+    //                }
 
-//                Keys.onLeftPressed: {
-//                    event.accepted = true;
-//                    gameView.currentIndex = Math.max(gameView.currentIndex - 1, 0);
-//                    return;
-//                }
+    //                Keys.onLeftPressed: {
+    //                    event.accepted = true;
+    //                    gameView.currentIndex = Math.max(gameView.currentIndex - 1, 0);
+    //                    return;
+    //                }
 
     Keys.onPressed: {
         // Show / Hide Index
@@ -99,13 +101,13 @@ Item {
         }
     }
 
-    function rowHeight(index) {
-        if (isLastRow(index) && showSeeAll) {
-            return 36 + 36
-        } else {
-            return 36
-        }
-    }
+    //    function rowHeight(index) {
+    //        if (isLastRow(index) && showSeeAll) {
+    //            return 36 + 36
+    //        } else {
+    //            return 36
+    //        }
+    //    }
 
     function updatedIndex() {
         onIndexChanged(gameView.currentIndex, items.count)
@@ -119,12 +121,12 @@ Item {
     Rectangle {
         id: mainListContent
         color: theme.background_dark
-//        color: "transparent"
+        //        color: "transparent"
         width: parent.width
         height: parent.height
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-    
+
         /**
         * -----
         * Games List
@@ -136,31 +138,34 @@ Item {
             color: "transparent"
             width: parent.width / 2
             height: parent.height
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+                margins: vpx(12)
+            }
             clip: true
-             
-            ListView {
-              id: gameView
-              model: parent.visible ? items : []
-              delegate: gameViewDelegate
-              height: parent.width
-              width: parent.height
-              anchors.left: parent.left
-              anchors.bottom: parent.bottom
-              anchors.margins: 32
-              anchors.bottomMargin: 6
-              anchors.topMargin: 2
-              anchors.top: parent.top
-              currentIndex: defaultIndex
-              snapMode: ListView.SnapOneItem
-              highlightRangeMode: ListView.ApplyRange
-              highlightMoveDuration: 0
-              preferredHighlightBegin: height * 0.5 - 15
-              preferredHighlightEnd: height * 0.5 + 15
 
-              focus: listContent.activeFocus
+            ListView {
+                id: gameView
+                model: parent.visible ? items : []
+                delegate: gameViewDelegate
+                height: parent.width
+                width: parent.height
+
+                anchors {
+                    fill: parent
+
+                }
+                currentIndex: defaultIndex
+                //              snapMode: ListView.SnapToItem
+                highlightRangeMode: ListView.ApplyRange
+                highlightMoveDuration: 0
+                preferredHighlightBegin: height * 0.5 - 15
+                preferredHighlightEnd: height * 0.5 + 15
+                clip: false
+
+                focus: listContent.activeFocus
                 Keys.onUpPressed: {
                     if (focusSeeAll) {
                         focusSeeAll = false
@@ -185,14 +190,14 @@ Item {
                     event.accepted = true
                     gameView.currentIndex = Math.min(gameView.currentIndex + 10, items.count - 1)
                     return
-            //        showIndex = false
+                    //        showIndex = false
                 }
 
                 Keys.onLeftPressed: {
                     event.accepted = true;
                     gameView.currentIndex = Math.max(gameView.currentIndex - 10, 0);
                     return;
-            //        showIndex = true
+                    //        showIndex = true
                 }
 
                 onCurrentIndexChanged: {
@@ -204,21 +209,21 @@ Item {
                     }
                 }
 
-              move: Transition {
-                 NumberAnimation { properties: "x,y,contentY"; duration: 100 }
-              }
-              moveDisplaced: Transition {
-                 NumberAnimation { properties: "x,y"; duration: 100 }
-              }
+                move: Transition {
+                    NumberAnimation { properties: "x,y,contentY"; duration: 100 }
+                }
+                moveDisplaced: Transition {
+                    NumberAnimation { properties: "x,y"; duration: 100 }
+                }
             }
 
             Component.onCompleted: {
-//                currentIndex = defaultIndex
+                //                currentIndex = defaultIndex
                 delay(50, function() {
                     gameView.positionViewAtIndex(currentIndex, ListView.Center)
                     if (currentHomeIndex <= 1 && collectionListIndex) {
                         currentIndex = defaultIndex
-//                        setCurrentIndex(currentIndex)
+                        //                        setCurrentIndex(currentIndex)
                     }
                 })
 
@@ -232,10 +237,10 @@ Item {
                         gameView.positionViewAtIndex(defaultIndex, ListView.Center)
                         if (currentHomeIndex <= 1 && !collectionListIndex) {
                             currentIndex = 0
-    //                        setCurrentIndex(currentIndex)
+                            //                        setCurrentIndex(currentIndex)
                         }
                     })
-//                    console.log(defaultIndex)
+                    //                    console.log(defaultIndex)
                 }
             }
             
@@ -243,11 +248,11 @@ Item {
                 id: gameViewDelegate
 
                 Item {
-                  id: gameViewDelegateContainer
-                  width: games.width - 12 - 12 - 12
-                  height: rowHeight(index)
-                  
-                  Keys.onPressed: {
+                    id: gameViewDelegateContainer
+                    width: games.width
+                    height: listRowHeight
+
+                    Keys.onPressed: {
                         //Launch game
                         if (api.keys.isCancel(event)) {
                             if (showSeeAll) {
@@ -255,10 +260,10 @@ Item {
                             }
 
                             if (currentHomeIndex <= 1) {
-                             event.accepted = true;
-                             gameList.currentIndex = -1
-                             navigate('HomePage');
-                         }
+                                event.accepted = true;
+                                gameList.currentIndex = -1
+                                navigate('HomePage');
+                            }
                         }
                         if (api.keys.isAccept(event)) {
                             event.accepted = true;
@@ -284,9 +289,9 @@ Item {
 
                         //Next page
                         if (api.keys.isPageDown(event)) {
-                           event.accepted = true
-                           gameView.currentIndex = Math.min(gameView.currentIndex + 10, items.count - 1)
-                           return
+                            event.accepted = true
+                            gameView.currentIndex = Math.min(gameView.currentIndex + 10, items.count - 1)
+                            return
                         }
                         
                         //Prev collection
@@ -297,67 +302,116 @@ Item {
                         }
 
                         event.accepted = false
-                  }
+                    }
 
-                  ListRow {
-                    title: modelData ? modelData.title : emptyTitle
-                    //title: modelData.title
-                    selected: parent.ListView.isCurrentItem && gameView.activeFocus && !selectSeeAll && modelData ? true : false
-                    width: parent.width
-                    emptyStyle: modelData ? false : true
-                    height: 38
-                    rowColor: gamesColor
-                    favorite: modelData.favorite && !hideFavoriteIcon
-                  }
+                    ListRow {
+                        title: modelData ? modelData.title : emptyTitle
+                        model: modelData ? modelData : null
+                        //title: modelData.title
+                        selected: parent.ListView.isCurrentItem && gameView.activeFocus && !selectSeeAll && modelData ? true : false
+                        width: parent.width
+                        emptyStyle: modelData ? false : true
+                        height: listRowHeight
+                        //                        rowColor: gamesColor
+                        favorite: modelData.favorite && !hideFavoriteIcon
+                    }
 
-                  Item {
-                      id: see_all
-                      width: parent.width
-                      height: 42
-                      visible: isLastRow(index) && showSeeAll
-                      anchors.top: parent.top
-                      anchors.topMargin: 42
-                      Rectangle {
-                          width: parent.width
-                          anchors.top: parent.top
-                          height: 1
-                          color: "white"
-                          opacity: 0.1
-                      }
-                      ListRow {
-                          title: "显示全部"
-                          selected: selectSeeAll
-                          width: parent.width
-                          anchors.bottom: parent.bottom
-                          height: 38
-                          rowColor: gamesColor
-                          favorite: false
-                      }
-                  }
+                    //                    Item {
+                    //                        id: see_all
+                    //                        width: parent.width
+                    //                        height: 42
+                    //                        visible: isLastRow(index) && showSeeAll
+                    //                        anchors.top: parent.top
+                    //                        anchors.topMargin: 42
+                    //                        Rectangle {
+                    //                            width: parent.width
+                    //                            anchors.top: parent.top
+                    //                            height: 1
+                    //                            color: "white"
+                    //                            opacity: 0.1
+                    //                        }
+                    //                        ListRow {
+                    //                            title: "显示全部"
+                    //                            selected: selectSeeAll
+                    //                            width: parent.width
+                    //                            anchors.bottom: parent.bottom
+                    //                            height: 38
+                    //                            rowColor: gamesColor
+                    //                            favorite: false
+                    //                        }
+                    //                    }
 
                 }
             }
 
         }
-          
+
         Rectangle {
             id: game_detail
             visible: true
-            color: "transparent"
-            width: 320
+            color: "#22000000"
+            width: parent.width * 0.5 - vpx(32)
             height: parent.height
-            anchors.rightMargin: 0
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            anchors {
+                margins: vpx(12)
+                right: parent.right
+                top: parent.top
+                bottom: parent.bottom
+            }
             z: 2001
 
-            BoxArt {
-                id: game_box_art
-                asset: selectedGame && gameView.currentIndex >= 0 && !focusSeeAll ? selectedGame.assets.boxFront : ""
-                context: currentCollection.shortName + listContent.context
-             }
+            Item {
+                id: game_detail_image
+                width: parent.width
+                height: parent.height * 0.66 - vpx(32)
+                anchors {
+//                    margins: vpx(12)
+                    left: parent.left
+                    top: parent.top
+//                    topMargin: vpx(12)
+//                    bottom: parent.bottom
+                }
 
+                BoxArt {
+                    id: game_box_art
+                    asset: selectedGame && gameView.currentIndex >= 0 && !focusSeeAll ? selectedGame.assets.boxFront : ""
+                    context: currentCollection.shortName + listContent.context
+                }
+            }
+
+            //Description
+            Item {
+                width: parent.width
+                //                    height: gameDetailText.height - 40
+                anchors {
+                    top: game_detail_image.bottom
+//                    topMargin: vpx(16)
+                    margins: vpx(24)
+                    topMargin: vpx(24)
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                    bottomMargin: vpx(70)
+                }
+
+                PegasusUtils.AutoScroll {
+                    anchors.fill: parent
+                    Text {
+                        id: txt_game_description
+                        width: parent.width
+                        text: selectedGame.description
+                        font {
+                            weight: Font.Light
+                            pixelSize: vpx(20)
+                            letterSpacing: 0.4
+                        }
+                        wrapMode: Text.WordWrap
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignJustify
+                        color: "#999"
+                    }
+                }
+            }
         }
     }
 }
