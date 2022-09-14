@@ -102,7 +102,7 @@ ListView {
         color: theme.background_dark
         Behavior on bgIndex {
             ColorAnimation {
-                target: collectionsBackground; property: "color"; to: systemColors[allCollections.get(currentIndex).shortName] ?? systemColors["default"]; duration: 335
+                target: collectionsBackground; property: "color"; to: collectionInfoList[allCollections.get(currentIndex).shortName].color || collectionInfoList["default"].color; duration: 335
             }
         }
         transitions: Transition {
@@ -177,7 +177,7 @@ ListView {
                 id: collectionListView_item
                 width: parent.width
                 height: parent.height
-                color:  "transparent" //systemColors[modelData.shortName]
+                color:  "transparent"
 
                 Image {
                     id: menu_mask
@@ -197,7 +197,6 @@ ListView {
                 }
 
                 Rectangle {
-
                     id: tile_content
                     anchors.top: collectionListView_item.top
                     anchors.left: collectionListView_item.left
@@ -205,22 +204,11 @@ ListView {
                     anchors.leftMargin: 0
                     width: parent.width
                     height: parent.height
-                    color: systemColors[modelData.shortName] ?? "#000000"
+                    color: collectionInfoList[modelData.shortName].color || "#000000"
                     clip: false
                     visible: false
 
                 }
-
-//                DropShadow {
-//                    anchors.fill: mask
-//                    horizontalOffset: 0
-//                    verticalOffset: 4
-//                    radius: 12.0
-//                    samples: 16
-//                    opacity: 0.4
-//                    color: systemColors[modelData.shortName]
-//                    source: mask
-//                }
 
                 Image {
                     id: device
@@ -315,7 +303,7 @@ ListView {
                 }
 
                 Text {
-//                    text: systemCompanies[modelData.shortName].toUpperCase()
+//                    text: collectionInfoList[modelData.shortName].company.toUpperCase()
                     text: modelData.description
                     font.family: systemSubitleFont.name
                     font.pixelSize: vpx(20)

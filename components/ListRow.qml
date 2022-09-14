@@ -8,7 +8,10 @@ Item {
     property var rowColor : "#000000"
     property var emptyStyle : false
     property var model : null
-    property var collectionName : { return model? model.collections.get(0).shortName : ''}
+    property var collectionName : {
+        return model? model.collections.get(0).shortName : null
+        //        return _coll? systemInfoList[_coll].short : ''
+    }
 
 
     Rectangle {
@@ -50,7 +53,7 @@ Item {
     }
 
     Text {
-//        text: model.collections.get(0).shortName
+        //        text: model.collections.get(0).shortName
         text: model.title
         color: selected ? "#DDD" : "#888"
         //		opacity: emptyStyle ? 0.3 : 1.0
@@ -73,25 +76,47 @@ Item {
     }
 
     // show game platform except from systemlist
-    Text {
+    Item {
+        id: sysTagContainer
         visible: currentHomeIndex !== 0
-        text: collectionName.toUpperCase()
-        color: systemColors[collectionName] ?? "#666"
-        font {
-            pixelSize: vpx(15)
-            letterSpacing: 0.5
-        }
-        width: parent.width
-        height: parent.height
+        height: vpx(22)
+        width: sysTag.width + vpx(12)
         anchors {
             right: parent.right
             rightMargin: vpx(30)
             verticalCenter: parent.verticalCenter
-            verticalCenterOffset: vpx(-1)
         }
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignRight
-        elide: Text.ElideRight
+
+        //        Rectangle {
+        //            anchors {
+        //                fill: parent
+        //            }
+        //            color: systemInfoList[collectionName].color || "#666"
+        //            radius: vpx(4)
+        //        }
+        Text {
+            id: sysTag
+
+            text: collectionName ? systemInfoList[collectionName].short.toUpperCase() : ''
+            color: systemInfoList[collectionName].color || "#666"
+            //            color: "#EEE"
+            font {
+                family: systemTitleFont.name
+                pixelSize: vpx(20)
+                letterSpacing: vpx(0.5)
+            }
+            //        width: parent.width
+            height: parent.height
+            anchors {
+                right: parent.right
+//                rightMargin: vpx(6)
+                verticalCenter: parent.verticalCenter
+                verticalCenterOffset: vpx(1)
+            }
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignRight
+            elide: Text.ElideRight
+        }
     }
 
     Image {
@@ -110,17 +135,17 @@ Item {
         }
     }
 
-//    Image {
-//        width: vpx(20)
-//        height: vpx(20)
-//        visible: favorite
-//        fillMode: Image.PreserveAspectFit
-//        source: "../assets/icons/ic-list-favorite"
-//        asynchronous: true
-//        anchors {
-//            right: parent.right
-//            rightMargin: vpx(3)
-//            verticalCenter: parent.verticalCenter
-//        }
-//    }
+    //    Image {
+    //        width: vpx(20)
+    //        height: vpx(20)
+    //        visible: favorite
+    //        fillMode: Image.PreserveAspectFit
+    //        source: "../assets/icons/ic-list-favorite"
+    //        asynchronous: true
+    //        anchors {
+    //            right: parent.right
+    //            rightMargin: vpx(3)
+    //            verticalCenter: parent.verticalCenter
+    //        }
+    //    }
 }

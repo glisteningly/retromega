@@ -293,7 +293,7 @@ Item {
                 anchors.leftMargin: 18
 //                color: systemColor//theme.title
                 color: "#EEE"
-                font.pixelSize: vpx(24)
+                font.pixelSize: isSystemPage ? vpx(30) : vpx(28)
                 font.letterSpacing: 0.3
 //                font.bold: true
                 font.family: isSystemPage ? systemTitleFont.name : collectionTitleFont.name
@@ -320,43 +320,12 @@ Item {
             }   
 
 
-            // Text {
-            //     id: header_time
-            //     text: Qt.formatTime(new Date(), "hh:mm")   
-            //     anchors.right: parent.right
-            //     anchors.top: parent.top
-            //     anchors.topMargin: 16
-            //     anchors.rightMargin: 32
-            //     color: "#9B9B9B"
-            //     font.pixelSize: 18
-            //     font.letterSpacing: -0.3
-            //     font.bold: true              
-            // }   
-            Rectangle{
-                visible: false
-                id: legend
-                height:vpx(26)
-                width:vpx(26)
-                color:"#666"
-                radius:vpx(14)
-                anchors.top: parent.top
-                anchors.topMargin: vpx(12)
-                //anchors.right: header_time.left  
-                anchors.right: parent.right
-                anchors.leftMargin: 0
-                //anchors.rightMargin: 5
-                anchors.rightMargin: 32
-                Text{
-                    text: "Y"
-                    color:"white"         
-                    font.pixelSize: 14
-//                    font.letterSpacing: -0.3
-                    font.bold: true              
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
+            HeaderInfoBar {
+                height: parent.height
+                anchors {
+                    right: parent.right
                 }
             }
-
         }
 
         /**

@@ -107,7 +107,7 @@ ListView {
         color: theme.background_dark
         Behavior on bgIndex {
             ColorAnimation {
-                target: systemsBackground; property: "color"; to: systemColors[allSystems.get(currentIndex).shortName] ?? systemColors["default"]; duration: 335
+                target: systemsBackground; property: "color"; to: systemInfoList[allSystems.get(currentIndex).shortName].color || systemInfoList["default"].color; duration: 335
             }
         }
         transitions: Transition {
@@ -184,7 +184,7 @@ ListView {
                 id: systemsListView_item
                 width: parent.width
                 height: parent.height
-                color:  "transparent" //systemColors[modelData.shortName]
+                color:  "transparent"
                 
                 Image {
                     id: menu_mask
@@ -311,7 +311,7 @@ ListView {
                 }
 
                 Text {
-                    text: systemCompanies[modelData.shortName].toUpperCase()
+                    text: systemInfoList[modelData.shortName].company.toUpperCase()
                     font.family: systemSubitleFont.name
                     font.pixelSize: vpx(20)
                     font.letterSpacing: 0.5

@@ -52,19 +52,19 @@ Item {
             ColorAnimation {
                 from: "white"
                 to: "#30000000"
-                duration: 400
+                duration: 600
             }
             ColorAnimation {
                 from: "#30000000"
                 to: "white"
-                duration: 400
+                duration: 600
             }
         }
     }
 
     Rectangle {
         id: gridItemBg
-        color:  systemColors[modelData.shortName] ?? "#000000"
+        color:  systemInfoList[modelData.shortName].color || "#000000"
         opacity: 0.5
         anchors {
             fill: parent
@@ -101,19 +101,17 @@ Item {
         smooth: true
     }
 
-    //    Image {
-    //        anchors.centerIn: parent
-
-    //        visible: boxFront.status === Image.Loading
-    //        source: "../assets/loading-spinner.png"
-
-    //        RotationAnimator on rotation {
-    //            loops: Animator.Infinite;
-    //            from: 0;
-    //            to: 360;
-    //            duration: 500
-    //        }
-    //    }
+    Image {
+        anchors.centerIn: parent
+        visible: boxFront.status === Image.Loading
+        source: "../assets/loading-spinner.png"
+        RotationAnimator on rotation {
+            loops: Animator.Infinite;
+            from: 0;
+            to: 360;
+            duration: 500
+        }
+    }
 
     Text {
         id: shortTitle

@@ -5,6 +5,8 @@ import SortFilterProxyModel 0.2
 
 import 'components' as Components
 import './const.js' as Const
+import './systems.js' as SYSTEM
+import'./collections.js' as COLLECTION
 
 FocusScope {
     id: root
@@ -21,8 +23,9 @@ FocusScope {
     property var curDataText: { dataText[lang] }
 
     property var theme : Const.theme
-    property var systemColors: Const.systemColors
-    property var systemCompanies: Const.systemCompanies
+    property var systemInfoList: SYSTEM.systemInfoList
+    property var collectionInfoList: COLLECTION.collectionInfoList
+
 
     Timer {
         id: timer
@@ -35,20 +38,20 @@ FocusScope {
         timer.start();
     }
 
-    Component.onCompleted: { 
+    Component.onCompleted: {
         lang = api.memory.get('lang') ?? 'cn'
-        currentHomeIndex = api.memory.get('homeIndex') ?? 0
-        currentSystemIndex = api.memory.get('currentSystemIndex') ?? 0
-        currentCollectionIndex = api.memory.get('currentCollectionIndex') ?? 0
-        currentSystemViewMode = api.memory.get('currentSystemViewMode') ?? 'list'
-        currentGameListViewMode = api.memory.get('currentGameListViewMode') ?? 'list'
-        currentPage = api.memory.get('currentPage') ?? 'HomePage'
-        collectionListIndex = api.memory.get('collectionListIndex') ?? 0
-        collectionSortMode = api.memory.get('collectionSortMode') ?? "title"
-        collectionSortDirection =  api.memory.get('collectionSortDirection') ?? 0
-        collectionFilterMode =  api.memory.get('collectionFilterMode') ?? "all"
-        collectionShowAllItems =  api.memory.get('collectionShowAllItems') ?? false
-        startSound.play()                                                                           
+                                         currentHomeIndex = api.memory.get('homeIndex') ?? 0
+                                                                                           currentSystemIndex = api.memory.get('currentSystemIndex') ?? 0
+                                                                                                                                                        currentCollectionIndex = api.memory.get('currentCollectionIndex') ?? 0
+                                                                                                                                                                                                                             currentSystemViewMode = api.memory.get('currentSystemViewMode') ?? 'list'
+                                                                                                                                                                                                                                                                                                currentGameListViewMode = api.memory.get('currentGameListViewMode') ?? 'list'
+                                                                                                                                                                                                                                                                                                                                                                       currentPage = api.memory.get('currentPage') ?? 'HomePage'
+                                                                                                                                                                                                                                                                                                                                                                                                                      collectionListIndex = api.memory.get('collectionListIndex') ?? 0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     collectionSortMode = api.memory.get('collectionSortMode') ?? "title"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  collectionSortDirection =  api.memory.get('collectionSortDirection') ?? 0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          collectionFilterMode =  api.memory.get('collectionFilterMode') ?? "all"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            collectionShowAllItems =  api.memory.get('collectionShowAllItems') ?? false
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  startSound.play()
     }
 
     // Main homepage index
@@ -67,7 +70,7 @@ FocusScope {
         }
     }
 
-//    property string currentSystemViewMode : "grid"
+    //    property string currentSystemViewMode : "grid"
     property string currentSystemViewMode : "list"
     function toggleSystemViewMode() {
         var _flag = (currentSystemViewMode === 'list')?'grid':'list'
@@ -81,7 +84,7 @@ FocusScope {
         api.memory.set('currentGameListViewMode', _flag)
         currentGameListViewMode = _flag
     }
-  
+
     function setSystemIndex(index) {
         api.memory.set('currentSystemIndex', index)
         currentSystemIndex = index
@@ -117,7 +120,7 @@ FocusScope {
     // Games index
     property int currentGameIndex: 0
     property var currentGame: {return currentCollection.games.get(currentGameIndex)}
-  
+
 
 
     // Collection sort mode
@@ -131,31 +134,31 @@ FocusScope {
         
         var direction = collectionSortDirection == 0 ? 1 : 0
         if (collectionSortMode !== sortMode || sortMode === "lastPlayed" || sortMode === "rating")  {
-        
+
             switch (sortMode) {
-                case "title":
-                    direction = 0
-                    break               
-                case "lastPlayed":
-                    direction = 1
-                    break               
-                case "rating":
-                    direction = 1
-                    break                
-                case "release":
-                    direction = 0
-                    break              
+            case "title":
+                direction = 0
+                break
+            case "lastPlayed":
+                direction = 1
+                break
+            case "rating":
+                direction = 1
+                break
+            case "release":
+                direction = 0
+                break
             }
         }
 
         collectionSortDirection = direction
-        collectionSortMode = sortMode        
+        collectionSortMode = sortMode
         api.memory.set('collectionSortDirection', direction)
     }
 
     function setCollectionFilterMode(filterMode) {
         api.memory.set('collectionFilterMode', filterMode)
-        collectionFilterMode = filterMode        
+        collectionFilterMode = filterMode
     }
 
     function setHomeIndex(index) {
@@ -163,11 +166,11 @@ FocusScope {
         api.memory.set('homeIndex', index)
         currentHomeIndex = index
     }
-  
+
     property var androidCollection: {
         return api.collections.get(0)
     }
-  
+
     property string currentPage : 'HomePage';
     function setCurrentPage(page) {
         api.memory.set('currentPage', page)
@@ -177,7 +180,7 @@ FocusScope {
     property var currentGameDetail : null
     property int currentGameDetailIndex : 0
     property bool isShowingGameDetail : false
-    function showGameDetail(game, index) {                
+    function showGameDetail(game, index) {
         if (game) {
             forwardSound.play()
             currentGameDetail = game
@@ -193,13 +196,13 @@ FocusScope {
     property bool launchingGame : false
     function startGame(game, index) {
         currentGameIndex = index
-        setCollectionListIndex(index)       
+        setCollectionListIndex(index)
         launchSound.play()
         launchingGame = true
         game.launch()
-//        delay(400, function() {
-//            game.launch()
-//        })
+        //        delay(400, function() {
+        //            game.launch()
+        //        })
     }
     
     property var systemColor: {
@@ -213,8 +216,8 @@ FocusScope {
 
 
     property var layoutScreen : {
-        "width": parent.width,
         "height": parent.height,
+        "width": Math.min(parent.width,  parent.height * 2),
         "background": theme.background,
     }
 
@@ -231,15 +234,15 @@ FocusScope {
         "height": 40,
         "background": "transparent",
         
-    }    
+    }
 
     property var layoutContainer : {
         "width": layoutScreen.width,
         "height": parent.height - layoutHeader.height - layoutHeader.height,
         "background": "transparent",
         
-    }   
- 
+    }
+
     function navigate(page){
         setCurrentPage(page)
         if (page === 'HomePage') {
@@ -248,41 +251,41 @@ FocusScope {
             forwardSound.play()
         }
         if (page === 'GamesPage') {
-           gamesPage.onShow()
+            gamesPage.onShow()
         }
     }
-  
+
     //Sounds
     SoundEffect {
         id: backSound
         source: "assets/sound/sound-back.wav"
         volume: 0.5
-    }   
+    }
 
     //Sounds
     SoundEffect {
         id: forwardSound
         source: "assets/sound/sound-forward.wav"
         volume: 0.5
-    }   
+    }
 
     SoundEffect {
         id: navSound
         source: "assets/sound/sound-click2.wav"
         volume: 1.0
-    }   
+    }
 
     SoundEffect {
         id: launchSound
         source: "assets/sound/sound-launch.wav"
         volume: 0.35
-    }      
+    }
 
     SoundEffect {
         id: startSound
         source: "assets/sound/sound-start.wav"
         volume: 0.35
-    }           
+    }
     
     property var lastPlayedMaximum: {
         if (allLastPlayed.count >= 50) {
@@ -295,14 +298,14 @@ FocusScope {
     SortFilterProxyModel {
         id: allSystems
         sourceModel: api.collections
-//        filters: ValueFilter { roleName: "name"; value: "Android"; inverted: true; }
+        //        filters: ValueFilter { roleName: "name"; value: "Android"; inverted: true; }
         filters: ValueFilter { roleName: "summary"; value: "collection"; inverted: true; }
     }
 
     SortFilterProxyModel {
         id: allCollections
         sourceModel: api.collections
-//        filters: ValueFilter { roleName: "name"; value: "Android"; inverted: true; }
+        //        filters: ValueFilter { roleName: "name"; value: "Android"; inverted: true; }
         filters: ValueFilter { roleName: "summary"; value: "collection"; }
     }
 
@@ -345,10 +348,10 @@ FocusScope {
         id: currentCollectionGamesSorted
         sourceModel: currentCollection.games
         sorters: RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
-//        sorters: [
-//            RoleSorter { roleName: "favorite"; sortOrder: Qt.DescendingOrder },
-//            RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
-//        ]
+        //        sorters: [
+        //            RoleSorter { roleName: "favorite"; sortOrder: Qt.DescendingOrder },
+        //            RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
+        //        ]
 
     }
 
@@ -358,15 +361,10 @@ FocusScope {
         color: '#000'
         width: layoutScreen.width
         height: layoutScreen.height
-        anchors.top: parent.top
-
-//        Rectangle {
-//            id: backRect
-//            color: theme.background
-//            anchors.fill: parent
-//            radius: vpx(12)
-//        }
-
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
 
         // Home Page
         Components.HomePage {
@@ -380,51 +378,52 @@ FocusScope {
             opacity: 1.0
             transitions: Transition {
                 NumberAnimation { properties: "opacity"; easing.type: Easing.InCubic; duration: 200  }
-            }             
+            }
 
-         
-        } 
+
+        }
 
         // Game Detail
         Component {
-            id: gameDetail           
+            id: gameDetail
             Components.GameDetail {
-                //visible: isShowingGameDetail         
+                //visible: isShowingGameDetail
                 id: gameDetailContentView
-                anchors.top: parent.top
-                anchors.right: parent.right
-                anchors.left: parent.left
-                anchors.rightMargin: 0
-                anchors.leftMargin: 0
+                width: layoutScreen.width
+                height: layoutScreen.height
+                anchors {
+                    top: parent.top
+                    horizontalCenter: parent.horizontalCenter
+                }
                 opacity: 1.0
                 active: isShowingGameDetail
                 game: currentGameDetail
 
                 transitions: Transition {
                     NumberAnimation { properties: "opacity"; easing.type: Easing.OutCubic; duration: 1600  }
-                } 
-
+                }
             }
-
         }
+    }
 
-
-          
-    }   
-
-//    FastBlur {
-//        visible: isShowingGameDetail
-//        id: blur
-//        anchors.fill: app
-//        source: app
-//        radius: 50
-//    }
+    //    FastBlur {
+    //        visible: isShowingGameDetail
+    //        id: blur
+    //        anchors.fill: app
+    //        source: app
+    //        radius: 50
+    //    }
 
     Loader  {
         id: gameDetailLoader
         focus: isShowingGameDetail
-        active:  isShowingGameDetail
-        anchors.fill: parent
+        active: isShowingGameDetail
+        width: layoutScreen.width
+        height: layoutScreen.height
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
         sourceComponent: gameDetail
         asynchronous: false
     }
@@ -439,7 +438,7 @@ FocusScope {
         anchors {
             fill: parent
         }
-        states: [ 
+        states: [
 
             State{
                 name: "default"; when: !launchingGame
@@ -455,7 +454,7 @@ FocusScope {
 
         transitions: Transition {
             NumberAnimation { properties: "opacity"; easing.type: Easing.OutInElastic; duration: 350  }
-        }            
+        }
         z: 2002
-    }          
+    }
 }

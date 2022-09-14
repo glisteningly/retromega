@@ -53,19 +53,19 @@ Item {
             ColorAnimation {
                 from: "white"
                 to: "#30000000"
-                duration: 400
+                duration: 600
             }
             ColorAnimation {
                 from: "#30000000"
                 to: "white"
-                duration: 400
+                duration: 600
             }
         }
     }
 
     Rectangle {
         id: gridItemBg
-        color:  systemColors[modelData.shortName] ?? "#000000"
+        color:  collectionInfoList[modelData.shortName].color || "#000000"
         opacity: 0.6
         anchors.fill: parent
         anchors.margins: 2
@@ -124,15 +124,16 @@ Item {
 //        anchors.centerIn: parent.bottom
 //        anchors.leftMargin: 8
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: parent.height * 0.05
+        anchors.bottomMargin: parent.height * 0.04
         font.letterSpacing: 1.5
         text: collection.name
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
-        color: ColorDetector.isColorDarkOrLight(systemColors[modelData.shortName]) === 'dark'? "#eee":"#333"
+        color: ColorDetector.isColorDarkOrLight(collectionInfoList[modelData.shortName].color) === 'dark'? "#eee":"#333"
+//        color: "#EEE"
         font {
-            pixelSize: vpx(20)
-//            family: systemTitleFont.name
+            pixelSize: vpx(22)
+            family: collectionTitleFont.name
         }
     }
 

@@ -32,7 +32,7 @@ Item {
         if (currentHomeIndex > 1) {
             return theme.primaryColor
         } else {
-            return systemColors[currentCollection.shortName] ?? theme.primaryColor
+            return systemInfoList[currentCollection.shortName].color || theme.primaryColor
         }
     }
 
@@ -59,7 +59,6 @@ Item {
 //        color: highlightColor
         color: "#333"
         visible: selected
-//        color:  systemColors[modelData.shortName] ?? "#000000"
 //        opacity: headerFocused ? 0.1 : 0.3
         anchors.fill: parent
 //        anchors.margins: 0
@@ -88,12 +87,12 @@ Item {
             ColorAnimation {
                 from: "white"
                 to: "#30000000"
-                duration: 400
+                duration: 600
             }
             ColorAnimation {
                 from: "#30000000"
                 to: "white"
-                duration: 400
+                duration: 600
             }
         }
     }
@@ -117,10 +116,6 @@ Item {
             top: parent.top
             bottom: parent.bottom
             margins: 2
-//            topMargin: 0
-//            rightMargin: 10
-//            bottomMargin: 0
-//            leftMargin: 10
         }
         asynchronous: true
         visible: source != ""
@@ -128,22 +123,6 @@ Item {
         sourceSize { width: 240; height: 240 }
         fillMode: Image.PreserveAspectFit
         smooth: true
-//        property bool adapt: true
-
-        // 圆角
-//        layer.enabled: rounded
-//        layer.effect: OpacityMask {
-//            maskSource: Item {
-//                width: gameGridItem.width
-//                height: gameGridItem.height
-
-//                Rectangle {
-//                    anchors.fill: parent
-//                    radius: 6
-//                }
-//            }
-//        }
-
         onStatusChanged: {
             if (status === Image.Ready) {
                 gameGridItem.imageLoaded(implicitWidth, implicitHeight);
@@ -151,19 +130,20 @@ Item {
         }
     }
 
-//    Image {
-//        anchors.centerIn: parent
+    Image {
+        anchors.centerIn: parent
 
-//        visible: imgGridItem.status === Image.Loading
-//        source: '../assets/images/loading-spinner.png'
+        visible: imgGridItem.status === Image.Loading
+        source: '../assets/images/loading-spinner.png'
 
-//        RotationAnimator on rotation {
-//            loops: Animator.Infinite;
-//            from: 0;
-//            to: 360;
-//            duration: 500
-//        }
-//    }
+        RotationAnimator on rotation {
+            loops: Animator.Infinite;
+            from: 0;
+            to: 360;
+            duration: 500
+        }
+    }
+
     Rectangle {
         id: noImage
         visible: !imgGridItem.visible
@@ -272,8 +252,8 @@ Item {
         anchors {
             right: parent.right
             top: parent.top
-            rightMargin: 3
-            topMargin: 3
+            rightMargin: vpx(2)
+            topMargin: vpx(2)
         }
     }
 
