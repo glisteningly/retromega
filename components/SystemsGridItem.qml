@@ -34,8 +34,17 @@ Item {
     scale: selected ? 1.1 : 1
     z: selected ? 3 : 1
 
+    Behavior on scale {
+        PropertyAnimation { duration: 150 }
+    }
 
-    Behavior on scale { PropertyAnimation { duration: 150 } }
+    Behavior on width {
+        NumberAnimation { duration: 100; }
+    }
+
+    Behavior on height {
+        NumberAnimation { duration: 100; }
+    }
 
     Rectangle {
         id: gridItemBgBorder
@@ -96,21 +105,22 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  "../assets/images/devices/"+modelData.shortName+".png" || ""
-        sourceSize { width: 256; height: 256 }
+        sourceSize { width: 400; height: 400 }
         fillMode: Image.PreserveAspectFit
         smooth: true
     }
 
     Image {
         anchors.centerIn: parent
-        visible: boxFront.status === Image.Loading
-        source: "../assets/loading-spinner.png"
+        visible: imgController.status === Image.Loading
+        source: "../assets/images/loading-spinner.png"
         RotationAnimator on rotation {
             loops: Animator.Infinite;
             from: 0;
             to: 360;
             duration: 500
         }
+        opacity: 0.6
     }
 
     Text {
@@ -122,7 +132,7 @@ Item {
         //        anchors.leftMargin: 8
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 7
-        font.letterSpacing: 0.2
+//        font.letterSpacing: 0.2
 
 
         text: collection.name.length >= 18 ? collection.shortName : collection.name
@@ -130,7 +140,7 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         color: "#eee"
         font {
-            pixelSize: vpx(24)
+            pixelSize: parent.width * 0.12
             family: systemTitleFont.name
         }
     }

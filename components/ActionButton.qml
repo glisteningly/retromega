@@ -10,7 +10,7 @@ Item {
         id: buttonBackground
         anchors.fill: parent
         color: parent.activeFocus ? systemColor : "#ffffff"
-        radius: 6
+        radius: vpx(4)
     }
 
     DropShadow {
@@ -23,28 +23,32 @@ Item {
         source: buttonBackground
     }
 
-    Text { 
+    Text {
         text: title
         font.bold: false
         font.pixelSize: vpx(16)
         visible: parent.activeFocus
         opacity: 0.5
         color: textColor
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: vpx(-22)
+        anchors.top: parent.bottom
+        anchors.topMargin: vpx(4)
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
     Image {
         id: iconImage
         source: "../assets/icons/ic-" + icon + ".svg"
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+        height: parent.height * 0.6
+        width: height
+        anchors {
+            verticalCenter: parent.verticalCenter
+            horizontalCenter: parent.horizontalCenter
+        }
     }
 
     ColorOverlay {
         anchors.fill: iconImage
         source: iconImage
         color: parent.activeFocus ? "#ffffff" : systemColor// "#333333"
-    }    
+    }
 }

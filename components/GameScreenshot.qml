@@ -34,7 +34,7 @@ Item {
         id: game_box_shadow
         source: "../assets/images/cover-shadow.png"
         width: (371 / 200) * parent.width
-        height: (371 / 200) * parent.height
+        height: (371 / 200) * parent.height - vpx(4)
         fillMode: Image.PreserveAspectFill
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter

@@ -3,7 +3,7 @@ import QtGraphicalEffects 1.12
 
 Item {
 
-    // When the box art is used across screens, 
+    // When the box art is used across screens,
     // context signals when the contents needs to be reset
     // Basically avoids seeing previous artwork on an unrelated screen / state
     property var context: "default"
@@ -11,20 +11,20 @@ Item {
     // Asset to load
     property var asset: string
 
-    // If first time the box art is loaded. In this case loads sync 
+    // If first time the box art is loaded. In this case loads sync
     property var initialLoad: true
 
     // State
     property var loadingError: false
     property var loadingImage: true
     
-    // Convenience 
+    // Convenience
     property var emptyAsset: {
         return (asset == "" || asset == null)
     }
 
     onContextChanged: {
-        // When context changes, remove the cached image underneath 
+        // When context changes, remove the cached image underneath
         game_box_art_previous.source = ""
 
         // If image is in process of loading then hide the shadow so we don't just see a black square & shadow
@@ -34,7 +34,7 @@ Item {
     }
 
     function update_image_size(width, height, container_size) {
-        var fill = (width > height) ? 0.75 : 0.65
+        var fill = (width > height * 0.95) ? 0.9 : 0.65
         box_art.width  = size_image(width, height, container_size * fill).width
         box_art.height = size_image(width, height, container_size * fill).height
     }
@@ -56,10 +56,13 @@ Item {
         id: game_box_shadow
         source: "../assets/images/cover-shadow.png"
         width: (371 / 200) * parent.width
-        height: (371 / 200) * parent.height
+        height: (371 / 200) * parent.height - vpx(4)
         fillMode: Image.PreserveAspectFill
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            verticalCenter: parent.verticalCenter
+//            verticalCenterOffset: vpx(1)
+        }
     }
 
     // Image container with rounded corners
@@ -71,7 +74,7 @@ Item {
         width: parent.width
         height: parent.height
 
-        // Cached image of the last box art that was shown. 
+        // Cached image of the last box art that was shown.
         // This is used to avoid the box art  flickering when scrolling and images are loading.
         Image {
             anchors.fill: parent
@@ -106,14 +109,14 @@ Item {
                 }
                 
                 if (status == Image.Ready) {
-                    update_image_size(game_box_art.implicitWidth, game_box_art.implicitHeight, vpx(400));
-                    game_box_art_previous.source = source 
+                    update_image_size(game_box_art.implicitWidth, game_box_art.implicitHeight, vpx(360));
+                    game_box_art_previous.source = source
                     game_box_shadow.opacity = 1.0
                     opacity = 1.0
                     box_art.loadingError = false
                     box_art.initialLoad = false
-                    box_art.loadingImage = false    
-                    box_art.forceSync = false                
+                    box_art.loadingImage = false
+                    box_art.forceSync = false
                 }
             }
         }

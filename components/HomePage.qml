@@ -220,8 +220,8 @@ Item {
                         id: recentsContentView
                         width: parent.width
                         height: parent.height
-                        items: allRecentlyPlayed      
-                        indexItems: allRecentlyPlayed
+                        items: filterLastPlayed
+                        indexItems: filterLastPlayed
                         sortMode: "recent"
                         focus: true  && !isShowingGameDetail
                     }
@@ -233,8 +233,8 @@ Item {
                         id: recentsContentView
                         width: parent.width
                         height: parent.height
-                        items: allRecentlyPlayed
-                        indexItems: allRecentlyPlayed
+                        items: filterLastPlayed
+                        indexItems: filterLastPlayed
                         sortMode: "recent"
                         focus: true  && !isShowingGameDetail
                     }

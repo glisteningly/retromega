@@ -35,8 +35,17 @@ Item {
     scale: selected ? 1.1 : 1
     z: selected ? 3 : 1
 
+    Behavior on scale {
+        PropertyAnimation { duration: 150 }
+    }
 
-    Behavior on scale { PropertyAnimation { duration: 150 } }
+    Behavior on width {
+        NumberAnimation { duration: 100; }
+    }
+
+    Behavior on height {
+        NumberAnimation { duration: 100; }
+    }
 
     Rectangle {
         id: gridItemBgBorder
@@ -97,7 +106,7 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  "../assets/images/collections/"+modelData.shortName+".png" || ""
-        sourceSize { width: 128; height: 128 }
+        sourceSize { width: 400; height: 400 }
         fillMode: Image.PreserveAspectFit
 //        smooth: true
     }
@@ -124,7 +133,7 @@ Item {
 //        anchors.centerIn: parent.bottom
 //        anchors.leftMargin: 8
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: parent.height * 0.04
+        anchors.bottomMargin: parent.height * 0.06
         font.letterSpacing: 1.5
         text: collection.name
         wrapMode: Text.WordWrap
@@ -132,7 +141,7 @@ Item {
         color: ColorDetector.isColorDarkOrLight(collectionInfoList[modelData.shortName].color) === 'dark'? "#eee":"#333"
 //        color: "#EEE"
         font {
-            pixelSize: vpx(22)
+            pixelSize: parent.width * 0.1
             family: collectionTitleFont.name
         }
     }

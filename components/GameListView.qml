@@ -92,22 +92,6 @@ Item {
             return
         }
     }
-    
-    function isLastRow(currentIndex) {
-        if (currentIndex === items.count - 1) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    //    function rowHeight(index) {
-    //        if (isLastRow(index) && showSeeAll) {
-    //            return 36 + 36
-    //        } else {
-    //            return 36
-    //        }
-    //    }
 
     function updatedIndex() {
         onIndexChanged(gameView.currentIndex, items.count)
@@ -146,16 +130,39 @@ Item {
             }
             clip: true
 
+            Rectangle {
+                id: listProgressBar
+                width: vpx(8)
+                height: vpx(100)
+                anchors {
+                    right: parent.right
+                    top: parent.top
+                    bottom: parent.bottom
+                }
+                color: "#22000000"
+
+                Rectangle {
+                    height: ((gameView.height / listRowHeight) / items.count) * gameView.height
+                    width: parent.width
+                    anchors {
+                        left: parent.left
+                        top: parent.top
+                        topMargin: (gameView.height - height) * (gameView.currentIndex / (items.count - 1))
+                    }
+                    color: "#333"
+                }
+            }
+
             ListView {
                 id: gameView
                 model: parent.visible ? items : []
                 delegate: gameViewDelegate
-                height: parent.width
-                width: parent.height
-
                 anchors {
-                    fill: parent
-
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    rightMargin: vpx(12)
+                    bottom: parent.bottom
                 }
                 currentIndex: defaultIndex
                 //              snapMode: ListView.SnapToItem
@@ -249,7 +256,7 @@ Item {
 
                 Item {
                     id: gameViewDelegateContainer
-                    width: games.width
+                    width: parent.width
                     height: listRowHeight
 
                     Keys.onPressed: {
@@ -315,32 +322,6 @@ Item {
                         //                        rowColor: gamesColor
                         favorite: modelData.favorite && !hideFavoriteIcon
                     }
-
-                    //                    Item {
-                    //                        id: see_all
-                    //                        width: parent.width
-                    //                        height: 42
-                    //                        visible: isLastRow(index) && showSeeAll
-                    //                        anchors.top: parent.top
-                    //                        anchors.topMargin: 42
-                    //                        Rectangle {
-                    //                            width: parent.width
-                    //                            anchors.top: parent.top
-                    //                            height: 1
-                    //                            color: "white"
-                    //                            opacity: 0.1
-                    //                        }
-                    //                        ListRow {
-                    //                            title: "显示全部"
-                    //                            selected: selectSeeAll
-                    //                            width: parent.width
-                    //                            anchors.bottom: parent.bottom
-                    //                            height: 38
-                    //                            rowColor: gamesColor
-                    //                            favorite: false
-                    //                        }
-                    //                    }
-
                 }
             }
 
@@ -360,7 +341,8 @@ Item {
             }
             z: 2001
 
-            Item {
+             Rectangle {
+                color: "transparent"
                 id: game_detail_image
                 width: parent.width
                 height: parent.height * 0.66 - vpx(32)
@@ -368,7 +350,7 @@ Item {
 //                    margins: vpx(12)
                     left: parent.left
                     top: parent.top
-//                    topMargin: vpx(12)
+                    topMargin: vpx(20)
 //                    bottom: parent.bottom
                 }
 
@@ -391,7 +373,7 @@ Item {
                     left: parent.left
                     right: parent.right
                     bottom: parent.bottom
-                    bottomMargin: vpx(70)
+                    bottomMargin: vpx(58)
                 }
 
                 PegasusUtils.AutoScroll {

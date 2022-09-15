@@ -301,23 +301,7 @@ Item {
                 anchors.verticalCenterOffset: isSystemPage ? 3 : 0
                 width:300       
                 elide: Text.ElideRight       
-            }
-
-
-            Text {
-                visible: false
-                id: header_time
-                text: collectionSortTitle
-                anchors.right: legend.left
-                anchors.verticalCenter: parent.verticalCenter
-//                anchors.top: parent.top
-//                anchors.topMargin: 6
-                anchors.rightMargin: 8
-                color: "#9B9B9B"
-                font.pixelSize: vpx(22)
-                font.letterSpacing: 0.3
-//                font.bold: true
-            }   
+            } 
 
 
             HeaderInfoBar {

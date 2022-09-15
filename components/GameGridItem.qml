@@ -52,14 +52,22 @@ Item {
 //    transform: selected ? scale_zoomed : scale_normal
     z: selected ? 3 : 1
 
-    Behavior on scale { PropertyAnimation { duration: 150 } }
+    Behavior on scale {
+        PropertyAnimation { duration: 150 }
+    }
+
+    Behavior on width {
+        NumberAnimation { duration: 100; }
+    }
+
+    Behavior on height {
+        NumberAnimation { duration: 100; }
+    }
 
     Rectangle {
         id: gridItemBg
-//        color: highlightColor
         color: "#333"
         visible: selected
-//        opacity: headerFocused ? 0.1 : 0.3
         anchors.fill: parent
 //        anchors.margins: 0
 
@@ -120,7 +128,10 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  modelData.assets.boxFront || ""
-        sourceSize { width: 240; height: 240 }
+//        sourceSize {
+//            width: parent.width;
+//            height: parent.height
+//        }
         fillMode: Image.PreserveAspectFit
         smooth: true
         onStatusChanged: {
@@ -135,13 +146,13 @@ Item {
 
         visible: imgGridItem.status === Image.Loading
         source: '../assets/images/loading-spinner.png'
-
         RotationAnimator on rotation {
             loops: Animator.Infinite;
             from: 0;
             to: 360;
             duration: 500
         }
+        opacity: 0.6
     }
 
     Rectangle {

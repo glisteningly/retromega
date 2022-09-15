@@ -9,12 +9,11 @@ GridView {
         return (currentIndex + 1) + " / " + allCollections.count
     }
     property int columnCount: {
-        return 5
-//        return theme.gridColumnCount;
+        return collectionColumns
     }
     readonly property int maxRecalcs: 5
     property int currentRecalcs: 0
-    property real cellHeightRatio: 0.6
+    property real cellHeightRatio: 0.7
 
     model: allCollections
     currentIndex: currentCollectionIndex
@@ -44,14 +43,14 @@ GridView {
     onVisibleChanged: {
         if (visible) {
             positionViewAtIndex(currentCollectionIndex, GridView.Center)
-            delay(10, function() {
+            delay(200, function() {
                 positionViewAtIndex(currentCollectionIndex, GridView.Center)
             })
         }
     }
 
     Component.onCompleted: {
-        delay(50, function() {
+        delay(200, function() {
             positionViewAtIndex(currentCollectionIndex, GridView.Center)
         })
     }
@@ -80,6 +79,22 @@ GridView {
                 currentIndex = Math.max(currentIndex - games_to_skip, 0);
             else
                 currentIndex = Math.min(currentIndex + games_to_skip, model.count - 1);
+        }
+
+        // press L3 or V
+        if (event.key === 1048585 || event.key === 66) {
+            if (columnCount > 4) {
+                columnCount -= 1
+                setCollectionColumns(columnCount)
+            }
+        }
+
+        // press R3 or B
+        if (event.key === 1048582 || event.key === 86) {
+            if (columnCount < 8) {
+                columnCount += 1
+                setCollectionColumns(columnCount)
+            }
         }
     }
 

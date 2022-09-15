@@ -39,19 +39,22 @@ FocusScope {
     }
 
     Component.onCompleted: {
-        lang = api.memory.get('lang') ?? 'cn'
-                                         currentHomeIndex = api.memory.get('homeIndex') ?? 0
-                                                                                           currentSystemIndex = api.memory.get('currentSystemIndex') ?? 0
-                                                                                                                                                        currentCollectionIndex = api.memory.get('currentCollectionIndex') ?? 0
-                                                                                                                                                                                                                             currentSystemViewMode = api.memory.get('currentSystemViewMode') ?? 'list'
-                                                                                                                                                                                                                                                                                                currentGameListViewMode = api.memory.get('currentGameListViewMode') ?? 'list'
-                                                                                                                                                                                                                                                                                                                                                                       currentPage = api.memory.get('currentPage') ?? 'HomePage'
-                                                                                                                                                                                                                                                                                                                                                                                                                      collectionListIndex = api.memory.get('collectionListIndex') ?? 0
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     collectionSortMode = api.memory.get('collectionSortMode') ?? "title"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  collectionSortDirection =  api.memory.get('collectionSortDirection') ?? 0
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          collectionFilterMode =  api.memory.get('collectionFilterMode') ?? "all"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            collectionShowAllItems =  api.memory.get('collectionShowAllItems') ?? false
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  startSound.play()
+        lang = api.memory.get('lang') || 'cn'
+        currentHomeIndex = api.memory.get('homeIndex') || 0
+        currentSystemIndex = api.memory.get('currentSystemIndex') || 0
+        currentCollectionIndex = api.memory.get('currentCollectionIndex') || 0
+        currentSystemViewMode = api.memory.get('currentSystemViewMode') || 'list'
+        currentGameListViewMode = api.memory.get('currentGameListViewMode') || 'list'
+        currentPage = api.memory.get('currentPage') || 'HomePage'
+        collectionListIndex = api.memory.get('collectionListIndex') || 0
+        collectionSortMode = api.memory.get('collectionSortMode') || "title"
+        collectionSortDirection =  api.memory.get('collectionSortDirection') || 0
+        collectionFilterMode =  api.memory.get('collectionFilterMode') || "all"
+        collectionShowAllItems =  api.memory.get('collectionShowAllItems') || false
+        collectionColumns = api.memory.get('collectionColumns') || 5
+        systemColumns = api.memory.get('systemColumns') || 6
+        gamelistColumns = api.memory.get('gamelistColumns') || 6
+        startSound.play()
     }
 
     // Main homepage index
@@ -122,6 +125,24 @@ FocusScope {
     property var currentGame: {return currentCollection.games.get(currentGameIndex)}
 
 
+    // Systems grid columns
+    property int systemColumns: theme.systemColumns
+    function setSystemColumns(count) {
+        api.memory.set('systemColumns', count)
+    }
+
+    // Collections grid columns
+    property int collectionColumns: theme.collectionColumns
+    function setCollectionColumns(count) {
+        api.memory.set('collectionColumns', count)
+    }
+
+    // gamelist grid columns
+    property int gamelistColumns: theme.gamelistColumns
+    function setGamelistColumns(count) {
+        gamelistColumns = count
+        api.memory.set('gamelistColumns', count)
+    }
 
     // Collection sort mode
     // Collection list index
@@ -288,11 +309,13 @@ FocusScope {
     }
     
     property var lastPlayedMaximum: {
-        if (allLastPlayed.count >= 50) {
-            return 50
+        if (allRecentlyPlayed.count >= theme.maxRecentlyPlayed - 1) {
+            return theme.maxRecentlyPlayed - 1
         } else {
-            return allLastPlayed.count
+            return allRecentlyPlayed.count - 1
         }
+
+//        return 30
     }
 
     SortFilterProxyModel {

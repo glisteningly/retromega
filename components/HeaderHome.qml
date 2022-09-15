@@ -102,7 +102,6 @@ Rectangle {
         Rectangle {
             id: bg
             color: "#22000000"
-            visible: selected
             anchors {
                 fill: parent
             }

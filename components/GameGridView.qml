@@ -88,22 +88,6 @@ Item {
         }
     }
 
-    function isLastRow(currentIndex) {
-        if (currentIndex === items.count - 1) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    function rowHeight(index) {
-        if (isLastRow(index) && showSeeAll) {
-            return 36 + 36
-        } else {
-            return 36
-        }
-    }
-
     function updatedIndex() {
         onIndexChanged(gameView.currentIndex, items.count)
     }
@@ -132,10 +116,7 @@ Item {
             property real cellHeightRatio: 1.39
 
             property real columnCount: {
-                //                    if (cellHeightRatio > 1.2) return 6;
-                if (cellHeightRatio < 0.8)
-                    return 5
-                return 6
+                return gamelistColumns
             }
 
             model: parent.visible ? items : []
@@ -174,7 +155,7 @@ Item {
 
             Component.onCompleted: {
                 positionViewAtIndex(defaultIndex, GridView.Center)
-                delay(50, function() {
+                delay(200, function() {
                     positionViewAtIndex(defaultIndex, GridView.Center)
 //                    if (currentHomeIndex <= 1 && !collectionListIndex) {
 //                        currentIndex = -1
@@ -215,6 +196,22 @@ Item {
                     else
                         currentIndex = Math.min(currentIndex + games_to_skip,
                                                 items.count - 1)
+                }
+
+                // press L3 or V
+                if (event.key === 1048585 || event.key === 66) {
+                    if (columnCount > 4) {
+                        columnCount -= 1
+                        setGamelistColumns(columnCount)
+                    }
+                }
+
+                // press R3 or B
+                if (event.key === 1048582 || event.key === 86) {
+                    if (columnCount < 10) {
+                        columnCount += 1
+                        setGamelistColumns(columnCount)
+                    }
                 }
             }
 

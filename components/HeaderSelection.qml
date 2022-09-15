@@ -26,5 +26,4 @@ Item {
         y: 6
         radius: 6
 	}
-
 }

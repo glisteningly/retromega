@@ -9,7 +9,7 @@ GridView {
         return (currentIndex + 1) + " / " + allSystems.count
     }
     property int columnCount: {
-        return theme.gridColumnCount;
+        return systemColumns;
     }
     property real cellHeightRatio: 1
 
@@ -41,10 +41,10 @@ GridView {
     displayMarginBeginning: anchors.topMargin
 
     Component.onCompleted: {
-        delay(50, function() {
+        delay(200, function() {
             positionViewAtIndex(currentSystemIndex, GridView.Center)
         })
-        systemsBackground.bgIndex = currentIndex
+//        systemsBackground.bgIndex = currentIndex
     }
 
     onVisibleChanged: {
@@ -64,6 +64,7 @@ GridView {
     }
 
     Keys.onPressed: {
+//        console.debug(event.key)
         if (event.isAutoRepeat)
             return;
 
@@ -76,6 +77,22 @@ GridView {
                 currentIndex = Math.max(currentIndex - games_to_skip, 0);
             else
                 currentIndex = Math.min(currentIndex + games_to_skip, model.count - 1);
+        }    
+
+        // press L3 or V
+        if (event.key === 1048585 || event.key === 66) {
+            if (columnCount > 4) {
+                columnCount -= 1
+                setSystemColumns(columnCount)
+            }
+        }
+
+        // press R3 or B
+        if (event.key === 1048582 || event.key === 86) {
+            if (columnCount < 8) {
+                columnCount += 1
+                setSystemColumns(columnCount)
+            }
         }
     }
 

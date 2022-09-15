@@ -120,7 +120,7 @@ Item {
             bottomMargin: vpx(60)
         }
         opacity: 1.0
-        radius: vpx(12)
+        radius: vpx(4)
 
         Rectangle {
             id: rightPanel
@@ -236,7 +236,7 @@ Item {
                     ActionButton {
                         id: actionPlay
                         title: curDataText.games_play
-                        icon: "play"
+                        icon: "system"
                         focus: true
                         height: vpx(45)
                         width: vpx(135)
