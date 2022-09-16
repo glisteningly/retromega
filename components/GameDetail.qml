@@ -249,7 +249,9 @@ Item {
                                 startGame(game.modelData, currentGameDetailIndex)
                             }
                         }
-
+                        onClicked: {
+                            startGame(game.modelData, currentGameDetailIndex)
+                        }
                     }
                     ActionButton {
                         id: actionFavorite
@@ -263,12 +265,15 @@ Item {
                         width: vpx(135)
 
                         Keys.onPressed: {
-
                             // Favorite
                             if (api.keys.isAccept(event)) {
                                 game.modelData.favorite = !game.modelData.favorite
                                 event.accepted = true;
                             }
+                        }
+
+                        onClicked: {
+                            game.modelData.favorite = !game.modelData.favorite
                         }
 
                     }
@@ -286,19 +291,18 @@ Item {
                 Text {
                     id: title
                     font.family: collectionTitleFont.name
-                    width: parent.width * 0.6 - 20
+                    width: parent.width
                     wrapMode: Text.WordWrap
                     anchors {
                         left: info_right.left
                         top: info_right.top
                     }
-                    //                maximumLineCount: 2
+                    maximumLineCount: 2
                     text: game ? game.title : curDataText.global_no_games
                     lineHeight: 1.1
                     color: textColor
                     font.pixelSize: vpx(30)
                     font.letterSpacing: 0
-                    maximumLineCount: 1
                     //                font.bold: true
                     z:2
                 }
@@ -309,7 +313,7 @@ Item {
                     //                    height: gameDetailText.height - 40
                     anchors {
                         top: title.bottom
-                        topMargin: vpx(24)
+                        topMargin: vpx(40)
                         left: parent.left
                         right: parent.right
                         bottom: parent.bottom
@@ -323,7 +327,7 @@ Item {
                             text: introDescription
                             font {
                                 weight: Font.Light
-                                pixelSize: vpx(22)
+                                pixelSize: vpx(20)
                                 letterSpacing: 0.4
                             }
                             wrapMode: Text.WordWrap
@@ -333,6 +337,8 @@ Item {
                         }
                     }
                 }
+
+
             }
 
             GameDetailFooter {
@@ -340,6 +346,31 @@ Item {
                 visible: false
                 anchors.bottom: parent.bottom
                 //        visible: !showFullDescription
+            }
+        }
+
+        Rectangle {
+            id: close
+            width: vpx(64)
+            height: vpx(64)
+            anchors {
+                top: parent.top
+                right: parent.right
+            }
+            color: "#22000000"
+
+            Image {
+                width: vpx(32)
+                height: vpx(32)
+                source: "../assets/icons/ic-close.svg"
+                anchors {
+                    centerIn: parent
+                }
+            }
+
+            TapHandler {
+                gesturePolicy: TapHandler.ReleaseWithinBounds
+                onTapped: showGameDetail(false)
             }
         }
     }

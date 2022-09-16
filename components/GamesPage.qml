@@ -3,15 +3,15 @@ import QtGraphicalEffects 1.12
 
 Item {
     id: gamesPage
-    anchors.leftMargin: 200 
+    anchors.leftMargin: 200
 
     state: currentGameListViewMode
     
-    property var showSort       : false
+    property var showSort: false
     //property var showGameDetail : false
 
-//    property alias currentIndex: gameList.currentIndex
-//    property alias showIndex: gameList.showIndex
+    //    property alias currentIndex: gameList.currentIndex
+    //    property alias showIndex: gameList.showIndex
     property int currentIndex: 0
     function setCurrentIndex(index) {
         currentIndex = index
@@ -19,8 +19,8 @@ Item {
 
 
     property var footerTitle: {
-//        return gameList.footerTitle
-//        return currentIndex
+        //        return gameList.footerTitle
+        //        return currentIndex
         if (gamesItems.count > 0) {
             return (currentIndex + 1) + " / " + gamesItems.count
         } else {
@@ -36,34 +36,34 @@ Item {
         return (collectionShowAllItems) ? curDataText.global_all + " " + currentCollection.name : currentCollection.name
     }
     
-//    property bool showIndex: false
+    //    property bool showIndex: false
     property var collectionSortTitle: {
         var title = curDataText.global_title
         switch (collectionSortMode) {
-            case "title":
-                title = curDataText.sort_title
-                break
-            case "lastPlayed":
-                title = curDataText.sort_last_played
-                break
-            case "rating":
-                title = curDataText.sort_rating
-                break
-            case "favorites":
-                title = curDataText.sort_favorites_only
-                break           
-            case "release":
-                title = curDataText.sort_release_year
-                break
-            case "playCount":
-                title = curDataText.sort_play_count
-                break                      
-            case "playTime":
-                title = curDataText.sort_play_time
-                break                       
-            default:
-                title = curDataText.sort_by
-                break
+        case "title":
+            title = curDataText.sort_title
+            break
+        case "lastPlayed":
+            title = curDataText.sort_last_played
+            break
+        case "rating":
+            title = curDataText.sort_rating
+            break
+        case "favorites":
+            title = curDataText.sort_favorites_only
+            break
+        case "release":
+            title = curDataText.sort_release_year
+            break
+        case "playCount":
+            title = curDataText.sort_play_count
+            break
+        case "playTime":
+            title = curDataText.sort_play_time
+            break
+        default:
+            title = curDataText.sort_by
+            break
         }
 
         if (collectionFilterMode == "favorites" && !collectionShowAllItems) {
@@ -74,16 +74,22 @@ Item {
     }
 
     property var onShow: function() {
-//        gameList.currentIndex = collectionListIndex
+        //        gameList.currentIndex = collectionListIndex
     }
 
     property var isFavoritesList: {
         return (collectionFilterMode == "favorites" && !collectionShowAllItems)
-    } 
+    }
 
-    function onSeeAllEvent() {        
+    function onSeeAllEvent() {
         setCollectionListIndex(0)
-        setCollectionShowAllItems(true)    
+        setCollectionShowAllItems(true)
+    }
+
+    function goBack() {
+        gameList.currentIndex = -1
+        gameList.box_art.initialLoad = true
+        navigate('HomePage')
     }
 
     Component.onCompleted: {
@@ -93,22 +99,22 @@ Item {
     width: parent.width
     height: parent.height
 
-    Keys.onPressed: {           
+    Keys.onPressed: {
 
         // Show / Hide Sort
-//        if (api.keys.isFilters(event)) {
-//            event.accepted = true;
-//            showSort = !showSort
-//            return;
-//        }
+        //        if (api.keys.isFilters(event)) {
+        //            event.accepted = true;
+        //            showSort = !showSort
+        //            return;
+        //        }
 
-        // Back to Home            
+        // Back to Home
         if (api.keys.isCancel(event)) {
             event.accepted = true
             //if (showGameDetail) {
-                //showGameDetail(null)
-                //showGameDetail = false
-                //listFocus.focus = true   
+            //showGameDetail(null)
+            //showGameDetail = false
+            //listFocus.focus = true
             if (showSort) {
                 showSort = false
                 backSound.play()
@@ -118,12 +124,10 @@ Item {
                 setCollectionShowAllItems(false)
                 backSound.play()
             } else {
-                gameList.currentIndex = -1
-                gameList.box_art.initialLoad = true
-                navigate('HomePage');
+                goBack()
             }
             return
-        }  
+        }
 
         if (event.key === 1048586 || event.key === 32) {
             toggleGameListViewMode(currentIndex)
@@ -135,13 +139,13 @@ Item {
 
     property var emptyModel: {
         return {  title: "No Favorites",
-                favorite: true 
+            favorite: true
         }
     }
 
     ListModel {
         id: emptyListModel
-        ListElement { 
+        ListElement {
             isEmptyRow: true
             emptyTitle: "No Favorites"
         }
@@ -180,7 +184,7 @@ Item {
             height: 40
             anchors.left: parent.left
             anchors.leftMargin: 0
-            anchors.rightMargin: 0 
+            anchors.rightMargin: 0
             anchors.bottom: parent.bottom
             clip:true
 
@@ -202,10 +206,10 @@ Item {
                 color: "#9B9B9B"//theme.title
                 font.pixelSize: 18
                 font.letterSpacing: 0.3
-//                font.bold: true
+                //                font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
-                elide: Text.ElideRight   
-                height: 20    
+                elide: Text.ElideRight
+                height: 20
             }
 
             ButtonLegend {
@@ -240,14 +244,14 @@ Item {
             }
 
             ButtonLegendSquare {
-//              visible: currentHomeIndex == 0
-              id: button_legend_sel
-              title: curDataText.global_view
-              key: "SEL"
-              width: 55
-              anchors.left: button_legend_details.right
-              anchors.leftMargin: 32
-              anchors.verticalCenter: parent.verticalCenter
+                //              visible: currentHomeIndex == 0
+                id: button_legend_sel
+                title: curDataText.global_view
+                key: "SEL"
+                width: 55
+                anchors.left: button_legend_details.right
+                anchors.leftMargin: 32
+                anchors.verticalCenter: parent.verticalCenter
             }
 
             // ButtonLegend {
@@ -260,7 +264,7 @@ Item {
             //     anchors.verticalCenter: parent.verticalCenter
             // }
 
-        }        
+        }
 
 
         /**
@@ -278,8 +282,6 @@ Item {
             clip:true
 
             Rectangle {
-//                anchors.leftMargin: 22
-//                anchors.rightMargin: 22
                 anchors.left: parent.left
                 anchors.right: parent.right
                 color: "#222"
@@ -287,21 +289,48 @@ Item {
                 height: 1
             }
 
+            Rectangle {
+                id: backBtn
+                width: parent.height
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    bottom: parent.bottom
+                }
+                color: "#33000000"
+
+                Image {
+                    width: vpx(24)
+                    height: vpx(24)
+                    source: "../assets/icons/ic-back.svg"
+                    anchors {
+                        centerIn: parent
+                    }
+                }
+
+                TapHandler {
+                    gesturePolicy: TapHandler.ReleaseWithinBounds
+                    onTapped: navigate('HomePage')
+                }
+            }
+
             Text{
                 text: headerTitle
-                anchors.left: parent.left
-                anchors.leftMargin: 18
-//                color: systemColor//theme.title
+                anchors {
+                    left: backBtn.right
+                    leftMargin: vpx(16)
+                    verticalCenter: parent.verticalCenter
+                    verticalCenterOffset: isSystemPage ? 3 : 0
+                }
+                //                color: systemColor//theme.title
                 color: "#EEE"
                 font.pixelSize: isSystemPage ? vpx(30) : vpx(28)
                 font.letterSpacing: 0.3
-//                font.bold: true
                 font.family: isSystemPage ? systemTitleFont.name : collectionTitleFont.name
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: isSystemPage ? 3 : 0
-                width:300       
-                elide: Text.ElideRight       
-            } 
+
+                width:300
+                elide: Text.ElideRight
+            }
 
 
             HeaderInfoBar {
@@ -321,7 +350,7 @@ Item {
             width: parent.width
             height: parent.height
             anchors.top: header.bottom
-//            anchors.bottom: footer.top
+            //            anchors.bottom: footer.top
             anchors.bottom: parent.bottom
 
 

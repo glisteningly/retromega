@@ -116,7 +116,7 @@ Item {
                     box_art.loadingError = false
                     box_art.initialLoad = false
                     box_art.loadingImage = false
-                    box_art.forceSync = false
+//                    box_art.forceSync = false
                 }
             }
         }

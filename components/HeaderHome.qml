@@ -69,7 +69,7 @@ Rectangle {
     Rectangle{
         id: tabLeft
         //        height:parent.height
-        width:40
+        width: parent.height - vpx(8)
         color:"#33000000"
         radius:2
         anchors.top: parent.top
@@ -203,7 +203,7 @@ Rectangle {
     Rectangle {
         id: tabRight
         //        height:18
-        width:40
+        width: parent.height - vpx(8)
         color:"#33000000"
         radius:2
 

@@ -3,9 +3,13 @@ import QtGraphicalEffects 1.12
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.15
 Item {
+    id: root
     property var title: "Button"
     property var icon: "play"
     property var textColor: "#000000"
+
+    signal clicked()
+
     Rectangle {
         id: buttonBackground
         anchors.fill: parent
@@ -50,5 +54,10 @@ Item {
         anchors.fill: iconImage
         source: iconImage
         color: parent.activeFocus ? "#ffffff" : systemColor// "#333333"
+    }
+
+    TapHandler {
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+        onTapped: root.clicked()
     }
 }

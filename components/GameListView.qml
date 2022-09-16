@@ -341,17 +341,17 @@ Item {
             }
             z: 2001
 
-             Rectangle {
+            Rectangle {
                 color: "transparent"
                 id: game_detail_image
                 width: parent.width
                 height: parent.height * 0.66 - vpx(32)
                 anchors {
-//                    margins: vpx(12)
+                    //                    margins: vpx(12)
                     left: parent.left
                     top: parent.top
                     topMargin: vpx(20)
-//                    bottom: parent.bottom
+                    //                    bottom: parent.bottom
                 }
 
                 BoxArt {
@@ -359,40 +359,68 @@ Item {
                     asset: selectedGame && gameView.currentIndex >= 0 && !focusSeeAll ? selectedGame.assets.boxFront : ""
                     context: currentCollection.shortName + listContent.context
                 }
+
+                TapHandler {
+                    gesturePolicy: TapHandler.ReleaseWithinBounds
+                    onTapped: showGameDetail(selectedGame, gameView.currentIndex)
+                }
             }
 
             //Description
-            Item {
+            Rectangle {
                 width: parent.width
                 //                    height: gameDetailText.height - 40
+                color: "#11FFFFFF"
                 anchors {
                     top: game_detail_image.bottom
-//                    topMargin: vpx(16)
-                    margins: vpx(24)
-                    topMargin: vpx(24)
+                    //                    topMargin: vpx(16)
+                    //                    margins: vpx(8)
+                    topMargin: vpx(16)
                     left: parent.left
                     right: parent.right
                     bottom: parent.bottom
-                    bottomMargin: vpx(58)
+                    bottomMargin: vpx(46)
                 }
 
-                PegasusUtils.AutoScroll {
-                    anchors.fill: parent
-                    Text {
-                        id: txt_game_description
-                        width: parent.width
-                        text: selectedGame.description
-                        font {
-                            weight: Font.Light
-                            pixelSize: vpx(20)
-                            letterSpacing: 0.4
-                        }
-                        wrapMode: Text.WordWrap
-                        elide: Text.ElideRight
-                        horizontalAlignment: Text.AlignJustify
-                        color: "#999"
+                Text {
+                    anchors {
+                        fill: parent
+                        leftMargin: vpx(12)
+                        rightMargin: vpx(12)
+                        topMargin: vpx(6)
+                        bottomMargin: vpx(6)
                     }
+                    id: txt_game_description
+                    width: parent.width
+                    text: selectedGame.description
+                    font {
+                        weight: Font.Light
+                        pixelSize: vpx(20)
+                        letterSpacing: 0.4
+                    }
+                    wrapMode: Text.WordWrap
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignJustify
+                    color: "#999"
                 }
+
+                //                PegasusUtils.AutoScroll {
+                //                    anchors.fill: parent
+                //                    Text {
+                //                        id: txt_game_description
+                //                        width: parent.width
+                //                        text: selectedGame.description
+                //                        font {
+                //                            weight: Font.Light
+                //                            pixelSize: vpx(20)
+                //                            letterSpacing: 0.4
+                //                        }
+                //                        wrapMode: Text.WordWrap
+                //                        elide: Text.ElideRight
+                //                        horizontalAlignment: Text.AlignJustify
+                //                        color: "#999"
+                //                    }
+                //                }
             }
         }
     }

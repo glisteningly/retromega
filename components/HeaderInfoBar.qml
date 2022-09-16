@@ -35,6 +35,7 @@ Rectangle {
         text: Math.round(percent * 100) + "%"
         anchors {
             right:  battery_indicator.left
+            rightMargin: vpx(4)
             verticalCenter: parent.verticalCenter
         }
         color: "#66ffffff"

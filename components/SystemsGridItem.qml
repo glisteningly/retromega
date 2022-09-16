@@ -111,6 +111,8 @@ Item {
     }
 
     Image {
+        width: vpx(60)
+        height: vpx(60)
         anchors.centerIn: parent
         visible: imgController.status === Image.Loading
         source: "../assets/images/loading-spinner.png"

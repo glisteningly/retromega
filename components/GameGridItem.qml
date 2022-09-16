@@ -23,7 +23,7 @@ import "qrc:/qmlutils" as PegasusUtils
 Item {
     id: gameGridItem
     property bool rounded: true
-//    focus: true
+    //    focus: true
 
     property bool selected: false
     property var gameData
@@ -45,11 +45,7 @@ Item {
     signal doubleClicked()
     signal imageLoaded(int imgWidth, int imgHeight)
 
-//    property var scale_normal: Scale { origin.x: 0; origin.y: 0; xScale: 1; yScale: 1}
-//    property var scale_zoomed: Scale { origin.x: 0; origin.y: 0; xScale: 1.1; yScale: 1.1}
-
     scale: selected ? 1.1 : 1
-//    transform: selected ? scale_zoomed : scale_normal
     z: selected ? 3 : 1
 
     Behavior on scale {
@@ -69,24 +65,6 @@ Item {
         color: "#333"
         visible: selected
         anchors.fill: parent
-//        anchors.margins: 0
-
-//        opacity: 1
-//        SequentialAnimation on color {
-//            loops: Animation.Infinite
-
-//            ColorAnimation {
-//                from: "white"
-//                to: "#30000000"
-//                duration: 400
-//            }
-//            ColorAnimation {
-//                from: "#30000000"
-//                to: "white"
-//                duration: 400
-//            }
-//        }
-
         border.color: "white"
         border.width: 2
         SequentialAnimation on border.color {
@@ -128,12 +106,13 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  modelData.assets.boxFront || ""
-//        sourceSize {
-//            width: parent.width;
-//            height: parent.height
-//        }
+        //        sourceSize {
+        //            width: parent.width;
+        //            height: parent.height
+        //        }
+        sourceSize { width: 256; height: 256 }
         fillMode: Image.PreserveAspectFit
-        smooth: true
+//        smooth: true
         onStatusChanged: {
             if (status === Image.Ready) {
                 gameGridItem.imageLoaded(implicitWidth, implicitHeight);
@@ -142,8 +121,9 @@ Item {
     }
 
     Image {
+        width: vpx(60)
+        height: vpx(60)
         anchors.centerIn: parent
-
         visible: imgGridItem.status === Image.Loading
         source: '../assets/images/loading-spinner.png'
         RotationAnimator on rotation {
@@ -162,102 +142,129 @@ Item {
         anchors {
             fill: parent
             margins: 2
-//            left: parent.left
-//            right: parent.right
-//            top: parent.top
-//            bottom: parent.bottom
+            //            left: parent.left
+            //            right: parent.right
+            //            top: parent.top
+            //            bottom: parent.bottom
 
-//            leftMargin: 6
-//            rightMargin: 6
-//            topMargin: 6
-//            bottomMargin: 24
+            //            leftMargin: 6
+            //            rightMargin: 6
+            //            topMargin: 6
+            //            bottomMargin: 24
         }
-//        radius: 4
-            Text {
-                visible: !selected
-                width: parent.width - vpx(12)
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    leftMargin: vpx(12)
-                    rightMargin: vpx(12)
-                    centerIn: parent
-                }
-                text: modelData.title
-                wrapMode: Text.WordWrap
-                horizontalAlignment: Text.AlignHCenter
-                color: '#90FFFFFF'
-                elide: Text.ElideMiddle
-                maximumLineCount:3
-                font {
-                    pixelSize: vpx(20)
-                    letterSpacing: 0.5
-                }
+        //        radius: 4
+        Text {
+            visible: !selected
+            width: parent.width - vpx(12)
+            anchors {
+                left: parent.left
+                right: parent.right
+                leftMargin: vpx(12)
+                rightMargin: vpx(12)
+                centerIn: parent
             }
+            text: modelData.title
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
+            color: '#90FFFFFF'
+            elide: Text.ElideMiddle
+            maximumLineCount:3
+            font {
+                pixelSize: vpx(20)
+                letterSpacing: 0.5
+            }
+        }
     }
 
-//    Text {
-//        visible: !selected
-//        height: titlefontSize + vpx(6)
-//        anchors {
-//            left: parent.left
-//            right: parent.right
-//            bottom: parent.bottom
-//            leftMargin: 6
-//            rightMargin: 6
-//            bottomMargin: vpx(4)
-//        }
-//        text: modelData.title
-//        wrapMode: Text.NoWrap
-//        horizontalAlignment: Text.AlignHCenter
-//        color: selected ? "white" : '#90FFFFFF'
-//        elide: Text.ElideMiddle
-//        maximumLineCount:1
-//        font {
-//            pixelSize: titlefontSize
-//            letterSpacing: 0.5
-//        }
-//    }
-
-    PegasusUtils.AutoScroll {
+    Item {
         visible: selected
-        height: titlefontSize + vpx(14)
+        height: parent.width * 0.18
         anchors {
             left: parent.left
+            leftMargin: vpx(2)
             right: parent.right
+            rightMargin: vpx(2)
             bottom: parent.bottom
-//            margins: 0
-            leftMargin: 2
-            rightMargin: 2
-            bottomMargin: -2.5
+            bottomMargin: vpx(1.5)
         }
-        Rectangle {
-            color:  "#90000000"
-            anchors {
-                fill: parent
 
+
+        Rectangle {
+            color:  "#B0000000"
+            width: parent.width
+            height: gameTitle.lineCount === 1 ? parent.height : parent.height * 1.6
+            anchors {
+                bottom: parent.bottom
             }
         }
 
         Text {
+            id: gameTitle
             width: parent.width
-            text: modelData.title
-            font {
-                pixelSize: titlefontSize
-                letterSpacing: 0.5
+            height: lineCount === 1 ? parent.height : parent.height * 1.6
+            anchors {
+                left: parent.left
+//                leftMargin: vpx(4)
+                right: parent.right
+//                rightMargin: vpx(4)
+//                verticalCenter: parent
+                bottom: parent.bottom
             }
+            text: modelData.title
             wrapMode: Text.WordWrap
-            elide: Text.ElideMiddle
             horizontalAlignment: Text.AlignHCenter
-            color: "white"
+            verticalAlignment: Text.AlignVCenter
+            color: '#FFFFFF'
+            elide: Text.ElideMiddle
+            maximumLineCount:2
+            font {
+                family: collectionTitleFont.name
+                pixelSize: parent.width * 0.1
+            }
         }
     }
+
+
+
+    //    PegasusUtils.AutoScroll {
+    //        visible: selected
+    //        height: titlefontSize + vpx(14)
+    //        anchors {
+    //            left: parent.left
+    //            right: parent.right
+    //            bottom: parent.bottom
+    ////            margins: 0
+    //            leftMargin: 2
+    //            rightMargin: 2
+    //            bottomMargin: -2.5
+    //        }
+    //        Rectangle {
+    //            color:  "#90000000"
+    //            anchors {
+    //                fill: parent
+
+    //            }
+    //        }
+
+    //        Text {
+    //            width: parent.width
+    //            text: modelData.title
+    //            font {
+    //                pixelSize: titlefontSize
+    //                letterSpacing: 0.5
+    //            }
+    //            wrapMode: Text.WordWrap
+    //            elide: Text.ElideMiddle
+    //            horizontalAlignment: Text.AlignHCenter
+    //            color: "white"
+    //        }
+    //    }
 
     Image {
         width: vpx(40)
         height: vpx(40)
         visible: modelData.favorite && !hideFavoriteIcon
-//        fillMode: Image.PreserveAspectFit
+        //        fillMode: Image.PreserveAspectFit
         source: "../assets/icons/favorite_red.png"
         asynchronous: true
         anchors {
