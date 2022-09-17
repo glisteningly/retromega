@@ -232,65 +232,83 @@ Rectangle {
     }
 
     HeaderInfoBar {
+        id: headInfoHome
         height: parent.height
         anchors {
             right: parent.right
         }
     }
 
-    //    HeaderLink {
-    //        id: title_apps
-    //        title: "应用"
-    //        index: 3
-    //        anchors.left: title_recent.right
-    //        anchors.top: parent.top
-    //        anchors.topMargin: 6
-    //        anchors.leftMargin: 24
-    //        lightText: light
-    //        KeyNavigation.down: mainFocus
-    //    }
+    property bool showColumsCtrl: {
+        if (currentHomeIndex === 0 || currentHomeIndex === 1) {
+            return currentSystemViewMode === 'grid'
+        } else if (currentHomeIndex === 2 || currentHomeIndex === 3) {
+            return currentGameListViewMode === 'grid'
+        } else {
+            return false
+        }
+    }
 
-    //    BatteryIndicator {
-    //        id: battery_indicator
-    //        anchors {
-    //            right: parent.right
-    //            verticalCenter: parent.verticalCenter
-    //            verticalCenterOffset: vpx(2)
-    //            rightMargin: vpx(12)
-    //        }
-    //        opacity: 0.6
-    //        lightStyle: true
-    //        visible: showBattery
-    //    }
+    function columnCtrlDec() {
+        if (currentHomeIndex === 0) {
+            setSystemColumnsDec()
+        } else if (currentHomeIndex === 1) {
+            setCollectionColumnsDec()
+        } else if (currentHomeIndex === 2 || currentHomeIndex === 3) {
+            setGamelistColumnsDec()
+        }
+    }
 
-    //    Text {
-    //        id: battery_percent
-    //        font.family: systemSubitleFont.name
-    //        text: Math.round(percent * 100) + "%"
-    //        anchors {
-    //            right:  battery_indicator.left
-    //            verticalCenter: parent.verticalCenter
-    //        }
-    //        color: "#66ffffff"
-    //        font.pixelSize: vpx(24)
-    //        //        font.letterSpacing: -0.3
-    //        //        font.bold: true
-    //        visible: showBattery
-    //    }
+    function columnCtrlInc() {
+        if (currentHomeIndex === 0) {
+            setSystemColumnsInc()
+        } else if (currentHomeIndex === 1) {
+            setCollectionColumnsInc()
+        } else if (currentHomeIndex === 2 || currentHomeIndex === 3) {
+            setGamelistColumnsInc()
+        }
+    }
 
-    //    Text {
-    //        id: header_time
-    //        font.family: systemSubitleFont.name
-    //        text: Qt.formatTime(new Date(), "hh:mm")
-    //        anchors {
-    //            right: showBattery ? battery_percent.left : parent.right
-    //            verticalCenter: parent.verticalCenter
-    //            rightMargin: vpx(24)
-    //        }
-    //        color: "#ccffffff"
-    //        font.pixelSize: vpx(24)
-    //        font.letterSpacing: -0.3
-    //        visible: showStatusInfo
-    //    }
-
+    Item {
+        id: columsCtrl
+        visible: showColumsCtrl
+        height: parent.height
+        anchors {
+            right: parent.right
+            rightMargin: vpx(200)
+        }
+        Item {
+            id: columnDec
+            width: parent.height
+            anchors {
+                top: parent.top
+                right: parent.right
+                bottom: parent.bottom
+            }
+            TapButton {
+                iconSize: vpx(32)
+                iconImage: "../assets/icons/ic-grid-dec.svg"
+                bgColor: "#22000000"
+                iconOpacity: 0.6
+                onClicked: columnCtrlDec()
+            }
+        }
+        Item {
+            id: columnInc
+            width: parent.height
+            anchors {
+                top: parent.top
+                right: columnDec.left
+                rightMargin: vpx(4)
+                bottom: parent.bottom
+            }
+            TapButton {
+                iconSize: vpx(32)
+                iconImage: "../assets/icons/ic-grid-inc.svg"
+                bgColor: "#22000000"
+                iconOpacity: 0.6
+                onClicked: columnCtrlInc()
+            }
+        }
+    }
 }

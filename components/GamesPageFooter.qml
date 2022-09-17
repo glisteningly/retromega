@@ -10,11 +10,8 @@ Item {
     }
     height: vpx(44)
     Rectangle {
-        id: footer
-        //color: light ? "#60000000" : "transparent"
-//        width: parent.width / 2
-        width: vpx(292)
-        color: "#88000000"
+        width: vpx(412)
+        color: "#BB000000"
         height: parent.height
         anchors {
             right: parent.right
@@ -45,8 +42,21 @@ Item {
 
         ButtonLegend {
             id: button_legend_a
-            title: curDataText.global_enter
+            title: curDataText.games_play
             key: "A"
+            width: vpx(55)
+            lightText: lightActive
+            anchors {
+                right: button_legend_x.left
+                rightMargin: vpx(32)
+                verticalCenter: parent.verticalCenter
+            }
+        }
+
+        ButtonLegend {
+            id: button_legend_x
+            title: curDataText.games_info
+            key: "X"
             width: vpx(55)
             lightText: lightActive
             anchors {
@@ -55,19 +65,6 @@ Item {
                 verticalCenter: parent.verticalCenter
             }
         }
-
-//        ButtonLegend {
-//            id: button_legend_b
-//            title: curDataText.global_menu
-//            key: "B"
-//            width: vpx(55)
-//            lightText: lightActive
-//            anchors {
-//                right: button_legend_sel.left
-//                rightMargin: vpx(32)
-//                verticalCenter: parent.verticalCenter
-//            }
-//        }
 
         ButtonLegendSquare {
             //      visible: currentHomeIndex !== 1

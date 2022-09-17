@@ -177,8 +177,19 @@ Item {
         /**
         * Footer
         */
-        Rectangle {
+        GamesPageFooter {
             id: footer
+            title: footerTitle
+//            light: (currentHomeIndex == 0 && currentPage === "HomePage")
+            anchors.bottom: parent.bottom
+            visible: true
+            z: 999
+        }
+
+
+        Rectangle {
+            visible: false
+            id: footer1
             color: "transparent"
             width: parent.width
             height: 40
@@ -200,12 +211,15 @@ Item {
 
             Text {
                 text: footerTitle
-                font.family: systemSubitleFont.name
+                font {
+                    family: systemSubitleFont.name
+                    pixelSize: 18
+                    letterSpacing: 0.3
+                }
                 anchors.right: parent.right
                 anchors.rightMargin: 32
                 color: "#9B9B9B"//theme.title
-                font.pixelSize: 18
-                font.letterSpacing: 0.3
+
                 //                font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
                 elide: Text.ElideRight
@@ -289,7 +303,7 @@ Item {
                 height: 1
             }
 
-            Rectangle {
+            Item {
                 id: backBtn
                 width: parent.height
                 anchors {
@@ -297,20 +311,11 @@ Item {
                     left: parent.left
                     bottom: parent.bottom
                 }
-                color: "#33000000"
-
-                Image {
-                    width: vpx(24)
-                    height: vpx(24)
-                    source: "../assets/icons/ic-back.svg"
-                    anchors {
-                        centerIn: parent
-                    }
-                }
-
-                TapHandler {
-                    gesturePolicy: TapHandler.ReleaseWithinBounds
-                    onTapped: navigate('HomePage')
+                TapButton {
+                    iconSize: vpx(24)
+                    iconImage: "../assets/icons/ic-back.svg"
+                    bgColor: "#22000000"
+                    onClicked: navigate('HomePage')
                 }
             }
 
@@ -337,6 +342,49 @@ Item {
                 height: parent.height
                 anchors {
                     right: parent.right
+                }
+            }
+
+            Item {
+                id: columsCtrl
+                visible: showColumsCtrl
+                height: parent.height
+                anchors {
+                    right: parent.right
+                    rightMargin: vpx(200)
+                }
+                Item {
+                    id: columnDec
+                    width: parent.height
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+                    TapButton {
+                        iconSize: vpx(32)
+                        iconImage: "../assets/icons/ic-grid-dec.svg"
+                        bgColor: "#22000000"
+                        iconOpacity: 0.6
+                        onClicked: setGamelistColumnsDec()
+                    }
+                }
+                Item {
+                    id: columnInc
+                    width: parent.height
+                    anchors {
+                        top: parent.top
+                        right: columnDec.left
+                        rightMargin: vpx(4)
+                        bottom: parent.bottom
+                    }
+                    TapButton {
+                        iconSize: vpx(32)
+                        iconImage: "../assets/icons/ic-grid-inc.svg"
+                        bgColor: "#22000000"
+                        iconOpacity: 0.6
+                        onClicked: setGamelistColumnsInc()
+                    }
                 }
             }
         }

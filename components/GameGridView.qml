@@ -200,30 +200,15 @@ Item {
 
                 // press L3 or V
                 if (event.key === 1048585 || event.key === 66) {
-                    if (columnCount > 4) {
-                        columnCount -= 1
-                        setGamelistColumns(columnCount)
-                    }
+                    setGamelistColumnsDec()
                 }
 
                 // press R3 or B
                 if (event.key === 1048582 || event.key === 86) {
-                    if (columnCount < 10) {
-                        columnCount += 1
-                        setGamelistColumns(columnCount)
-                    }
+                    setGamelistColumnsInc()
                 }
             }
 
-            //            highlight: Rectangle {
-            //                color:  theme.primaryColor
-            //                opacity: headerFocused ? 0.1 : 0.3
-            //                width: grid.cellWidth
-            //                height: grid.cellHeight
-            //                scale: 1.1
-            //                radius: vpx(12)
-            //                z: 2
-            //            }
             delegate: GameGridItem {
                 id: game_griditem_container
                 gameData: modelData

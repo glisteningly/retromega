@@ -1,5 +1,6 @@
 const dataText = {
     "en": {
+        global_enter: "enter",
         global_back: "Back",
         global_select: "Enter",
         global_ok: "OK",
@@ -32,6 +33,7 @@ const dataText = {
         sort_play_count: "By Play Count",
     },
     "cn": {
+        global_enter: "进入",
         global_back: "返回",
         global_select: "确定",
         global_games: "游戏",

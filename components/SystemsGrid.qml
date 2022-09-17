@@ -81,18 +81,12 @@ GridView {
 
         // press L3 or V
         if (event.key === 1048585 || event.key === 66) {
-            if (columnCount > 4) {
-                columnCount -= 1
-                setSystemColumns(columnCount)
-            }
+            setSystemColumnsDec()
         }
 
         // press R3 or B
         if (event.key === 1048582 || event.key === 86) {
-            if (columnCount < 8) {
-                columnCount += 1
-                setSystemColumns(columnCount)
-            }
+            setSystemColumnsInc()
         }
     }
 

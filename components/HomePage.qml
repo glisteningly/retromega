@@ -83,9 +83,18 @@ Item {
         id: footer
         title: footerTitle
         light: (currentHomeIndex == 0 && currentPage === "HomePage")
-        anchors.bottom: homepage.bottom
-        visible: false
-        z: (currentHomeIndex <= 1) ? 1 : 0
+        anchors.bottom: parent.bottom
+        visible: currentHomeIndex <= 1
+        z: 1
+    }
+
+    GamesPageFooter {
+        id: game_footer
+        title: footerTitle
+        light: (currentHomeIndex == 0 && currentPage === "HomePage")
+        anchors.bottom: parent.bottom
+        visible: currentHomeIndex === 2 || currentHomeIndex === 3
+        z: 1
     }
 
 

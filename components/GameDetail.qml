@@ -301,7 +301,7 @@ Item {
                     text: game ? game.title : curDataText.global_no_games
                     lineHeight: 1.1
                     color: textColor
-                    font.pixelSize: vpx(30)
+                    font.pixelSize: vpx(36)
                     font.letterSpacing: 0
                     //                font.bold: true
                     z:2
@@ -349,7 +349,7 @@ Item {
             }
         }
 
-        Rectangle {
+        Item {
             id: close
             width: vpx(64)
             height: vpx(64)
@@ -357,20 +357,11 @@ Item {
                 top: parent.top
                 right: parent.right
             }
-            color: "#22000000"
-
-            Image {
-                width: vpx(32)
-                height: vpx(32)
-                source: "../assets/icons/ic-close.svg"
-                anchors {
-                    centerIn: parent
-                }
-            }
-
-            TapHandler {
-                gesturePolicy: TapHandler.ReleaseWithinBounds
-                onTapped: showGameDetail(false)
+            TapButton {
+                iconSize: vpx(32)
+                iconImage: "../assets/icons/ic-close.svg"
+                bgColor: "#22000000"
+                onClicked: showGameDetail(false)
             }
         }
     }

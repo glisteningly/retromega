@@ -128,13 +128,35 @@ FocusScope {
     // Systems grid columns
     property int systemColumns: theme.systemColumns
     function setSystemColumns(count) {
+        systemColumns = count
         api.memory.set('systemColumns', count)
+    }
+    function setSystemColumnsDec() {
+        if (systemColumns > 4) {
+            setSystemColumns(systemColumns - 1)
+        }
+    }
+    function setSystemColumnsInc() {
+        if (systemColumns < 8) {
+            setSystemColumns(systemColumns + 1)
+        }
     }
 
     // Collections grid columns
     property int collectionColumns: theme.collectionColumns
     function setCollectionColumns(count) {
+        collectionColumns = count
         api.memory.set('collectionColumns', count)
+    }
+    function setCollectionColumnsDec() {
+        if (collectionColumns > 4) {
+            setCollectionColumns(collectionColumns - 1)
+        }
+    }
+    function setCollectionColumnsInc() {
+        if (collectionColumns < 8) {
+            setCollectionColumns(collectionColumns + 1)
+        }
     }
 
     // gamelist grid columns
@@ -142,6 +164,16 @@ FocusScope {
     function setGamelistColumns(count) {
         gamelistColumns = count
         api.memory.set('gamelistColumns', count)
+    }
+    function setGamelistColumnsDec() {
+        if (gamelistColumns > 4) {
+            setGamelistColumns(gamelistColumns - 1)
+        }
+    }
+    function setGamelistColumnsInc() {
+        if (gamelistColumns < 10) {
+            setGamelistColumns(gamelistColumns + 1)
+        }
     }
 
     // Collection sort mode

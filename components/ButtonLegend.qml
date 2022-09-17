@@ -14,17 +14,22 @@ Item {
 	    //anchors.leftMargin: 70
 	    Rectangle{
 	    	id: legend
-            height:22
-            width:22
-	        color:"#444"
-	        radius:20
+            height:vpx(24)
+            width:vpx(24)
+            color:"#EEE"
+            radius:vpx(12)
 	        anchors.verticalCenter: parent.verticalCenter
 	        anchors.left: parent.left  
 	        anchors.leftMargin: 0
+//            border {
+//                width: vpx(1)
+//                color: "#444"
+//            }
+
 	        Text{
 	             text: key
-	             color:"white"         
-	             font.pixelSize: 14
+                 color: "#222"
+                 font.pixelSize: vpx(18)
 //	             font.letterSpacing: -0.3
 	             font.bold: true              
                  anchors.verticalCenter: parent.verticalCenter
@@ -33,16 +38,17 @@ Item {
 	        Text{
 	        	 id: legend_title
 	             text: title
-	             color: lightText ? "#70ffffff" : theme.text                      
+//	             color: lightText ? "#70ffffff" : theme.text
+                 color: "#EEE"
                  font {
-                     pixelSize: 18
+                     pixelSize: vpx(20)
 //                     letterSpacing: 1
                      family: systemSubitleFont.name
+                     bold: true
                  }
-//	             font.bold: true
 	             anchors.verticalCenter: parent.verticalCenter
 	             anchors.left: parent.right
-	             anchors.leftMargin: 4
+                 anchors.leftMargin: vpx(4)
 	             
 	        }
 	    }
