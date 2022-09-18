@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtGraphicalEffects 1.12
 
 Item {
+    id: root
     property var title : "Row"
     property var selected : false
     property var favorite : false
@@ -13,6 +14,7 @@ Item {
         //        return _coll? systemInfoList[_coll].short : ''
     }
 
+    signal clicked()
 
     Rectangle {
         id: rowBg
@@ -148,4 +150,7 @@ Item {
     //            verticalCenter: parent.verticalCenter
     //        }
     //    }
+    TapHandler {
+        onTapped: root.clicked()
+    }
 }

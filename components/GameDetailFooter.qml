@@ -1,55 +1,49 @@
 import QtQuick 2.12
-import QtGraphicalEffects 1.12
-import QtGraphicalEffects 1.0
 
 Item {
-    height: 55
-    width: parent.width
-
-    /**
-    * Footer
-    */
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
+    height: vpx(44)
     Rectangle {
         id: footer
-        color: theme.background
-        width: parent.width
-        height: 40
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.rightMargin: 0 
-        anchors.bottom: parent.bottom
+        width: vpx(200)
+        color: "#AA000000"
+        height: parent.height
+        anchors {
+            right: parent.right
+            rightMargin: vpx(12)
+            bottom: parent.bottom
+            bottomMargin: vpx(12)
+        }
+        radius: vpx(6)
         clip:true
 
-
-            Rectangle {
-                anchors.leftMargin: 22
-                anchors.rightMargin: 22
-                anchors.left: parent.left
-                anchors.right: parent.right
-                color: "#e3e3e3"
-                anchors.top: parent.top
-                height: 1
-            }
-            
         ButtonLegend {
-            id: button_legend_start
-            title: curDataText.games_select
+            id: button_legend_a
+            title: curDataText.global_select
             key: "A"
-            width: 55
-            anchors.left: parent.left
-            anchors.leftMargin: 32
-            anchors.verticalCenter: parent.verticalCenter
+            width: vpx(55)
+            lightText: lightActive
+            anchors {
+                right: button_legend_b.left
+                rightMargin: vpx(32)
+                verticalCenter: parent.verticalCenter
+            }
         }
 
         ButtonLegend {
-            id: button_legend_back
+            id: button_legend_b
             title: curDataText.global_back
             key: "B"
-            width: 55
-            anchors.left: button_legend_start.right
-            anchors.leftMargin: 32
-            anchors.verticalCenter: parent.verticalCenter
+            width: vpx(55)
+            lightText: lightActive
+            anchors {
+                right: parent.right
+                rightMargin: vpx(32)
+                verticalCenter: parent.verticalCenter
+            }
         }
-
-    }     
+    }
 }

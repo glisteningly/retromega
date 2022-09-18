@@ -340,13 +340,6 @@ Item {
 
 
             }
-
-            GameDetailFooter {
-                id: footer
-                visible: false
-                anchors.bottom: parent.bottom
-                //        visible: !showFullDescription
-            }
         }
 
         Item {
@@ -364,5 +357,10 @@ Item {
                 onClicked: showGameDetail(false)
             }
         }
+    }
+
+    GameDetailFooter {
+        id: footer
+        anchors.bottom: parent.bottom
     }
 }

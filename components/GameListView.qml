@@ -62,27 +62,6 @@ Item {
         
     }
 
-    //    onShowIndexChanged: {
-    //        if (showIndex) {
-    //            maintainFocusTop = true
-    //        } else {
-    //            maintainFocusTop = false
-    //            listContent.focus = true
-    //        }
-    //    }
-
-    //                Keys.onRightPressed: {
-    //                    event.accepted = true
-    //                    gameView.currentIndex = Math.min(gameView.currentIndex + 1, items.count - 1)
-    //                    return
-    //                }
-
-    //                Keys.onLeftPressed: {
-    //                    event.accepted = true;
-    //                    gameView.currentIndex = Math.max(gameView.currentIndex - 1, 0);
-    //                    return;
-    //                }
-
     Keys.onPressed: {
         // Show / Hide Index
         // Details
@@ -171,27 +150,8 @@ Item {
                 preferredHighlightBegin: height * 0.5 - 15
                 preferredHighlightEnd: height * 0.5 + 15
                 clip: false
-
+                keyNavigationEnabled: true
                 focus: listContent.activeFocus
-                Keys.onUpPressed: {
-                    if (focusSeeAll) {
-                        focusSeeAll = false
-                    } else if (gameView.currentIndex == 0) {
-                        event.accepted = false
-                    } else {
-                        decrementCurrentIndex();
-                        event.accepted = true
-                    }
-                }
-
-                Keys.onDownPressed:     {
-                    if (gameView.currentIndex == items.count - 1 && showSeeAll) {
-                        focusSeeAll = true
-                    } else {
-                        incrementCurrentIndex();
-                        event.accepted = true
-                    }
-                }
 
                 Keys.onRightPressed: {
                     event.accepted = true
@@ -314,17 +274,22 @@ Item {
                     ListRow {
                         title: modelData ? modelData.title : emptyTitle
                         model: modelData ? modelData : null
-                        //title: modelData.title
                         selected: parent.ListView.isCurrentItem && gameView.activeFocus && !selectSeeAll && modelData ? true : false
                         width: parent.width
                         emptyStyle: modelData ? false : true
                         height: listRowHeight
-                        //                        rowColor: gamesColor
                         favorite: modelData.favorite && !hideFavoriteIcon
+
+                        onClicked: {
+                            if (gameView.currentIndex === index) {
+                                startGame(modelData, index)
+                            } else {
+                                gameView.currentIndex = index
+                            }
+                        }
                     }
                 }
             }
-
         }
 
         Rectangle {
@@ -375,11 +340,11 @@ Item {
                     top: game_detail_image.bottom
                     //                    topMargin: vpx(16)
                     //                    margins: vpx(8)
-                    topMargin: vpx(16)
+                    topMargin: vpx(12)
                     left: parent.left
                     right: parent.right
                     bottom: parent.bottom
-                    bottomMargin: vpx(46)
+                    bottomMargin: vpx(50)
                 }
 
                 Text {

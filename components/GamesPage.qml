@@ -180,106 +180,10 @@ Item {
         GamesPageFooter {
             id: footer
             title: footerTitle
-//            light: (currentHomeIndex == 0 && currentPage === "HomePage")
             anchors.bottom: parent.bottom
-            visible: true
+            visible: !isShowingGameDetail
             z: 999
         }
-
-
-        Rectangle {
-            visible: false
-            id: footer1
-            color: "transparent"
-            width: parent.width
-            height: 40
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.rightMargin: 0
-            anchors.bottom: parent.bottom
-            clip:true
-
-            Rectangle {
-                anchors.leftMargin: 22
-                anchors.rightMargin: 22
-                anchors.left: parent.left
-                anchors.right: parent.right
-                color: "#e3e3e3"
-                anchors.top: parent.top
-                height: 1
-            }
-
-            Text {
-                text: footerTitle
-                font {
-                    family: systemSubitleFont.name
-                    pixelSize: 18
-                    letterSpacing: 0.3
-                }
-                anchors.right: parent.right
-                anchors.rightMargin: 32
-                color: "#9B9B9B"//theme.title
-
-                //                font.bold: true
-                anchors.verticalCenter: parent.verticalCenter
-                elide: Text.ElideRight
-                height: 20
-            }
-
-            ButtonLegend {
-                id: button_legend_start
-                title: curDataText.games_play
-                key: "A"
-                width: 55
-                anchors.left: parent.left
-                anchors.leftMargin: 32
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            ButtonLegend {
-                id: button_legend_back
-                title: curDataText.global_back
-                key: "B"
-                width: 55
-                anchors.left: button_legend_start.right
-                anchors.leftMargin: 32
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            ButtonLegend {
-                id: button_legend_details
-                title: curDataText.games_info
-                key: "X"
-                width: 55
-                visible: true//collectionFilterMode == "all" || collectionShowAllItems
-                anchors.left: button_legend_back.right
-                anchors.leftMargin: 32
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            ButtonLegendSquare {
-                //              visible: currentHomeIndex == 0
-                id: button_legend_sel
-                title: curDataText.global_view
-                key: "SEL"
-                width: 55
-                anchors.left: button_legend_details.right
-                anchors.leftMargin: 32
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            // ButtonLegend {
-            //     id: button_legend_grid
-            //     title: "Grid"
-            //     key: "X"
-            //     width: 55
-            //     anchors.left: collectionFilterMode == "all" ? button_legend_details.right : button_legend_back.right
-            //     anchors.leftMargin: 24
-            //     anchors.verticalCenter: parent.verticalCenter
-            // }
-
-        }
-
 
         /**
         * Header

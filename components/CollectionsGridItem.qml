@@ -138,8 +138,8 @@ Item {
         text: collection.name
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
-        color: ColorDetector.isColorDarkOrLight(collectionInfoList[modelData.shortName].color) === 'dark'? "#eee":"#333"
-//        color: "#EEE"
+//        color: ColorDetector.isColorDarkOrLight(collectionInfoList[modelData.shortName].color) === 'dark'? "#eee":"#333"
+        color: "#EEE"
         font {
             pixelSize: parent.width * 0.1
             family: collectionTitleFont.name

@@ -11,8 +11,6 @@ Item {
     height: vpx(44)
     Rectangle {
         id: footer
-        //color: light ? "#60000000" : "transparent"
-//        width: parent.width / 2
         width: vpx(292)
         color: "#88000000"
         height: parent.height

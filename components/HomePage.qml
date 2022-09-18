@@ -93,7 +93,7 @@ Item {
         title: footerTitle
         light: (currentHomeIndex == 0 && currentPage === "HomePage")
         anchors.bottom: parent.bottom
-        visible: currentHomeIndex === 2 || currentHomeIndex === 3
+        visible: (currentHomeIndex === 2 || currentHomeIndex === 3) && !isShowingGameDetail
         z: 1
     }
 
