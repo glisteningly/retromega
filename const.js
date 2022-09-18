@@ -31,6 +31,9 @@ const dataText = {
         sort_favorites_only: "Favorites Only",
         sort_play_time: "By Play Time",
         sort_play_count: "By Play Count",
+        meta_released: "Released in: ",
+        meta_players: "Number of players: ",
+        meta_play_count: "Play Count: "
     },
     "cn": {
         global_enter: "进入",
@@ -61,7 +64,10 @@ const dataText = {
         sort_show_all: "显示全部",
         sort_favorites_only: "仅显示收藏",
         sort_play_time: "按游玩时长",
-        sort_play_count: "按游玩次数"
+        sort_play_count: "按游玩次数",
+        meta_released: "发售日期: ",
+        meta_players: "游戏人数: ",
+        meta_play_count: "游玩次数: "
     }
 }
 

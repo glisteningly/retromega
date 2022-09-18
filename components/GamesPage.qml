@@ -250,12 +250,38 @@ Item {
             }
 
             Item {
-                id: columsCtrl
-                visible: showColumsCtrl
+                id: viewCtrl
                 height: parent.height
+                width: parent.height + vpx(4)
                 anchors {
                     right: parent.right
                     rightMargin: vpx(200)
+                }
+                Item {
+                    id: viewGrid
+                    width: parent.height
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+                    TapButton {
+                        iconSize: vpx(32)
+                        iconImage: currentGameListViewMode === 'list' ? "../assets/icons/ic-view-grid.svg" : "../assets/icons/ic-view-list.svg"
+                        bgColor: "#22000000"
+                        iconOpacity: 0.6
+                        onClicked: toggleGameListViewMode()
+                    }
+                }
+            }
+
+            Item {
+                id: columsCtrl
+                visible: currentGameListViewMode === 'grid'
+                height: parent.height
+                anchors {
+                    right: viewCtrl.left
+                    rightMargin: vpx(24)
                 }
                 Item {
                     id: columnDec

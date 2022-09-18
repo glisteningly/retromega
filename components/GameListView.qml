@@ -271,7 +271,7 @@ Item {
                         event.accepted = false
                     }
 
-                    ListRow {
+                    GameListItem {
                         title: modelData ? modelData.title : emptyTitle
                         model: modelData ? modelData : null
                         selected: parent.ListView.isCurrentItem && gameView.activeFocus && !selectSeeAll && modelData ? true : false

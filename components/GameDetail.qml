@@ -6,43 +6,48 @@ import "qrc:/qmlutils" as PegasusUtils
 
 Item { 
     id: gameDetail
-    property var active: true
+    property bool active: true
     property var game: null
-    property var pauseScreenshotVideo: false
+    property bool pauseScreenshotVideo: false
     //visible: active
 
     onGameChanged: {
         //console.log(game.assets.video)
     }
 
-    property var mainGenre: {
-        if (game.genreList.lenght == 0) { return null }
+    property var meta_mainGenre: {
+        if (game.genreList.lenght === 0) { return null }
         var g = game.genreList[0]
         var s = g.split(',')
         return s[0]
     }
     
-    property var players: {
+    property var meta_players: {
         if (!game) { return null }
         if (game.players > 0) {
-            return game.players + " Player" + (game.players > 1 ? "s" : "")
+            return curDataText.meta_players + game.players
         } else {
             return null
         }
     }
 
-    property var playerGenre : {
-        return [players, mainGenre].filter(v => { return v != null }).join(" • ")
+    property var meta_playerGenre : {
+        return [players, mainGenre].filter(v => { return v !== null }).join(" • ")
     }
 
-    property var releaseDate: {
+    property var meta_releaseDate: {
         if (!game) { return "" }
-        return (game.releaseYear)  ? "Released " + game.releaseYear : ""
+        return (game.releaseYear)  ? curDataText.meta_released + game.releaseYear : ""
     }
 
-    property var developedBy: {
+    property var meta_developedBy: {
         if (!game) { return "" }
-        return "Developed By " + game.developer
+        return game.developer
+    }
+
+    property var meta_playCount: {
+        if (!game) { return "" }
+        return curDataText.meta_play_count + game.playCount
     }
 
     property var textColor: {
@@ -57,6 +62,14 @@ Item {
         if (!game) { return "" }
         return game.description.replace("\n"," ")
     }
+
+//    property var gameReleased: {
+//        if (!game) {
+//            return ""
+//        } else {
+//            return game.release.subString(0, 4)
+//        }
+//    }
 
     property var gameIsFavorite: {
         if (game) {
@@ -307,12 +320,78 @@ Item {
                     z:2
                 }
 
+                Item {
+                    id: game_meta
+                    height: vpx(40)
+                    anchors {
+                        top: title.bottom
+                        topMargin: vpx(4)
+                        left: parent.left
+                        right: parent.right
+                    }
+                    Text {
+                        id: game_meta_developer
+                        text: meta_developedBy
+                        font {
+                            pixelSize: vpx(18)
+                        }
+                        wrapMode: Text.WordWrap
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignJustify
+                        color: textColor
+                    }
+
+                    Text {
+                        id: game_meta_released
+                        text: meta_releaseDate
+                        anchors {
+                            left: game_meta_developer.right
+                            leftMargin: vpx(24)
+                        }
+                        font {
+                            pixelSize: vpx(18)
+                        }
+                        horizontalAlignment: Text.AlignJustify
+                        color: textColor
+                    }
+
+                    Text {
+                        id: game_meta_players
+                        text: meta_players
+                        anchors {
+                            top: parent.top
+                            topMargin: vpx(30)
+                        }
+                        font {
+                            pixelSize: vpx(18)
+                        }
+                        horizontalAlignment: Text.AlignJustify
+                        color: textColor
+                    }
+
+                    Text {
+                        id: game_meta_play_count
+                        text: meta_playCount
+                        anchors {
+                            top: parent.top
+                            topMargin: vpx(30)
+                            left: game_meta_players.right
+                            leftMargin: vpx(24)
+                        }
+                        font {
+                            pixelSize: vpx(18)
+                        }
+                        horizontalAlignment: Text.AlignJustify
+                        color: textColor
+                    }
+                }
+
                 //Description
                 Item {
                     width: parent.width
                     //                    height: gameDetailText.height - 40
                     anchors {
-                        top: title.bottom
+                        top: game_meta.bottom
                         topMargin: vpx(40)
                         left: parent.left
                         right: parent.right
@@ -326,9 +405,9 @@ Item {
                             width: parent.width
                             text: introDescription
                             font {
-                                weight: Font.Light
-                                pixelSize: vpx(20)
-                                letterSpacing: 0.4
+//                                weight: Font.Light
+                                pixelSize: vpx(22)
+//                                letterSpacing: 0.4
                             }
                             wrapMode: Text.WordWrap
                             elide: Text.ElideRight

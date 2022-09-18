@@ -54,7 +54,7 @@ Rectangle {
         if (currentSystemViewMode === 'grid') {
             return theme.background
         } else {
-            return currentHomeIndex <= 1 ?  "#11000000" : theme.background
+            return currentHomeIndex <= 1 ?  "#22000000" : theme.background
         }
     }
     //    width: parent.width
@@ -270,12 +270,54 @@ Rectangle {
     }
 
     Item {
+        id: viewCtrl
+        height: parent.height
+        width: parent.height + vpx(4)
+        anchors {
+            right: parent.right
+            rightMargin: vpx(200)
+        }
+        Item {
+            visible: (currentHomeIndex === 0 || currentHomeIndex === 1)
+            width: parent.height
+            anchors {
+                top: parent.top
+                right: parent.right
+                bottom: parent.bottom
+            }
+            TapButton {
+                iconSize: vpx(32)
+                iconImage: currentSystemViewMode === 'list' ? "../assets/icons/ic-view-grid.svg" : "../assets/icons/ic-view-card.svg"
+                bgColor: "#22000000"
+                iconOpacity: 0.6
+                onClicked: toggleSystemViewMode()
+            }
+        }
+        Item {
+            visible: (currentHomeIndex === 2 || currentHomeIndex === 3)
+            width: parent.height
+            anchors {
+                top: parent.top
+                right: parent.right
+                bottom: parent.bottom
+            }
+            TapButton {
+                iconSize: vpx(32)
+                iconImage: currentGameListViewMode === 'list' ? "../assets/icons/ic-view-grid.svg" : "../assets/icons/ic-view-list.svg"
+                bgColor: "#22000000"
+                iconOpacity: 0.6
+                onClicked: toggleGameListViewMode()
+            }
+        }
+    }
+
+    Item {
         id: columsCtrl
         visible: showColumsCtrl
         height: parent.height
         anchors {
-            right: parent.right
-            rightMargin: vpx(200)
+            right: viewCtrl.left
+            rightMargin: vpx(24)
         }
         Item {
             id: columnDec

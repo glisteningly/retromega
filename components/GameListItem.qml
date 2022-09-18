@@ -3,11 +3,11 @@ import QtGraphicalEffects 1.12
 
 Item {
     id: root
-    property var title : "Row"
-    property var selected : false
-    property var favorite : false
-    property var rowColor : "#000000"
-    property var emptyStyle : false
+    property string title : "Row"
+    property bool selected : false
+    property bool favorite : false
+    property string rowColor : "#000000"
+    property bool emptyStyle : false
     property var model : null
     property var collectionName : {
         return model? model.collections.get(0).shortName : null
@@ -62,7 +62,7 @@ Item {
         font {
             family: boldTitleFont
             pixelSize: vpx(24)
-            letterSpacing: 0.5
+//            letterSpacing: 0.5
             //        bold: false
         }
         width: parent.width - (favorite ? vpx(50) : vpx(12))
