@@ -2,11 +2,12 @@ import QtQuick 2.12
 import QtGraphicalEffects 1.12
 
 Item {
-    property var title : "Row"
-    property var icon : ""
-    property var index : 0
-    property var selected : currentHomeIndex == index
-    property var lightText : false
+    id: root
+    property string title : "Row"
+    property string icon : ""
+    property int index : 0
+    property bool selected : currentHomeIndex === index
+    property bool lightText : false
     property var textColor : {
         if (activeFocus) {
             return "#ffffff"
@@ -17,8 +18,9 @@ Item {
             return "#60ffffff"
         }
     }
+    signal clicked()
 
-    enabled: false
+//    enabled: false
     focus: true
     width: selected? iconImage.width + item_text.width + vpx(4) : iconImage.width + vpx(12)
     height: parent.height
@@ -94,18 +96,8 @@ Item {
         }
     }
 
-    //    Text {
-    //        id: item_text
-    //        text: title
-    ////        anchors.left: parent.left
-    ////        anchors.top: parent.top
-    //        anchors.centerIn: parent
-    //        color: textColor
-    //        font {
-    //            family: boldTitleFont
-    //            pixelSize: vpx(24)
-    //            letterSpacing: boldTitleLetterSpacing
-    ////        bold: true
-    //        }
-    //    }
+    TapHandler {
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+        onTapped: clicked()
+    }
 }

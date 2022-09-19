@@ -50,6 +50,11 @@ Item {
         return curDataText.meta_play_count + game.playCount
     }
 
+    property var meta_playTime: {
+        if (!game) { return "" }
+        return curDataText.meta_play_time + game.playTime
+    }
+
     property var textColor: {
         return theme.text_dark
     }
@@ -92,7 +97,7 @@ Item {
             return null
         }
     }
-    property var textScroll: 10
+    property int textScroll: 10
 
     Keys.onPressed: {
         if (event.key === '1048586') {
@@ -241,18 +246,23 @@ Item {
                     fillMode: Image.PreserveAspectFit
                 }
 
-                RowLayout {
+                Item {
                     id: actionBtns
+                    width: parent.width
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: vpx(12)
-                    spacing: vpx(24)
                     ActionButton {
                         id: actionPlay
                         title: curDataText.games_play
                         icon: "system"
                         focus: true
                         height: vpx(45)
-                        width: vpx(135)
+                        width: parent.width / 2 - vpx(12)
+                        anchors {
+                            left: parent.left
+                            bottom: parent.bottom
+                        }
+
                         textColor: gameDetail.textColor
                         KeyNavigation.right: actionFavorite
                         KeyNavigation.down: gameDetailText
@@ -275,8 +285,11 @@ Item {
                         icon: gameIsFavorite ? "favorite-on" : "favorite-off"
                         focus: false
                         height: vpx(45)
-                        width: vpx(135)
-
+                        width: parent.width / 2 - vpx(12)
+                        anchors {
+                            right: parent.right
+                            bottom: parent.bottom
+                        }
                         Keys.onPressed: {
                             // Favorite
                             if (api.keys.isAccept(event)) {
@@ -384,6 +397,22 @@ Item {
                         horizontalAlignment: Text.AlignJustify
                         color: textColor
                     }
+
+//                    Text {
+//                        id: game_meta_play_time
+//                        text: meta_playTime
+//                        anchors {
+//                            top: parent.top
+//                            topMargin: vpx(30)
+//                            left: game_meta_play_count.right
+//                            leftMargin: vpx(24)
+//                        }
+//                        font {
+//                            pixelSize: vpx(18)
+//                        }
+//                        horizontalAlignment: Text.AlignJustify
+//                        color: textColor
+//                    }
                 }
 
                 //Description

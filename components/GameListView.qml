@@ -15,7 +15,7 @@ Item {
         } else if (items.count > 0) {
             return items.count
         } else {
-            return "No Games"
+            return curDataText.global_no_games
         }
     }
 
@@ -315,7 +315,7 @@ Item {
                     //                    margins: vpx(12)
                     left: parent.left
                     top: parent.top
-                    topMargin: vpx(20)
+                    topMargin: vpx(12)
                     //                    bottom: parent.bottom
                 }
 

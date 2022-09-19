@@ -31,6 +31,7 @@ Item {
 
     // Shadow. Using an image for better shadow visuals & performance.
     Image {
+        visible: screenshot || video
         id: game_box_shadow
         source: "../assets/images/cover-shadow.png"
         width: (371 / 200) * parent.width
@@ -60,19 +61,19 @@ Item {
             loops: MediaPlayer.Infinite 
         }
 
-        layer.enabled: rounded
-        layer.effect: OpacityMask {
-            maskSource: Item {
-                width: gameScreenshot.width
-                height: gameScreenshot.height
-                Rectangle {
-                    anchors.centerIn: parent
-                    width: gameScreenshot.width
-                    height: gameScreenshot.height
-                    radius: vpx(6)
-                }
-            }
-        }
+//        layer.enabled: rounded
+//        layer.effect: OpacityMask {
+//            maskSource: Item {
+//                width: gameScreenshot.width
+//                height: gameScreenshot.height
+//                Rectangle {
+//                    anchors.centerIn: parent
+//                    width: gameScreenshot.width
+//                    height: gameScreenshot.height
+//                    radius: vpx(6)
+//                }
+//            }
+//        }
 
     }
 }

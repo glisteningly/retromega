@@ -33,7 +33,8 @@ const dataText = {
         sort_play_count: "By Play Count",
         meta_released: "Released in: ",
         meta_players: "Number of players: ",
-        meta_play_count: "Play Count: "
+        meta_play_count: "Play Count: ",
+        meta_play_time: "Play Time: "
     },
     "cn": {
         global_enter: "进入",
@@ -67,7 +68,8 @@ const dataText = {
         sort_play_count: "按游玩次数",
         meta_released: "发售日期: ",
         meta_players: "游戏人数: ",
-        meta_play_count: "游玩次数: "
+        meta_play_count: "游玩次数: ",
+        meta_play_time: "游玩时长: "
     }
 }
 

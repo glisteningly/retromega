@@ -68,20 +68,10 @@ Rectangle {
 
     Rectangle{
         id: tabLeft
-        //        height:parent.height
-        width: parent.height - vpx(8)
+        height: parent.height
+        width: parent.height
         color:"#33000000"
-        radius:2
-        anchors.top: parent.top
-        anchors.topMargin: vpx(4)
         anchors.left: parent.left
-        anchors.leftMargin: vpx(4)
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: vpx(4)
-        //        border {
-        //            color: "#888"
-        //            width: 1
-        //        }
 
         Text{
             text: "L"
@@ -151,11 +141,11 @@ Rectangle {
         index: 0
         anchors.left: tabLeft.right
         anchors.top: parent.top
-        //        anchors.topMargin: 6
-        anchors.leftMargin: vpx(12)
+        anchors.leftMargin: vpx(24)
         lightText: light
         KeyNavigation.down: mainFocus
         KeyNavigation.right: title_collection
+        onClicked: setHomeIndex(0)
     }
 
     HeaderLink {
@@ -165,11 +155,10 @@ Rectangle {
         index: 1
         anchors.left: title_systems.right
         anchors.top: parent.top
-        //        anchors.topMargin: 6
-        //        anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus
         KeyNavigation.right: title_favorites
+        onClicked: setHomeIndex(1)
     }
 
     HeaderLink {
@@ -179,11 +168,10 @@ Rectangle {
         index: 2
         anchors.left: title_collection.right
         anchors.top: parent.top
-        //        anchors.topMargin: 6
-        //        anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus
         KeyNavigation.right: title_recent
+        onClicked: setHomeIndex(2)
     }
 
     HeaderLink {
@@ -193,33 +181,21 @@ Rectangle {
         index: 3
         anchors.left: title_favorites.right
         anchors.top: parent.top
-        //        anchors.topMargin: 6
-        //        anchors.leftMargin: 24
         lightText: light
         KeyNavigation.down: mainFocus
-        //        KeyNavigation.right: title_apps
+        onClicked: setHomeIndex(3)
     }
 
     Rectangle {
         id: tabRight
-        //        height:18
-        width: parent.height - vpx(8)
+        height: parent.height
+        width: parent.height
         color:"#33000000"
-        radius:2
 
         anchors {
-            top: parent.top
-            topMargin: vpx(4)
             left: title_recent.right
-            leftMargin: vpx(12)
-            bottom: parent.bottom
-            bottomMargin: vpx(4)
+            leftMargin: vpx(24)
         }
-
-        //        border {
-        //            color: "#888"
-        //            width: 1
-        //        }
         Text{
             text: "R"
             color:"#55EEEEEE"

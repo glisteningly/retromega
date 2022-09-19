@@ -14,7 +14,7 @@ Item {
         } else if (items.count > 0) {
             return items.count
         } else {
-            return "No Games"
+            return curDataText.global_no_games
         }
     }
 
