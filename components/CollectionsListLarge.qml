@@ -148,7 +148,7 @@ ListView {
         Item {
             id: grid_listitem_container
             width: layoutScreen.width
-            height: layoutScreen.height - vpx(50) - vpx(50) - 35
+            height: layoutScreen.height
             scale: 1.0
 
             z: 100 - index
@@ -181,19 +181,13 @@ ListView {
 
                 Image {
                     id: menu_mask
-                    //width: 136
-                    width: layoutScreen.height * 0.283333
                     height: layoutScreen.height
                     anchors {
-                        top: parent.top
-                        right: parent.right
-                        leftMargin: 0
-                        topMargin: -55
-                        //                        rightMargin: 70
-                        rightMargin: parent.width * 0.2
+                        fill: parent
                     }
+                    fillMode: Image.PreserveAspectCrop
                     z: 0
-                    source: "../assets/images/menu-side-2.png"
+                    source: "../assets/images/bg_system_line.png"
                 }
 
                 Rectangle {
@@ -216,12 +210,12 @@ ListView {
                     source: "../assets/images/collections/"+modelData.shortName+".png"
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.rightMargin: 0
-                    anchors.verticalCenterOffset: 20
+                    anchors.rightMargin: vpx(80)
+                    anchors.verticalCenterOffset: vpx(-30)
                     cache: true
                     asynchronous: true
-                    width: 550
-                    height: 550
+                    width: vpx(550)
+                    height: vpx(550)
                     fillMode: Image.PreserveAspectFit
                     scale: 1.0
                     states: [
@@ -238,12 +232,12 @@ ListView {
 
                         State {
                             name: "active"; when: grid_listitem_container.ListView.isCurrentItem && !headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: vpx(50); opacity: 1.0; scale: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: vpx(80); opacity: 1.0;}
                         },
 
                         State {
                             name: "inactive"; when: grid_listitem_container.ListView.isCurrentItem  && headerFocused
-                            PropertyChanges { target: device; anchors.rightMargin: vpx(50); opacity: 1.0; scale: 0.85}
+                            PropertyChanges { target: device; anchors.rightMargin: vpx(80); opacity: 1.0; }
                         }
                     ]
 
@@ -272,7 +266,7 @@ ListView {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: vpx(60)
-                    anchors.verticalCenterOffset: 0
+                    anchors.verticalCenterOffset: vpx(15)
                 }
 
                 DropShadow {

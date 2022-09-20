@@ -22,17 +22,20 @@ const systemInfoList = {
   "gb": {
     "short": "gb",
     "color": "#920E00",
-    "company": "Nintendo"
+    "company": "Nintendo",
+        "thumb_scale": true
   },
   "gba": {
     "short": "gba",
     "color": "#920E00",
-    "company": "Nintendo"
+    "company": "Nintendo",
+        "thumb_scale": true
   },
   "gbc": {
     "short": "gbc",
     "color": "#920E00",
-    "company": "Nintendo"
+    "company": "Nintendo",
+        "thumb_scale": true
   },
   "snes": {
     "short": "snes",
@@ -47,12 +50,14 @@ const systemInfoList = {
   "gg": {
     "short": "gg",
     "color": "#2196F3",
-    "company": "Sega"
+    "company": "Sega",
+        "thumb_scale": true
   },
   "gamegear": {
     "short": "gg",
     "color": "#2196F3",
-    "company": "Sega"
+    "company": "Sega",
+        "thumb_scale": true
   },
   "mastersystem": {
     "short": "ms",
@@ -107,17 +112,20 @@ const systemInfoList = {
   "neogeo": {
     "short": "neogeo",
     "color": "#0277BD",
-    "company": "SNK"
+    "company": "SNK",
+        "thumb_scale": true
   },
   "ngp": {
     "short": "ngp",
     "color": "#689F38",
-    "company": "SNK"
+    "company": "SNK",
+        "thumb_scale": true
   },
   "ngpc": {
     "short": "ngpc",
     "color": "#689F38",
-    "company": "SNK"
+    "company": "SNK",
+        "thumb_scale": true
   },
   "neogeocd": {
     "short": "ngcd",
@@ -142,46 +150,55 @@ const systemInfoList = {
   "cps": {
     "short": "tg16",
     "color": "#ECAF00",
-    "company": "capcom"
+    "company": "capcom",
+        "thumb_scale": true
   },
   "cps1": {
     "short": "cps1",
     "color": "#ECAF00",
-    "company": "capcom"
+    "company": "capcom",
+        "thumb_scale": true
   },
   "cps2": {
     "short": "cps2",
     "color": "#ECAF00",
-    "company": "capcom"
+    "company": "capcom",
+        "thumb_scale": true
   },
   "cps3": {
     "short": "cps3",
     "color": "#ECAF00",
-    "company": "capcom"
+    "company": "capcom",
+        "thumb_scale": true
   },
   "mame": {
     "short": "mame",
     "color": "#546E7A",
-    "company": "arcade"
+    "company": "arcade",
+        "thumb_scale": true
   },
   "naomi": {
     "short": "naomi",
     "color": "#BF360C",
-    "company": "Sega"
+    "company": "Sega",
+        "thumb_scale": true
   },
   "wonderswan": {
     "short": "ws",
     "color": "#6A1B9A",
-    "company": "Bandai"
+    "company": "Bandai",
+        "thumb_scale": true
   },
   "wonderswancolor": {
     "short": "wsc",
     "color": "#6A1B9A",
-    "company": "Bandai"
+    "company": "Bandai",
+        "thumb_scale": true
   },
   "pgm": {
     "short": "pgm",
     "color": "#00838F",
-    "company": "igs"
+    "company": "igs",
+        "thumb_scale": true
   }
 }

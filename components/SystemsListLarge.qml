@@ -155,7 +155,7 @@ ListView {
         Item {
             id: system_listitem_container
             width: layoutScreen.width
-            height: layoutScreen.height - vpx(50) - vpx(50) - 35
+            height: layoutScreen.height
             scale: 1.0
             
             z: 100 - index
@@ -188,71 +188,50 @@ ListView {
                 
                 Image {
                     id: menu_mask
-                    //width: 136
-                    width: layoutScreen.height * 0.283333
                     height: layoutScreen.height
                     anchors {
-                        top: parent.top
-                        right: parent.right
-                        leftMargin: 0
-                        topMargin: -55
-                        //                        rightMargin: 70
-                        rightMargin: parent.width * 0.2
+                        fill: parent
                     }
+                    fillMode: Image.PreserveAspectCrop
                     z: 0
-                    source: "../assets/images/menu-side-2.png"
+                    source: "../assets/images/bg_system_line.png"
                 }
-
-                //                Rectangle {
-
-                //                    id: tile_content
-                //                    anchors {
-                //                        top: systemsListView_item.top
-                //                        left: systemsListView_item.left
-                //                        topMargin: 0
-                //                        leftMargin: 0
-                //                    }
-                //                    width: parent.width
-                //                    height: parent.height
-                //                    color: systemColors[modelData.shortName] ?? "#000000"
-                //                    clip: false
-                //                    visible: false
-                //                }
                 
                 Image {
                     id: device
                     //                    source: "../assets/images/devices/"+modelData.shortName+".png"
-                    source: "../assets/images/devices/"+modelData.shortName+".png"
+                    source: "../assets/images/hardware/"+modelData.shortName+".png"
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.rightMargin: vpx(50)
-                    anchors.verticalCenterOffset: 25
+                    anchors.rightMargin: -vpx(40)
+                    anchors.verticalCenterOffset: -vpx(30)
                     cache: true
                     asynchronous: true
-                    width: 550
-                    height: 550
+                    width: vpx(800)
+                    height: vpx(800)
                     fillMode: Image.PreserveAspectFit
-                    scale: 1.0
+//                    scale: 1.0
+                    scale: systemInfoList[modelData.shortName].thumb_scale ? 0.8 : 1.0
                     states: [
 
                         State{
                             name: "inactiveRight"; when: !(system_listitem_container.ListView.isCurrentItem) && currentIndex < index
-                            PropertyChanges { target: device; anchors.rightMargin: -160.0; opacity: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: -vpx(160); opacity: 1.0}
                         },
 
                         State{
                             name: "inactiveLeft"; when: !(system_listitem_container.ListView.isCurrentItem) && currentIndex > index
-                            PropertyChanges { target: device; anchors.rightMargin: 40.0; opacity: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: vpx(40); opacity: 1.0}
                         },
 
                         State {
                             name: "active"; when: system_listitem_container.ListView.isCurrentItem
-                            PropertyChanges { target: device; anchors.rightMargin: vpx(50); opacity: 1.0; scale: 1.0}
+                            PropertyChanges { target: device; anchors.rightMargin: -vpx(40); opacity: 1.0;}
                         },
 
                         State {
                             name: "inactive"; when: system_listitem_container.ListView.isCurrentItem
-                            PropertyChanges { target: device; anchors.rightMargin: vpx(50); opacity: 1.0; scale: 0.85}
+                            PropertyChanges { target: device; anchors.rightMargin: -vpx(40); opacity: 1.0;}
                         }
                     ]
 
@@ -279,7 +258,7 @@ ListView {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.leftMargin: vpx(60)
-                    anchors.verticalCenterOffset: vpx(-10)
+                    anchors.verticalCenterOffset: vpx(15)
                 }
 
                 DropShadow {
