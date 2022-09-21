@@ -106,13 +106,9 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  modelData.assets.boxFront || ""
-        //        sourceSize {
-        //            width: parent.width;
-        //            height: parent.height
-        //        }
-        sourceSize { width: 256; height: 256 }
+        sourceSize.width: 256
+        sourceSize.height: 256
         fillMode: Image.PreserveAspectFit
-//        smooth: true
         onStatusChanged: {
             if (status === Image.Ready) {
                 gameGridItem.imageLoaded(implicitWidth, implicitHeight);

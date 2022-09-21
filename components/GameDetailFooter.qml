@@ -25,7 +25,6 @@ Item {
             title: curDataText.global_select
             key: "A"
             width: vpx(55)
-            lightText: lightActive
             anchors {
                 right: button_legend_b.left
                 rightMargin: vpx(32)
@@ -38,7 +37,6 @@ Item {
             title: curDataText.global_back
             key: "B"
             width: vpx(55)
-            lightText: lightActive
             anchors {
                 right: parent.right
                 rightMargin: vpx(32)

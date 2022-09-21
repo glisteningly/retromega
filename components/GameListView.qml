@@ -81,6 +81,12 @@ Item {
         gameView.cellHeightRatio = 1;
     }
 
+    onFocusChanged: {
+        if (focus) {
+            gameView.focus = true
+        }
+    }
+
     Rectangle {
         id: mainListContent
         color: theme.background_dark
@@ -151,7 +157,7 @@ Item {
                 preferredHighlightEnd: height * 0.5 + 15
                 clip: false
                 keyNavigationEnabled: true
-                focus: listContent.activeFocus
+//                focus: listContent.activeFocus
 
                 Keys.onRightPressed: {
                     event.accepted = true
@@ -187,24 +193,29 @@ Item {
             Component.onCompleted: {
                 //                currentIndex = defaultIndex
                 delay(50, function() {
-                    gameView.positionViewAtIndex(currentIndex, ListView.Center)
-                    if (currentHomeIndex <= 1 && collectionListIndex) {
-                        currentIndex = defaultIndex
-                        //                        setCurrentIndex(currentIndex)
+                    if (gameView && visible) {
+//                        gameView.focus = true
+                        gameView.positionViewAtIndex(currentIndex, ListView.Center)
+                        if (currentHomeIndex <= 1 && collectionListIndex) {
+                            currentIndex = defaultIndex
+                            //                        setCurrentIndex(currentIndex)
+                        }
                     }
                 })
 
             }
 
             onVisibleChanged: {
-                if (visible) {
+                if (gameView && visible) {
                     currentIndex = -1
                     gameView.positionViewAtIndex(defaultIndex, ListView.Center)
                     delay(50, function() {
-                        gameView.positionViewAtIndex(defaultIndex, ListView.Center)
-                        if (currentHomeIndex <= 1 && !collectionListIndex) {
-                            currentIndex = 0
-                            //                        setCurrentIndex(currentIndex)
+                        if (gameView && visible) {
+                            gameView.positionViewAtIndex(defaultIndex, ListView.Center)
+                            if (currentHomeIndex <= 1 && !collectionListIndex) {
+                                currentIndex = 0
+                                //                        setCurrentIndex(currentIndex)
+                            }
                         }
                     })
                     //                    console.log(defaultIndex)
@@ -216,7 +227,7 @@ Item {
 
                 Item {
                     id: gameViewDelegateContainer
-                    width: parent.width
+                    width: parent? parent.width : 0
                     height: listRowHeight
 
                     Keys.onPressed: {
@@ -319,9 +330,20 @@ Item {
                     //                    bottom: parent.bottom
                 }
 
+                Image {
+                    width: parent.width
+                    height: parent.height * 0.7
+                    anchors {
+                        bottom: parent.bottom
+                    }
+                    fillMode: Image.PreserveAspectCrop
+                    z: 0
+                    source: "../assets/images/bg_system_line.png"
+                }
+
                 BoxArt {
                     id: game_box_art
-                    asset: selectedGame && gameView.currentIndex >= 0 && !focusSeeAll ? selectedGame.assets.boxFront : ""
+                    asset: selectedGame && gameView.currentIndex >= 0 ? selectedGame.assets.boxFront : ""
                     context: currentCollection.shortName + listContent.context
                 }
 
@@ -357,7 +379,7 @@ Item {
                     }
                     id: txt_game_description
                     width: parent.width
-                    text: selectedGame.description
+                    text: selectedGame.description || ""
                     font {
                         weight: Font.Light
                         pixelSize: vpx(20)

@@ -97,6 +97,12 @@ Item {
         gameView.cellHeightRatio = 1
     }
 
+    onFocusChanged: {
+        if (focus) {
+            gameView.focus = true
+        }
+    }
+
     Rectangle {
         id: mainGridContent
         color: theme.background_dark
@@ -108,9 +114,7 @@ Item {
 
         GridView {
             id: gameView
-            //            visible: false
-            //            enabled: false
-            focus: listContent.activeFocus
+//            focus: listContent.activeFocus
             readonly property int maxRecalcs: 5
             property int currentRecalcs: 0
             property real cellHeightRatio: 1.39
@@ -156,16 +160,19 @@ Item {
             Component.onCompleted: {
                 positionViewAtIndex(defaultIndex, GridView.Center)
                 delay(200, function() {
+                    if (gameView && visible) {
+//                    gameView.focus = true
                     positionViewAtIndex(defaultIndex, GridView.Center)
 //                    if (currentHomeIndex <= 1 && !collectionListIndex) {
 //                        currentIndex = -1
 //                    }
+                    }
                 })
 //                currentIndex = defaultIndex
             }
 
             onVisibleChanged: {
-                if (visible) {
+                if (gameView && visible) {
                     cells_need_recalc()
                     currentIndex = 0
                     positionViewAtIndex(defaultIndex, GridView.Center)

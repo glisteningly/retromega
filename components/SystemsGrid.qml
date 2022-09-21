@@ -15,24 +15,24 @@ GridView {
 
     model: allSystems
     currentIndex: currentSystemIndex
-//    width: parent.width - 8
-//    anchors.verticalCenter: parent.verticalCenter
+    //    width: parent.width - 8
+    //    anchors.verticalCenter: parent.verticalCenter
     anchors {
         fill: parent
         margins: vpx(12)
-//        topMargin: vpx(12)
+        //        topMargin: vpx(12)
     }
     cacheBuffer: 10
-//    delegate: systemsDelegate
+    //    delegate: systemsDelegate
 
     highlightRangeMode: GridView.ApplyRange
     highlightMoveDuration: 0
     preferredHighlightBegin: height * 0.5 - vpx(120)
     preferredHighlightEnd: height * 0.5 + vpx(120)
 
-//        function update_cell_height_ratio(img_w, img_h) {
-//            cellHeightRatio = Math.min(Math.max(cellHeightRatio, img_h / img_w), 1.5);
-//        }
+    //        function update_cell_height_ratio(img_w, img_h) {
+    //            cellHeightRatio = Math.min(Math.max(cellHeightRatio, img_h / img_w), 1.5);
+    //        }
 
 
     cellWidth: width / columnCount
@@ -42,13 +42,15 @@ GridView {
 
     Component.onCompleted: {
         delay(200, function() {
-            positionViewAtIndex(currentSystemIndex, GridView.Center)
+            if (visible) {
+                positionViewAtIndex(currentSystemIndex, GridView.Center)
+            }
         })
-//        systemsBackground.bgIndex = currentIndex
+        //        systemsBackground.bgIndex = currentIndex
     }
 
     onVisibleChanged: {
-        if (visible) {
+        if (systemsGridView && visible) {
             positionViewAtIndex(currentSystemIndex, GridView.Center)
             delay(0, function() {
                 positionViewAtIndex(currentSystemIndex, GridView.Center)
@@ -58,26 +60,26 @@ GridView {
 
     onCurrentIndexChanged: {
         if (visible) {
-          navSound.play()
-          setCurSystemIndex(currentIndex)
+            navSound.play()
+            setCurSystemIndex(currentIndex)
         }
     }
 
     Keys.onPressed: {
-//        console.debug(event.key)
+        //        console.debug(event.key)
         if (event.isAutoRepeat)
             return;
 
         if (api.keys.isPageUp(event) || api.keys.isPageDown(event)) {
             event.accepted = true;
-//            navSound.play()
+            //            navSound.play()
             var rows_to_skip = Math.max(1, Math.round(systemsGridView.height / cellHeight));
             var games_to_skip = rows_to_skip * columnCount;
             if (api.keys.isPageUp(event))
                 currentIndex = Math.max(currentIndex - games_to_skip, 0);
             else
                 currentIndex = Math.min(currentIndex + games_to_skip, model.count - 1);
-        }    
+        }
 
         // press L3 or V
         if (event.key === 1048585 || event.key === 66) {
@@ -90,17 +92,17 @@ GridView {
         }
     }
 
-//    highlight: Rectangle {
-//        color:  theme.primaryColor
-//        opacity: headerFocused ? 0.1 : 0.3
-//        width: grid.cellWidth
-//        height: grid.cellHeight
-//        scale: 1.1
-//        radius: vpx(12)
-//        z: 2
-//    }
+    //    highlight: Rectangle {
+    //        color:  theme.primaryColor
+    //        opacity: headerFocused ? 0.1 : 0.3
+    //        width: grid.cellWidth
+    //        height: grid.cellHeight
+    //        scale: 1.1
+    //        radius: vpx(12)
+    //        z: 2
+    //    }
 
-//    highlightMoveDuration: 0
+    //    highlightMoveDuration: 0
 
     delegate: SystemsGridItem {
         id: system_griditem_container

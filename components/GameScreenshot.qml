@@ -36,7 +36,7 @@ Item {
         source: "../assets/images/cover-shadow.png"
         width: (371 / 200) * parent.width
         height: (371 / 200) * parent.height - vpx(4)
-        fillMode: Image.PreserveAspectFill
+        fillMode: Image.Stretch
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
     }

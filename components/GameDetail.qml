@@ -18,8 +18,12 @@ Item {
     property var meta_mainGenre: {
         if (game.genreList.lenght === 0) { return null }
         var g = game.genreList[0]
-        var s = g.split(',')
-        return s[0]
+        if (g) {
+            var s = g.split(',')
+            return s[0]
+        } else {
+            return null
+        }
     }
     
     property var meta_players: {
@@ -32,7 +36,7 @@ Item {
     }
 
     property var meta_playerGenre : {
-        return [players, mainGenre].filter(v => { return v !== null }).join(" • ")
+        return [meta_players, meta_mainGenre].filter(v => { return v !== null }).join(" • ")
     }
 
     property var meta_releaseDate: {
@@ -68,13 +72,13 @@ Item {
         return game.description.replace("\n"," ")
     }
 
-//    property var gameReleased: {
-//        if (!game) {
-//            return ""
-//        } else {
-//            return game.release.subString(0, 4)
-//        }
-//    }
+    //    property var gameReleased: {
+    //        if (!game) {
+    //            return ""
+    //        } else {
+    //            return game.release.subString(0, 4)
+    //        }
+    //    }
 
     property var gameIsFavorite: {
         if (game) {
@@ -225,7 +229,7 @@ Item {
                     screenshot: gameScreenshot
                     video: gameVideo
                     active: gameDetail.active
-                    pauseVideo: showFullDescription || pauseScreenshotVideo
+//                    pauseVideo: showFullDescription || pauseScreenshotVideo
                 }
 
                 Image {
@@ -242,7 +246,8 @@ Item {
                     asynchronous: true
                     visible: source != ""
                     source:  game ? game.assets.logo : ''
-                    sourceSize { width: 200; height: 200 }
+                    sourceSize.width: 400
+                    sourceSize.height: 400
                     fillMode: Image.PreserveAspectFit
                 }
 
@@ -265,7 +270,6 @@ Item {
 
                         textColor: gameDetail.textColor
                         KeyNavigation.right: actionFavorite
-                        KeyNavigation.down: gameDetailText
                         Keys.onPressed: {
                             // Start Game
                             if (api.keys.isAccept(event)) {
@@ -280,7 +284,6 @@ Item {
                         id: actionFavorite
                         textColor: gameDetail.textColor
                         KeyNavigation.left: actionPlay
-                        KeyNavigation.down: gameDetailText
                         title: gameIsFavorite ? curDataText.games_favorite_cancel : curDataText.games_favorite
                         icon: gameIsFavorite ? "favorite-on" : "favorite-off"
                         focus: false
@@ -398,21 +401,21 @@ Item {
                         color: textColor
                     }
 
-//                    Text {
-//                        id: game_meta_play_time
-//                        text: meta_playTime
-//                        anchors {
-//                            top: parent.top
-//                            topMargin: vpx(30)
-//                            left: game_meta_play_count.right
-//                            leftMargin: vpx(24)
-//                        }
-//                        font {
-//                            pixelSize: vpx(18)
-//                        }
-//                        horizontalAlignment: Text.AlignJustify
-//                        color: textColor
-//                    }
+                    //                    Text {
+                    //                        id: game_meta_play_time
+                    //                        text: meta_playTime
+                    //                        anchors {
+                    //                            top: parent.top
+                    //                            topMargin: vpx(30)
+                    //                            left: game_meta_play_count.right
+                    //                            leftMargin: vpx(24)
+                    //                        }
+                    //                        font {
+                    //                            pixelSize: vpx(18)
+                    //                        }
+                    //                        horizontalAlignment: Text.AlignJustify
+                    //                        color: textColor
+                    //                    }
                 }
 
                 //Description
@@ -434,9 +437,9 @@ Item {
                             width: parent.width
                             text: introDescription
                             font {
-//                                weight: Font.Light
+                                //                                weight: Font.Light
                                 pixelSize: vpx(22)
-//                                letterSpacing: 0.4
+                                //                                letterSpacing: 0.4
                             }
                             wrapMode: Text.WordWrap
                             elide: Text.ElideRight

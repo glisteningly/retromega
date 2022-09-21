@@ -6,21 +6,21 @@ Item {
     // When the box art is used across screens,
     // context signals when the contents needs to be reset
     // Basically avoids seeing previous artwork on an unrelated screen / state
-    property var context: "default"
+    property string context: "default"
 
     // Asset to load
     property var asset: string
 
     // If first time the box art is loaded. In this case loads sync
-    property var initialLoad: true
+    property bool initialLoad: true
 
     // State
-    property var loadingError: false
-    property var loadingImage: true
+    property bool loadingError: false
+    property bool loadingImage: true
     
     // Convenience
     property var emptyAsset: {
-        return (asset == "" || asset == null)
+        return (typeof asset === 'string' && asset.length === 0 || asset === null)
     }
 
     onContextChanged: {
@@ -35,6 +35,15 @@ Item {
 
     function update_image_size(width, height, container_size) {
         var fill = (width > height * 0.95) ? 0.9 : 0.65
+        var scale = width / height
+        if (scale < 0.8) {
+            fill = width / height * 0.8
+        } else if (scale >= 0.8 && scale <= 1.2) {
+            fill = 0.66
+        } else {
+            fill = height / width * 1.2
+        }
+
         box_art.width  = size_image(width, height, container_size * fill).width
         box_art.height = size_image(width, height, container_size * fill).height
     }
@@ -57,7 +66,7 @@ Item {
         source: "../assets/images/cover-shadow.png"
         width: (371 / 200) * parent.width
         height: (371 / 200) * parent.height - vpx(4)
-        fillMode: Image.PreserveAspectFill
+        fillMode: Image.Stretch
         anchors {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter
@@ -91,9 +100,10 @@ Item {
             smooth: true
             property bool adapt: true
             fillMode: Image.PreserveAspectCrop
-            source: asset
+            source: asset || ""
             asynchronous: initialLoad ? false : true
-            sourceSize: { width: 512; height: 512 }
+            sourceSize.width: 512
+            sourceSize.height: 512
             onStatusChanged: {
                 
                 if (status == Image.Null || status == Image.Error) {
@@ -107,9 +117,11 @@ Item {
                         game_box_shadow.opacity = 0
                     }
                 }
+
+                var container_size = Math.min(layoutScreen.width * 0.5, layoutScreen.height * 0.66)
                 
                 if (status == Image.Ready) {
-                    update_image_size(game_box_art.implicitWidth, game_box_art.implicitHeight, vpx(360));
+                    update_image_size(game_box_art.implicitWidth, game_box_art.implicitHeight, container_size);
                     game_box_art_previous.source = source
                     game_box_shadow.opacity = 1.0
                     opacity = 1.0
@@ -130,7 +142,7 @@ Item {
                     anchors.centerIn: parent
                     width: game_box_art.adapt ? game_box_art.width : Math.min(game_box_art.width, game_box_art.height)
                     height: game_box_art.adapt ? game_box_art.height : width
-                    radius: 6
+                    radius: vpx(4)
                 }
             }
         }

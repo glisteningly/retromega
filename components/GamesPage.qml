@@ -224,7 +224,7 @@ Item {
             }
 
             Text{
-                text: headerTitle
+                text: headerTitle || ''
                 anchors {
                     left: backBtn.right
                     leftMargin: vpx(16)

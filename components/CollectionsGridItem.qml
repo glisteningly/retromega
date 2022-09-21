@@ -106,7 +106,8 @@ Item {
         asynchronous: true
         visible: source != ""
         source:  "../assets/images/collections/"+modelData.shortName+".png" || ""
-        sourceSize { width: 256; height: 256 }
+        sourceSize.width: 256
+        sourceSize.height: 256
         fillMode: Image.PreserveAspectFit
 //        smooth: true
     }

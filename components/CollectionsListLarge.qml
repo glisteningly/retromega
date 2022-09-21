@@ -207,7 +207,7 @@ ListView {
                 Image {
                     id: device
 //                    source: "../assets/images/devices/"+modelData.shortName+".png"
-                    source: "../assets/images/collections/"+modelData.shortName+".png"
+                    source: visible? "../assets/images/collections/"+modelData.shortName+".png" : ""
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: vpx(80)

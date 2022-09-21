@@ -23,16 +23,16 @@ GridView {
         topMargin: vpx(10)
     }
     cacheBuffer: 10
-//    delegate: systemsDelegate
+    //    delegate: systemsDelegate
 
     highlightRangeMode: GridView.ApplyRange
     highlightMoveDuration: 0
     preferredHighlightBegin: height * 0.5 - vpx(120)
     preferredHighlightEnd: height * 0.5 + vpx(120)
 
-//        function update_cell_height_ratio(img_w, img_h) {
-//            cellHeightRatio = Math.min(Math.max(cellHeightRatio, img_h / img_w), 1.5);
-//        }
+    //        function update_cell_height_ratio(img_w, img_h) {
+    //            cellHeightRatio = Math.min(Math.max(cellHeightRatio, img_h / img_w), 1.5);
+    //        }
 
 
     cellWidth: width / columnCount
@@ -51,20 +51,22 @@ GridView {
 
     Component.onCompleted: {
         delay(200, function() {
-            positionViewAtIndex(currentCollectionIndex, GridView.Center)
+            if (visible) {
+                positionViewAtIndex(currentCollectionIndex, GridView.Center)
+            }
         })
     }
 
     onCurrentIndexChanged: {
         if (visible) {
-          navSound.play()
-          setCurCollectionIndex(collectionsGridView.currentIndex)
+            navSound.play()
+            setCurCollectionIndex(collectionsGridView.currentIndex)
         }
     }
 
-//    Component.onDestruction: {
-//        setCollectionIndex(collectionsGridView.currentIndex)
-//    }
+    //    Component.onDestruction: {
+    //        setCollectionIndex(collectionsGridView.currentIndex)
+    //    }
 
     Keys.onPressed: {
         if (event.isAutoRepeat)
@@ -72,7 +74,7 @@ GridView {
 
         if (api.keys.isPageUp(event) || api.keys.isPageDown(event)) {
             event.accepted = true;
-//            navSound.play()
+            //            navSound.play()
             var rows_to_skip = Math.max(1, Math.round(collectionsGridView.height / cellHeight));
             var games_to_skip = rows_to_skip * columnCount;
             if (api.keys.isPageUp(event))
@@ -92,16 +94,16 @@ GridView {
         }
     }
 
-//    highlight: Rectangle {
-//        color:  theme.primaryColor
-//        width: grid.cellWidth
-//        height: grid.cellHeight
-//        scale: 1.1
-//        radius: vpx(12)
-//        z: 2
-//    }
+    //    highlight: Rectangle {
+    //        color:  theme.primaryColor
+    //        width: grid.cellWidth
+    //        height: grid.cellHeight
+    //        scale: 1.1
+    //        radius: vpx(12)
+    //        z: 2
+    //    }
 
-//    highlightMoveDuration: 0
+    //    highlightMoveDuration: 0
 
     delegate: CollectionsGridItem {
         id: collection_griditem_container

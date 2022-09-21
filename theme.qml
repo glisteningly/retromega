@@ -122,7 +122,9 @@ FocusScope {
 
     // Games index
     property int currentGameIndex: 0
-    property var currentGame: {return currentCollection.games.get(currentGameIndex)}
+    property var currentGame: {
+        return currentCollection.games? currentCollection.games.get(currentGameIndex) : null
+    }
 
 
     // Systems grid columns
@@ -260,7 +262,7 @@ FocusScope {
     
     property var systemColor: {
         if (currentPage === 'GamesPage') {
-            return systemColors[currentCollection.shortName] || theme.primaryColor
+            return systemInfoList[currentCollection.shortName].color || theme.primaryColor
         } else {
             return theme.primaryColor
         }
@@ -393,8 +395,8 @@ FocusScope {
         id: currentCollectionGamesSortedFiltered
         sourceModel: currentCollection.games
         sorters: [
-            RoleSorter { roleName: "favorite"; sortOrder: Qt.DescendingOrder },
-            RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
+            RoleSorter { roleName: "favorite"; sortOrder: Qt.DescendingOrder }
+//            RoleSorter { roleName: collectionSortMode; sortOrder: collectionSortDirection == 0 ? Qt.AscendingOrder : Qt.DescendingOrder }
         ]
         filters: ValueFilter { roleName: "favorite"; value: true; inverted: false; enabled: collectionFilterMode == "favorites" }
     }

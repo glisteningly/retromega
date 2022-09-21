@@ -156,8 +156,8 @@ Item {
                 Loader {
                     id: collectionLoader
                     sourceComponent: currentSystemViewMode === 'list' ? collectionList : collectionGrid
-                    visible: currentHomeIndex == 1
-                    focus: currentHomeIndex == 1
+                    visible: currentHomeIndex === 1
+                    focus: currentHomeIndex === 1
                     anchors.fill: parent
                     asynchronous: false
                 }
@@ -168,7 +168,7 @@ Item {
                     CollectionsListLarge {
                         id: collectionsListView
                         anchors.fill: parent
-                        focus: currentHomeIndex == 1
+                        focus: currentHomeIndex === 1
                     }
                 }
 
@@ -177,7 +177,7 @@ Item {
                     CollectionsGrid {
                         id: collectionsGridView
                         anchors.fill: parent
-                        focus: currentHomeIndex == 1
+                        focus: currentHomeIndex === 1
                     }
                 }
                 
