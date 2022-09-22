@@ -34,14 +34,14 @@ Item {
     }
 
     function update_image_size(width, height, container_size) {
-        var fill = (width > height * 0.95) ? 0.9 : 0.65
+        var fill = (width > height * 0.95) ? 0.9 : 0.66
         var scale = width / height
         if (scale < 0.8) {
             fill = width / height * 0.8
         } else if (scale >= 0.8 && scale <= 1.2) {
             fill = 0.66
         } else {
-            fill = height / width * 1.2
+            fill = height / width * 1.4
         }
 
         box_art.width  = size_image(width, height, container_size * fill).width

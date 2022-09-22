@@ -26,7 +26,7 @@ GridView {
     //    delegate: systemsDelegate
 
     highlightRangeMode: GridView.ApplyRange
-    highlightMoveDuration: 0
+    highlightMoveDuration: 200
     preferredHighlightBegin: height * 0.5 - vpx(120)
     preferredHighlightEnd: height * 0.5 + vpx(120)
 

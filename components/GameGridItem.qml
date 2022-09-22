@@ -117,8 +117,8 @@ Item {
     }
 
     Image {
-        width: vpx(60)
-        height: vpx(60)
+        width: vpx(50)
+        height: vpx(50)
         anchors.centerIn: parent
         visible: imgGridItem.status === Image.Loading
         source: '../assets/images/loading-spinner.png'
@@ -174,7 +174,7 @@ Item {
 
     Item {
         visible: selected
-        height: parent.width * 0.18
+        height: Math.min(parent.width * 0.18, vpx(30))
         anchors {
             left: parent.left
             leftMargin: vpx(2)
@@ -188,7 +188,7 @@ Item {
         Rectangle {
             color:  "#B0000000"
             width: parent.width
-            height: gameTitle.lineCount === 1 ? parent.height : parent.height * 1.6
+            height: gameTitle.lineCount === 1 ? parent.height : parent.height * 1.8
             anchors {
                 bottom: parent.bottom
             }
@@ -197,7 +197,7 @@ Item {
         Text {
             id: gameTitle
             width: parent.width
-            height: lineCount === 1 ? parent.height : parent.height * 1.6
+            height: lineCount === 1 ? parent.height : parent.height * 1.8
             anchors {
                 left: parent.left
 //                leftMargin: vpx(4)
@@ -213,9 +213,10 @@ Item {
             color: '#FFFFFF'
             elide: Text.ElideMiddle
             maximumLineCount:2
+            lineHeight: 0.85
             font {
                 family: collectionTitleFont.name
-                pixelSize: parent.width * 0.1
+                pixelSize: Math.min(parent.width * 0.1, vpx(20))
             }
         }
     }

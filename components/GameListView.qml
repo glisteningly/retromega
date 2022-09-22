@@ -374,16 +374,15 @@ Item {
                         fill: parent
                         leftMargin: vpx(12)
                         rightMargin: vpx(12)
-                        topMargin: vpx(6)
-                        bottomMargin: vpx(6)
+                        topMargin: vpx(10)
+                        bottomMargin: vpx(10)
                     }
                     id: txt_game_description
                     width: parent.width
                     text: selectedGame.description || ""
                     font {
-                        weight: Font.Light
-                        pixelSize: vpx(20)
-                        letterSpacing: 0.4
+                        family: collectionTitleFont.name
+                        pixelSize: vpx(21)
                     }
                     wrapMode: Text.WordWrap
                     elide: Text.ElideRight

@@ -437,14 +437,13 @@ Item {
                             width: parent.width
                             text: introDescription
                             font {
-                                //                                weight: Font.Light
+                                family: collectionTitleFont.name
                                 pixelSize: vpx(22)
-                                //                                letterSpacing: 0.4
                             }
                             wrapMode: Text.WordWrap
                             elide: Text.ElideRight
                             horizontalAlignment: Text.AlignJustify
-                            color: textColor
+                            color: "#AAA"
                         }
                     }
                 }

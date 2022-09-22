@@ -134,7 +134,7 @@ Item {
             cacheBuffer: 30
 
             highlightRangeMode: GridView.ApplyRange
-            highlightMoveDuration: 0
+            highlightMoveDuration: 200
             preferredHighlightBegin: height * 0.5 - vpx(120)
             preferredHighlightEnd: height * 0.5 + vpx(120)
 
@@ -146,7 +146,7 @@ Item {
             function update_cell_height_ratio(img_w, img_h) {
                 if (currentHomeIndex === 0) {
                     // 限制图片的最大宽高比
-                    cellHeightRatio = Math.min(Math.max(0.67,img_h / img_w), 1.8)
+                    cellHeightRatio = Math.min(Math.max(0.6 ,img_h / img_w), 1.8)
                 } else {
                     return 1.0
                 }
@@ -190,19 +190,18 @@ Item {
             }
 
             Keys.onPressed: {
-                if (event.isAutoRepeat)
-                    return
+//                if (event.isAutoRepeat)
+//                    return
 
                 if (api.keys.isPageUp(event) || api.keys.isPageDown(event)) {
                     event.accepted = true
-                    var rows_to_skip = Math.max(
-                                1, Math.round(gameView.height / cellHeight))
+                    var rows_to_skip = Math.max(1, Math.round(gameView.height / cellHeight))
                     var games_to_skip = rows_to_skip * columnCount
+
                     if (api.keys.isPageUp(event))
                         currentIndex = Math.max(currentIndex - games_to_skip, 0)
                     else
-                        currentIndex = Math.min(currentIndex + games_to_skip,
-                                                items.count - 1)
+                        currentIndex = Math.min(currentIndex + games_to_skip, items.count - 1)
                 }
 
                 // press L3 or V
