@@ -93,6 +93,17 @@ Item {
     }
 
     Image {
+        anchors {
+            fill: parent
+            topMargin: vpx(40)
+        }
+        opacity: selected? 0.8 : 0.5
+        fillMode: Image.PreserveAspectCrop
+        z: 0
+        source: "../assets/images/bg_system_line.png"
+    }
+
+    Image {
         id: imgController
         anchors {
             fill: parent

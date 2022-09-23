@@ -60,7 +60,7 @@ Item {
     }
 
     property var textColor: {
-        return theme.text_dark
+        return "#AAA"
     }
 
     property var margin: {
@@ -329,7 +329,7 @@ Item {
                     maximumLineCount: 2
                     text: game ? game.title : curDataText.global_no_games
                     lineHeight: 1.1
-                    color: textColor
+                    color: "#DDD"
                     font.pixelSize: vpx(36)
                     font.letterSpacing: 0
                     //                font.bold: true
@@ -350,6 +350,7 @@ Item {
                         text: meta_developedBy
                         font {
                             pixelSize: vpx(18)
+                            family: collectionTitleFont.name
                         }
                         wrapMode: Text.WordWrap
                         elide: Text.ElideRight
@@ -366,6 +367,7 @@ Item {
                         }
                         font {
                             pixelSize: vpx(18)
+                            family: collectionTitleFont.name
                         }
                         horizontalAlignment: Text.AlignJustify
                         color: textColor
@@ -379,6 +381,7 @@ Item {
                             topMargin: vpx(30)
                         }
                         font {
+                            family: collectionTitleFont.name
                             pixelSize: vpx(18)
                         }
                         horizontalAlignment: Text.AlignJustify
@@ -395,6 +398,7 @@ Item {
                             leftMargin: vpx(24)
                         }
                         font {
+                            family: collectionTitleFont.name
                             pixelSize: vpx(18)
                         }
                         horizontalAlignment: Text.AlignJustify
