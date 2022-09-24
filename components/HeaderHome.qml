@@ -143,8 +143,8 @@ Rectangle {
         anchors.top: parent.top
         anchors.leftMargin: vpx(24)
         lightText: light
-        KeyNavigation.down: mainFocus
-        KeyNavigation.right: title_collection
+//        KeyNavigation.down: mainFocus
+//        KeyNavigation.right: title_collection
         onClicked: setHomeIndex(0)
     }
 
@@ -156,8 +156,8 @@ Rectangle {
         anchors.left: title_systems.right
         anchors.top: parent.top
         lightText: light
-        KeyNavigation.down: mainFocus
-        KeyNavigation.right: title_favorites
+//        KeyNavigation.down: mainFocus
+//        KeyNavigation.right: title_favorites
         onClicked: setHomeIndex(1)
     }
 
@@ -169,8 +169,8 @@ Rectangle {
         anchors.left: title_collection.right
         anchors.top: parent.top
         lightText: light
-        KeyNavigation.down: mainFocus
-        KeyNavigation.right: title_recent
+//        KeyNavigation.down: mainFocus
+//        KeyNavigation.right: title_recent
         onClicked: setHomeIndex(2)
     }
 
@@ -182,7 +182,7 @@ Rectangle {
         anchors.left: title_favorites.right
         anchors.top: parent.top
         lightText: light
-        KeyNavigation.down: mainFocus
+//        KeyNavigation.down: mainFocus
         onClicked: setHomeIndex(3)
     }
 

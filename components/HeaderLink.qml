@@ -21,7 +21,7 @@ Item {
     signal clicked()
 
 //    enabled: false
-    focus: true
+//    focus: false
     width: selected? iconImage.width + item_text.width + vpx(4) : iconImage.width + vpx(12)
     height: parent.height
 
