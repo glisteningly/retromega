@@ -87,9 +87,9 @@ Item {
         visible: selected
         anchors.fill: gridItemBg
         source: gridItemBg
-        verticalOffset: 3
-        horizontalOffset: 3
-        color: "#CC000000"
+        verticalOffset: vpx(12)
+        horizontalOffset: vpx(12)
+        color: "#BB000000"
         radius: 20
         samples: 20
     }

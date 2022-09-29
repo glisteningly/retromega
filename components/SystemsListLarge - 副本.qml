@@ -210,7 +210,7 @@ ListView {
                     width: vpx(800)
                     height: vpx(800)
                     fillMode: Image.PreserveAspectFit
-                    //                    scale: 1.0
+//                    scale: 1.0
                     scale: systemInfoList[modelData.shortName].thumb_scale ? 0.8 : 1.0
                     states: [
 
@@ -241,39 +241,24 @@ ListView {
                     
                 }
 
-                //                //主标题
-                //                Text {
-                //                    id: title
-                //                    text: modelData.name
-                //                    font.family: systemTitleFont.name
-                //                    font.pixelSize: titleFontSize(modelData.name)
-                //                    font.letterSpacing: 0
-                //                    //                    font.bold: true
-                //                    color: itemTextColor
-                //                    //                    width: 280
-                //                    wrapMode: Text.WordWrap
-                //                    //                    anchors.rightMargin: 30
-                //                    visible: true
-                //                    lineHeight: 0.8
-                //                    anchors.verticalCenter: parent.verticalCenter
-                //                    anchors.left: parent.left
-                //                    anchors.leftMargin: vpx(60)
-                //                    anchors.verticalCenterOffset: vpx(15)
-                //                }
-
-                Image {
+                //              主标题
+                Text {
                     id: title
-                    source: "../assets/images/logos/"+modelData.shortName+".png"
-                    width: vpx(480)
-                    height: vpx(100)
-                    fillMode: Image.PreserveAspectFit
-                    horizontalAlignment: Image.AlignLeft
-                    //                    verticalAlignment: Image.AlignBottom
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        left: parent.left
-                        leftMargin: vpx(60)
-                    }
+                    text: modelData.name
+                    font.family: systemTitleFont.name
+                    font.pixelSize: titleFontSize(modelData.name)
+                    font.letterSpacing: 0
+                    //                    font.bold: true
+                    color: itemTextColor
+                    //                    width: 280
+                    wrapMode: Text.WordWrap
+                    //                    anchors.rightMargin: 30
+                    visible: true
+                    lineHeight: 0.8
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: vpx(60)
+                    anchors.verticalCenterOffset: vpx(15)
                 }
 
                 DropShadow {
@@ -312,12 +297,10 @@ ListView {
                     //                    font.bold: true
                     color: itemTextColor
                     opacity: 0.7
-                    anchors {
-                        bottomMargin: vpx(6)
-                        left: title.left
-                        leftMargin: vpx(2)
-                        bottom: title.top
-                    }
+                    anchors.bottomMargin: -1
+                    anchors.left: title.left
+                    anchors.leftMargin: vpx(2)
+                    anchors.bottom: title.top
                 }
 
                 Rectangle {

@@ -47,14 +47,15 @@ Item {
     }
 
     Rectangle {
-        id: gridItemBgBorder
-        visible: selected
+        id: gridItemBg
+        color:  systemInfoList[modelData.shortName].color || "#000000"
+        opacity: 0.5
         anchors {
             fill: parent
+            margins: 2
         }
-        color: "transparent"
         border.color: "white"
-        border.width: 2
+        border.width: selected ? 2 : 0
         SequentialAnimation on border.color {
             loops: Animation.Infinite
 
@@ -71,24 +72,14 @@ Item {
         }
     }
 
-    Rectangle {
-        id: gridItemBg
-        color:  systemInfoList[modelData.shortName].color || "#000000"
-        opacity: 0.5
-        anchors {
-            fill: parent
-            margins: 2
-        }
-    }
-
     DropShadow {
         visible: selected
         anchors.fill: gridItemBg
         source: gridItemBg
-        verticalOffset: 3
-        horizontalOffset: 3
-        color: "#90000000"
-        radius: 10
+        verticalOffset: vpx(12)
+        horizontalOffset: vpx(12)
+        color: "#BB000000"
+        radius: 20
         samples: 20
     }
 

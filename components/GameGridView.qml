@@ -117,10 +117,10 @@ Item {
 //            focus: listContent.activeFocus
             readonly property int maxRecalcs: 5
             property int currentRecalcs: 0
-            property real cellHeightRatio: 1.39
+            property real cellHeightRatio: 1.0
 
             property real columnCount: {
-                return gamelistColumns
+                return cellHeightRatio <= 0.8 ? gamelistColumns - 1 : gamelistColumns
             }
 
             model: parent.visible ? items : []
@@ -140,7 +140,7 @@ Item {
 
             function cells_need_recalc() {
                 currentRecalcs = 0
-                cellHeightRatio = 1.39
+                cellHeightRatio = 1
             }
 
             function update_cell_height_ratio(img_w, img_h) {
